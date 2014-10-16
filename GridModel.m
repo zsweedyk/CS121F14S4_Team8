@@ -11,7 +11,7 @@
 @interface GridModel()
 {
     NSString* _grid[19][29];
-    NSInteger _visited[19][29];
+    NSInteger _visited[19][29]; // table for BFS
     
 }
 @end
@@ -21,28 +21,29 @@
 //nothing=0
 //wire = 1
 //battery+=2
-//battery-=3
+//battery-=3,6
 //lightbulb=4
+//bulbconnection=5
+
 
 -(void) generateGrid
 {
     NSString* path = [[NSBundle mainBundle] pathForResource:@"test0" ofType:@""];
     NSError* error;
-    // Read grids from text file
     
+    // Read grids from text file
     for (int r=0; r<19; r++) {
 
         NSString* readString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
         NSRange range = NSMakeRange(r*31, 29);
         NSString* gridString = [readString substringWithRange:range];
-        //printf([gridString UTF8String]);
         for (int c = 0; c<29; c++) {
             _grid[r][c] = [gridString substringWithRange:NSMakeRange(c, 1)];
             _grid[r][c] = [gridString substringWithRange:NSMakeRange(c, 1)];
         }
     }
     
-    //[self printGrid];
+    [self printGrid];
 }
 
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col
@@ -82,19 +83,14 @@
     }else{
         connections = [connections stringByAppendingString:@"X"];
     }
-    //printf([connections UTF8String]);
+
     return connections;
 }
 
--(void) resetVisited: (NSInteger) visited
-{
-   
-}
 
-
--(NSInteger) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type
+-(BOOL) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type
 {
-    //printf([_grid[row][col] UTF8String]);
+    // reset visited table
     for (NSInteger i = 0; i<19; i++)
     {
         for (NSInteger j = 0; j < 29; j++) {
@@ -102,27 +98,27 @@
         }
     }
     
+    // add start grid to visited table
     _visited[row][col] = 1;
     
+    // initialize a queue for BFS and add current grid to the que
     NSMutableArray* queue = [[NSMutableArray alloc] init];
     NSArray* initPos = [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:row],[NSNumber numberWithInt:col], nil];
     [queue addObject:initPos];
     
+    // BFS
     while ([queue count] > 0)
     {
         NSArray* position = queue[0];
         [queue removeObjectAtIndex:0];
+        
         NSInteger r = [position[0] integerValue];
         NSInteger c = [position[1] integerValue];
-        NSLog(@"sequence = %i",r);
-        NSLog(@"sequence = %i",c);
-        //printf([_grid[r][c -1] UTF8String]);
-        //printf([_grid[r][c -2] UTF8String]);
-        NSLog(@"%i",_visited[r][c - 2]);
         
+        // check if left neighbor is the goal, if not, add to the queue
         if ([_grid[r][c-1]  isEqual: @"-"] && _visited[r][c-2] == 0) {
             if ([_grid[r][c-2]  isEqual: type])
-                return 1;
+                return YES;
 
             if ([_grid[r][c-2]  isEqual: @"1"])
             {
@@ -131,9 +127,10 @@
             }
         }
         
+        // check if right neighbor is the goal, if not, add to the queue
         if ([_grid[r][c+1]  isEqual: @"-"] && _visited[r][c+2] == 0) {
             if ([_grid[r][c+2]  isEqual: type])
-                return 1;
+                return YES;
             
             if ([_grid[r][c+2]  isEqual: @"1"])
             {
@@ -142,9 +139,10 @@
             }
         }
         
+        // check if top neighbor is the goal, if not, add to the queue
         if ([_grid[r-1][c]  isEqual: @"|"] && _visited[r-2][c] == 0) {
             if ([_grid[r-2][c]  isEqual: type])
-                return 1;
+                return YES;
             
             if ([_grid[r-2][c]  isEqual: @"1"])
             {
@@ -153,9 +151,10 @@
             }
         }
         
+        // check if bottom neighbor is the goal, if not, add to the queue
         if ([_grid[r+1][c]  isEqual: @"|"] && _visited[r+2][c] == 0) {
             if ([_grid[r+2][c]  isEqual: type])
-                return 1;
+                return YES;
             
             if ([_grid[r+2][c]  isEqual: @"1"])
             {
@@ -164,39 +163,10 @@
             }
         }
     }
-    return 0;
+    
+    // nothing is found
+    return NO;
 }
-
-//-(NSString*) findPathFrom: (NSString*) path toType: (NSString*) type
-//{
-//    NSString* currentPos = [path substringWithRange:NSMakeRange(path.length-5, 5)];
-//    
-//    int numCurrent = (int)[[path componentsSeparatedByString:currentPos] count] - 1;
-//    
-//    //If currentPos is already contained in path,
-//    if (numCurrent>1) {
-//        return [path substringWithRange:NSMakeRange(0, path.length-5)];
-//    }
-//    
-//    int row = [[path substringWithRange:NSMakeRange(path.length-5, 2)] intValue];
-//    int col = [[path substringWithRange:NSMakeRange(path.length-2, 2)] intValue];
-//    
-//    if (type == [self getTypeAtRow:row andCol:col]) {
-//        return path;
-//    }
-//    
-//    NSString* connections = [self getConnectionsAtRow:row andCol:col];
-//    if ([self string:connections contains:@"L"]) {
-//        NSString* next = [NSString stringWithFormat:@"/%d.%d",row, col];
-//        path = [path stringByAppendingString:next];
-//        return [self findPathFrom:path toType:<#(NSString *)#>]
-//    }
-//    
-//    
-//    NSLog([self getTypeAtRow:row andCol:col]);
-//    return [self getTypeAtRow:row andCol:col];
-//}
-
 
 
 -(BOOL) string: (NSString*) string contains: (NSString*) sub

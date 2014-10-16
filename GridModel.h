@@ -14,7 +14,7 @@
 -(void) generateGrid;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(NSString*) getConnectionsAtRow: (int) row andCol: (int) col;
--(NSInteger) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type;
+-(BOOL) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type;
 -(void) setValueAtRow: (int) row andCol: (int) col withValue: (NSString*) value;
 //-(NSString*) findPathFrom: (NSString*) path toType: (NSString*) type;
 
