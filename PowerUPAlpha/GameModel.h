@@ -16,5 +16,6 @@
 -(NSString*) getConnectionsAtRow: (int) row andCol: (int) col;
 -(BOOL) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type;
 -(void) setValueAtRow: (int) row andCol: (int) col withValue: (NSString*) value;
+-(BOOL) connected;
 
 @end

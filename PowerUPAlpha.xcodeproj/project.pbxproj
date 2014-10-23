@@ -47,8 +47,8 @@
 		A8C34A0319F8B29400878205 /* wireXXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349F319F8B29400878205 /* wireXXXX.png */; };
 		A8C34A0819F8B2AA00878205 /* bulb_light.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0419F8B2AA00878205 /* bulb_light.png */; };
 		A8C34A0919F8B2AA00878205 /* bulb_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0519F8B2AA00878205 /* bulb_normal.png */; };
-		A8C34A0A19F8B2AA00878205 /* bulb_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0619F8B2AA00878205 /* bulb_normal.png */; };
 		A8C34A0B19F8B2AA00878205 /* bulb_short.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0719F8B2AA00878205 /* bulb_short.png */; };
+		A8C34A0D19F8C2EF00878205 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0C19F8C2EF00878205 /* blank.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,8 +114,8 @@
 		A8C349F319F8B29400878205 /* wireXXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXXXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXXXX.png"; sourceTree = "<group>"; };
 		A8C34A0419F8B2AA00878205 /* bulb_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_light.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/bulb_light.png"; sourceTree = "<group>"; };
 		A8C34A0519F8B2AA00878205 /* bulb_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_normal.png; path = ../../../../../../Desktop/bulb_normal.png; sourceTree = "<group>"; };
-		A8C34A0619F8B2AA00878205 /* bulb_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_normal.png; path = "../../../../../../Desktop/wire pics/bulb_normal.png"; sourceTree = "<group>"; };
 		A8C34A0719F8B2AA00878205 /* bulb_short.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_short.png; path = ../../../../../../Desktop/bulb_short.png; sourceTree = "<group>"; };
+		A8C34A0C19F8C2EF00878205 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blank.png; path = ../../../../../../Desktop/blank.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +159,6 @@
 			children = (
 				A8C34A0419F8B2AA00878205 /* bulb_light.png */,
 				A8C34A0519F8B2AA00878205 /* bulb_normal.png */,
-				A8C34A0619F8B2AA00878205 /* bulb_normal.png */,
 				A8C34A0719F8B2AA00878205 /* bulb_short.png */,
 				A8C349E419F8B29400878205 /* wireLRTB.png */,
 				A8C349E519F8B29400878205 /* wireLRTX.png */,
@@ -185,6 +184,7 @@
 				A8C349D919F8B26300878205 /* batteryPosXRTX.png */,
 				A8C349DA19F8B26300878205 /* batteryPosXRXB.png */,
 				A8C349DB19F8B26300878205 /* batteryPosXRXX.png */,
+				A8C34A0C19F8C2EF00878205 /* blank.png */,
 				A8C349D219F8A38300878205 /* test0 */,
 				A8C3499819F89B4900878205 /* AppDelegate.h */,
 				A8C3499919F89B4900878205 /* AppDelegate.m */,
@@ -320,9 +320,9 @@
 				A8C34A0919F8B2AA00878205 /* bulb_normal.png in Resources */,
 				A8C349E319F8B26300878205 /* batteryPosXRXX.png in Resources */,
 				A8C349FC19F8B29400878205 /* wireXRTB.png in Resources */,
+				A8C34A0D19F8C2EF00878205 /* blank.png in Resources */,
 				A8C349DD19F8B26300878205 /* batteryNegLXTX.png in Resources */,
 				A8C349E019F8B26300878205 /* batteryPosLRXX.png in Resources */,
-				A8C34A0A19F8B2AA00878205 /* bulb_normal.png in Resources */,
 				A8C34A0819F8B2AA00878205 /* bulb_light.png in Resources */,
 				A8C349FD19F8B29400878205 /* wireXRTX.png in Resources */,
 				A8C349DE19F8B26300878205 /* batteryNegLXXB.png in Resources */,

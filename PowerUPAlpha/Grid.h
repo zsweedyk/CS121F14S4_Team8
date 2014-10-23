@@ -12,5 +12,9 @@
 
 - (id) initWithFrame:(CGRect)frame size:(CGFloat) frameSize;
 - (void)setValueAtRow:(int) row col:(int)col to:(NSString*) value;
+- (void)setTarget:(id)target action:(SEL)action;
+- (void) win;
+- (void) setElectricityAtRow:(int) row col:(int) col;
+- (void) setNoElectricityAtRow:(int) row col:(int) col;
 
 @end

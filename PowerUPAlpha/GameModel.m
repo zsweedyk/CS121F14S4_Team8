@@ -44,7 +44,7 @@
 
 -(void) setValueAtRow: (int) row andCol: (int) col withValue: (NSString*) value
 {
-    _grid[row][col] = value;
+    _grid[2*row][2*col] = value;
 }
 
 -(NSString*) getConnectionsAtRow: (int) row andCol: (int) col
@@ -157,6 +157,14 @@
     
     // nothing is found
     return NO;
+}
+
+
+-(BOOL) connected
+{
+    BOOL left = [self findTargetFromRow:5*2 andCol:6*2 toType:@"2"];
+    BOOL right =  [self findTargetFromRow:5*2 andCol:8*2 toType:@"3"];
+    return left * right;
 }
 
 
