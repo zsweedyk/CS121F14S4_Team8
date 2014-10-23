@@ -70,7 +70,7 @@
             break;
         case 1:
             title = @"Instrucción";
-            message = @"TODO";
+            message = @"En ese juego, estás tratando de conectar la circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
             break;
         case 2:
             title = @"游戏指南";
