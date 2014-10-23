@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton* level;
 
 - (IBAction)indexChanged:(UISegmentedControl *)sender;
+- (IBAction)displayHelpMessage:(UIButton*) sender;
 
 @end
 

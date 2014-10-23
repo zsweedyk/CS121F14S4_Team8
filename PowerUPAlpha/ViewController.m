@@ -59,4 +59,33 @@
     }
 }
 
+- (IBAction)displayHelpMessage:(UIButton*) sender{
+    NSString *title;
+    NSString *message;
+    
+    switch (language) {
+        case 0:
+            title = @"How to Play";
+            message = @"In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions.";
+            break;
+        case 1:
+            title = @"Instrucción";
+            message = @"TODO";
+            break;
+        case 2:
+            title = @"游戏指南";
+            message = @"在这个游戏中，你需要通过变换开关的位置使灯泡发亮。";
+            break;
+        default:
+            break;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alertView show];
+}
+
 @end

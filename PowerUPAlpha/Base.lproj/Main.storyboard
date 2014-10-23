@@ -30,6 +30,9 @@
                                 <state key="normal" title="How to Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="displayHelpMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pRv-db-uyB"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oWs-oR-Lk0">
                                 <rect key="frame" x="286" y="407" width="197" height="29"/>
