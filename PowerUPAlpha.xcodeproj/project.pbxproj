@@ -14,6 +14,12 @@
 		A8C349A219F89B4900878205 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C349A119F89B4900878205 /* Images.xcassets */; };
 		A8C349A519F89B4900878205 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C349A319F89B4900878205 /* LaunchScreen.xib */; };
 		A8C349B119F89B4900878205 /* PowerUPAlphaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349B019F89B4900878205 /* PowerUPAlphaTests.m */; };
+		A8C349BC19F89C1D00878205 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349BB19F89C1D00878205 /* GameViewController.m */; };
+		A8C349C519F89F0800878205 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349C419F89F0800878205 /* Grid.m */; };
+		A8C349C819F89F4500878205 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349C719F89F4500878205 /* GameModel.m */; };
+		A8C349CB19F89F5900878205 /* Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349CA19F89F5900878205 /* Switch.m */; };
+		A8C349CE19F89F6B00878205 /* Bulb.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349CD19F89F6B00878205 /* Bulb.m */; };
+		A8C349D119F89F7E00878205 /* Wire.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349D019F89F7E00878205 /* Wire.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,18 @@
 		A8C349AA19F89B4900878205 /* PowerUPAlphaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPAlphaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C349AF19F89B4900878205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8C349B019F89B4900878205 /* PowerUPAlphaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerUPAlphaTests.m; sourceTree = "<group>"; };
+		A8C349BA19F89C1D00878205 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		A8C349BB19F89C1D00878205 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		A8C349C319F89F0800878205 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		A8C349C419F89F0800878205 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
+		A8C349C619F89F4500878205 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
+		A8C349C719F89F4500878205 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
+		A8C349C919F89F5900878205 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Switch.h; sourceTree = "<group>"; };
+		A8C349CA19F89F5900878205 /* Switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Switch.m; sourceTree = "<group>"; };
+		A8C349CC19F89F6B00878205 /* Bulb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bulb.h; sourceTree = "<group>"; };
+		A8C349CD19F89F6B00878205 /* Bulb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bulb.m; sourceTree = "<group>"; };
+		A8C349CF19F89F7E00878205 /* Wire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wire.h; sourceTree = "<group>"; };
+		A8C349D019F89F7E00878205 /* Wire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wire.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +103,18 @@
 				A8C3499919F89B4900878205 /* AppDelegate.m */,
 				A8C3499B19F89B4900878205 /* ViewController.h */,
 				A8C3499C19F89B4900878205 /* ViewController.m */,
+				A8C349BA19F89C1D00878205 /* GameViewController.h */,
+				A8C349BB19F89C1D00878205 /* GameViewController.m */,
+				A8C349C319F89F0800878205 /* Grid.h */,
+				A8C349C419F89F0800878205 /* Grid.m */,
+				A8C349C619F89F4500878205 /* GameModel.h */,
+				A8C349C719F89F4500878205 /* GameModel.m */,
+				A8C349C919F89F5900878205 /* Switch.h */,
+				A8C349CA19F89F5900878205 /* Switch.m */,
+				A8C349CC19F89F6B00878205 /* Bulb.h */,
+				A8C349CD19F89F6B00878205 /* Bulb.m */,
+				A8C349CF19F89F7E00878205 /* Wire.h */,
+				A8C349D019F89F7E00878205 /* Wire.m */,
 				A8C3499E19F89B4900878205 /* Main.storyboard */,
 				A8C349A119F89B4900878205 /* Images.xcassets */,
 				A8C349A319F89B4900878205 /* LaunchScreen.xib */,
@@ -219,8 +249,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8C349CB19F89F5900878205 /* Switch.m in Sources */,
+				A8C349D119F89F7E00878205 /* Wire.m in Sources */,
+				A8C349C519F89F0800878205 /* Grid.m in Sources */,
+				A8C349C819F89F4500878205 /* GameModel.m in Sources */,
+				A8C349BC19F89C1D00878205 /* GameViewController.m in Sources */,
 				A8C3499D19F89B4900878205 /* ViewController.m in Sources */,
 				A8C3499A19F89B4900878205 /* AppDelegate.m in Sources */,
+				A8C349CE19F89F6B00878205 /* Bulb.m in Sources */,
 				A8C3499719F89B4900878205 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
