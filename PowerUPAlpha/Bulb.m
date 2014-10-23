@@ -10,4 +10,17 @@
 
 @implementation Bulb
 
+
+- (id) initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    self.image = [UIImage imageNamed:@"bulb_normal"];
+    return self;
+}
+
+- (void) lightUp
+{
+    self.image = [UIImage imageNamed:@"bulb_light"];
+}
+
 @end

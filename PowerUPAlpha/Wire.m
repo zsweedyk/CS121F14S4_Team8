@@ -7,7 +7,15 @@
 //
 
 #import "Wire.h"
+#import <UIKit/UIKit.h>
 
 @implementation Wire
+
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
+{
+    self = [super initWithFrame:frame];
+    self.image = [UIImage imageNamed:imageName];
+    return self;
+}
 
 @end

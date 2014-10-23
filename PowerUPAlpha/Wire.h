@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Wire : NSObject
+@interface Wire : UIImageView
+
+@property (nonatomic) NSInteger tag;
+
+-(id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName;
 
 @end

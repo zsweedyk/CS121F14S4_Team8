@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Switch : NSObject
+@protocol SwitchDelegate
+@required
+- (void) switchSelected:(id)sender;
+@end
+
+@interface Switch : UIButton
+
+@property (nonatomic, strong) id delegate;
+
+- (id) initWithFrame:(CGRect)frame;
+- (NSString*) rotateSwitch;
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Bulb : NSObject
+@interface Bulb : UIImageView
+
+- (id) initWithFrame:(CGRect)frame;
+
+- (void) lightUp;
 
 @end

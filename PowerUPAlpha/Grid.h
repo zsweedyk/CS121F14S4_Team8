@@ -7,14 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Switch.h"
 
-@interface Grid : UIView
+@protocol GridDelegate
 
-- (id) initWithFrame:(CGRect)frame size:(CGFloat) frameSize;
-- (void)setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void)setTarget:(id)target action:(SEL)action;
+@required
+- (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation;
+@end
+
+
+@interface Grid : UIView <SwitchDelegate>
+
+@property (nonatomic, strong) id delegate;
+
+- (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
+- (void) setUpGridForNumRows:(int)rows andCols:(int)cols;
+- (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
 - (void) win;
-- (void) setElectricityAtRow:(int) row col:(int) col;
-- (void) setNoElectricityAtRow:(int) row col:(int) col;
 
 @end

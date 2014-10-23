@@ -7,16 +7,16 @@
 //
 
 #import "Grid.h"
+#import "Wire.h"
+#import "Bulb.h"
 
-@interface Grid()
+@interface Grid() 
 {
-    int numRows;
-    int numCols;
-    BOOL topSwitch;
-    BOOL botSwitch;
-    id _target;
-    SEL _action;
-    NSMutableArray* _grids;
+    int _numRows;
+    int _numCols;
+    int _bulbRow;
+    int _bulbCol;
+    NSMutableArray* _cells;
 }
 @end
 
@@ -30,54 +30,50 @@
 }
 */
 
-- (id) initWithFrame:(CGRect)frame size:(CGFloat) frameSize
+- (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
-    CGFloat gridNum = 15;
-    CGFloat gridSize = frameSize / gridNum;
     
-    _grids = [[NSMutableArray alloc] init];
-    for (int row = 0; row < gridNum; row++){
-        // create an array of nine buttons that makes up a row
-        NSMutableArray* rowArray = [[NSMutableArray alloc] init];
-        for (int col = 0; col < gridNum; col++){
-            CGFloat x = col * gridSize;
-            CGFloat y = row * gridSize;
-            
-            // create button and assign property for the button
-            CGRect buttonFrame = CGRectMake(x, y, gridSize, gridSize);
-            UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
-            button.tag = row * 10 + col; // e.g: for the cell of row 2 col 7, the tag is 27
-            [button setBackgroundColor:[UIColor whiteColor]];
-            
-            [self addSubview:button];
-            [rowArray addObject:button];
-            
-            [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-        [_grids addObject:rowArray];
-    }
+    _cells = [[NSMutableArray alloc] init];
+    
+    [self setUpGridForNumRows:rows andCols:cols];
     
     return self;
 }
 
-- (void)cellSelected:(id)sender
+- (void) setUpGridForNumRows:(int)rows andCols:(int)cols
 {
-    UIButton* button = (UIButton*) sender;
-    int buttonTag = (int) button.tag;
-    int row = buttonTag / 10;
-    int col = buttonTag % 10;
-    // debug use
-    NSLog(@"%d",row);
-    NSLog(@"%d",col);
+    _numRows = rows;
+    _numCols = cols;
     
-    // the switch is selected
-    if (row == 9 && col == 9)
-    {
-        [self switchSelectedAtRow:row col:col];
+    // calculate dimension of the cell that makes it fit in the frame
+    CGFloat cellHeight = self.frame.size.height/_numRows;
+    CGFloat cellWidth = self.frame.size.width/_numCols;
+    CGFloat cellSize = MIN(cellHeight, cellWidth);
+    
+    // Set each cell on the grid
+    for (int row = 0; row < _numRows; ++row){
+        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        for (int col = 0; col < _numCols; ++col){
+            // location of cell
+            CGFloat xLabel = col * cellSize;
+            CGFloat yLabel = row * cellSize;
+            
+            // initially set all cells to a white label. Initialized to proper component later
+            CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
+            UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
+            blankTile.tag = row*10+col; // keep track of where each cell is
+            [blankTile setBackgroundColor:[UIColor whiteColor]];
+            
+            [self addSubview:blankTile];
+            [rowCells addObject:blankTile];
+        }
+        
+        [_cells addObject:rowCells];
     }
+    
+    
 }
 
 // 0 empty cell
@@ -87,20 +83,52 @@
 // 4 bulb
 // 5 bulb connector
 // 9 switch
-- (void)setValueAtRow:(int) row col:(int)col to:(NSString*)value{
-    UIButton* button = _grids[row][col];
-    [button setBackgroundImage:[UIImage imageNamed:value] forState:UIControlStateNormal];
-}
-
-- (void) setGame{
+- (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType{
+    
+    // white label to replace
+    UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+    [label removeFromSuperview];
+    
+    // new component to replace with
+    UIView* newComponent;
+    
+    // check component type and use the appropriate object
+    NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
+    if ([typeIndicator isEqual: @"wi"]) { // wire case
+        newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"ba"]) { // battery case
+        newComponent = [[UIImageView alloc] initWithFrame:label.frame];
+        [(UIImageView*)newComponent setImage:[UIImage imageNamed:componentType]];
+    } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
+        _bulbRow = row;
+        _bulbCol = col;
+        newComponent = [[Bulb alloc] initWithFrame:label.frame];
+    } else if ([typeIndicator isEqual:@"sw"]) { // switch case
+        newComponent = [[Switch alloc] initWithFrame:label.frame];
+        ((Switch*)newComponent).delegate = self;
+    } else {
+        newComponent = label;
+    }
+    newComponent.tag = label.tag;
+    [self addSubview:newComponent];
+    [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
     
 }
 
-- (void) switchSelectedAtRow:(int) row col:(int)col{
-    [_target performSelector:_action withObject:[NSNumber numberWithInt:row] withObject:[NSNumber numberWithInt:col]];
+- (void) switchSelected:(id)sender
+{
+    NSNumber* senderTag = [[NSNumber alloc] initWithInt:(int)((Switch*)sender).tag];
+    
+    NSString* newOrientation = [(Switch*)sender rotateSwitch];
+
+    [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
 }
 
+
 - (void) win{
+    
+    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] lightUp];
+    
     NSString *title = @"You win!";
     
     NSString *message = [NSString stringWithFormat:@"You are awesome!"];
@@ -112,20 +140,6 @@
     
     [alertView show];
 
-}
-
-- (void) setElectricityAtRow:(int) row col:(int) col{
-    [self setValueAtRow:row col:col to:@"bulb_light"];
-}
-
-- (void) setNoElectricityAtRow:(int) row col:(int) col{
-    [self setValueAtRow:row col:col to:@"bulb_short"];
-}
-
-- (void)setTarget:(id)target action:(SEL)action
-{
-    _target = target;
-    _action = action;
 }
 
 @end

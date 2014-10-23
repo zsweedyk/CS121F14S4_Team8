@@ -10,36 +10,105 @@
 
 @interface GameModel()
 {
-    NSString* _grid[19][29];
-    NSInteger _visited[19][29]; // table for BFS
+    NSMutableArray* _grid;
+    int _batteryRow;
+    int _batteryPosCol;
+    int _batteryNegCol;
+    int _bulbRow;
+    int _bulbCol;
+    
+    NSMutableArray* _visited; // table for BFS
 }
 
 @end
 
 @implementation GameModel
+
 -(void) generateGrid
 {
+    self.numRows = 15;
+    self.numCols = 15;
+    int gridRows = self.numRows*2 - 1;
+    int gridCols = self.numCols*2 - 1; // The grid contains more data than the grid elements
+    
+    // initialize arrays with enough space for all the data in the rows
+    _grid = [[NSMutableArray alloc] initWithCapacity:gridRows];
+    _visited = [[NSMutableArray alloc] initWithCapacity:self.numRows];
+    
+    // in each row spot add another array for the columns
+    for (int r = 0; r < gridRows; ++r) {
+        NSMutableArray* column = [[NSMutableArray alloc] initWithCapacity:gridCols];
+        [_grid addObject:column];
+        
+        NSMutableArray* visColumn = [[NSMutableArray alloc] initWithCapacity:self.numCols];
+        [_visited addObject:visColumn];
+    }
+    
+    // get the txt file with the grid data
     NSString* path = [[NSBundle mainBundle] pathForResource:@"test0" ofType:@""];
     NSError* error;
     
     // Read grids from text file
-    for (int r=0; r<29; r++) {
+    NSString* data = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    for (int r = 0; r < gridRows; ++r) {
+        NSRange range = NSMakeRange(r*(gridCols + 2), gridCols); // the range for a row worth of data
+        NSString* rowData = [data substringWithRange:range];
         
-        NSString* readString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-        NSRange range = NSMakeRange(r*31, 29);
-        NSString* gridString = [readString substringWithRange:range];
-        for (int c = 0; c<29; c++) {
-            _grid[r][c] = [gridString substringWithRange:NSMakeRange(c, 1)];
-            _grid[r][c] = [gridString substringWithRange:NSMakeRange(c, 1)];
+        for (int c = 0; c < gridCols; ++c) {
+            NSString* datum = [rowData substringWithRange:NSMakeRange(c, 1)];
+            [[_grid objectAtIndex:r] setObject:datum atIndex:c];
         }
     }
-    
-    [self printGrid];
+
 }
 
--(NSString*) getTypeAtRow: (int) row andCol: (int) col
+-(NSString*) getTypeAtRow:(int)row andCol:(int)col
 {
-    return _grid[2*row][2*col];
+    NSString* component = [[_grid objectAtIndex:2*row] objectAtIndex:2*col];
+    NSString* compWithConn = [self getComponentWithConnectionsFor:[component intValue] AtRow:row andCol:col];
+    
+    return compWithConn;
+}
+
+// determine the component and what connections it has based on the type and the location
+- (NSString*) getComponentWithConnectionsFor:(int)type AtRow:(int)row andCol:(int)col
+{
+    NSString* compWithConn;
+    switch (type) {
+        // blank case
+        case 0:
+        case 9:
+            compWithConn = @"blank";
+            break;
+        // wire case
+        case 1:
+            compWithConn = [@"wire" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
+            break;
+        // neagtive battery
+        case 3:
+            compWithConn = [@"batteryNeg" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
+            _batteryRow = row;
+            _batteryNegCol = col;
+            break;
+        // positive battery
+        case 6:
+            compWithConn = [@"batteryPos" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
+            _batteryPosCol = col;
+            break;
+        case 4:
+            // No short case for now
+            compWithConn = @"bulb";
+            _bulbRow = row;
+            _bulbCol = col;
+            break;
+        case 7:
+            compWithConn = @"switch";
+            break;
+        default:
+            break;
+    }
+
+    return compWithConn;
 }
 
 -(void) setValueAtRow: (int) row andCol: (int) col withValue: (NSString*) value
@@ -47,29 +116,30 @@
     _grid[2*row][2*col] = value;
 }
 
--(NSString*) getConnectionsAtRow: (int) row andCol: (int) col
+-(NSString*) getConnectionsAtRow:(int)row andCol:(int)col
 {
     NSString* connections = @"";
     
-    if ([_grid[2*row][2*col-1]  isEqual: @"-"]) {
+    // connected to the left or switch to the left
+    if ([_grid[2*row][2*col-1]  isEqual: @"-"] || [_grid[2*row][2*col-2] isEqual:@"7"]) {
         connections = [connections stringByAppendingString:@"L"];
     }else{
         connections = [connections stringByAppendingString:@"X"];
     }
-    
-    if ([_grid[2*row][2*col+1]  isEqual: @"-"]) {
+    // connected to the right or switch to the right
+    if ([_grid[2*row][2*col+1]  isEqual: @"-"] || [_grid[2*row][2*col+2] isEqual:@"7"]) {
         connections = [connections stringByAppendingString:@"R"];
     }else{
         connections = [connections stringByAppendingString:@"X"];
     }
-    
-    if ([_grid[2*row-1][2*col]  isEqual: @"|"]) {
+    // connected above or switch above
+    if ([_grid[2*row-1][2*col]  isEqual: @"|"] || [_grid[2*row-2][2*col] isEqual:@"7"]) {
         connections = [connections stringByAppendingString:@"T"];
     }else{
         connections = [connections stringByAppendingString:@"X"];
     }
-    
-    if ([_grid[2*row+1][2*col]  isEqual: @"|"]) {
+    // connected below or switch below
+    if ([_grid[2*row+1][2*col]  isEqual: @"|"] || [_grid[2*row+2][2*col] isEqual:@"7"]) {
         connections = [connections stringByAppendingString:@"B"];
     }else{
         connections = [connections stringByAppendingString:@"X"];
@@ -78,120 +148,115 @@
     return connections;
 }
 
-
--(BOOL) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type
+// Update the grid with the connection of the switch
+-(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation
 {
+    if ([[newOrientation substringWithRange:NSMakeRange(0, 1)] isEqual:@"L"]) {
+        _grid[2*row][2*col-1] = @"-";
+    } else {
+        _grid[2*row][2*col-1] = @" ";
+    }
+    
+    if ([[newOrientation substringWithRange:NSMakeRange(1, 1)] isEqual:@"R"]) {
+        _grid[2*row][2*col+1] = @"-";
+    } else {
+        _grid[2*row][2*col+1] = @" ";
+    }
+    
+    if ([[newOrientation substringWithRange:NSMakeRange(2, 1)] isEqual:@"T"]) {
+        _grid[2*row-1][2*col] = @"|";
+    } else {
+        _grid[2*row-1][2*col] = @" ";
+    }
+    
+    if ([[newOrientation substringWithRange:NSMakeRange(3, 1)] isEqual:@"B"]) {
+        _grid[2*row+1][2*col] = @"|";
+    } else {
+        _grid[2*row+1][2*col] = @" ";
+    }
+    
+}
+
+-(BOOL) checkForShort
+{
+    NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
+    NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
+    
+    return [self breadthSearchFrom:start To:end];
+}
+
+-(BOOL) checkForComplete
+{
+    NSArray* startPos = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
+    NSArray* startNeg = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
+    NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_bulbRow], [NSNumber numberWithInt:_bulbCol], nil];
+    
+    return [self breadthSearchFrom:startPos To:end] && [self breadthSearchFrom:startNeg To:end];
+}
+
+-(BOOL) breadthSearchFrom:(NSArray*)start To:(NSArray*)end
+{
+    
     // reset visited table
-    for (NSInteger i = 0; i<19; i++)
-    {
-        for (NSInteger j = 0; j < 29; j++) {
-            _visited[i][j] = 0;
+    for (int i = 0; i < self.numRows; ++i) {
+        for (int j = 0; j < self.numCols; ++j) {
+            _visited[i][j] = [NSNumber numberWithInt:0];
         }
     }
     
-    // add start grid to visited table
-    _visited[row][col] = 1;
+    // set up our queue
+    NSMutableArray* connectionQueue = [[NSMutableArray alloc] init];
+    [connectionQueue addObject:start];
     
-    // initialize a queue for BFS and add current grid to the que
-    NSMutableArray* queue = [[NSMutableArray alloc] init];
-    NSArray* initPos = [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:row],[NSNumber numberWithInt:col], nil];
-    [queue addObject:initPos];
+    // target
+    int targetRow = [end[0] intValue];
+    int targetCol = [end[1] intValue];
     
-    // BFS
-    while ([queue count] > 0)
-    {
-        NSArray* position = queue[0];
-        [queue removeObjectAtIndex:0];
+    // search for target
+    while ([connectionQueue count] > 0) {
+        NSArray* position = connectionQueue[0];
+        [connectionQueue removeObjectAtIndex:0];
         
-        NSInteger r = [position[0] integerValue];
-        NSInteger c = [position[1] integerValue];
+        int row = [position[0] intValue];
+        int col = [position[1] intValue];
+        [[[_visited objectAtIndex:row]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]];
         
-        // check if left neighbor is the goal, if not, add to the queue
-        if ([_grid[r][c-1]  isEqual: @"-"] && _visited[r][c-2] == 0) {
-            if ([_grid[r][c-2]  isEqual: type])
-                return YES;
-            
-            if ([_grid[r][c-2]  isEqual: @"1"])
-            {
-                _visited[r][c - 2] = 1;
-                [queue addObject:[[NSArray alloc]initWithObjects:[NSNumber numberWithInt:r],[NSNumber numberWithInt:(c-2)], nil]];
-            }
+        // check for target
+        if (row == targetRow && col == targetCol) {
+            return YES;
         }
-        
-        // check if right neighbor is the goal, if not, add to the queue
-        if ([_grid[r][c+1]  isEqual: @"-"] && _visited[r][c+2] == 0) {
-            if ([_grid[r][c+2]  isEqual: type])
-                return YES;
-            
-            if ([_grid[r][c+2]  isEqual: @"1"])
-            {
-                _visited[r][c + 2] = 1;
-                [queue addObject:[[NSArray alloc]initWithObjects:[NSNumber numberWithInt:r],[NSNumber numberWithInt:(c+2)], nil]];
-            }
+        // check left neighbor
+        if ([_grid[2*row][2*col-1] isEqual:@"-"] && [[[_visited objectAtIndex:row]objectAtIndex:col-1] isEqual:[NSNumber numberWithInt:0]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col-1], nil]];
+            _visited[row][col-1] = [NSNumber numberWithInt:1];
         }
-        
-        // check if top neighbor is the goal, if not, add to the queue
-        if ([_grid[r-1][c]  isEqual: @"|"] && _visited[r-2][c] == 0) {
-            if ([_grid[r-2][c]  isEqual: type])
-                return YES;
-            
-            if ([_grid[r-2][c]  isEqual: @"1"])
-            {
-                _visited[r-2][c] = 1;
-                [queue addObject:[[NSArray alloc]initWithObjects:[NSNumber numberWithInt:r-2],[NSNumber numberWithInt:(c)], nil]];
-            }
+        // check right neighbor
+        if ([_grid[2*row][2*col+1] isEqual:@"-"] && [[[_visited objectAtIndex:row]objectAtIndex:col+1] isEqual:[NSNumber numberWithInt:0]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col+1], nil]];
+            _visited[row][col+1] = [NSNumber numberWithInt:1];
         }
-        
-        // check if bottom neighbor is the goal, if not, add to the queue
-        if ([_grid[r+1][c]  isEqual: @"|"] && _visited[r+2][c] == 0) {
-            if ([_grid[r+2][c]  isEqual: type])
-                return YES;
-            
-            if ([_grid[r+2][c]  isEqual: @"1"])
-            {
-                _visited[r+2][c] = 1;
-                [queue addObject:[[NSArray alloc]initWithObjects:[NSNumber numberWithInt:r+2],[NSNumber numberWithInt:(c)], nil]];
-            }
+        // check above neighbor
+        if ([_grid[2*row-1][2*col] isEqual:@"|"] && [[[_visited objectAtIndex:row-1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:0]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row-1], [NSNumber numberWithInt:col], nil]];
+            _visited[row-1][col] = [NSNumber numberWithInt:1];
+        }
+        // check below neighbor
+        if ([_grid[2*row+1][2*col] isEqual:@"|"] && [[[_visited objectAtIndex:row+1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:0]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row+1], [NSNumber numberWithInt:col], nil]];
+            _visited[row+1][col] = [NSNumber numberWithInt:1];
         }
     }
     
-    // nothing is found
     return NO;
 }
 
-
 -(BOOL) connected
 {
-    BOOL left = [self findTargetFromRow:5*2 andCol:6*2 toType:@"2"];
-    BOOL right =  [self findTargetFromRow:5*2 andCol:8*2 toType:@"3"];
-    return left * right;
+
+    return [self checkForComplete];
 }
 
-
--(BOOL) string: (NSString*) string contains: (NSString*) sub
-{
-    return !([string rangeOfString:sub].location == NSNotFound);
-}
-
--(int) numOf: (NSString*) str in: (NSString*) sub
-{
-    int count = 0;
-    NSUInteger length = [str length];
-    NSRange range = NSMakeRange(0, length);
-    while(range.location != NSNotFound)
-    {
-        range = [str rangeOfString: sub options:0 range:range];
-        if(range.location != NSNotFound)
-        {
-            range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
-            count++;
-        }
-    }
-    return count;
-}
-
-
-
+/*
 -(void) printGrid
 {
     for(int r = 0;r<29;r++)
@@ -204,5 +269,6 @@
         printf("},\n");
     }
 }
+ */
 
 @end
