@@ -10,4 +10,7 @@
 
 @interface Grid : UIView
 
+- (id) initWithFrame:(CGRect)frame size:(CGFloat) frameSize;
+- (void)setValueAtRow:(int) row col:(int)col to:(NSString*) value;
+
 @end

@@ -7,8 +7,19 @@
 //
 
 #import "GameViewController.h"
+#import "GameModel.h"
+#import "Grid.h"
 
 @interface GameViewController ()
+{
+    int numRows;
+    int numCols;
+    BOOL topSwitch;
+    BOOL botSwitch;
+    
+    GameModel* _model;
+    Grid* _grid;
+}
 
 @end
 
@@ -18,25 +29,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    numRows = 15;
+    numCols = 15;
     CGRect frame = self.view.frame;
     
-    // set up T button
-    CGFloat yButton = CGRectGetHeight(frame) * 0.6;
-    CGFloat xButtonT = CGRectGetWidth(frame) * 0.1;
-    CGFloat TButtonSize = xButtonT * 2;
-    CGFloat xButtonB = (xButtonT * 3 + TButtonSize * 2);
-    CGFloat BButtonSize = TButtonSize;
+    //Initialize model
+    _model = [[GameModel alloc] init];
     
-    CGRect TFrame = CGRectMake(xButtonT, yButton, TButtonSize, TButtonSize / 2);
-    UIButton* T = [[UIButton alloc] initWithFrame:TFrame];
-    T.layer.cornerRadius = TButtonSize / 10;
-    T.layer.borderWidth = 1.0f;
-    [T setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.7]];
-    [T setTitle:@"Top On" forState:UIControlStateNormal];
-    [T setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    T.titleLabel.font = [UIFont systemFontOfSize:TButtonSize/5];
-    [self.view addSubview:T];
+    // initilize _gridView
+    float framePortion = 0.8;
+    CGFloat xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
+    CGFloat yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
+    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
+    CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
+    
+    _grid = [[Grid alloc] initWithFrame:gridFrame size:size];
+    [self.view addSubview:_grid];
+    
+    [self startNewGame];
+}
 
+- (void) restart{
+    
+    for (int row = 0; row < numRows; row++){
+        for (int col = 0; col < numCols; col++){
+            NSString* value = [_model getTypeAtRow:row andCol:col];
+            [_grid setValueAtRow:row col:col to:value];
+        }
+    }
+    
+}
+
+- (void) startNewGame{
+    [_model generateGrid];
+    [self restart];
+}
+
+- (void) switchSelected{
+    
 }
 
 - (void)didReceiveMemoryWarning {

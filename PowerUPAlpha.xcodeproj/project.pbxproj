@@ -20,6 +20,35 @@
 		A8C349CB19F89F5900878205 /* Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349CA19F89F5900878205 /* Switch.m */; };
 		A8C349CE19F89F6B00878205 /* Bulb.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349CD19F89F6B00878205 /* Bulb.m */; };
 		A8C349D119F89F7E00878205 /* Wire.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C349D019F89F7E00878205 /* Wire.m */; };
+		A8C349D319F8A38300878205 /* test0 in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D219F8A38300878205 /* test0 */; };
+		A8C349DC19F8B26300878205 /* batteryNegLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D419F8B26300878205 /* batteryNegLRXX.png */; };
+		A8C349DD19F8B26300878205 /* batteryNegLXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D519F8B26300878205 /* batteryNegLXTX.png */; };
+		A8C349DE19F8B26300878205 /* batteryNegLXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D619F8B26300878205 /* batteryNegLXXB.png */; };
+		A8C349DF19F8B26300878205 /* batteryNegLXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D719F8B26300878205 /* batteryNegLXXX.png */; };
+		A8C349E019F8B26300878205 /* batteryPosLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D819F8B26300878205 /* batteryPosLRXX.png */; };
+		A8C349E119F8B26300878205 /* batteryPosXRTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349D919F8B26300878205 /* batteryPosXRTX.png */; };
+		A8C349E219F8B26300878205 /* batteryPosXRXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349DA19F8B26300878205 /* batteryPosXRXB.png */; };
+		A8C349E319F8B26300878205 /* batteryPosXRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349DB19F8B26300878205 /* batteryPosXRXX.png */; };
+		A8C349F419F8B29400878205 /* wireLRTB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E419F8B29400878205 /* wireLRTB.png */; };
+		A8C349F519F8B29400878205 /* wireLRTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E519F8B29400878205 /* wireLRTX.png */; };
+		A8C349F619F8B29400878205 /* wireLRXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E619F8B29400878205 /* wireLRXB.png */; };
+		A8C349F719F8B29400878205 /* wireLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E719F8B29400878205 /* wireLRXX.png */; };
+		A8C349F819F8B29400878205 /* wireLXTB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E819F8B29400878205 /* wireLXTB.png */; };
+		A8C349F919F8B29400878205 /* wireLXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349E919F8B29400878205 /* wireLXTX.png */; };
+		A8C349FA19F8B29400878205 /* wireLXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349EA19F8B29400878205 /* wireLXXB.png */; };
+		A8C349FB19F8B29400878205 /* wireLXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349EB19F8B29400878205 /* wireLXXX.png */; };
+		A8C349FC19F8B29400878205 /* wireXRTB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349EC19F8B29400878205 /* wireXRTB.png */; };
+		A8C349FD19F8B29400878205 /* wireXRTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349ED19F8B29400878205 /* wireXRTX.png */; };
+		A8C349FE19F8B29400878205 /* wireXRXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349EE19F8B29400878205 /* wireXRXB.png */; };
+		A8C349FF19F8B29400878205 /* wireXRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349EF19F8B29400878205 /* wireXRXX.png */; };
+		A8C34A0019F8B29400878205 /* wireXXTB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349F019F8B29400878205 /* wireXXTB.png */; };
+		A8C34A0119F8B29400878205 /* wireXXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349F119F8B29400878205 /* wireXXTX.png */; };
+		A8C34A0219F8B29400878205 /* wireXXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349F219F8B29400878205 /* wireXXXB.png */; };
+		A8C34A0319F8B29400878205 /* wireXXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C349F319F8B29400878205 /* wireXXXX.png */; };
+		A8C34A0819F8B2AA00878205 /* bulb_light.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0419F8B2AA00878205 /* bulb_light.png */; };
+		A8C34A0919F8B2AA00878205 /* bulb_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0519F8B2AA00878205 /* bulb_normal.png */; };
+		A8C34A0A19F8B2AA00878205 /* bulb_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0619F8B2AA00878205 /* bulb_normal.png */; };
+		A8C34A0B19F8B2AA00878205 /* bulb_short.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C34A0719F8B2AA00878205 /* bulb_short.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +87,35 @@
 		A8C349CD19F89F6B00878205 /* Bulb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bulb.m; sourceTree = "<group>"; };
 		A8C349CF19F89F7E00878205 /* Wire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wire.h; sourceTree = "<group>"; };
 		A8C349D019F89F7E00878205 /* Wire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wire.m; sourceTree = "<group>"; };
+		A8C349D219F8A38300878205 /* test0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test0; path = "../../../../../../Downloads/Display Prototype/Display Prototype/test0"; sourceTree = "<group>"; };
+		A8C349D419F8B26300878205 /* batteryNegLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryNegLRXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryNegLRXX.png"; sourceTree = "<group>"; };
+		A8C349D519F8B26300878205 /* batteryNegLXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryNegLXTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryNegLXTX.png"; sourceTree = "<group>"; };
+		A8C349D619F8B26300878205 /* batteryNegLXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryNegLXXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryNegLXXB.png"; sourceTree = "<group>"; };
+		A8C349D719F8B26300878205 /* batteryNegLXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryNegLXXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryNegLXXX.png"; sourceTree = "<group>"; };
+		A8C349D819F8B26300878205 /* batteryPosLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryPosLRXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryPosLRXX.png"; sourceTree = "<group>"; };
+		A8C349D919F8B26300878205 /* batteryPosXRTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryPosXRTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryPosXRTX.png"; sourceTree = "<group>"; };
+		A8C349DA19F8B26300878205 /* batteryPosXRXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryPosXRXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryPosXRXB.png"; sourceTree = "<group>"; };
+		A8C349DB19F8B26300878205 /* batteryPosXRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batteryPosXRXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/batteryPosXRXX.png"; sourceTree = "<group>"; };
+		A8C349E419F8B29400878205 /* wireLRTB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLRTB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLRTB.png"; sourceTree = "<group>"; };
+		A8C349E519F8B29400878205 /* wireLRTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLRTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLRTX.png"; sourceTree = "<group>"; };
+		A8C349E619F8B29400878205 /* wireLRXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLRXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLRXB.png"; sourceTree = "<group>"; };
+		A8C349E719F8B29400878205 /* wireLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLRXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLRXX.png"; sourceTree = "<group>"; };
+		A8C349E819F8B29400878205 /* wireLXTB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLXTB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLXTB.png"; sourceTree = "<group>"; };
+		A8C349E919F8B29400878205 /* wireLXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLXTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLXTX.png"; sourceTree = "<group>"; };
+		A8C349EA19F8B29400878205 /* wireLXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLXXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLXXB.png"; sourceTree = "<group>"; };
+		A8C349EB19F8B29400878205 /* wireLXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireLXXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireLXXX.png"; sourceTree = "<group>"; };
+		A8C349EC19F8B29400878205 /* wireXRTB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXRTB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXRTB.png"; sourceTree = "<group>"; };
+		A8C349ED19F8B29400878205 /* wireXRTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXRTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXRTX.png"; sourceTree = "<group>"; };
+		A8C349EE19F8B29400878205 /* wireXRXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXRXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXRXB.png"; sourceTree = "<group>"; };
+		A8C349EF19F8B29400878205 /* wireXRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXRXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXRXX.png"; sourceTree = "<group>"; };
+		A8C349F019F8B29400878205 /* wireXXTB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXXTB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXXTB.png"; sourceTree = "<group>"; };
+		A8C349F119F8B29400878205 /* wireXXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXXTX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXXTX.png"; sourceTree = "<group>"; };
+		A8C349F219F8B29400878205 /* wireXXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXXXB.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXXXB.png"; sourceTree = "<group>"; };
+		A8C349F319F8B29400878205 /* wireXXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wireXXXX.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/wireXXXX.png"; sourceTree = "<group>"; };
+		A8C34A0419F8B2AA00878205 /* bulb_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_light.png; path = "../../../../../../Downloads/Display Prototype/Display Prototype/bulb_light.png"; sourceTree = "<group>"; };
+		A8C34A0519F8B2AA00878205 /* bulb_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_normal.png; path = ../../../../../../Desktop/bulb_normal.png; sourceTree = "<group>"; };
+		A8C34A0619F8B2AA00878205 /* bulb_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_normal.png; path = "../../../../../../Desktop/wire pics/bulb_normal.png"; sourceTree = "<group>"; };
+		A8C34A0719F8B2AA00878205 /* bulb_short.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulb_short.png; path = ../../../../../../Desktop/bulb_short.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +157,35 @@
 		A8C3499319F89B4900878205 /* PowerUPAlpha */ = {
 			isa = PBXGroup;
 			children = (
+				A8C34A0419F8B2AA00878205 /* bulb_light.png */,
+				A8C34A0519F8B2AA00878205 /* bulb_normal.png */,
+				A8C34A0619F8B2AA00878205 /* bulb_normal.png */,
+				A8C34A0719F8B2AA00878205 /* bulb_short.png */,
+				A8C349E419F8B29400878205 /* wireLRTB.png */,
+				A8C349E519F8B29400878205 /* wireLRTX.png */,
+				A8C349E619F8B29400878205 /* wireLRXB.png */,
+				A8C349E719F8B29400878205 /* wireLRXX.png */,
+				A8C349E819F8B29400878205 /* wireLXTB.png */,
+				A8C349E919F8B29400878205 /* wireLXTX.png */,
+				A8C349EA19F8B29400878205 /* wireLXXB.png */,
+				A8C349EB19F8B29400878205 /* wireLXXX.png */,
+				A8C349EC19F8B29400878205 /* wireXRTB.png */,
+				A8C349ED19F8B29400878205 /* wireXRTX.png */,
+				A8C349EE19F8B29400878205 /* wireXRXB.png */,
+				A8C349EF19F8B29400878205 /* wireXRXX.png */,
+				A8C349F019F8B29400878205 /* wireXXTB.png */,
+				A8C349F119F8B29400878205 /* wireXXTX.png */,
+				A8C349F219F8B29400878205 /* wireXXXB.png */,
+				A8C349F319F8B29400878205 /* wireXXXX.png */,
+				A8C349D419F8B26300878205 /* batteryNegLRXX.png */,
+				A8C349D519F8B26300878205 /* batteryNegLXTX.png */,
+				A8C349D619F8B26300878205 /* batteryNegLXXB.png */,
+				A8C349D719F8B26300878205 /* batteryNegLXXX.png */,
+				A8C349D819F8B26300878205 /* batteryPosLRXX.png */,
+				A8C349D919F8B26300878205 /* batteryPosXRTX.png */,
+				A8C349DA19F8B26300878205 /* batteryPosXRXB.png */,
+				A8C349DB19F8B26300878205 /* batteryPosXRXX.png */,
+				A8C349D219F8A38300878205 /* test0 */,
 				A8C3499819F89B4900878205 /* AppDelegate.h */,
 				A8C3499919F89B4900878205 /* AppDelegate.m */,
 				A8C3499B19F89B4900878205 /* ViewController.h */,
@@ -229,9 +316,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8C34A0119F8B29400878205 /* wireXXTX.png in Resources */,
+				A8C34A0919F8B2AA00878205 /* bulb_normal.png in Resources */,
+				A8C349E319F8B26300878205 /* batteryPosXRXX.png in Resources */,
+				A8C349FC19F8B29400878205 /* wireXRTB.png in Resources */,
+				A8C349DD19F8B26300878205 /* batteryNegLXTX.png in Resources */,
+				A8C349E019F8B26300878205 /* batteryPosLRXX.png in Resources */,
+				A8C34A0A19F8B2AA00878205 /* bulb_normal.png in Resources */,
+				A8C34A0819F8B2AA00878205 /* bulb_light.png in Resources */,
+				A8C349FD19F8B29400878205 /* wireXRTX.png in Resources */,
+				A8C349DE19F8B26300878205 /* batteryNegLXXB.png in Resources */,
+				A8C34A0219F8B29400878205 /* wireXXXB.png in Resources */,
+				A8C349F719F8B29400878205 /* wireLRXX.png in Resources */,
+				A8C349F619F8B29400878205 /* wireLRXB.png in Resources */,
+				A8C34A0319F8B29400878205 /* wireXXXX.png in Resources */,
+				A8C349F519F8B29400878205 /* wireLRTX.png in Resources */,
 				A8C349A019F89B4900878205 /* Main.storyboard in Resources */,
+				A8C349E219F8B26300878205 /* batteryPosXRXB.png in Resources */,
+				A8C349D319F8A38300878205 /* test0 in Resources */,
+				A8C349F919F8B29400878205 /* wireLXTX.png in Resources */,
+				A8C349FA19F8B29400878205 /* wireLXXB.png in Resources */,
+				A8C349FE19F8B29400878205 /* wireXRXB.png in Resources */,
+				A8C34A0B19F8B2AA00878205 /* bulb_short.png in Resources */,
 				A8C349A519F89B4900878205 /* LaunchScreen.xib in Resources */,
+				A8C34A0019F8B29400878205 /* wireXXTB.png in Resources */,
+				A8C349FF19F8B29400878205 /* wireXRXX.png in Resources */,
+				A8C349E119F8B26300878205 /* batteryPosXRTX.png in Resources */,
+				A8C349FB19F8B29400878205 /* wireLXXX.png in Resources */,
+				A8C349DC19F8B26300878205 /* batteryNegLRXX.png in Resources */,
+				A8C349F419F8B29400878205 /* wireLRTB.png in Resources */,
+				A8C349DF19F8B26300878205 /* batteryNegLXXX.png in Resources */,
 				A8C349A219F89B4900878205 /* Images.xcassets in Resources */,
+				A8C349F819F8B29400878205 /* wireLXTB.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

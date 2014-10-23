@@ -10,4 +10,11 @@
 
 @interface GameModel : NSObject
 
+-(void) printGrid;
+-(void) generateGrid;
+-(NSString*) getTypeAtRow: (int) row andCol: (int) col;
+-(NSString*) getConnectionsAtRow: (int) row andCol: (int) col;
+-(BOOL) findTargetFromRow: (NSInteger) row andCol: (NSInteger) col toType: (NSString*) type;
+-(void) setValueAtRow: (int) row andCol: (int) col withValue: (NSString*) value;
+
 @end
