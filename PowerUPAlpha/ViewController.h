@@ -10,6 +10,12 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet
+    UISegmentedControl* segmentedControl;
+@property (weak, nonatomic) IBOutlet UIButton* about;
+@property (weak, nonatomic) IBOutlet UIButton* level;
+
+- (IBAction)indexChanged:(UISegmentedControl *)sender;
 
 @end
 

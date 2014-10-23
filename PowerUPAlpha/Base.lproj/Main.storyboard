@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcY-SM-gip">
-                                <rect key="frame" x="327" y="269" width="114" height="30"/>
+                                <rect key="frame" x="327" y="582" width="114" height="30"/>
                                 <state key="normal" title="Start New Game">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -25,10 +25,32 @@
                                     <segue destination="YOw-Hf-Be0" kind="presentation" id="JLm-qq-Q7W"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6X-Mt-zgk">
+                                <rect key="frame" x="343" y="497" width="83" height="30"/>
+                                <state key="normal" title="How to Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oWs-oR-Lk0">
+                                <rect key="frame" x="286" y="407" width="197" height="29"/>
+                                <segments>
+                                    <segment title="English"/>
+                                    <segment title="español"/>
+                                    <segment title="中文"/>
+                                </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BUr-ka-1PQ"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="about" destination="p6X-Mt-zgk" id="83o-8j-hF7"/>
+                        <outlet property="level" destination="UcY-SM-gip" id="AEW-Hy-ye4"/>
+                        <outlet property="segmentedControl" destination="oWs-oR-Lk0" id="ECI-y2-AFL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
