@@ -15,6 +15,7 @@
     int numRows;
     int numCols;
     BOOL powered;
+    NSInteger level;
     
     GameModel* _model;
     Grid* _grid;
@@ -32,7 +33,8 @@
     _model = [[GameModel alloc] init];
     
     // generate a grid
-    [_model generateGrid];
+    level = 0;
+    [_model generateGrid:level];
     
     CGRect frame = self.view.frame;
 
@@ -52,6 +54,14 @@
     _grid.delegate = self;
     
     [self.view addSubview:_grid];
+    
+    [self setUpDisplay];
+}
+
+- (void) newLevel{
+    if (level <= 2)
+        ++level;
+    [_model generateGrid:level];
     
     [self setUpDisplay];
 }
@@ -77,8 +87,29 @@
     BOOL connected = [_model connected];
     if (connected) {
         [_grid win];
+        
+        NSString *title = @"You win!";
+        
+        NSString *message;
+        if (level <= 1)
+            message = [NSString stringWithFormat:@"Current level is unlocked. Let's try next level!"];
+        else
+            message = [NSString stringWithFormat:@"All levels are unlocked. Congratuation!"];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertView show];
+        
     }
     
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (level <= 1)
+        [self newLevel];
 }
 
 - (void)didReceiveMemoryWarning {

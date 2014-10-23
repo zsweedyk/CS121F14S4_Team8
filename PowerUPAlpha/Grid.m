@@ -129,17 +129,6 @@
     
     [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] lightUp];
     
-    NSString *title = @"You win!";
-    
-    NSString *message = [NSString stringWithFormat:@"You are awesome!"];
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alertView show];
-
 }
 
 @end

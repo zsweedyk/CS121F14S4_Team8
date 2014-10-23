@@ -16,6 +16,7 @@
     int _batteryNegCol;
     int _bulbRow;
     int _bulbCol;
+    //int _level;
     
     NSMutableArray* _visited; // table for BFS
 }
@@ -24,7 +25,7 @@
 
 @implementation GameModel
 
--(void) generateGrid
+-(void) generateGrid: (NSInteger) level
 {
     self.numRows = 15;
     self.numCols = 15;
@@ -45,7 +46,7 @@
     }
     
     // get the txt file with the grid data
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"test0" ofType:@""];
+    NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
     NSError* error;
     
     // Read grids from text file
