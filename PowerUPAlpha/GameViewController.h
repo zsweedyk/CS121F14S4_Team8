@@ -10,4 +10,7 @@
 
 @interface GameViewController : UIViewController <UIAlertViewDelegate>
 
+@property (nonatomic) NSInteger language;
+@property (weak, nonatomic) IBOutlet UIButton* back;
+
 @end

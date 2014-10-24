@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GameViewController.h"
 
 @interface ViewController (){
     NSInteger language;
@@ -86,6 +87,15 @@
                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alertView show];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"SegueToGame"]) {
+        GameViewController *vc = [segue destinationViewController];
+        
+        [vc setLanguage:language];
+    }
 }
 
 @end

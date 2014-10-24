@@ -56,6 +56,21 @@
     [self.view addSubview:_grid];
     
     [self setUpDisplay];
+    
+    // display the back menu in appropriate language
+    switch (_language) {
+        case 0:
+            [_back setTitle:@"Back to Menu" forState:UIControlStateNormal];
+            break;
+        case 1:
+            [_back setTitle:@"Volver al menú" forState:UIControlStateNormal];
+            break;
+        case 2:
+            [_back setTitle:@"回到主菜单" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void) newLevel{
