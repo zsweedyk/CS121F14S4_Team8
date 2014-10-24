@@ -84,6 +84,10 @@
     int rowSelected = [tag intValue] / 10;
     int colSelected = [tag intValue] % 10;
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+}
+
+// if the battery is on, check the circuit connection
+-(void) powerOn{
     BOOL connected = [_model connected];
     if (connected) {
         [_grid win];
@@ -94,7 +98,7 @@
         if (level <= 1)
             message = [NSString stringWithFormat:@"Current level is unlocked. Let's try next level!"];
         else
-            message = [NSString stringWithFormat:@"All levels are unlocked. Congratuation!"];
+            message = [NSString stringWithFormat:@"All levels are unlocked. Congratulation!"];
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
@@ -102,9 +106,7 @@
                                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alertView show];
-        
     }
-    
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

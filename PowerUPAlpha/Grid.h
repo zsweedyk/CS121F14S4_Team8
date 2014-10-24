@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Switch.h"
+#import "Battery.h"
 
 @protocol GridDelegate
 
 @required
 - (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation;
+- (void) powerOn;
 @end
 
 
-@interface Grid : UIView <SwitchDelegate>
+@interface Grid : UIView <SwitchDelegate,BatteryDelegate>
 
 @property (nonatomic, strong) id delegate;
 

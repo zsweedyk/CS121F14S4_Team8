@@ -10,6 +10,7 @@
 		749773A519F8D238003B90A9 /* level0 in Resources */ = {isa = PBXBuildFile; fileRef = 749773A419F8D238003B90A9 /* level0 */; };
 		A836ACBD19F9B89F000CC663 /* level1 in Resources */ = {isa = PBXBuildFile; fileRef = A836ACBC19F9B89F000CC663 /* level1 */; };
 		A836ACBF19F9B8AE000CC663 /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = A836ACBE19F9B8AE000CC663 /* level2 */; };
+		A836ACC219F9E1CD000CC663 /* Battery.m in Sources */ = {isa = PBXBuildFile; fileRef = A836ACC119F9E1CD000CC663 /* Battery.m */; };
 		A8C3499719F89B4900878205 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C3499619F89B4900878205 /* main.m */; };
 		A8C3499A19F89B4900878205 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C3499919F89B4900878205 /* AppDelegate.m */; };
 		A8C3499D19F89B4900878205 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C3499C19F89B4900878205 /* ViewController.m */; };
@@ -39,6 +40,8 @@
 		749773A419F8D238003B90A9 /* level0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0; sourceTree = "<group>"; };
 		A836ACBC19F9B89F000CC663 /* level1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1; sourceTree = "<group>"; };
 		A836ACBE19F9B8AE000CC663 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
+		A836ACC019F9E1CD000CC663 /* Battery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Battery.h; sourceTree = "<group>"; };
+		A836ACC119F9E1CD000CC663 /* Battery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Battery.m; sourceTree = "<group>"; };
 		A8C3499119F89B4900878205 /* PowerUPAlpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUPAlpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C3499519F89B4900878205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8C3499619F89B4900878205 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -115,12 +118,14 @@
 				A8C349C419F89F0800878205 /* Grid.m */,
 				A8C349C619F89F4500878205 /* GameModel.h */,
 				A8C349C719F89F4500878205 /* GameModel.m */,
-				A8C349C919F89F5900878205 /* Switch.h */,
-				A8C349CA19F89F5900878205 /* Switch.m */,
 				A8C349CC19F89F6B00878205 /* Bulb.h */,
 				A8C349CD19F89F6B00878205 /* Bulb.m */,
 				A8C349CF19F89F7E00878205 /* Wire.h */,
 				A8C349D019F89F7E00878205 /* Wire.m */,
+				A8C349C919F89F5900878205 /* Switch.h */,
+				A8C349CA19F89F5900878205 /* Switch.m */,
+				A836ACC019F9E1CD000CC663 /* Battery.h */,
+				A836ACC119F9E1CD000CC663 /* Battery.m */,
 				A8C3499E19F89B4900878205 /* Main.storyboard */,
 				A8C349A119F89B4900878205 /* Images.xcassets */,
 				A8C349A319F89B4900878205 /* LaunchScreen.xib */,
@@ -264,6 +269,7 @@
 				A8C349CB19F89F5900878205 /* Switch.m in Sources */,
 				A8C349D119F89F7E00878205 /* Wire.m in Sources */,
 				A8C349C519F89F0800878205 /* Grid.m in Sources */,
+				A836ACC219F9E1CD000CC663 /* Battery.m in Sources */,
 				A8C349C819F89F4500878205 /* GameModel.m in Sources */,
 				A8C349BC19F89C1D00878205 /* GameViewController.m in Sources */,
 				A8C3499D19F89B4900878205 /* ViewController.m in Sources */,

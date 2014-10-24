@@ -9,6 +9,7 @@
 #import "Grid.h"
 #import "Wire.h"
 #import "Bulb.h"
+#import "Battery.h"
 
 @interface Grid() 
 {
@@ -97,8 +98,10 @@
     if ([typeIndicator isEqual: @"wi"]) { // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
     } else if ([typeIndicator isEqual:@"ba"]) { // battery case
-        newComponent = [[UIImageView alloc] initWithFrame:label.frame];
-        [(UIImageView*)newComponent setImage:[UIImage imageNamed:componentType]];
+        //newComponent = [[UIImageView alloc] initWithFrame:label.frame];
+        //[(UIImageView*)newComponent setImage:[UIImage imageNamed:componentType]];
+        newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
+        ((Battery*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
         _bulbRow = row;
         _bulbCol = col;
@@ -122,6 +125,13 @@
     NSString* newOrientation = [(Switch*)sender rotateSwitch];
 
     [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
+}
+
+- (void) powerUp:(id)sender
+{
+    [(Battery*)sender turnOnPower];
+    
+    [self.delegate performSelector:@selector(powerOn)];
 }
 
 
