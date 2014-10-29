@@ -26,6 +26,7 @@
 		A86E10D71A005C4E0029011B /* level0 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D41A005C4E0029011B /* level0 */; };
 		A86E10D81A005C4E0029011B /* level1 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D51A005C4E0029011B /* level1 */; };
 		A86E10D91A005C4E0029011B /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D61A005C4E0029011B /* level2 */; };
+		A86E10DC1A0073C80029011B /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10DB1A0073C80029011B /* Bomb.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		A86E10D41A005C4E0029011B /* level0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0; sourceTree = "<group>"; };
 		A86E10D51A005C4E0029011B /* level1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1; sourceTree = "<group>"; };
 		A86E10D61A005C4E0029011B /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
+		A86E10DA1A0073C80029011B /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
+		A86E10DB1A0073C80029011B /* Bomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bomb.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,8 @@
 				A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */,
 				A84F7F0A19FDC1C6001AEC0D /* ViewController.h */,
 				A84F7F0B19FDC1C6001AEC0D /* ViewController.m */,
+				A86E10DA1A0073C80029011B /* Bomb.h */,
+				A86E10DB1A0073C80029011B /* Bomb.m */,
 				A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */,
 				A84F7F1019FDC1C6001AEC0D /* Images.xcassets */,
 				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
@@ -276,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A86E10DC1A0073C80029011B /* Bomb.m in Sources */,
 				A86E10CC1A005B1E0029011B /* Bulb.m in Sources */,
 				A86E10CD1A005B1E0029011B /* GameModel.m in Sources */,
 				A86E10D21A005B1E0029011B /* Switch.m in Sources */,
