@@ -8,9 +8,11 @@
 
 #import "MenuViewController.h"
 #import "GameViewController.h"
+#import "Sound.h"
 
 @interface MenuViewController (){
     NSInteger language;
+    Sound *soundLanguage;
     // 0 english
     // 1 spanish
     // 2 chinese
@@ -24,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     language = 0;
+    soundLanguage = [[Sound alloc] initWithSoundNamed:@"beep-warmguitar.aif"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +36,16 @@
 
 - (IBAction)indexChanged:(UISegmentedControl *)sender
 {
+    NSString *path  = [[NSBundle mainBundle] pathForResource:@"beep-warmguitar" ofType:@"aif"];
+    NSURL *pathURL = [NSURL fileURLWithPath : path];
+    
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
+    AudioServicesDisposeSystemSoundID(audioEffect);
+    
+    [soundLanguage play];
+    
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
             NSLog(@"english");

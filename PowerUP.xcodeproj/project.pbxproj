@@ -27,6 +27,11 @@
 		A86E10D81A005C4E0029011B /* level1 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D51A005C4E0029011B /* level1 */; };
 		A86E10D91A005C4E0029011B /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D61A005C4E0029011B /* level2 */; };
 		A86E10DC1A0073C80029011B /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10DB1A0073C80029011B /* Bomb.m */; };
+		A893D75B1A01E2DC0004F539 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = A893D75A1A01E2DC0004F539 /* Sound.m */; };
+		A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75C1A01E94F0004F539 /* beep-attention.aif */; };
+		A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75D1A01E94F0004F539 /* beep-rejected.aif */; };
+		A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */; };
+		A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75F1A01E94F0004F539 /* slide-magic.aif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +81,12 @@
 		A86E10D61A005C4E0029011B /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
 		A86E10DA1A0073C80029011B /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
 		A86E10DB1A0073C80029011B /* Bomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bomb.m; sourceTree = "<group>"; };
+		A893D7591A01E2DC0004F539 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		A893D75A1A01E2DC0004F539 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
+		A893D75C1A01E94F0004F539 /* beep-attention.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-attention.aif"; sourceTree = "<group>"; };
+		A893D75D1A01E94F0004F539 /* beep-rejected.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-rejected.aif"; sourceTree = "<group>"; };
+		A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-warmguitar.aif"; sourceTree = "<group>"; };
+		A893D75F1A01E94F0004F539 /* slide-magic.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "slide-magic.aif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +128,10 @@
 		A84F7F0219FDC1C6001AEC0D /* PowerUP */ = {
 			isa = PBXGroup;
 			children = (
+				A893D75C1A01E94F0004F539 /* beep-attention.aif */,
+				A893D75D1A01E94F0004F539 /* beep-rejected.aif */,
+				A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */,
+				A893D75F1A01E94F0004F539 /* slide-magic.aif */,
 				A86E10B91A005B1E0029011B /* Battery.h */,
 				A86E10BA1A005B1E0029011B /* Battery.m */,
 				A86E10BB1A005B1E0029011B /* Bulb.h */,
@@ -141,6 +156,8 @@
 				A84F7F0B19FDC1C6001AEC0D /* ViewController.m */,
 				A86E10DA1A0073C80029011B /* Bomb.h */,
 				A86E10DB1A0073C80029011B /* Bomb.m */,
+				A893D7591A01E2DC0004F539 /* Sound.h */,
+				A893D75A1A01E2DC0004F539 /* Sound.m */,
 				A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */,
 				A84F7F1019FDC1C6001AEC0D /* Images.xcassets */,
 				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
@@ -260,10 +277,14 @@
 			files = (
 				A86E10D81A005C4E0029011B /* level1 in Resources */,
 				A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */,
+				A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				A86E10D71A005C4E0029011B /* level0 in Resources */,
 				A86E10D91A005C4E0029011B /* level2 in Resources */,
+				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
+				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
+				A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A86E10DC1A0073C80029011B /* Bomb.m in Sources */,
+				A893D75B1A01E2DC0004F539 /* Sound.m in Sources */,
 				A86E10CC1A005B1E0029011B /* Bulb.m in Sources */,
 				A86E10CD1A005B1E0029011B /* GameModel.m in Sources */,
 				A86E10D21A005B1E0029011B /* Switch.m in Sources */,
