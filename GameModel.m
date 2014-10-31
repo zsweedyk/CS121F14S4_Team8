@@ -26,8 +26,10 @@
 
 @implementation GameModel
 
--(id) init
+-(id) initWithLevels: (int) levels
 {
+    _numLevels = levels;
+    
     if (self == [super init]) {
 
         self.numRows = 15;

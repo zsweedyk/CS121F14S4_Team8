@@ -9,16 +9,21 @@
 #import "GameViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface GameViewController () <GridDelegate>
 {
     int numRows;
     int numCols;
+    int totalLevels;
     BOOL powered;
     NSInteger level;
     
     GameModel* _model;
     Grid* _grid;
+    AVAudioPlayer* _audioPlayerWin;
+    AVAudioPlayer* _audioPlayerNo;
 }
 
 @end
@@ -29,8 +34,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // sound set up
+    NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
+    NSURL *winPathURL = [NSURL fileURLWithPath : winPath];
+    _audioPlayerWin = [[AVAudioPlayer alloc] initWithContentsOfURL:winPathURL error:nil];
+    
+    NSString *noPath  = [[NSBundle mainBundle] pathForResource:@"beep-rejected" ofType:@"aif"];
+    NSURL *noPathURL = [NSURL fileURLWithPath : noPath];
+    _audioPlayerNo = [[AVAudioPlayer alloc] initWithContentsOfURL:noPathURL error:nil];
+    
     //Initialize model
-    _model = [[GameModel alloc] init];
+    totalLevels = 3;
+    _model = [[GameModel alloc] initWithLevels:totalLevels];
     
     // generate a grid
     level = 0;
@@ -74,8 +89,8 @@
 }
 
 - (void) newLevel{
-    if (level <= 2)
-        ++level;
+    ++level;
+    
     [_model generateGrid:level];
     
     [self setUpDisplay];
@@ -106,6 +121,8 @@
     BOOL connected = [_model connected];
     if (connected) {
         [_grid win];
+        [_audioPlayerWin prepareToPlay];
+        [_audioPlayerWin play];
         
         NSString *title = @"You win!";
         
@@ -121,11 +138,14 @@
                                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alertView show];
+    } else {
+        [_audioPlayerNo prepareToPlay];
+        [_audioPlayerNo play];
     }
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (level <= 1)
+    if (level < totalLevels - 1)
         [self newLevel];
 }
 

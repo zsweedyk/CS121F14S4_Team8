@@ -8,14 +8,13 @@
 
 #import "MenuViewController.h"
 #import "GameViewController.h"
-#import "Sound.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface MenuViewController (){
-    NSInteger language;
-    Sound *soundLanguage;
-    // 0 english
-    // 1 spanish
-    // 2 chinese
+    NSInteger language; // 0 english, 1 spanish, 2 chinese
+    AVAudioPlayer* _audioPlayerLanguagePressed;
+    AVAudioPlayer* _audioPlayerAboutPressed;
 }
 
 @end
@@ -26,7 +25,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     language = 0;
-    soundLanguage = [[Sound alloc] initWithSoundNamed:@"beep-warmguitar.aif"];
+    
+    // sound set up
+    NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
+    _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
+    
+    NSString *aboutPath  = [[NSBundle mainBundle] pathForResource:@"beep-horn" ofType:@"aif"];
+    NSURL *aboutPathURL = [NSURL fileURLWithPath : aboutPath];
+    _audioPlayerAboutPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:aboutPathURL error:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,22 +45,14 @@
 
 - (IBAction)indexChanged:(UISegmentedControl *)sender
 {
-    NSString *path  = [[NSBundle mainBundle] pathForResource:@"beep-warmguitar" ofType:@"aif"];
-    NSURL *pathURL = [NSURL fileURLWithPath : path];
-    
-    SystemSoundID audioEffect;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
-    AudioServicesPlaySystemSound(audioEffect);
-    AudioServicesDisposeSystemSoundID(audioEffect);
-    
-    [soundLanguage play];
-    
+    [_audioPlayerLanguagePressed prepareToPlay];
+    [_audioPlayerLanguagePressed play];
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
             NSLog(@"english");
             language = 0;
-            [self.level setTitle:@"Start New Game" forState:UIControlStateNormal];
-            [self.about setTitle:@"How to Play" forState:UIControlStateNormal];
+            [self.level setTitle:@"Start new game" forState:UIControlStateNormal];
+            [self.about setTitle:@"How to play" forState:UIControlStateNormal];
             break;
             
         case 1:
@@ -76,7 +77,8 @@
 - (IBAction)displayHelpMessage:(UIButton*) sender{
     NSString *title;
     NSString *message;
-    
+    //[_audioPlayerAboutPressed prepareToPlay];
+    //[_audioPlayerAboutPressed play];
     switch (language) {
         case 0:
             title = @"How to Play";
