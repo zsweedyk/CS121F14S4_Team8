@@ -13,4 +13,6 @@
 @property (nonatomic) NSInteger language;
 @property (weak, nonatomic) IBOutlet UIButton* back;
 
+- (id) initWithLevel: (int) startLevel;
+
 @end

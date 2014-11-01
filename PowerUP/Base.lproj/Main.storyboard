@@ -84,34 +84,10 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="leY-KK-gSh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLn-Hj-100">
-                                <rect key="frame" x="277" y="192" width="49" height="30"/>
-                                <state key="normal" title="Level 0">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IXp-pY-SBV" kind="presentation" id="fML-Mr-TFQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saJ-LA-op0">
-                                <rect key="frame" x="277" y="285" width="49" height="30"/>
-                                <state key="normal" title="Level 1">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8r-ig-yo8">
-                                <rect key="frame" x="277" y="381" width="49" height="30"/>
-                                <state key="normal" title="Level 2">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="RE2-IP-v4T" secondAttribute="centerX" id="8qX-cf-HNF"/>
-                            <constraint firstAttribute="centerX" secondItem="saJ-LA-op0" secondAttribute="centerX" id="jkE-fk-oQk"/>
-                            <constraint firstAttribute="centerX" secondItem="HLn-Hj-100" secondAttribute="centerX" id="n7I-iv-b4n"/>
-                            <constraint firstAttribute="centerX" secondItem="v8r-ig-yo8" secondAttribute="centerX" id="zkm-PR-6Hs"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -156,6 +132,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Nrk-zj-1DE"/>
+        <segue reference="dtf-rg-i2c"/>
     </inferredMetricsTieBreakers>
 </document>

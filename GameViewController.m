@@ -30,9 +30,18 @@
 
 @implementation GameViewController
 
+- (id) initWithLevel: (int) startLevel {
+    level = startLevel;
+    [self viewDidLoad];
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
@@ -48,7 +57,6 @@
     _model = [[GameModel alloc] initWithLevels:totalLevels];
     
     // generate a grid
-    level = 0;
     [_model generateGrid:level];
     
     CGRect frame = self.view.frame;
