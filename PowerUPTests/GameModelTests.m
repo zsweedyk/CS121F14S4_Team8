@@ -152,8 +152,16 @@
     [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
     XCTAssertFalse([_model connected]);
 
+<<<<<<< Updated upstream
     [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
     XCTAssert([_model connected], @"Can't detect the bulbs");
+=======
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
+    XCTAssertFalse([_model connected]);
+
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
+    XCTAssertTrue([_model connected]);
+>>>>>>> Stashed changes
 
 }
 
