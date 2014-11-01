@@ -16,8 +16,7 @@
     int _batteryRow;
     int _batteryPosCol;
     int _batteryNegCol;
-    int _bulbRow;
-    int _bulbCol;
+    NSMutableArray *_bulbs;
     int _numLevels;
     //int _level;
 }
@@ -50,21 +49,22 @@
     return self;
 }
 
--(void) clearGrid
+-(void) clearGridAndBulbs
 {
     for (int x = 0; x < _grid.count; ++x) {
         [_grid[x] removeAllObjects];
     }
+    [_bulbs removeAllObjects];
 }
 
 -(void) generateGrid: (NSInteger) level
 {
-    [self clearGrid];
-
+    [self clearGridAndBulbs];
+    
     // Make sure that the input for this method is valid
     NSAssert((level <= _numLevels), @"Invalid level argument");
     NSAssert((level >= -2), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
-
+    
     // get the txt file with the grid data
     NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
     NSError* error;
@@ -76,31 +76,30 @@
         NSString* rowData = [data substringWithRange:range];
         
         for (int c = 0; c < _gridCols; ++c) {
-
+            
             NSString* datum = [rowData substringWithRange:NSMakeRange(c, 1)];
-
+            
             // Find the battery and bulbs in the grid and store their location
             if ([datum isEqual:@"3"]) {
-                _batteryRow = r;
-                _batteryNegCol = c;
+                _batteryRow = r/2;
+                _batteryNegCol = c/2;
             } else if ([datum isEqual:@"4"]) {
-                _bulbRow = r;
-                _bulbCol = c;
+                NSArray* bulb = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:r/2], [NSNumber numberWithInt:c/2], nil];
+                [_bulbs addObject:bulb];
             } else if ([datum isEqual:@"6"]) {
-                _batteryPosCol = c;
+                _batteryPosCol = c/2;
             }
-
+            
             [[_grid objectAtIndex:r] setObject:datum atIndex:c];
         }
     }
-    
 }
 
 -(NSString*) getTypeAtRow:(int)row andCol:(int)col
 {
     NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument"); // Make sure row input is valid
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument"); // Make sure col input is valid
-
+    
     NSString* component = [[_grid objectAtIndex:2*row] objectAtIndex:2*col];
     NSString* compWithConn = [self getComponentWithConnectionsFor:[component intValue] AtRow:row andCol:col];
     
@@ -150,7 +149,7 @@
 
 -(NSString*) getConnectionsAtRow:(int)row andCol:(int)col
 {
-
+    
     NSString* connections = @"";
     
     // connected to the left or switch to the left
@@ -187,14 +186,14 @@
     NSRegularExpression *orientationForm = [[NSRegularExpression alloc] initWithPattern:@"[LX][RX][TX][BX]" options:0 error:nil];
     int numMatchesToForm = [orientationForm numberOfMatchesInString:newOrientation options:0 range:NSMakeRange(0, 4)];
     NSAssert(numMatchesToForm == 1, @"Invalid orientation argument"); // Make sure orientation input is valid
-
+    
     // Make sure row and col input is valid
     NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument");
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument");
-
+    
     // Make sure that row and col describe switch location
     NSAssert([_grid[2*row][2*col] isEqual:@"7"], @"Input location does not correspond to switch");
-
+    
     // As long as location is not left most column, adjust left cell
     if  (col != 0) {
         if ([[newOrientation substringWithRange:NSMakeRange(0, 1)] isEqual:@"L"]) {
@@ -203,7 +202,7 @@
             _grid[2 * row][2 * col - 1] = @" ";
         }
     }
-
+    
     // As long as location is not right most column, adjust right cell
     if (col != _numCols-1) {
         if ([[newOrientation substringWithRange:NSMakeRange(1, 1)] isEqual:@"R"]) {
@@ -212,7 +211,7 @@
             _grid[2 * row][2 * col + 1] = @" ";
         }
     }
-
+    
     // As long as location is not upper most row, adjust above cell
     if (row != 0) {
         if ([[newOrientation substringWithRange:NSMakeRange(2, 1)] isEqual:@"T"]) {
@@ -221,7 +220,7 @@
             _grid[2 * row - 1][2 * col] = @" ";
         }
     }
-
+    
     // As long as location is not lower most row, adjust below cell
     if (row != _numRows - 1) {
         if ([[newOrientation substringWithRange:NSMakeRange(3, 1)] isEqual:@"B"]) {
@@ -232,20 +231,22 @@
     }
     
 }
+/**
+ -(BOOL) checkForShort
+ {
+     NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
+     NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
+ 
+     return [self breadthSearchFrom:end To:start withDirection:@"X"];
+ }**/
 
--(BOOL) checkForShort
+
+
+-(BOOL) breadthSearchFrom:(NSArray*)bulb To:(NSArray*)battery withDirection:(NSString*)direction
 {
-    NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
-    NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
     
-    return [self breadthSearchFrom:start To:end];
-}
-
--(BOOL) breadthSearchFrom:(NSArray*)start To:(NSArray*)end
-{
-
     NSMutableArray* visited = [[NSMutableArray alloc] initWithCapacity:self.numRows];
-
+    
     // set visited table initally to all 0's
     for (int i = 0; i < self.numRows; ++i) {
         NSMutableArray *visColumn = [[NSMutableArray alloc] initWithCapacity:self.numCols];
@@ -255,13 +256,27 @@
         }
     }
     
+    [[visited objectAtIndex:[bulb[0] intValue]] setObject:[NSNumber numberWithInt:1] atIndex:[bulb[1] intValue]];
+    
     // set up our queue
     NSMutableArray* connectionQueue = [[NSMutableArray alloc] init];
-    [connectionQueue addObject:start];
+    
+    // Add the first element given the direction of travel from light bulb
+    NSArray* firstObject;
+    if ([direction isEqual:@"L"]) {
+        firstObject = [[NSArray alloc] initWithObjects:bulb[0], [NSNumber numberWithInt:[bulb[1] intValue] - 1], nil];
+    } else if ([direction isEqual:@"R"]) {
+        firstObject = [[NSArray alloc] initWithObjects:bulb[0], [NSNumber numberWithInt:[bulb[1] intValue] + 1], nil];
+    } else if ([direction isEqual:@"T"]) {
+        firstObject = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:[bulb[0] intValue] - 1], bulb[1], nil];
+    } else {
+        firstObject = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:[bulb[0] intValue] + 1], bulb[1], nil];
+    }
+    [connectionQueue addObject:firstObject];
     
     // target
-    int targetRow = [end[0] intValue];
-    int targetCol = [end[1] intValue];
+    int targetRow = [battery[0] intValue];
+    int targetCol = [battery[1] intValue];
     
     // search for target
     while ([connectionQueue count] > 0) {
@@ -270,31 +285,31 @@
         
         int row = [position[0] intValue];
         int col = [position[1] intValue];
-        [[visited objectAtIndex:row / 2] setObject:[NSNumber numberWithInt:1] atIndex:col/2];
+        [[visited objectAtIndex:row] setObject:[NSNumber numberWithInt:1] atIndex:col];
         
         // check for target
         if (row == targetRow && col == targetCol) {
             return YES;
         }
         // check left neighbor
-        if ([_grid[row][col-1] isEqual:@"-"] && ![[[visited objectAtIndex:row/2]objectAtIndex:col/2-1] isEqual:[NSNumber numberWithInt:1]]) {
-            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col-2], nil]];
-            visited[row/2][col/2-1] = [NSNumber numberWithInt:1];
+        if ([_grid[2*row][2*col-1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col-1] isEqual:[NSNumber numberWithInt:1]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col-1], nil]];
+            visited[row][col-1] = [NSNumber numberWithInt:1];
         }
         // check right neighbor
-        if ([_grid[row][col+1] isEqual:@"-"] && ![[[visited objectAtIndex:row/2]objectAtIndex:col/2+1] isEqual:[NSNumber numberWithInt:1]]) {
-            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col+2], nil]];
-            visited[row/2][col/2+1] = [NSNumber numberWithInt:1];
+        if ([_grid[2*row][2*col+1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col+1] isEqual:[NSNumber numberWithInt:1]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col+1], nil]];
+            visited[row][col+1] = [NSNumber numberWithInt:1];
         }
         // check above neighbor
-        if ([_grid[row-1][col] isEqual:@"|"] && ![[[visited objectAtIndex:row/2-1]objectAtIndex:col/2] isEqual:[NSNumber numberWithInt:1]]) {
-            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row-2], [NSNumber numberWithInt:col], nil]];
-            visited[row/2-1][col/2] = [NSNumber numberWithInt:1];
+        if ([_grid[2*row-1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row-1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row-1], [NSNumber numberWithInt:col], nil]];
+            visited[row-1][col] = [NSNumber numberWithInt:1];
         }
         // check below neighbor
-        if ([_grid[row+1][col] isEqual:@"|"] && ![[[visited objectAtIndex:row/2+1]objectAtIndex:col/2] isEqual:[NSNumber numberWithInt:1]]) {
-            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row+2], [NSNumber numberWithInt:col], nil]];
-            visited[row/2+1][col/2] = [NSNumber numberWithInt:1];
+        if ([_grid[2*row+1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row+1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]) {
+            [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row+1], [NSNumber numberWithInt:col], nil]];
+            visited[row+1][col] = [NSNumber numberWithInt:1];
         }
     }
     
@@ -303,12 +318,38 @@
 
 -(BOOL) connected
 {
-
-    NSArray* startPos = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
-    NSArray* startNeg = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
-    NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_bulbRow], [NSNumber numberWithInt:_bulbCol], nil];
-
-    return [self breadthSearchFrom:startPos To:end] && [self breadthSearchFrom:startNeg To:end];
+    
+    NSArray* battPos = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
+    NSArray* battNeg = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
+    
+    
+    // Check conenctivity for each bulb
+    for (int i = 0; i < _bulbs.count; ++i) {
+        
+        // Find which paths we can follow from the bulb
+        NSMutableArray* pathStarts = [[NSMutableArray alloc] init];
+        NSString* directions = [self getConnectionsAtRow:[_bulbs[i][0] intValue] andCol:[_bulbs[i][1] intValue]];
+        for(int j = 0; j < 4; ++j) {
+            NSString* dir = [directions substringWithRange:NSMakeRange(j, 1)];
+            if (![dir isEqual:@"X"]) {
+                [pathStarts addObject:dir];
+            }
+        }
+        
+        // Make sure the bulb is valid on the grid
+        NSAssert([pathStarts count] == 2, @"Invalid number of connections to bulb at row:, and col:");
+        
+        // See if the bulb is connected following the two possible paths
+        bool path1 = [self breadthSearchFrom:_bulbs[i] To:battPos withDirection:pathStarts[0]] && [self breadthSearchFrom:_bulbs[i] To:battNeg withDirection:pathStarts[1]];
+        bool path2 = [self breadthSearchFrom:_bulbs[i] To:battNeg withDirection:pathStarts[0]] && [self breadthSearchFrom:_bulbs[i] To:battPos withDirection:pathStarts[1]];
+        
+        // If it's not at least one of the possible paths then it's false
+        if (!(path1 || path2)) {
+            return false;
+        }
+        
+    }
+    return true;
 }
 
 /*
