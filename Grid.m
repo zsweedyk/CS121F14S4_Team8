@@ -159,4 +159,10 @@
     
 }
 
+- (void) shorted{
+    
+    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] burned];
+    
+}
+
 @end

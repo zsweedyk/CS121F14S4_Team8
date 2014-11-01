@@ -26,5 +26,6 @@
 - (void) setUpGridForNumRows:(int)rows andCols:(int)cols;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
 - (void) win;
+- (void) shorted;
 
 @end

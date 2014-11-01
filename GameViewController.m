@@ -18,6 +18,7 @@
     int numRows;
     int numCols;
     BOOL powered;
+    BOOL shorted;
     
     NSInteger _level;
     int _numLevels;
@@ -28,10 +29,13 @@
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
     
-    NSString* title;
+    NSString* titleWin;
     NSString* next;
     NSString* all;
     NSString* okay;
+    
+    NSString* titleLose;
+    NSString* restart;
 }
 
 @end
@@ -52,6 +56,7 @@
     // Do any additional setup after loading the view.
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    shorted = NO;
     
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
@@ -113,24 +118,30 @@
     switch (_language) {
         case 0:
             [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            title = @"You win";
+            titleWin = @"You win";
             next = @"Current level is unlocked. Let's try next level!";
             all = @"All levels are unlocked. Congratulation!";
             okay = @"OK";
+            titleLose = @"You lose";
+            restart = @"The circuit is shorted. Let's give it another try!";
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            title = @"You win (spanish)";
+            titleWin = @"You win (spanish)";
             next = @"Current level is unlocked. Let's try next level! (spanish)";
             all = @"All levels are unlocked. Congratulation! (spanish)";
             okay = @"OK";
+            titleLose = @"You lose (spanish)";
+            restart = @"The circuit is shorted. Let's give it another try! (spanish)";
             break;
         case 2:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            title = @"成功过关！";
+            titleWin = @"成功过关！";
             next = @"下关已解锁！";
             all = @"所有关卡已解锁！";
             okay = @"进入下一关";
+            titleLose = @"你没有过关";
+            restart = @"再试一次吧！";
             break;
         default:
             break;
@@ -175,7 +186,22 @@
 // if the battery is on, check the circuit connection
 -(void) powerOn{
     BOOL connected = [_model connected];
-    if (connected) {
+    //shorted = [_model checkForShort];
+    
+    if (shorted) {
+        [_grid shorted];
+        
+        if (_language == 2)
+            okay = @"好";
+        
+        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:titleLose
+                                                          message:restart
+                                                         delegate:self
+                                                cancelButtonTitle:okay otherButtonTitles:nil];
+        
+        [loseView show];
+    }
+    else if (connected) {
         [_grid win];
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
@@ -189,12 +215,12 @@
             if (_language == 2)
                 okay = @"退出游戏";
         }
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+        UIAlertView *winView = [[UIAlertView alloc] initWithTitle:titleWin
                                                             message:message
                                                            delegate:self
                                                   cancelButtonTitle:okay otherButtonTitles:nil];
         
-        [alertView show];
+        [winView show];
     } else {
         [_audioPlayerNo prepareToPlay];
         [_audioPlayerNo play];
@@ -202,7 +228,10 @@
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (_level < _numLevels - 1)
+    if (shorted){
+        _level--;
+        [self newLevel];
+    } else if (_level < _numLevels - 1)
         [self newLevel];
 }
 

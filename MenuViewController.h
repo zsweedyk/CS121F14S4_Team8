@@ -11,5 +11,6 @@
 @interface MenuViewController : UIViewController
 
 - (id) initWithLanguage: (int) language;
+
 @end
 

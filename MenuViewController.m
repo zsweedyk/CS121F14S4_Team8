@@ -56,8 +56,8 @@
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
     
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
-    [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [_segmentControl setSelectedSegmentIndex:_language];
+    [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
     
     // set up tint color
@@ -86,6 +86,7 @@
     [self.view addSubview:_about];
     
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void)chooseLevel:(id)sender

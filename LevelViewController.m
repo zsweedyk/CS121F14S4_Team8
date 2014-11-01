@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 3;
+    _numLevels = 4;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // set up tint color
@@ -61,7 +61,7 @@
         if (_language == 2)
             titleStr = [NSString stringWithFormat:@"关卡 %d", i];
         else if (_language == 1)
-            titleStr = [NSString stringWithFormat:@"Level %d", i];
+            titleStr = [NSString stringWithFormat:@"Level %d (spanish)", i];
         else
             titleStr = [NSString stringWithFormat:@"Level %d", i];
             
@@ -87,7 +87,7 @@
     if (_language == 2)
         backtoMenu = @"回到主菜单";
     else if (_language == 1)
-        backtoMenu = @"Back to main menu";
+        backtoMenu = @"Back to main menu (spanish)";
     else
         backtoMenu = @"Back to main menu";
     
@@ -103,7 +103,7 @@
 
 - (void)backToMain:(id)sender
 {
-    MenuViewController* menuVC = [MenuViewController alloc];
+    MenuViewController* menuVC = [[MenuViewController alloc] initWithLanguage:_language];
     [self presentViewController:menuVC animated:NO completion:nil];
 }
 
