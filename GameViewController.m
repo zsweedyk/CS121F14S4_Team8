@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "LevelViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
 #import <AudioToolbox/AudioToolbox.h>
@@ -16,22 +17,31 @@
 {
     int numRows;
     int numCols;
-    int totalLevels;
     BOOL powered;
-    NSInteger level;
     
+    NSInteger _level;
+    int _numLevels;
+    int _language;
     GameModel* _model;
     Grid* _grid;
+    UIButton* _backToLevel;
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
+    
+    NSString* title;
+    NSString* next;
+    NSString* all;
+    NSString* okay;
 }
 
 @end
 
 @implementation GameViewController
 
-- (id) initWithLevel: (int) startLevel {
-    level = startLevel;
+- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language{
+    _level = startLevel;
+    _numLevels = totalLevels;
+    _language = language;
     [self viewDidLoad];
     
     return self;
@@ -52,12 +62,11 @@
     NSURL *noPathURL = [NSURL fileURLWithPath : noPath];
     _audioPlayerNo = [[AVAudioPlayer alloc] initWithContentsOfURL:noPathURL error:nil];
     
-    //Initialize model
-    totalLevels = 3;
-    _model = [[GameModel alloc] initWithLevels:totalLevels];
+    // initialize model
+    _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
     
     // generate a grid
-    [_model generateGrid:level];
+    [_model generateGrid:_level];
     
     CGRect frame = self.view.frame;
     
@@ -80,26 +89,65 @@
     
     [self setUpDisplay];
     
+    // back to level button set up
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 6;
+    
+    CGFloat x = (frameWidth - buttonWidth) / 2;
+    CGFloat y = buttonHeight / 2;
+    CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+    
+    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
+    
+    [_backToLevel setBackgroundColor:[UIColor clearColor]];
+    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
+    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+    
+    [self.view addSubview:_backToLevel];
+    
+    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
+    
     // display the back menu in appropriate language
     switch (_language) {
         case 0:
-            [_back setTitle:@"Back to Menu" forState:UIControlStateNormal];
+            [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
+            title = @"You win";
+            next = @"Current level is unlocked. Let's try next level!";
+            all = @"All levels are unlocked. Congratulation!";
+            okay = @"OK";
             break;
         case 1:
-            [_back setTitle:@"Volver al menú" forState:UIControlStateNormal];
+            [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
+            title = @"You win (spanish)";
+            next = @"Current level is unlocked. Let's try next level! (spanish)";
+            all = @"All levels are unlocked. Congratulation! (spanish)";
+            okay = @"OK";
             break;
         case 2:
-            [_back setTitle:@"回到主菜单" forState:UIControlStateNormal];
+            [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
+            title = @"成功过关！";
+            next = @"下关已解锁！";
+            all = @"所有关卡已解锁！";
+            okay = @"进入下一关";
             break;
         default:
             break;
     }
 }
 
+
+- (void)backToLevel:(id)sender
+{
+    LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
+    [self presentViewController:levelVC animated:NO completion:nil];
+}
+
 - (void) newLevel{
-    ++level;
+    ++_level;
     
-    [_model generateGrid:level];
+    [_model generateGrid:_level];
     
     [self setUpDisplay];
 }
@@ -132,18 +180,19 @@
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
         
-        NSString *title = @"You win!";
-        
         NSString *message;
-        if (level <= 1)
-            message = [NSString stringWithFormat:@"Current level is unlocked. Let's try next level!"];
+        if (_level <= 1)
+            message = next;
         else
-            message = [NSString stringWithFormat:@"All levels are unlocked. Congratulation!"];
-        
+        {
+            message = all;
+            if (_language == 2)
+                okay = @"退出游戏";
+        }
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
                                                            delegate:self
-                                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                  cancelButtonTitle:okay otherButtonTitles:nil];
         
         [alertView show];
     } else {
@@ -153,7 +202,7 @@
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (level < totalLevels - 1)
+    if (_level < _numLevels - 1)
         [self newLevel];
 }
 

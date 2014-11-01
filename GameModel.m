@@ -26,7 +26,7 @@
 
 @implementation GameModel
 
--(id) initWithLevels: (int) levels
+-(id) initWithTotalLevels: (int) levels
 {
     _numLevels = levels;
     

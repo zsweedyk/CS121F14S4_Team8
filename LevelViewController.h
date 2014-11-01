@@ -10,4 +10,6 @@
 
 @interface LevelViewController : UIViewController
 
+- (id) initWithLanguage: (int) language;
+
 @end
