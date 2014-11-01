@@ -146,11 +146,14 @@
     XCTAssertFalse([_model connected]); // still unconnected
 
     [_model switchSelectedAtRow:11 andCol:8 withOrientation:@"LRXX"];
-    [_model switchSelectedAtRow:12 andCol:4 withOrientation:@"XXTX"];
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTX"];
     XCTAssertFalse([_model connected]); // still unconnected
 
-    [_model switchSelectedAtRow:12 andCol:4 withOrientation:@"XXTB"];
-    XCTAssertTrue([_model connected]);
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
+    XCTAssertFalse([_model connected]);
+
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
+    XCTAssert([_model connected], @"Can't detect the bulbs");
 
 }
 
