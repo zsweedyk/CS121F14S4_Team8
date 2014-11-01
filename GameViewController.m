@@ -186,7 +186,7 @@
 // if the battery is on, check the circuit connection
 -(void) powerOn{
     BOOL connected = [_model connected];
-    //shorted = [_model checkForShort];
+    shorted = [_model checkForShort];
     
     if (shorted) {
         [_grid shorted];

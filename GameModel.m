@@ -18,34 +18,35 @@
     int _batteryNegCol;
     NSMutableArray *_bulbs;
     int _numLevels;
-    //int _level;
+    
 }
 
 @end
 
 @implementation GameModel
 
--(id) initWithTotalLevels: (int) levels
+-(id) initWithTotalLevels:(int)levels
 {
     _numLevels = levels;
     
     if (self == [super init]) {
-
+        
         self.numRows = 15;
         self.numCols = 15;
         _gridRows = self.numRows * 2 - 1;
         _gridCols = self.numCols * 2 - 1; // The grid contains more data than the grid elements
-
+        _bulbs = [[NSMutableArray alloc] init];
+        
         // initialize arrays with enough space for all the data in the rows
         _grid = [[NSMutableArray alloc] initWithCapacity:_gridRows];
-
+        
         // in each row spot add another array for the columns
         for (int r = 0; r < _gridRows; ++r) {
             NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:_gridCols];
             [_grid addObject:column];
         }
     }
-
+    
     return self;
 }
 
@@ -231,16 +232,14 @@
     }
     
 }
-/**
- -(BOOL) checkForShort
- {
-     NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
-     NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
+
+-(BOOL) checkForShort
+{
+    NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
+    NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
  
-     return [self breadthSearchFrom:end To:start withDirection:@"X"];
- }**/
-
-
+    return [self breadthSearchFrom:end To:start withDirection:@"R"];
+}
 
 -(BOOL) breadthSearchFrom:(NSArray*)bulb To:(NSArray*)battery withDirection:(NSString*)direction
 {
@@ -292,22 +291,26 @@
             return YES;
         }
         // check left neighbor
-        if ([_grid[2*row][2*col-1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col-1] isEqual:[NSNumber numberWithInt:1]]) {
+        if ([_grid[2*row][2*col-1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col-1] isEqual:[NSNumber numberWithInt:1]]
+            && ![_grid[2*row][2*col-2] isEqual:@"4"]) {
             [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col-1], nil]];
             visited[row][col-1] = [NSNumber numberWithInt:1];
         }
         // check right neighbor
-        if ([_grid[2*row][2*col+1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col+1] isEqual:[NSNumber numberWithInt:1]]) {
+        if ([_grid[2*row][2*col+1] isEqual:@"-"] && ![[[visited objectAtIndex:row]objectAtIndex:col+1] isEqual:[NSNumber numberWithInt:1]]
+            && ![_grid[2*row][2*col+2] isEqual:@"4"]) {
             [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:col+1], nil]];
             visited[row][col+1] = [NSNumber numberWithInt:1];
         }
         // check above neighbor
-        if ([_grid[2*row-1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row-1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]) {
+        if ([_grid[2*row-1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row-1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]
+            && ![_grid[2*row - 2][2*col] isEqual:@"4"]) {
             [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row-1], [NSNumber numberWithInt:col], nil]];
             visited[row-1][col] = [NSNumber numberWithInt:1];
         }
         // check below neighbor
-        if ([_grid[2*row+1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row+1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]) {
+        if ([_grid[2*row+1][2*col] isEqual:@"|"] && ![[[visited objectAtIndex:row+1]objectAtIndex:col] isEqual:[NSNumber numberWithInt:1]]
+            && ![_grid[2*row + 2][2*col] isEqual:@"4"]) {
             [connectionQueue addObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:row+1], [NSNumber numberWithInt:col], nil]];
             visited[row+1][col] = [NSNumber numberWithInt:1];
         }
