@@ -23,4 +23,10 @@
     self.image = [UIImage imageNamed:@"bulb_light"];
 }
 
+- (void) burned
+{
+    self.image = [UIImage imageNamed:@"bulb_short"];
+}
+
+
 @end

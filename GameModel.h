@@ -13,11 +13,12 @@
 @property (nonatomic) int numRows;
 @property (nonatomic) int numCols;
 
--(id) init;
+-(id) initWithTotalLevels: (int) levels;
 -(void) generateGrid: (NSInteger) level;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(BOOL) connected;
+-(BOOL) checkForShort;
 
 
 @end

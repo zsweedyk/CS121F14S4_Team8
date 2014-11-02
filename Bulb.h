@@ -15,4 +15,6 @@
 
 - (void) lightUp;
 
+- (void) burned;
+
 @end

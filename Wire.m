@@ -15,6 +15,7 @@
 {
     self = [super initWithFrame:frame];
     self.image = [UIImage imageNamed:imageName];
+    
     return self;
 }
 

@@ -10,6 +10,8 @@
 #import "Wire.h"
 #import "Bulb.h"
 #import "Battery.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface Grid()
 {
@@ -18,6 +20,8 @@
     int _bulbRow;
     int _bulbCol;
     NSMutableArray* _cells;
+    
+    AVAudioPlayer* _audioPlayerPressed;
 }
 @end
 
@@ -39,6 +43,11 @@
     _cells = [[NSMutableArray alloc] init];
     
     [self setUpGridForNumRows:rows andCols:cols];
+    
+    // sound set up
+    NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *pressedPathURL = [NSURL fileURLWithPath : pressedPath];
+    _audioPlayerPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:pressedPathURL error:nil];
     
     return self;
 }
@@ -97,15 +106,15 @@
     NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
     if ([typeIndicator isEqual: @"wi"]) { // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
+        //((Wire*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"ba"]) { // battery case
-        //newComponent = [[UIImageView alloc] initWithFrame:label.frame];
-        //[(UIImageView*)newComponent setImage:[UIImage imageNamed:componentType]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
         _bulbRow = row;
         _bulbCol = col;
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
+        //((Bulb*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"sw"]) { // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame];
         ((Switch*)newComponent).delegate = self;
@@ -122,9 +131,18 @@
 {
     NSNumber* senderTag = [[NSNumber alloc] initWithInt:(int)((Switch*)sender).tag];
     
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
+    
     NSString* newOrientation = [(Switch*)sender rotateSwitch];
     
     [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
+}
+
+- (void) wireSelected:(id)sender
+{
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
 }
 
 - (void) powerUp:(id)sender
@@ -138,6 +156,12 @@
 - (void) win{
     
     [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] lightUp];
+    
+}
+
+- (void) shorted{
+    
+    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] burned];
     
 }
 
