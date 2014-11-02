@@ -232,7 +232,7 @@
     }
     
 }
-
+/*
 -(BOOL) checkForShort
 {
     NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];

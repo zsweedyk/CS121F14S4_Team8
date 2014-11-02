@@ -146,10 +146,16 @@
     XCTAssertFalse([_model connected]); // still unconnected
 
     [_model switchSelectedAtRow:11 andCol:8 withOrientation:@"LRXX"];
-    [_model switchSelectedAtRow:12 andCol:4 withOrientation:@"XXTX"];
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTX"];
     XCTAssertFalse([_model connected]); // still unconnected
 
-    [_model switchSelectedAtRow:12 andCol:4 withOrientation:@"XXTB"];
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
+    XCTAssertFalse([_model connected]);
+
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
+    XCTAssertFalse([_model connected]);
+
+    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
     XCTAssertTrue([_model connected]);
 
 }
