@@ -64,7 +64,7 @@
     
     // Make sure that the input for this method is valid
     NSAssert((level <= _numLevels), @"Invalid level argument");
-    NSAssert((level >= -2), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
+    NSAssert((level >= -3), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
     
     // get the txt file with the grid data
     NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
@@ -94,6 +94,8 @@
             [[_grid objectAtIndex:r] setObject:datum atIndex:c];
         }
     }
+    
+    //[self printGrid];
 }
 
 -(NSString*) getTypeAtRow:(int)row andCol:(int)col
@@ -355,19 +357,19 @@
     return true;
 }
 
-/*
- -(void) printGrid
- {
- for(int r = 0;r<29;r++)
- {
- printf("{");
- for(int c=0;c<29;c++)
- {
- printf([_grid[r][c] UTF8String]);
- }
- printf("},\n");
- }
- }
- */
+/**
+-(void) printGrid
+{
+    for(int r = 0;r<29;r++)
+    {
+        printf("{");
+        for(int c=0;c<29;c++)
+        {
+            printf([_grid[r][c] UTF8String]);
+        }
+        printf("},\n");
+    }
+}**/
+
 
 @end

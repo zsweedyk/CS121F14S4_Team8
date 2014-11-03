@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A8E910201A070F1500E591BE /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A8E910231A070F1500E591BE /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				A8E910241A070F2B00E591BE /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
@@ -34,6 +48,7 @@
 		A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DDE1A043DA90076501D /* beep-horn.aif */; };
 		A8E84DE11A0591480076501D /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DE01A0591480076501D /* level3 */; };
 		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
+		A8E910271A07278200E591BE /* level-3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E910261A07278200E591BE /* level-3 */; };
 		C08E33F583226436092FCBF4 /* level-2 in Resources */ = {isa = PBXBuildFile; fileRef = C08E3BBDF2D1F37DE1A4AF54 /* level-2 */; };
 		C08E3C51D66438CE9748FA06 /* level-1 in Resources */ = {isa = PBXBuildFile; fileRef = C08E38997C01381A4E7DF1AA /* level-1 */; };
 /* End PBXBuildFile section */
@@ -92,6 +107,7 @@
 		A8E84DDE1A043DA90076501D /* beep-horn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-horn.aif"; sourceTree = "<group>"; };
 		A8E84DE01A0591480076501D /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
+		A8E910261A07278200E591BE /* level-3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-3"; sourceTree = "<group>"; };
 		C08E38997C01381A4E7DF1AA /* level-1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-1"; sourceTree = "<group>"; };
 		C08E3BBDF2D1F37DE1A4AF54 /* level-2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-2"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +200,7 @@
 				A84F7F0519FDC1C6001AEC0D /* main.m */,
 				C08E38997C01381A4E7DF1AA /* level-1 */,
 				C08E3BBDF2D1F37DE1A4AF54 /* level-2 */,
+				A8E910261A07278200E591BE /* level-3 */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,6 +232,7 @@
 				A84F7EFC19FDC1C6001AEC0D /* Sources */,
 				A84F7EFD19FDC1C6001AEC0D /* Frameworks */,
 				A84F7EFE19FDC1C6001AEC0D /* Resources */,
+				A8E910251A071FC700E591BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -259,6 +277,9 @@
 						CreatedOnToolsVersion = 6.0.1;
 						TestTargetID = A84F7EFF19FDC1C6001AEC0D;
 					};
+					A8E910201A070F1500E591BE = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
 				};
 			};
 			buildConfigurationList = A84F7EFB19FDC1C6001AEC0D /* Build configuration list for PBXProject "PowerUP" */;
@@ -276,6 +297,7 @@
 			targets = (
 				A84F7EFF19FDC1C6001AEC0D /* PowerUP */,
 				A84F7F1819FDC1C6001AEC0D /* PowerUPTests */,
+				A8E910201A070F1500E591BE /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +322,7 @@
 				A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
 				C08E33F583226436092FCBF4 /* level-2 in Resources */,
+				A8E910271A07278200E591BE /* level-3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +334,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A8E910241A070F2B00E591BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\n\ncd ${TARGET_TEMP_DIR}\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json\nfi\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
+		A8E910251A071FC700E591BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A84F7EFC19FDC1C6001AEC0D /* Sources */ = {
@@ -393,6 +445,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -435,6 +489,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -503,6 +558,20 @@
 			};
 			name = Release;
 		};
+		A8E910211A070F1500E591BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A8E910221A070F1500E591BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -529,6 +598,15 @@
 			buildConfigurations = (
 				A84F7F2719FDC1C6001AEC0D /* Debug */,
 				A84F7F2819FDC1C6001AEC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8E910231A070F1500E591BE /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8E910211A070F1500E591BE /* Debug */,
+				A8E910221A070F1500E591BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

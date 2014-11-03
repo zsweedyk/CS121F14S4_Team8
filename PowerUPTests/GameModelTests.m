@@ -22,7 +22,7 @@
 
 - (void)setUp {
     [super setUp];
-    _model = [[GameModel alloc] init];
+    _model = [[GameModel alloc] initWithTotalLevels:3];
     [_model generateGrid:-1];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
@@ -158,6 +158,17 @@
     [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
     XCTAssertTrue([_model connected]);
 
+}
+
+- (void) testShortConnection
+{
+    [_model generateGrid:-3];
+    
+    XCTAssertFalse([_model checkForShort]); // originally unshorted
+    
+    [_model switchSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
+ 
+    XCTAssertTrue([_model checkForShort]); // originally unshorted
 }
 
 @end
