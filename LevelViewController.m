@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 4;
+    _numLevels = 5;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // set up tint color
