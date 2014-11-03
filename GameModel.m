@@ -29,7 +29,7 @@
 {
     _numLevels = levels;
     
-    if (self == [super init]) {
+    if (self = [super init]) {
         
         self.numRows = 15;
         self.numCols = 15;

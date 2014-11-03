@@ -103,7 +103,7 @@
 
 - (void)backToMain:(id)sender
 {
-    MenuViewController* menuVC = [[MenuViewController alloc] initWithLanguage:_language];
+    MenuViewController* menuVC = [MenuViewController alloc];
     [self presentViewController:menuVC animated:NO completion:nil];
 }
 

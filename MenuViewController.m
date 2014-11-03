@@ -72,9 +72,9 @@
     [_level setTitleColor:tintColor forState:UIControlStateNormal];
     
     [self.view addSubview:_level];
-
+    
     [_level addTarget:self action:@selector(chooseLevel:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     // about button set up
     CGRect aboutFrame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight + buttonHeight * 2) / 2, buttonWidth, buttonHeight);
     _about = [[UIButton alloc] initWithFrame:aboutFrame];
@@ -86,7 +86,7 @@
     [self.view addSubview:_about];
     
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
-
+    
 }
 
 - (void)chooseLevel:(id)sender
