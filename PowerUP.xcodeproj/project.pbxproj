@@ -50,25 +50,25 @@
 		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
 		A8E910271A07278200E591BE /* level-3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E910261A07278200E591BE /* level-3 */; };
 		A8E9108D1A081F6800E591BE /* batteryNeg.pxm in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102A1A081F6700E591BE /* batteryNeg.pxm */; };
-		A8E9108E1A081F6800E591BE /* batteryNegLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102B1A081F6700E591BE /* batteryNegLRXX.png */; };
-		A8E9108F1A081F6800E591BE /* batteryNegLRXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102C1A081F6700E591BE /* batteryNegLRXXon.png */; };
-		A8E910901A081F6800E591BE /* batteryNegLRXXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102D1A081F6700E591BE /* batteryNegLRXXshort.png */; };
-		A8E910911A081F6800E591BE /* batteryNegLXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102E1A081F6700E591BE /* batteryNegLXTX.png */; };
-		A8E910921A081F6800E591BE /* batteryNegLXTXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102F1A081F6800E591BE /* batteryNegLXTXon.png */; };
-		A8E910931A081F6800E591BE /* batteryNegLXTXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910301A081F6800E591BE /* batteryNegLXTXshort.png */; };
-		A8E910941A081F6800E591BE /* batteryNegLXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910311A081F6800E591BE /* batteryNegLXXB.png */; };
-		A8E910951A081F6800E591BE /* batteryNegLXXBon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910321A081F6800E591BE /* batteryNegLXXBon.png */; };
-		A8E910961A081F6800E591BE /* batteryNegLXXBshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910331A081F6800E591BE /* batteryNegLXXBshort.png */; };
+		A8E9108E1A081F6800E591BE /* batteryNegXRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102B1A081F6700E591BE /* batteryNegXRXX.png */; };
+		A8E9108F1A081F6800E591BE /* batteryNegXRXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102C1A081F6700E591BE /* batteryNegXRXXon.png */; };
+		A8E910901A081F6800E591BE /* batteryNegXRXXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102D1A081F6700E591BE /* batteryNegXRXXshort.png */; };
+		A8E910911A081F6800E591BE /* batteryNegXXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102E1A081F6700E591BE /* batteryNegXXTX.png */; };
+		A8E910921A081F6800E591BE /* batteryNegXXTXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9102F1A081F6800E591BE /* batteryNegXXTXon.png */; };
+		A8E910931A081F6800E591BE /* batteryNegXXTXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910301A081F6800E591BE /* batteryNegXXTXshort.png */; };
+		A8E910941A081F6800E591BE /* batteryNegXXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910311A081F6800E591BE /* batteryNegXXXB.png */; };
+		A8E910951A081F6800E591BE /* batteryNegXXXBon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910321A081F6800E591BE /* batteryNegXXXBon.png */; };
+		A8E910961A081F6800E591BE /* batteryNegXXXBshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910331A081F6800E591BE /* batteryNegXXXBshort.png */; };
 		A8E910971A081F6800E591BE /* batteryPos.pxm in Resources */ = {isa = PBXBuildFile; fileRef = A8E910341A081F6800E591BE /* batteryPos.pxm */; };
-		A8E910981A081F6800E591BE /* batteryPosLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910351A081F6800E591BE /* batteryPosLRXX.png */; };
-		A8E910991A081F6800E591BE /* batteryPosLRXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910361A081F6800E591BE /* batteryPosLRXXon.png */; };
-		A8E9109A1A081F6800E591BE /* batteryPosLRXXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910371A081F6800E591BE /* batteryPosLRXXshort.png */; };
-		A8E9109B1A081F6800E591BE /* batteryPosXRTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910381A081F6800E591BE /* batteryPosXRTX.png */; };
-		A8E9109C1A081F6800E591BE /* batteryPosXRTXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910391A081F6800E591BE /* batteryPosXRTXon.png */; };
-		A8E9109D1A081F6800E591BE /* batteryPosXRTXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103A1A081F6800E591BE /* batteryPosXRTXshort.png */; };
-		A8E9109E1A081F6800E591BE /* batteryPosXRXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103B1A081F6800E591BE /* batteryPosXRXB.png */; };
-		A8E9109F1A081F6800E591BE /* batteryPosXRXBon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103C1A081F6800E591BE /* batteryPosXRXBon.png */; };
-		A8E910A01A081F6800E591BE /* batteryPosXRXBshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103D1A081F6800E591BE /* batteryPosXRXBshort.png */; };
+		A8E910981A081F6800E591BE /* batteryPosLXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910351A081F6800E591BE /* batteryPosLXXX.png */; };
+		A8E910991A081F6800E591BE /* batteryPosLXXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910361A081F6800E591BE /* batteryPosLXXXon.png */; };
+		A8E9109A1A081F6800E591BE /* batteryPosLXXXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910371A081F6800E591BE /* batteryPosLXXXshort.png */; };
+		A8E9109B1A081F6800E591BE /* batteryPosXXTX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910381A081F6800E591BE /* batteryPosXXTX.png */; };
+		A8E9109C1A081F6800E591BE /* batteryPosXXTXon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910391A081F6800E591BE /* batteryPosXXTXon.png */; };
+		A8E9109D1A081F6800E591BE /* batteryPosXXTXshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103A1A081F6800E591BE /* batteryPosXXTXshort.png */; };
+		A8E9109E1A081F6800E591BE /* batteryPosXXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103B1A081F6800E591BE /* batteryPosXXXB.png */; };
+		A8E9109F1A081F6800E591BE /* batteryPosXXXBon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103C1A081F6800E591BE /* batteryPosXXXBon.png */; };
+		A8E910A01A081F6800E591BE /* batteryPosXXXBshort.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103D1A081F6800E591BE /* batteryPosXXXBshort.png */; };
 		A8E910A11A081F6800E591BE /* bulb.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9103F1A081F6800E591BE /* bulb.png */; };
 		A8E910A21A081F6800E591BE /* bulb.pxm in Resources */ = {isa = PBXBuildFile; fileRef = A8E910401A081F6800E591BE /* bulb.pxm */; };
 		A8E910A31A081F6800E591BE /* bulbon.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E910411A081F6800E591BE /* bulbon.png */; };
@@ -203,25 +203,25 @@
 		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
 		A8E910261A07278200E591BE /* level-3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-3"; sourceTree = "<group>"; };
 		A8E9102A1A081F6700E591BE /* batteryNeg.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = batteryNeg.pxm; sourceTree = "<group>"; };
-		A8E9102B1A081F6700E591BE /* batteryNegLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLRXX.png; sourceTree = "<group>"; };
-		A8E9102C1A081F6700E591BE /* batteryNegLRXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLRXXon.png; sourceTree = "<group>"; };
-		A8E9102D1A081F6700E591BE /* batteryNegLRXXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLRXXshort.png; sourceTree = "<group>"; };
-		A8E9102E1A081F6700E591BE /* batteryNegLXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXTX.png; sourceTree = "<group>"; };
-		A8E9102F1A081F6800E591BE /* batteryNegLXTXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXTXon.png; sourceTree = "<group>"; };
-		A8E910301A081F6800E591BE /* batteryNegLXTXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXTXshort.png; sourceTree = "<group>"; };
-		A8E910311A081F6800E591BE /* batteryNegLXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXXB.png; sourceTree = "<group>"; };
-		A8E910321A081F6800E591BE /* batteryNegLXXBon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXXBon.png; sourceTree = "<group>"; };
-		A8E910331A081F6800E591BE /* batteryNegLXXBshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegLXXBshort.png; sourceTree = "<group>"; };
+		A8E9102B1A081F6700E591BE /* batteryNegXRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXRXX.png; sourceTree = "<group>"; };
+		A8E9102C1A081F6700E591BE /* batteryNegXRXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXRXXon.png; sourceTree = "<group>"; };
+		A8E9102D1A081F6700E591BE /* batteryNegXRXXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXRXXshort.png; sourceTree = "<group>"; };
+		A8E9102E1A081F6700E591BE /* batteryNegXXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXTX.png; sourceTree = "<group>"; };
+		A8E9102F1A081F6800E591BE /* batteryNegXXTXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXTXon.png; sourceTree = "<group>"; };
+		A8E910301A081F6800E591BE /* batteryNegXXTXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXTXshort.png; sourceTree = "<group>"; };
+		A8E910311A081F6800E591BE /* batteryNegXXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXXB.png; sourceTree = "<group>"; };
+		A8E910321A081F6800E591BE /* batteryNegXXXBon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXXBon.png; sourceTree = "<group>"; };
+		A8E910331A081F6800E591BE /* batteryNegXXXBshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryNegXXXBshort.png; sourceTree = "<group>"; };
 		A8E910341A081F6800E591BE /* batteryPos.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = batteryPos.pxm; sourceTree = "<group>"; };
-		A8E910351A081F6800E591BE /* batteryPosLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLRXX.png; sourceTree = "<group>"; };
-		A8E910361A081F6800E591BE /* batteryPosLRXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLRXXon.png; sourceTree = "<group>"; };
-		A8E910371A081F6800E591BE /* batteryPosLRXXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLRXXshort.png; sourceTree = "<group>"; };
-		A8E910381A081F6800E591BE /* batteryPosXRTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRTX.png; sourceTree = "<group>"; };
-		A8E910391A081F6800E591BE /* batteryPosXRTXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRTXon.png; sourceTree = "<group>"; };
-		A8E9103A1A081F6800E591BE /* batteryPosXRTXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRTXshort.png; sourceTree = "<group>"; };
-		A8E9103B1A081F6800E591BE /* batteryPosXRXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRXB.png; sourceTree = "<group>"; };
-		A8E9103C1A081F6800E591BE /* batteryPosXRXBon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRXBon.png; sourceTree = "<group>"; };
-		A8E9103D1A081F6800E591BE /* batteryPosXRXBshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXRXBshort.png; sourceTree = "<group>"; };
+		A8E910351A081F6800E591BE /* batteryPosLXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLXXX.png; sourceTree = "<group>"; };
+		A8E910361A081F6800E591BE /* batteryPosLXXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLXXXon.png; sourceTree = "<group>"; };
+		A8E910371A081F6800E591BE /* batteryPosLXXXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosLXXXshort.png; sourceTree = "<group>"; };
+		A8E910381A081F6800E591BE /* batteryPosXXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXTX.png; sourceTree = "<group>"; };
+		A8E910391A081F6800E591BE /* batteryPosXXTXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXTXon.png; sourceTree = "<group>"; };
+		A8E9103A1A081F6800E591BE /* batteryPosXXTXshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXTXshort.png; sourceTree = "<group>"; };
+		A8E9103B1A081F6800E591BE /* batteryPosXXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXXB.png; sourceTree = "<group>"; };
+		A8E9103C1A081F6800E591BE /* batteryPosXXXBon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXXBon.png; sourceTree = "<group>"; };
+		A8E9103D1A081F6800E591BE /* batteryPosXXXBshort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batteryPosXXXBshort.png; sourceTree = "<group>"; };
 		A8E9103F1A081F6800E591BE /* bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulb.png; sourceTree = "<group>"; };
 		A8E910401A081F6800E591BE /* bulb.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = bulb.pxm; sourceTree = "<group>"; };
 		A8E910411A081F6800E591BE /* bulbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulbon.png; sourceTree = "<group>"; };
@@ -428,25 +428,25 @@
 			isa = PBXGroup;
 			children = (
 				A8E9102A1A081F6700E591BE /* batteryNeg.pxm */,
-				A8E9102B1A081F6700E591BE /* batteryNegLRXX.png */,
-				A8E9102C1A081F6700E591BE /* batteryNegLRXXon.png */,
-				A8E9102D1A081F6700E591BE /* batteryNegLRXXshort.png */,
-				A8E9102E1A081F6700E591BE /* batteryNegLXTX.png */,
-				A8E9102F1A081F6800E591BE /* batteryNegLXTXon.png */,
-				A8E910301A081F6800E591BE /* batteryNegLXTXshort.png */,
-				A8E910311A081F6800E591BE /* batteryNegLXXB.png */,
-				A8E910321A081F6800E591BE /* batteryNegLXXBon.png */,
-				A8E910331A081F6800E591BE /* batteryNegLXXBshort.png */,
+				A8E9102B1A081F6700E591BE /* batteryNegXRXX.png */,
+				A8E9102C1A081F6700E591BE /* batteryNegXRXXon.png */,
+				A8E9102D1A081F6700E591BE /* batteryNegXRXXshort.png */,
+				A8E9102E1A081F6700E591BE /* batteryNegXXTX.png */,
+				A8E9102F1A081F6800E591BE /* batteryNegXXTXon.png */,
+				A8E910301A081F6800E591BE /* batteryNegXXTXshort.png */,
+				A8E910311A081F6800E591BE /* batteryNegXXXB.png */,
+				A8E910321A081F6800E591BE /* batteryNegXXXBon.png */,
+				A8E910331A081F6800E591BE /* batteryNegXXXBshort.png */,
 				A8E910341A081F6800E591BE /* batteryPos.pxm */,
-				A8E910351A081F6800E591BE /* batteryPosLRXX.png */,
-				A8E910361A081F6800E591BE /* batteryPosLRXXon.png */,
-				A8E910371A081F6800E591BE /* batteryPosLRXXshort.png */,
-				A8E910381A081F6800E591BE /* batteryPosXRTX.png */,
-				A8E910391A081F6800E591BE /* batteryPosXRTXon.png */,
-				A8E9103A1A081F6800E591BE /* batteryPosXRTXshort.png */,
-				A8E9103B1A081F6800E591BE /* batteryPosXRXB.png */,
-				A8E9103C1A081F6800E591BE /* batteryPosXRXBon.png */,
-				A8E9103D1A081F6800E591BE /* batteryPosXRXBshort.png */,
+				A8E910351A081F6800E591BE /* batteryPosLXXX.png */,
+				A8E910361A081F6800E591BE /* batteryPosLXXXon.png */,
+				A8E910371A081F6800E591BE /* batteryPosLXXXshort.png */,
+				A8E910381A081F6800E591BE /* batteryPosXXTX.png */,
+				A8E910391A081F6800E591BE /* batteryPosXXTXon.png */,
+				A8E9103A1A081F6800E591BE /* batteryPosXXTXshort.png */,
+				A8E9103B1A081F6800E591BE /* batteryPosXXXB.png */,
+				A8E9103C1A081F6800E591BE /* batteryPosXXXBon.png */,
+				A8E9103D1A081F6800E591BE /* batteryPosXXXBshort.png */,
 			);
 			path = batteries;
 			sourceTree = "<group>";
@@ -651,7 +651,7 @@
 				A8E910E01A081F6800E591BE /* wireXRTBon.png in Resources */,
 				A86E10D81A005C4E0029011B /* level1 in Resources */,
 				A8E84DE11A0591480076501D /* level3 in Resources */,
-				A8E9108E1A081F6800E591BE /* batteryNegLRXX.png in Resources */,
+				A8E9108E1A081F6800E591BE /* batteryNegXRXX.png in Resources */,
 				A8E910CB1A081F6800E591BE /* emitterTopLXXBon.png in Resources */,
 				A8E910AA1A081F6800E591BE /* deflectorXRTXon.png in Resources */,
 				A8E910D41A081F6800E591BE /* wireLRXB.png in Resources */,
@@ -660,15 +660,15 @@
 				A8E910D11A081F6800E591BE /* wire.pxm in Resources */,
 				A8E910B91A081F6800E591BE /* emitterLeftXRTXon.png in Resources */,
 				A8E910A91A081F6800E591BE /* deflectorXRTX.png in Resources */,
-				A8E910921A081F6800E591BE /* batteryNegLXTXon.png in Resources */,
+				A8E910921A081F6800E591BE /* batteryNegXXTXon.png in Resources */,
 				A8E910EA1A081F6800E591BE /* wireXXXX.png in Resources */,
 				A8E910BE1A081F6800E591BE /* emitterRightLXTB.png in Resources */,
 				A8E910D31A081F6800E591BE /* wireLRTXon.png in Resources */,
 				A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */,
 				A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */,
-				A8E910991A081F6800E591BE /* batteryPosLRXXon.png in Resources */,
+				A8E910991A081F6800E591BE /* batteryPosLXXXon.png in Resources */,
 				A8E910B21A081F6800E591BE /* emitterBottomLXTX.png in Resources */,
-				A8E9109C1A081F6800E591BE /* batteryPosXRTXon.png in Resources */,
+				A8E9109C1A081F6800E591BE /* batteryPosXXTXon.png in Resources */,
 				A8E910D01A081F6800E591BE /* laserXXTB.png in Resources */,
 				A8E910C11A081F6800E591BE /* emitterRightLXTXon.png in Resources */,
 				A8E910A41A081F6800E591BE /* deflector.pxm in Resources */,
@@ -679,31 +679,31 @@
 				A8E910C01A081F6800E591BE /* emitterRightLXTX.png in Resources */,
 				A8E910A21A081F6800E591BE /* bulb.pxm in Resources */,
 				A8E910AB1A081F6800E591BE /* deflectorXRXB.png in Resources */,
-				A8E910901A081F6800E591BE /* batteryNegLRXXshort.png in Resources */,
+				A8E910901A081F6800E591BE /* batteryNegXRXXshort.png in Resources */,
 				A8E910C31A081F6800E591BE /* emitterRightLXXBon.png in Resources */,
 				A8E910E81A081F6800E591BE /* wireXXTX.png in Resources */,
 				A8E910BC1A081F6800E591BE /* emitterLeftXXTB.png in Resources */,
 				A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */,
-				A8E910941A081F6800E591BE /* batteryNegLXXB.png in Resources */,
+				A8E910941A081F6800E591BE /* batteryNegXXXB.png in Resources */,
 				A8E910CF1A081F6800E591BE /* laserLRXX.png in Resources */,
-				A8E910931A081F6800E591BE /* batteryNegLXTXshort.png in Resources */,
+				A8E910931A081F6800E591BE /* batteryNegXXTXshort.png in Resources */,
 				A8E910A71A081F6800E591BE /* deflectorLXXB.png in Resources */,
 				A8E910E61A081F6800E591BE /* wireXXTB.png in Resources */,
 				A8E910C81A081F6800E591BE /* emitterTopLRXX.png in Resources */,
 				A8E9108D1A081F6800E591BE /* batteryNeg.pxm in Resources */,
 				A8E9101F1A06FA7100E591BE /* level4 in Resources */,
-				A8E9109E1A081F6800E591BE /* batteryPosXRXB.png in Resources */,
+				A8E9109E1A081F6800E591BE /* batteryPosXXXB.png in Resources */,
 				A8E910C41A081F6800E591BE /* emitterRightXXTB.png in Resources */,
 				A8E910A51A081F6800E591BE /* deflectorLXTX.png in Resources */,
 				A8E910C61A081F6800E591BE /* emitterTopLRXB.png in Resources */,
-				A8E910A01A081F6800E591BE /* batteryPosXRXBshort.png in Resources */,
+				A8E910A01A081F6800E591BE /* batteryPosXXXBshort.png in Resources */,
 				A8E910B51A081F6800E591BE /* emitterBottomXRTXon.png in Resources */,
-				A8E910981A081F6800E591BE /* batteryPosLRXX.png in Resources */,
+				A8E910981A081F6800E591BE /* batteryPosLXXX.png in Resources */,
 				A8E910D51A081F6800E591BE /* wireLRXBon.png in Resources */,
 				A8E910B71A081F6800E591BE /* emitterLeftXRTBon.png in Resources */,
 				A8E910A81A081F6800E591BE /* deflectorLXXBon.png in Resources */,
 				A8E910A11A081F6800E591BE /* bulb.png in Resources */,
-				A8E910911A081F6800E591BE /* batteryNegLXTX.png in Resources */,
+				A8E910911A081F6800E591BE /* batteryNegXXTX.png in Resources */,
 				A8E910DC1A081F6800E591BE /* wireLXXB.png in Resources */,
 				A8E910CE1A081F6800E591BE /* laser.pxm in Resources */,
 				A8E910B61A081F6800E591BE /* emitterLeftXRTB.png in Resources */,
@@ -713,10 +713,10 @@
 				A8E910971A081F6800E591BE /* batteryPos.pxm in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				A8E910AE1A081F6800E591BE /* emitterBottomLRTX.png in Resources */,
-				A8E9109D1A081F6800E591BE /* batteryPosXRTXshort.png in Resources */,
-				A8E9109F1A081F6800E591BE /* batteryPosXRXBon.png in Resources */,
+				A8E9109D1A081F6800E591BE /* batteryPosXXTXshort.png in Resources */,
+				A8E9109F1A081F6800E591BE /* batteryPosXXXBon.png in Resources */,
 				A8E910E41A081F6800E591BE /* wireXRXBon.png in Resources */,
-				A8E9109A1A081F6800E591BE /* batteryPosLRXXshort.png in Resources */,
+				A8E9109A1A081F6800E591BE /* batteryPosLXXXshort.png in Resources */,
 				A8E910D91A081F6800E591BE /* wireLXTBon.png in Resources */,
 				A86E10D71A005C4E0029011B /* level0 in Resources */,
 				A86E10D91A005C4E0029011B /* level2 in Resources */,
@@ -725,7 +725,7 @@
 				A8E910B41A081F6800E591BE /* emitterBottomXRTX.png in Resources */,
 				A8E910D61A081F6800E591BE /* wireLRXX.png in Resources */,
 				A8E910DF1A081F6800E591BE /* wireXRTB.png in Resources */,
-				A8E910961A081F6800E591BE /* batteryNegLXXBshort.png in Resources */,
+				A8E910961A081F6800E591BE /* batteryNegXXXBshort.png in Resources */,
 				A8E910BD1A081F6800E591BE /* emitterLeftXXTBon.png in Resources */,
 				A8E910D71A081F6800E591BE /* wireLRXXon.png in Resources */,
 				A8E910B01A081F6800E591BE /* emitterBottomLRXX.png in Resources */,
@@ -735,7 +735,7 @@
 				A8E910A61A081F6800E591BE /* deflectorLXTXon.png in Resources */,
 				A8E910D21A081F6800E591BE /* wireLRTX.png in Resources */,
 				A8E910B81A081F6800E591BE /* emitterLeftXRTX.png in Resources */,
-				A8E9109B1A081F6800E591BE /* batteryPosXRTX.png in Resources */,
+				A8E9109B1A081F6800E591BE /* batteryPosXXTX.png in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
 				A8E910DB1A081F6800E591BE /* wireLXTXon.png in Resources */,
 				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
@@ -747,8 +747,8 @@
 				A8E910B31A081F6800E591BE /* emitterBottomLXTXon.png in Resources */,
 				A8E910B11A081F6800E591BE /* emitterBottomLRXXon.png in Resources */,
 				A8E910E71A081F6800E591BE /* wireXXTBon.png in Resources */,
-				A8E910951A081F6800E591BE /* batteryNegLXXBon.png in Resources */,
-				A8E9108F1A081F6800E591BE /* batteryNegLRXXon.png in Resources */,
+				A8E910951A081F6800E591BE /* batteryNegXXXBon.png in Resources */,
+				A8E9108F1A081F6800E591BE /* batteryNegXRXXon.png in Resources */,
 				C08E33F583226436092FCBF4 /* level-2 in Resources */,
 				A8E910271A07278200E591BE /* level-3 in Resources */,
 				A8E910DE1A081F6800E591BE /* wireLXXX.png in Resources */,
