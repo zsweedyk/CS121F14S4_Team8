@@ -95,7 +95,7 @@
         }
     }
     
-    //[self printGrid];
+    [self printGrid];
 }
 
 -(NSString*) getTypeAtRow:(int)row andCol:(int)col
@@ -116,6 +116,8 @@
     switch (type) {
             // blank case
         case 0:
+            compWithConn = @"blank";
+            break;
         case 9:
             compWithConn = @"blank";
             break;
@@ -357,7 +359,7 @@
     return true;
 }
 
-/**
+
 -(void) printGrid
 {
     for(int r = 0;r<29;r++)
@@ -369,7 +371,7 @@
         }
         printf("},\n");
     }
-}**/
+}
 
 
 @end

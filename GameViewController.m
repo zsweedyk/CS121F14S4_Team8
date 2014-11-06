@@ -164,6 +164,7 @@
 }
 
 - (void) setUpDisplay{
+    [_grid setUpGridForNumRows:numRows andCols:numCols];
     
     // read values from gameModel and set them to grid
     for (int row = 0; row < numRows; row++){

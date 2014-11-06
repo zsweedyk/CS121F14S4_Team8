@@ -120,6 +120,7 @@
         ((Switch*)newComponent).delegate = self;
     } else {
         newComponent = label;
+        [newComponent setBackgroundColor:[UIColor whiteColor]];
     }
     newComponent.tag = label.tag;
     [self addSubview:newComponent];

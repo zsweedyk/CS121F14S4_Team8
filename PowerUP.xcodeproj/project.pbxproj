@@ -28,6 +28,7 @@
 		A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1019FDC1C6001AEC0D /* Images.xcassets */; };
 		A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */; };
 		A84F7F2019FDC1C6001AEC0D /* GameModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */; };
+		A86321971A0B540A00ED1F5C /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = A86321961A0B540A00ED1F5C /* blank.png */; };
 		A86E10CB1A005B1E0029011B /* Battery.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BA1A005B1E0029011B /* Battery.m */; };
 		A86E10CC1A005B1E0029011B /* Bulb.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BC1A005B1E0029011B /* Bulb.m */; };
 		A86E10CD1A005B1E0029011B /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BE1A005B1E0029011B /* GameModel.m */; };
@@ -171,6 +172,7 @@
 		A84F7F1919FDC1C6001AEC0D /* PowerUPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F1E19FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameModelTests.m; sourceTree = "<group>"; };
+		A86321961A0B540A00ED1F5C /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		A86E10B91A005B1E0029011B /* Battery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Battery.h; path = ../Battery.h; sourceTree = "<group>"; };
 		A86E10BA1A005B1E0029011B /* Battery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Battery.m; path = ../Battery.m; sourceTree = "<group>"; };
 		A86E10BB1A005B1E0029011B /* Bulb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bulb.h; path = ../Bulb.h; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				A86E10BC1A005B1E0029011B /* Bulb.m */,
 				A86E10BD1A005B1E0029011B /* GameModel.h */,
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
+				A86321961A0B540A00ED1F5C /* blank.png */,
 				A86E10BF1A005B1E0029011B /* GameViewController.h */,
 				A86E10C01A005B1E0029011B /* GameViewController.m */,
 				A86E10C11A005B1E0029011B /* Grid.h */,
@@ -570,7 +573,6 @@
 				A84F7EFC19FDC1C6001AEC0D /* Sources */,
 				A84F7EFD19FDC1C6001AEC0D /* Frameworks */,
 				A84F7EFE19FDC1C6001AEC0D /* Resources */,
-				A8E910251A071FC700E591BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -671,6 +673,7 @@
 				A8E9109C1A081F6800E591BE /* batteryPosXXTXon.png in Resources */,
 				A8E910D01A081F6800E591BE /* laserXXTB.png in Resources */,
 				A8E910C11A081F6800E591BE /* emitterRightLXTXon.png in Resources */,
+				A86321971A0B540A00ED1F5C /* blank.png in Resources */,
 				A8E910A41A081F6800E591BE /* deflector.pxm in Resources */,
 				A8E910E91A081F6800E591BE /* wireXXXB.png in Resources */,
 				A8E910C91A081F6800E591BE /* emitterTopLRXXon.png in Resources */,
@@ -780,19 +783,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "source ~/.bash_profile\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\n\ncd ${TARGET_TEMP_DIR}\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json\nfi\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
-		};
-		A8E910251A071FC700E591BE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = XcodeCoverage/exportenv.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
