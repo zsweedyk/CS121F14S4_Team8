@@ -103,8 +103,8 @@
 
 - (void)backToMain:(id)sender
 {
-    MenuViewController* menuVC = [MenuViewController alloc];
-    [self presentViewController:menuVC animated:NO completion:nil];
+    // go back to root viewcontroller (menuviewcontroller)
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)cellSelected:(id)sender
@@ -113,7 +113,9 @@
     int buttonTag = (int) button.tag;
     
     GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language];
-    [self presentViewController:gameVC animated:NO completion:nil];
+    
+    // add gameviewcontroller to navigationviewcontroller stack
+    [self.navigationController pushViewController:gameVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

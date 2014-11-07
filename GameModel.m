@@ -95,7 +95,7 @@
         }
     }
     
-    [self printGrid];
+    //[self printGrid];
 }
 
 -(NSString*) getTypeAtRow:(int)row andCol:(int)col

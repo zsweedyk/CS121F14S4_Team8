@@ -91,8 +91,12 @@
 
 - (void)chooseLevel:(id)sender
 {
+    // initialize level viewcontroller with language choice
     LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
-    [self presentViewController:levelVC animated:NO completion:nil];
+    self.navigationController.navigationBarHidden = YES;
+    
+    // add level view controller to navigation view controller stack
+    [self.navigationController pushViewController:levelVC animated:YES];
 }
 
 -(void)segmentedControlValueDidChange:(UISegmentedControl *)segment
@@ -101,21 +105,18 @@
     [_audioPlayerLanguagePressed play];
     switch (segment.selectedSegmentIndex) {
         case 0:
-            NSLog(@"english");
             _language = 0;
             [_level setTitle:@"Start new game" forState:UIControlStateNormal];
             [_about setTitle:@"How to play" forState:UIControlStateNormal];
             break;
             
         case 1:
-            NSLog(@"spanish");
             [_level setTitle:@"Juego nuevo" forState:UIControlStateNormal];
             [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
             _language = 1;
             break;
             
         case 2:
-            NSLog(@"chinese");
             [_level setTitle:@"开始新游戏" forState:UIControlStateNormal];
             [_about setTitle:@"游戏指南" forState:UIControlStateNormal];
             _language = 2;

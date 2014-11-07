@@ -151,8 +151,8 @@
 
 - (void)backToLevel:(id)sender
 {
-    LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
-    [self presentViewController:levelVC animated:NO completion:nil];
+    // go back to levelviewcontroller
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) newLevel{
