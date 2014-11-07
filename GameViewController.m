@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
-// Please add your comments on everything that you think can be improved
+// Please add your comments on anything that you think can be improved
 
 #import "GameViewController.h"
 #import "LevelViewController.h"
