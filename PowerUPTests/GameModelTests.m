@@ -164,11 +164,11 @@
 {
     [_model generateGrid:-3];
     
-    XCTAssertFalse([_model checkForShort]); // originally unshorted
+    XCTAssertFalse([_model shorted]); // originally unshorted
     
     [_model switchSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
  
-    XCTAssertTrue([_model checkForShort]); // originally unshorted
+    XCTAssertTrue([_model shorted]); // originally unshorted
 }
 
 @end

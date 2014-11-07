@@ -18,7 +18,7 @@
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(BOOL) connected;
--(BOOL) checkForShort;
+-(BOOL) shorted;
 
 
 @end

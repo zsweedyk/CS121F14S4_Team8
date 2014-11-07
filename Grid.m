@@ -17,6 +17,7 @@
 {
     int _numRows;
     int _numCols;
+    
     NSMutableArray* _bulbRows;
     NSMutableArray* _bulbCols;
     NSMutableArray* _batRows;
@@ -93,13 +94,13 @@
     
 }
 
-// 0 empty cell
-// 1 wire
-// 2 battery neg
-// 6,3 battery pos
-// 4 bulb
-// 5 bulb connector
-// 9 switch
+// components table:
+// 0: blank
+// 1: wire
+// 3: negative battery
+// 6: positive battery
+// 4: bulb
+// 7: switch
 - (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType{
     
     // white label to replace
@@ -110,30 +111,33 @@
     
     // check component type and use the appropriate object
     NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
-    if ([typeIndicator isEqual: @"wi"]) { // wire case
+    
+    if ([typeIndicator isEqual: @"wi"]) {
+        // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
-        //((Wire*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"ba"]) { // battery case
+    } else if ([typeIndicator isEqual:@"ba"]) {
+        // battery case
         [_batRows addObject:[NSNumber numberWithInt:row]];
         [_batCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
+    } else if ([typeIndicator isEqual:@"bu"]) {
+        // bulb case
         [_bulbRows addObject:[NSNumber numberWithInt:row]];
         [_bulbCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
-        //((Bulb*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"sw"]) { // switch case
+    } else if ([typeIndicator isEqual:@"sw"]) {
+        // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame];
         ((Switch*)newComponent).delegate = self;
     } else {
         newComponent = label;
         [newComponent setBackgroundColor:[UIColor whiteColor]];
     }
+    
     newComponent.tag = label.tag;
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
-    
 }
 
 - (void) switchSelected:(id)sender
@@ -156,14 +160,20 @@
 
 - (void) powerUp:(id)sender
 {
-    //[(Battery*)sender turnedOn];
+    // turn on all battery components
+    for (int i = 0; i < _batCols.count; i++)
+    {
+        int batRow = [_batRows[i] integerValue];
+        int batCol = [_batCols[i] integerValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
+    }
     
     [self.delegate performSelector:@selector(powerOn)];
 }
 
 
 - (void) win{
-    
+    // turn on all bulb components
     for (int i = 0; i < _bulbCols.count; i++)
     {
         int bulbRow = [_bulbRows[i] integerValue];
@@ -174,11 +184,13 @@
 }
 
 - (void) shorted{
+    // explode all battery components
     for (int i = 0; i < _batCols.count; i++)
     {
         int batRow = [_batRows[i] integerValue];
         int batCol = [_batCols[i] integerValue];
         [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
-    }}
+    }
+}
 
 @end

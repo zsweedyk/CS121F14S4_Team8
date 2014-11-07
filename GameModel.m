@@ -11,23 +11,24 @@
 @interface GameModel()
 {
     NSMutableArray* _grid;
+    NSMutableArray *_bulbs;
+
     int _gridRows;
     int _gridCols;
     int _batteryRow;
     int _batteryPosCol;
     int _batteryNegCol;
-    NSMutableArray *_bulbs;
-    int _numLevels;
-    
+
+    int _numLevels; // total number of levels
 }
 
 @end
 
 @implementation GameModel
 
--(id) initWithTotalLevels:(int)levels
+-(id) initWithTotalLevels:(int)totalLevels
 {
-    _numLevels = levels;
+    _numLevels = totalLevels;
     
     if (self = [super init]) {
         
@@ -58,6 +59,7 @@
     [_bulbs removeAllObjects];
 }
 
+// assumptions: level is in [-3, numLevels]
 -(void) generateGrid: (NSInteger) level
 {
     [self clearGridAndBulbs];
@@ -95,48 +97,57 @@
         }
     }
     
+    //For debug
     //[self printGrid];
 }
 
+// assumption: row is in [0, _numRows]; col is in [0, _numCols]
 -(NSString*) getTypeAtRow:(int)row andCol:(int)col
 {
     NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument"); // Make sure row input is valid
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument"); // Make sure col input is valid
     
     NSString* component = [[_grid objectAtIndex:2*row] objectAtIndex:2*col];
+
+    // find the connections the component has
     NSString* compWithConn = [self getComponentWithConnectionsFor:[component intValue] AtRow:row andCol:col];
     
     return compWithConn;
 }
 
 // determine the component and what connections it has based on the type and the location
+// components table:
+// 0: blank
+// 1: wire
+// 3: negative battery
+// 6: positive battery
+// 4: bulb
+// 7: switch
 - (NSString*) getComponentWithConnectionsFor:(int)type AtRow:(int)row andCol:(int)col
 {
     NSString* compWithConn;
     switch (type) {
-            // blank case
+        // blank case
         case 0:
             compWithConn = @"blank";
             break;
-        case 9:
-            compWithConn = @"blank";
-            break;
-            // wire case
+        // wire case
         case 1:
             compWithConn = [@"wire" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
             break;
-            // negative battery
+        // negative battery
         case 3:
             compWithConn = [@"batteryNeg" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
             break;
-            // positive battery
+        // positive battery
         case 6:
             compWithConn = [@"batteryPos" stringByAppendingString:[self getConnectionsAtRow:row andCol:col]];
             break;
         case 4:
-            // No short case for now
+        // bulb case
             compWithConn = @"bulb";
             break;
+        // switch case
         case 7:
             compWithConn = @"switch";
             break;
@@ -237,8 +248,9 @@
     
 }
 
--(BOOL) checkForShort
+-(BOOL) shorted
 {
+    // check if two nodes of battery are connected directly
     NSArray* start = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryPosCol], nil];
     NSArray* end = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_batteryRow], [NSNumber numberWithInt:_batteryNegCol], nil];
  
@@ -247,7 +259,6 @@
 
 -(BOOL) breadthSearchFrom:(NSArray*)bulb To:(NSArray*)battery withDirection:(NSString*)direction
 {
-    
     NSMutableArray* visited = [[NSMutableArray alloc] initWithCapacity:self.numRows];
     
     // set visited table initally to all 0's

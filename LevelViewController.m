@@ -13,9 +13,10 @@
 #import "MenuViewController.h"
 
 @interface LevelViewController () {
-    NSMutableArray* _buttons;
+    NSMutableArray* _buttons; // buttons for different levels
+    
     int _language;
-    int _numLevels;
+    int _numLevels; // total levels the game has
     int _currentLevel;
 }
 

@@ -17,6 +17,7 @@
 {
     self = [super initWithFrame:frame];
     
+    // TODO: add LRTB.png
     _possibleOrientations = [[NSArray alloc] initWithObjects:@"XXXX",@"LXXX",@"LRXX",@"LRTX",@"LRTB",@"LRXB",@"LXTX",@"LXTB",@"LXXB",@"XRXX",@"XRTX",@"XRTB",@"XRXB",@"XXTX",@"XXTB",@"XXXB", nil];
     _currentOrientation = 0;
     
@@ -27,7 +28,6 @@
     
     return self;
 }
-
 
 
 - (NSString*) rotateSwitch

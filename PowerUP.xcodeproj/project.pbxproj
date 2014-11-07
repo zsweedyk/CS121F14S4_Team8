@@ -172,7 +172,7 @@
 		A84F7F1919FDC1C6001AEC0D /* PowerUPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F1E19FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameModelTests.m; sourceTree = "<group>"; };
-		A86321961A0B540A00ED1F5C /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		A86321961A0B540A00ED1F5C /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blank.png; path = ../blank.png; sourceTree = "<group>"; };
 		A86E10B91A005B1E0029011B /* Battery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Battery.h; path = ../Battery.h; sourceTree = "<group>"; };
 		A86E10BA1A005B1E0029011B /* Battery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Battery.m; path = ../Battery.m; sourceTree = "<group>"; };
 		A86E10BB1A005B1E0029011B /* Bulb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bulb.h; path = ../Bulb.h; sourceTree = "<group>"; };
@@ -341,19 +341,14 @@
 		A84F7F0219FDC1C6001AEC0D /* PowerUP */ = {
 			isa = PBXGroup;
 			children = (
+				A8B618611A0D702800541E43 /* PowerUPSounds */,
 				A8E910281A081F6700E591BE /* PowerUpPics */,
-				A8E84DDE1A043DA90076501D /* beep-horn.aif */,
-				A893D75C1A01E94F0004F539 /* beep-attention.aif */,
-				A893D75D1A01E94F0004F539 /* beep-rejected.aif */,
-				A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */,
-				A893D75F1A01E94F0004F539 /* slide-magic.aif */,
 				A86E10B91A005B1E0029011B /* Battery.h */,
 				A86E10BA1A005B1E0029011B /* Battery.m */,
 				A86E10BB1A005B1E0029011B /* Bulb.h */,
 				A86E10BC1A005B1E0029011B /* Bulb.m */,
 				A86E10BD1A005B1E0029011B /* GameModel.h */,
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
-				A86321961A0B540A00ED1F5C /* blank.png */,
 				A86E10BF1A005B1E0029011B /* GameViewController.h */,
 				A86E10C01A005B1E0029011B /* GameViewController.m */,
 				A86E10C11A005B1E0029011B /* Grid.h */,
@@ -414,9 +409,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A8B618611A0D702800541E43 /* PowerUPSounds */ = {
+			isa = PBXGroup;
+			children = (
+				A8E84DDE1A043DA90076501D /* beep-horn.aif */,
+				A893D75C1A01E94F0004F539 /* beep-attention.aif */,
+				A893D75D1A01E94F0004F539 /* beep-rejected.aif */,
+				A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */,
+				A893D75F1A01E94F0004F539 /* slide-magic.aif */,
+			);
+			name = PowerUPSounds;
+			sourceTree = "<group>";
+		};
 		A8E910281A081F6700E591BE /* PowerUpPics */ = {
 			isa = PBXGroup;
 			children = (
+				A86321961A0B540A00ED1F5C /* blank.png */,
 				A8E910291A081F6700E591BE /* batteries */,
 				A8E9103E1A081F6800E591BE /* bulbs */,
 				A8E910421A081F6800E591BE /* deflectors */,

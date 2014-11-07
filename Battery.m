@@ -23,16 +23,21 @@
     return self;
 }
 
+- (void) turnedOff
+{
+    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+}
+
 - (void) turnedOn
 {
-    _name = [NSString stringWithFormat:@"%@%@", _name, @"on"];
-    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"on"];
+    [self setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 - (void) exploded
 {
-    _name = [NSString stringWithFormat:@"%@%@", _name, @"short"];
-    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    [self setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 @end

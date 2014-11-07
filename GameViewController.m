@@ -17,20 +17,21 @@
 
 @interface GameViewController () <GridDelegate>
 {
-    int numRows;
-    int numCols;
-    BOOL powered;
-    BOOL shorted;
-    
-    NSInteger _level;
-    int _numLevels;
-    int _language;
+    int _level;     // current level
+    int _numLevels; // total level
+    int _language;  // language choice
+
     GameModel* _model;
     Grid* _grid;
     UIButton* _backToLevel;
-    AVAudioPlayer* _audioPlayerWin;
-    AVAudioPlayer* _audioPlayerNo;
+
+    int numRows;
+    int numCols;
     
+    BOOL powered;
+    BOOL shorted;
+    
+    // message title variables
     NSString* titleWin;
     NSString* next;
     NSString* all;
@@ -38,6 +39,10 @@
     
     NSString* titleLose;
     NSString* restart;
+    
+    // sound effect variables
+    AVAudioPlayer* _audioPlayerWin;
+    AVAudioPlayer* _audioPlayerNo;
 }
 
 @end
@@ -58,6 +63,8 @@
     // Do any additional setup after loading the view.
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    // initialize variables
     shorted = NO;
     
     // sound set up
@@ -77,7 +84,7 @@
     
     CGRect frame = self.view.frame;
     
-    // initilize _gridView
+    // initilize _grid
     float framePortion = 0.8;
     CGFloat xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
     CGFloat yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
@@ -96,7 +103,7 @@
     
     [self setUpDisplay];
     
-    // back to level button set up
+    // set up back to level button
     CGFloat frameWidth = self.view.frame.size.width;
     CGFloat buttonWidth = frameWidth / 2;
     CGFloat buttonHeight = buttonWidth / 6;
@@ -116,7 +123,12 @@
     
     [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
-    // display the back menu in appropriate language
+    [self displayLanguage];
+}
+
+// display the back menu in appropriate language
+- (void)displayLanguage
+{
     switch (_language) {
         case 0:
             [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
@@ -150,7 +162,6 @@
     }
 }
 
-
 - (void)backToLevel:(id)sender
 {
     // go back to levelviewcontroller
@@ -181,7 +192,6 @@
 
 - (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation
 {
-    
     int rowSelected = [tag intValue] / 10;
     int colSelected = [tag intValue] % 10;
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
@@ -190,8 +200,10 @@
 // if the battery is on, check the circuit connection
 -(void) powerOn{
     BOOL connected = [_model connected];
-    shorted = [_model checkForShort];
+    shorted = [_model shorted];
     
+    // if the circuit is shorted, explode the battery, and display lose message
+    // the message will ask the user to restart the game
     if (shorted) {
         [_grid shorted];
         
@@ -205,6 +217,9 @@
         
         [loseView show];
     }
+    // if the circuit is connected, light up the bulb, and display win message
+    // the message will ask the user to go to next level
+    // if current level is the last level, nothing will happen
     else if (connected) {
         [_grid win];
         [_audioPlayerWin prepareToPlay];
@@ -225,17 +240,22 @@
                                                   cancelButtonTitle:okay otherButtonTitles:nil];
         
         [winView show];
-    } else {
+    }
+    // if neither shorted or connected, do nothing but play sound that indicates a bad move
+    else {
         [_audioPlayerNo prepareToPlay];
         [_audioPlayerNo play];
     }
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    // if the circuit is shorted, restart the current level
+    // if the circuit is not shorted and connected, go to the next level
     if (shorted){
         _level--;
         [self newLevel];
-    } else if (_level < _numLevels - 1)
+    }
+    else if (_level < _numLevels - 1)
         [self newLevel];
 }
 
