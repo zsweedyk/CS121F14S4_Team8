@@ -19,7 +19,8 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name;
-- (void) turnOnPower;
+- (void) turnedOn;
+- (void) exploded;
 
 @end
 

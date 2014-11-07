@@ -8,26 +8,31 @@
 
 #import "Battery.h"
 
-@implementation Battery
+@implementation Battery{
+    NSString* _name;
+}
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
 {
     self = [super initWithFrame:frame];
+    _name = name;
     
-    [self setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
     [self addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
     
     return self;
 }
 
-- (void) other
+- (void) turnedOn
 {
-    
+    _name = [NSString stringWithFormat:@"%@%@", _name, @"on"];
+    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
 }
 
-- (void) turnOnPower
+- (void) exploded
 {
-    // TODO: change background image
+    _name = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
 }
 
 @end

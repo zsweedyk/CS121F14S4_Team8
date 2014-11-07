@@ -164,6 +164,7 @@
 }
 
 - (void) setUpDisplay{
+    // reset all grids
     [_grid setUpGridForNumRows:numRows andCols:numCols];
     
     // read values from gameModel and set them to grid

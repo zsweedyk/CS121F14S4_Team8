@@ -17,8 +17,10 @@
 {
     int _numRows;
     int _numCols;
-    int _bulbRow;
-    int _bulbCol;
+    NSMutableArray* _bulbRows;
+    NSMutableArray* _bulbCols;
+    NSMutableArray* _batRows;
+    NSMutableArray* _batCols;
     NSMutableArray* _cells;
     
     AVAudioPlayer* _audioPlayerPressed;
@@ -40,9 +42,12 @@
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     
-    _cells = [[NSMutableArray alloc] init];
-    
     [self setUpGridForNumRows:rows andCols:cols];
+    
+    _batCols = [[NSMutableArray alloc] init];
+    _batRows = [[NSMutableArray alloc] init];
+    _bulbCols = [[NSMutableArray alloc] init];
+    _bulbRows = [[NSMutableArray alloc] init];
     
     // sound set up
     NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
@@ -54,6 +59,8 @@
 
 - (void) setUpGridForNumRows:(int)rows andCols:(int)cols
 {
+    _cells = [[NSMutableArray alloc] init];
+    
     _numRows = rows;
     _numCols = cols;
     
@@ -97,7 +104,6 @@
     
     // white label to replace
     UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-    [label removeFromSuperview];
     
     // new component to replace with
     UIView* newComponent;
@@ -108,11 +114,13 @@
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
         //((Wire*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"ba"]) { // battery case
+        [_batRows addObject:[NSNumber numberWithInt:row]];
+        [_batCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
-        _bulbRow = row;
-        _bulbCol = col;
+        [_bulbRows addObject:[NSNumber numberWithInt:row]];
+        [_bulbCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
         //((Bulb*)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"sw"]) { // switch case
@@ -148,7 +156,7 @@
 
 - (void) powerUp:(id)sender
 {
-    [(Battery*)sender turnOnPower];
+    //[(Battery*)sender turnedOn];
     
     [self.delegate performSelector:@selector(powerOn)];
 }
@@ -156,14 +164,21 @@
 
 - (void) win{
     
-    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] lightUp];
+    for (int i = 0; i < _bulbCols.count; i++)
+    {
+        int bulbRow = [_bulbRows[i] integerValue];
+        int bulbCol = [_bulbCols[i] integerValue];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+    }
     
 }
 
 - (void) shorted{
-    
-    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] burned];
-    
-}
+    for (int i = 0; i < _batCols.count; i++)
+    {
+        int batRow = [_batRows[i] integerValue];
+        int batCol = [_batCols[i] integerValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
+    }}
 
 @end
