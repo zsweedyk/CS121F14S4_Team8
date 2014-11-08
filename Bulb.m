@@ -23,10 +23,5 @@
     self.image = [UIImage imageNamed:@"bulbon"];
 }
 
-- (void) burned
-{
-    self.image = [UIImage imageNamed:@"bulb_short"];
-}
-
 
 @end

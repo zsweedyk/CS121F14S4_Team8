@@ -17,6 +17,7 @@
 {
     int _numRows;
     int _numCols;
+    
     NSMutableArray* _bulbRows;
     NSMutableArray* _bulbCols;
     NSMutableArray* _batRows;
@@ -41,8 +42,18 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
-    
-    [self setUpGridForNumRows:rows andCols:cols];
+
+    _numRows = rows;
+    _numCols = cols;
+
+    //initialize _cells 2-D array
+    _cells = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _numRows; ++i) {
+        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        [_cells addObject:rowCells];
+    }
+
+    [self setUpGrid];
     
     _batCols = [[NSMutableArray alloc] init];
     _batRows = [[NSMutableArray alloc] init];
@@ -57,13 +68,8 @@
     return self;
 }
 
-- (void) setUpGridForNumRows:(int)rows andCols:(int)cols
+- (void) setUpGrid
 {
-    _cells = [[NSMutableArray alloc] init];
-    
-    _numRows = rows;
-    _numCols = cols;
-    
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
@@ -71,81 +77,75 @@
     
     // Set each cell on the grid
     for (int row = 0; row < _numRows; ++row){
-        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
         for (int col = 0; col < _numCols; ++col){
             // location of cell
             CGFloat xLabel = col * cellSize;
             CGFloat yLabel = row * cellSize;
             
-            // initially set all cells to a white label. Initialized to proper component later
+            // initially set all cells to a clear label. Initialized to proper component later
             CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
             UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            blankTile.tag = row*10+col; // keep track of where each cell is
             [blankTile setBackgroundColor:[UIColor whiteColor]];
             
             [self addSubview:blankTile];
-            [rowCells addObject:blankTile];
+            [_cells[row] addObject:blankTile];
         }
         
-        [_cells addObject:rowCells];
+
     }
-    
-    
 }
 
-// 0 empty cell
-// 1 wire
-// 2 battery neg
-// 6,3 battery pos
-// 4 bulb
-// 5 bulb connector
-// 9 switch
-- (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType{
-    
+// components table:
+// 0: blank
+// 1: wire
+// 3: negative battery
+// 6: positive battery
+// 4: bulb
+// 7: switch
+- (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType
+{
     // white label to replace
-    UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-    
+    UIView* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+
     // new component to replace with
     UIView* newComponent;
     
     // check component type and use the appropriate object
     NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
-    if ([typeIndicator isEqual: @"wi"]) { // wire case
+    
+    if ([typeIndicator isEqual: @"wi"]) {
+        // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
-        //((Wire*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"ba"]) { // battery case
+    } else if ([typeIndicator isEqual:@"ba"]) {
+        // battery case
         [_batRows addObject:[NSNumber numberWithInt:row]];
         [_batCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
+    } else if ([typeIndicator isEqual:@"bu"]) {
+        // bulb case
         [_bulbRows addObject:[NSNumber numberWithInt:row]];
         [_bulbCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
-        //((Bulb*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"sw"]) { // switch case
-        newComponent = [[Switch alloc] initWithFrame:label.frame];
+    } else if ([typeIndicator isEqual:@"sw"]) {
+        // switch case
+        newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
     } else {
-        newComponent = label;
-        [newComponent setBackgroundColor:[UIColor whiteColor]];
+        return;
     }
-    newComponent.tag = label.tag;
+
+    [label removeFromSuperview];
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
-    
 }
 
-- (void) switchSelected:(id)sender
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
 {
-    NSNumber* senderTag = [[NSNumber alloc] initWithInt:(int)((Switch*)sender).tag];
-    
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    NSString* newOrientation = [(Switch*)sender rotateSwitch];
-    
-    [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) wireSelected:(id)sender
@@ -156,29 +156,36 @@
 
 - (void) powerUp:(id)sender
 {
-    //[(Battery*)sender turnedOn];
+    // turn on all battery components
+    for (int i = 0; i < _batCols.count; ++i) {
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
+    }
     
     [self.delegate performSelector:@selector(powerOn)];
 }
 
 
 - (void) win{
-    
-    for (int i = 0; i < _bulbCols.count; i++)
+    // turn on all bulb components
+    for (int i = 0; i < _bulbCols.count; ++i)
     {
-        int bulbRow = [_bulbRows[i] integerValue];
-        int bulbCol = [_bulbCols[i] integerValue];
+        int bulbRow = [_bulbRows[i] intValue];
+        int bulbCol = [_bulbCols[i] intValue];
         [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
     }
     
 }
 
-- (void) shorted{
-    for (int i = 0; i < _batCols.count; i++)
+- (void) shorted {
+    // explode all battery components
+    for (int i = 0; i < _batCols.count; ++i)
     {
-        int batRow = [_batRows[i] integerValue];
-        int batCol = [_batCols[i] integerValue];
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
         [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
-    }}
+    }
+}
 
 @end

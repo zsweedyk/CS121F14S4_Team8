@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     CGFloat frameWidth = self.view.frame.size.width;
@@ -103,6 +104,8 @@
 {
     [_audioPlayerLanguagePressed prepareToPlay];
     [_audioPlayerLanguagePressed play];
+    
+    // change the language and title of the buttons
     switch (segment.selectedSegmentIndex) {
         case 0:
             _language = 0;
@@ -130,8 +133,8 @@
 - (void)displayHelpMessage:(id) sender{
     NSString *title;
     NSString *message;
-    //[_audioPlayerAboutPressed prepareToPlay];
-    //[_audioPlayerAboutPressed play];
+    
+    // change the language of help message based on language choice
     switch (_language) {
         case 0:
             title = @"How to Play";
