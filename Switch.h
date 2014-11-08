@@ -11,14 +11,16 @@
 
 @protocol SwitchDelegate
 @required
-- (void) switchSelected:(id)sender;
+
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation;
+
 @end
 
-@interface Switch : UIButton
+@interface Switch : UIView
 
 @property (nonatomic, strong) id delegate;
 
-- (id) initWithFrame:(CGRect)frame;
+- (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
 - (NSString*) rotateSwitch;
 
 @end

@@ -13,7 +13,7 @@
 @protocol GridDelegate
 
 @required
-- (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation;
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) powerOn;
 @end
 

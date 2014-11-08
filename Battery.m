@@ -10,34 +10,39 @@
 
 @implementation Battery{
     NSString* _name;
+    UIButton* _battery;
 }
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
 {
     self = [super initWithFrame:frame];
     _name = name;
-    
-    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
-    [self addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
+
+    CGRect battFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _battery = [[UIButton alloc] initWithFrame:battFrame];
+    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+    [_battery addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addSubview:_battery];
     
     return self;
 }
 
 - (void) turnedOff
 {
-    [self setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
 }
 
 - (void) turnedOn
 {
     NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"on"];
-    [self setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 - (void) exploded
 {
     NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
-    [self setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 @end

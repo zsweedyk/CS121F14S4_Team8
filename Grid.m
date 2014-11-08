@@ -128,7 +128,7 @@
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
     } else if ([typeIndicator isEqual:@"sw"]) {
         // switch case
-        newComponent = [[Switch alloc] initWithFrame:label.frame];
+        newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
     } else {
         newComponent = label;
@@ -140,16 +140,12 @@
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
 }
 
-- (void) switchSelected:(id)sender
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
 {
-    NSNumber* senderTag = [[NSNumber alloc] initWithInt:(int)((Switch*)sender).tag];
-    
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    NSString* newOrientation = [(Switch*)sender rotateSwitch];
-    
-    [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) wireSelected:(id)sender
@@ -161,7 +157,7 @@
 - (void) powerUp:(id)sender
 {
     // turn on all battery components
-    for (int i = 0; i < _batCols.count; i++)
+    for (int i = 0; i < _batCols.count; ++i)
     {
         int batRow = [_batRows[i] integerValue];
         int batCol = [_batCols[i] integerValue];
@@ -174,7 +170,7 @@
 
 - (void) win{
     // turn on all bulb components
-    for (int i = 0; i < _bulbCols.count; i++)
+    for (int i = 0; i < _bulbCols.count; ++i)
     {
         int bulbRow = [_bulbRows[i] integerValue];
         int bulbCol = [_bulbCols[i] integerValue];
@@ -185,7 +181,7 @@
 
 - (void) shorted{
     // explode all battery components
-    for (int i = 0; i < _batCols.count; i++)
+    for (int i = 0; i < _batCols.count; ++i)
     {
         int batRow = [_batRows[i] integerValue];
         int batCol = [_batCols[i] integerValue];

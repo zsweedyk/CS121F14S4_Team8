@@ -28,9 +28,6 @@
     int numRows;
     int numCols;
     
-    BOOL powered;
-    BOOL shorted;
-    
     // message title variables
     NSString* titleWin;
     NSString* next;
@@ -64,9 +61,6 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    // initialize variables
-    shorted = NO;
-    
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
     NSURL *winPathURL = [NSURL fileURLWithPath : winPath];
@@ -92,8 +86,8 @@
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
     
     // with the generated grid we know the number of rows and cols so we can set the variables
-    numRows = _model.numRows;
-    numCols = _model.numCols;
+    numRows = [_model getNumRows];
+    numCols = [_model getNumCols];
     
     // initialize the grid
     _grid = [[Grid alloc] initWithFrame:gridFrame andNumRows:numRows andCols:numCols];
@@ -181,8 +175,8 @@
     [_grid setUpGridForNumRows:numRows andCols:numCols];
     
     // read values from gameModel and set them to grid
-    for (int row = 0; row < numRows; row++){
-        for (int col = 0; col < numCols; col++){
+    for (int row = 0; row < numRows; ++row){
+        for (int col = 0; col < numCols; ++col){
             NSString* componentType = [_model getTypeAtRow:row andCol:col];
             [_grid setValueAtRow:row col:col to:componentType];
         }
@@ -190,17 +184,17 @@
     
 }
 
-- (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
 {
-    int rowSelected = [tag intValue] / 10;
-    int colSelected = [tag intValue] % 10;
+    int rowSelected = [position[0] intValue];
+    int colSelected = [position[1] intValue];
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
 }
 
 // if the battery is on, check the circuit connection
 -(void) powerOn{
-    BOOL connected = [_model connected];
-    shorted = [_model shorted];
+    bool connected = [_model connected];
+    bool shorted = [_model shorted];
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
@@ -214,6 +208,7 @@
                                                           message:restart
                                                          delegate:self
                                                 cancelButtonTitle:okay otherButtonTitles:nil];
+        loseView.tag = 0;
         
         [loseView show];
     }
@@ -238,6 +233,7 @@
                                                             message:message
                                                            delegate:self
                                                   cancelButtonTitle:okay otherButtonTitles:nil];
+        winView.tag = 1;
         
         [winView show];
     }
@@ -251,7 +247,7 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     // if the circuit is shorted, restart the current level
     // if the circuit is not shorted and connected, go to the next level
-    if (shorted){
+    if (alertView.tag == 0){
         _level--;
         [self newLevel];
     }

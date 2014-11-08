@@ -146,6 +146,7 @@
 		A8E910EA1A081F6800E591BE /* wireXXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9108C1A081F6800E591BE /* wireXXXX.png */; };
 		C08E33F583226436092FCBF4 /* level-2 in Resources */ = {isa = PBXBuildFile; fileRef = C08E3BBDF2D1F37DE1A4AF54 /* level-2 */; };
 		C08E3C51D66438CE9748FA06 /* level-1 in Resources */ = {isa = PBXBuildFile; fileRef = C08E38997C01381A4E7DF1AA /* level-1 */; };
+		C08E3E456AF7E3D464D6278E /* ComponentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C08E333456A9EA36EE6BDD8B /* ComponentModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,6 +299,8 @@
 		A8E9108A1A081F6800E591BE /* wireXXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXTX.png; sourceTree = "<group>"; };
 		A8E9108B1A081F6800E591BE /* wireXXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXXB.png; sourceTree = "<group>"; };
 		A8E9108C1A081F6800E591BE /* wireXXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXXX.png; sourceTree = "<group>"; };
+		C08E333456A9EA36EE6BDD8B /* ComponentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModel.m; sourceTree = SOURCE_ROOT; };
+		C08E3346B0B9BA5F2F430755 /* ComponentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModel.h; sourceTree = SOURCE_ROOT; };
 		C08E38997C01381A4E7DF1AA /* level-1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-1"; sourceTree = "<group>"; };
 		C08E3BBDF2D1F37DE1A4AF54 /* level-2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-2"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -371,6 +374,8 @@
 				A84F7F1019FDC1C6001AEC0D /* Images.xcassets */,
 				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
 				A84F7F0319FDC1C6001AEC0D /* Supporting Files */,
+				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
+				C08E3346B0B9BA5F2F430755 /* ComponentModel.h */,
 			);
 			path = PowerUP;
 			sourceTree = "<group>";
@@ -812,6 +817,7 @@
 				A86E10CB1A005B1E0029011B /* Battery.m in Sources */,
 				A86E10CF1A005B1E0029011B /* Grid.m in Sources */,
 				A86E10D11A005B1E0029011B /* MenuViewController.m in Sources */,
+				C08E3E456AF7E3D464D6278E /* ComponentModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

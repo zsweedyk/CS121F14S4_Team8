@@ -10,9 +10,6 @@
 
 @interface GameModel : NSObject
 
-@property (nonatomic) int numRows;
-@property (nonatomic) int numCols;
-
 -(id) initWithTotalLevels: (int) levels;
 -(void) generateGrid: (NSInteger) level;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
@@ -20,5 +17,7 @@
 -(BOOL) connected;
 -(BOOL) shorted;
 
+- (int) getNumRows;
+- (int) getNumCols;
 
 @end

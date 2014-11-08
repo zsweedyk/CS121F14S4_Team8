@@ -11,10 +11,12 @@
 
 @protocol BatteryDelegate
 @required
+
 - (void) powerUp:(id)sender;
+
 @end
 
-@interface Battery: UIButton
+@interface Battery: UIView
 
 @property (nonatomic, strong) id delegate;
 
