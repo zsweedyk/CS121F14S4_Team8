@@ -24,18 +24,18 @@
     GameModel* _model;
     Grid* _grid;
     UIButton* _backToLevel;
+    UIButton* _test;
 
-    int numRows;
-    int numCols;
+    int _numRows;
+    int _numCols;
     
     // message title variables
-    NSString* titleWin;
-    NSString* next;
-    NSString* all;
-    NSString* okay;
-    
-    NSString* titleLose;
-    NSString* restart;
+    NSString* _titleWin;
+    NSString* _next;
+    NSString* _all;
+    NSString* _okay;
+    NSString* _titleLose;
+    NSString* _restart;
     
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
@@ -72,28 +72,15 @@
     
     // initialize model
     _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
+
+    // with the generated grid we know the number of rows and cols so we can set the variables
+    _numRows = [_model getNumRows];
+    _numCols = [_model getNumCols];
     
     // generate a grid
     [_model generateGrid:_level];
-    
-    CGRect frame = self.view.frame;
-    
-    // initilize _grid
-    float framePortion = 0.8;
-    CGFloat xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
-    CGFloat yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
-    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
-    CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
-    
-    // with the generated grid we know the number of rows and cols so we can set the variables
-    numRows = [_model getNumRows];
-    numCols = [_model getNumCols];
-    
-    // initialize the grid
-    _grid = [[Grid alloc] initWithFrame:gridFrame andNumRows:numRows andCols:numCols];
-    _grid.delegate = self;
-    
-    [self.view addSubview:_grid];
+
+    [self initializeGrid];
     
     [self setUpDisplay];
     
@@ -106,50 +93,73 @@
     CGFloat y = buttonHeight / 2;
     CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
     
-    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
-    
-    [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+//    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
+//    [_backToLevel setBackgroundColor:[UIColor clearColor]];
+//    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+//    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
+//    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+//
+//    [self.view addSubview:_backToLevel];
+
+    _test = [[UIButton alloc] initWithFrame:buttonFrame];
+    [_test setBackgroundColor:[UIColor clearColor]];
+    [_test setTitle:@"Test" forState:UIControlStateNormal];
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+    [_test setTitleColor:tintColor forState:UIControlStateNormal];
+    [self.view addSubview:_test];
+    [_test addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:_backToLevel];
+//    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self displayLanguage];
+    [self setLanguage];
 }
 
-// display the back menu in appropriate language
-- (void)displayLanguage
+- (void) initializeGrid
+{
+    CGRect frame = self.view.frame;
+
+    float framePortion = 0.8;
+    CGFloat xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
+    CGFloat yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
+    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
+    CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
+
+    // initialize the grid
+    _grid = [[Grid alloc] initWithFrame:gridFrame andNumRows:_numRows andCols:_numCols];
+    _grid.delegate = self;
+
+    [self.view addSubview:_grid];
+}
+
+- (void) setLanguage
 {
     switch (_language) {
         case 0:
             [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            titleWin = @"You win";
-            next = @"Current level is unlocked. Let's try next level!";
-            all = @"All levels are unlocked. Congratulation!";
-            okay = @"OK";
-            titleLose = @"You lose";
-            restart = @"The circuit is shorted. Let's give it another try!";
+            _titleWin = @"You win";
+            _next = @"Current level is unlocked. Let's try next level!";
+            _all = @"All levels are unlocked. Congratulation!";
+            _okay = @"OK";
+            _titleLose = @"You lose";
+            _restart = @"The circuit is shorted. Let's give it another try!";
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            titleWin = @"You win (spanish)";
-            next = @"Current level is unlocked. Let's try next level! (spanish)";
-            all = @"All levels are unlocked. Congratulation! (spanish)";
-            okay = @"OK";
-            titleLose = @"You lose (spanish)";
-            restart = @"The circuit is shorted. Let's give it another try! (spanish)";
+            _titleWin = @"You win (spanish)";
+            _next = @"Current level is unlocked. Let's try next level! (spanish)";
+            _all = @"All levels are unlocked. Congratulation! (spanish)";
+            _okay = @"OK";
+            _titleLose = @"You lose (spanish)";
+            _restart = @"The circuit is shorted. Let's give it another try! (spanish)";
             break;
         case 2:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            titleWin = @"成功过关！";
-            next = @"下关已解锁！";
-            all = @"所有关卡已解锁！";
-            okay = @"进入下一关";
-            titleLose = @"你没有过关";
-            restart = @"再试一次吧！";
+            _titleWin = @"成功过关！";
+            _next = @"下关已解锁！";
+            _all = @"所有关卡已解锁！";
+            _okay = @"进入下一关";
+            _titleLose = @"你没有过关";
+            _restart = @"再试一次吧！";
             break;
         default:
             break;
@@ -159,24 +169,24 @@
 - (void)backToLevel:(id)sender
 {
     // go back to levelviewcontroller
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self newLevel];
 }
 
 - (void) newLevel{
     ++_level;
-    
     [_model generateGrid:_level];
-    
+
     [self setUpDisplay];
 }
 
 - (void) setUpDisplay{
     // reset all grids
-    [_grid setUpGridForNumRows:numRows andCols:numCols];
+    [_grid setUpGrid];
     
     // read values from gameModel and set them to grid
-    for (int row = 0; row < numRows; ++row){
-        for (int col = 0; col < numCols; ++col){
+    for (int row = 0; row < _numRows; ++row){
+        for (int col = 0; col < _numCols; ++col){
             NSString* componentType = [_model getTypeAtRow:row andCol:col];
             [_grid setValueAtRow:row col:col to:componentType];
         }
@@ -201,14 +211,15 @@
     if (shorted) {
         [_grid shorted];
         
-        if (_language == 2)
-            okay = @"好";
+        if (_language == 2) {
+            _okay = @"好";
+        }
         
-        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:titleLose
-                                                          message:restart
+        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:_titleLose
+                                                          message:_restart
                                                          delegate:self
-                                                cancelButtonTitle:okay otherButtonTitles:nil];
-        loseView.tag = 0;
+                                                cancelButtonTitle:_okay otherButtonTitles:nil];
+        loseView.tag = 0; // To determine the alert view is a losing view
         
         [loseView show];
     }
@@ -221,19 +232,20 @@
         [_audioPlayerWin play];
         
         NSString *message;
-        if (_level <= 1)
-            message = next;
-        else
-        {
-            message = all;
-            if (_language == 2)
-                okay = @"退出游戏";
+        if (_level < _numLevels ) {
+            message = _next;
+        } else {
+            message = _all;
+            if (_language == 2) {
+                _okay = @"退出游戏";
+            }
         }
-        UIAlertView *winView = [[UIAlertView alloc] initWithTitle:titleWin
+
+        UIAlertView *winView = [[UIAlertView alloc] initWithTitle:_titleWin
                                                             message:message
                                                            delegate:self
-                                                  cancelButtonTitle:okay otherButtonTitles:nil];
-        winView.tag = 1;
+                                                  cancelButtonTitle:_okay otherButtonTitles:nil];
+        winView.tag = 1; // To determine the alert view is a win view
         
         [winView show];
     }

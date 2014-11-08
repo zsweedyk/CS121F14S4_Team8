@@ -11,7 +11,7 @@
 @interface GameModel : NSObject
 
 -(id) initWithTotalLevels: (int) levels;
--(void) generateGrid: (NSInteger) level;
+-(void) generateGrid: (int) level;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(BOOL) connected;

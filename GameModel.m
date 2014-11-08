@@ -51,7 +51,7 @@
 
 
 // assumptions: level is in [-3, numLevels]
--(void) generateGrid: (NSInteger) level
+-(void) generateGrid: (int) level
 {
     [self clearGridAndBulbs];
     
@@ -171,8 +171,6 @@
 {
     // Get typ and location from component
     NSString* type = [component getType];
-    int row = [component getRow];
-    int col = [component getCol];
 
     NSString* connections = [self getConnectionsFor:component];
 
@@ -279,7 +277,7 @@
 {
     // Make sure orientation input is valid
     NSRegularExpression *orientationForm = [[NSRegularExpression alloc] initWithPattern:@"[LX][RX][TX][BX]" options:0 error:nil];
-    int numMatchesToForm = [orientationForm numberOfMatchesInString:newOrientation options:0 range:NSMakeRange(0, 4)];
+    NSUInteger numMatchesToForm = [orientationForm numberOfMatchesInString:newOrientation options:0 range:NSMakeRange(0, 4)];
     NSAssert(numMatchesToForm == 1, @"Invalid orientation argument");
     
     // Make sure row and col input is valid
