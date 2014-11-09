@@ -23,5 +23,10 @@
     self.image = [UIImage imageNamed:@"bulbon"];
 }
 
+- (void) lightDown
+{
+    self.image = [UIImage imageNamed:@"bulb"];
+}
+
 
 @end

@@ -70,6 +70,12 @@
 
 - (void) setUpGrid
 {
+    // reset bat and bulb coordinates
+    _batCols = [[NSMutableArray alloc] init];
+    _batRows = [[NSMutableArray alloc] init];
+    _bulbCols = [[NSMutableArray alloc] init];
+    _bulbRows = [[NSMutableArray alloc] init];
+    
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
@@ -167,15 +173,23 @@
 }
 
 
-- (void) win{
-    // turn on all bulb components
-    for (int i = 0; i < _bulbCols.count; ++i)
+- (void) bulbConnectedWithIndices: (NSArray*) bulbs{
+    // turn off all bulbs first
+    for (int i = 0; i < _bulbRows.count; ++i)
     {
         int bulbRow = [_bulbRows[i] intValue];
         int bulbCol = [_bulbCols[i] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
     }
     
+    // turn on all connected bulbs
+    for (int j = 0; j < bulbs.count; ++j)
+    {
+        int index = [bulbs[j] integerValue];
+        int bulbRow = [_bulbRows[index] intValue];
+        int bulbCol = [_bulbCols[index] intValue];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+    }
 }
 
 - (void) shorted {

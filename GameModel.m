@@ -12,12 +12,13 @@
 @interface GameModel()
 {
     NSMutableArray* _grid;
-    NSMutableArray *_bulbs;
-
+    NSMutableArray* _bulbs;
+    
     int _numRows;
     int _numCols;
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
+    NSMutableArray* connectedBulbs;
 
     int _numLevels; // total number of levels
 }
@@ -416,6 +417,9 @@
 
 -(BOOL) connected
 {
+    // store the indices of all connected bulbs
+    connectedBulbs = [[NSMutableArray alloc] init];
+    
     // Check conenctivity for each bulb
     for (int i = 0; i < _bulbs.count; ++i) {
 
@@ -434,13 +438,20 @@
         bool path2Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
         bool path2Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
         
-        // If it's not at least one of the possible paths then it's false
-        if ( !((path1Pos && path1Neg) || (path2Pos && path2Neg)) ) {
-            return false;
+        // If one of paths is bult, add the index of the bulb to an array
+        if ((path1Pos && path1Neg) || (path2Pos && path2Neg)) {
+            [connectedBulbs addObject:[NSNumber numberWithInt:i]];
         }
     }
+    
+    if (connectedBulbs.count == _bulbs.count)
+        return true;
+    else
+        return false;
+}
 
-    return true;
+- (NSArray*) bulbIndices {
+    return connectedBulbs;
 }
 
 - (NSArray*) getAllConnectionsTo:(ComponentModel*)component{

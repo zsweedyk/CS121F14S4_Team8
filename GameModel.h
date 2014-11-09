@@ -14,8 +14,9 @@
 -(void) generateGrid: (int) level;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
--(BOOL) connected;
+- (NSArray*) bulbIndices;
 -(BOOL) shorted;
+-(BOOL) connected;
 
 - (int) getNumRows;
 - (int) getNumCols;

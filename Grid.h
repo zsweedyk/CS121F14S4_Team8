@@ -25,7 +25,7 @@
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
 - (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) win;
+- (void) bulbConnectedWithIndices: (NSArray*) bulbs;
 - (void) shorted;
 
 @end
