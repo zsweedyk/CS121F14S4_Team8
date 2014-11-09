@@ -10,6 +10,11 @@
 #import "Wire.h"
 #import "Bulb.h"
 #import "Battery.h"
+#import "Emitter.h"
+#import "Receiver.h"
+#import "Laser.h"
+#import "Deflector.h"
+#import "ComponentModel.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -23,6 +28,8 @@
     NSMutableArray* _batRows;
     NSMutableArray* _batCols;
     NSMutableArray* _cells;
+    //Lasers
+    NSMutableArray* _lasers;
     
     AVAudioPlayer* _audioPlayerPressed;
 }
@@ -59,6 +66,8 @@
     _batRows = [[NSMutableArray alloc] init];
     _bulbCols = [[NSMutableArray alloc] init];
     _bulbRows = [[NSMutableArray alloc] init];
+    
+    _lasers = [[NSMutableArray alloc] init];
     
     // sound set up
     NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
@@ -131,7 +140,14 @@
         // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
-    } else {
+    } else if ([typeIndicator isEqual:@"em"]) {//emitter case
+        newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"de"]) {//deflector case
+        newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
+        ((Deflector *)newComponent).delegate = self;
+    } else if ([typeIndicator isEqual:@"re"]) {//receiver case
+        newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+    }else {
         return;
     }
 
@@ -152,6 +168,14 @@
 {
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
+}
+
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
+{
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
+    
+    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) powerUp:(id)sender
@@ -176,6 +200,42 @@
         [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
     }
     
+}
+
+- (void) setStateWithArray:(NSArray *)locs
+{
+    for(int i=0;i<locs.count;i++){
+        if([[(ComponentModel *)locs[i] getState] isEqual:@"On"]){
+            int row = [locs[i] getRow];
+            int col = [locs[i] getCol];
+            [_cells[row][col] turnOn];
+        }else{
+            int row = [locs[i] getRow];
+            int col = [locs[i] getCol];
+            [_cells[row][col] turnOff];
+        }
+    }
+}
+
+-(void)emit:(NSArray *)locs
+{
+    for(int i = 0;i<_lasers.count;i++){
+        [_lasers[i] removeFromSuperview];
+    }
+    [_lasers removeAllObjects];
+    for(int i = 0;i<locs.count;i++){
+        int row = [(ComponentModel *)locs[i] getRow];
+        int col = [(ComponentModel *)locs[i] getCol];
+        NSString * imagename = [(ComponentModel *)locs[i] getState];
+        UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+        [label removeFromSuperview];
+        
+        Laser *beam = [[Laser alloc] initWithFrame:label.frame andOrientation:imagename];
+        beam.tag = label.tag;
+        [self addSubview:beam];
+        [_lasers addObject:beam];
+        [[_cells objectAtIndex:row] setObject:beam atIndex:col];
+    }
 }
 
 - (void) shorted {

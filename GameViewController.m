@@ -40,6 +40,8 @@
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
+    
+    BOOL masterPowerOn;
 }
 
 @end
@@ -58,6 +60,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    masterPowerOn = NO;
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
@@ -201,11 +205,79 @@
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
 }
 
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
+{
+    int rowSelected = [position[0] intValue];
+    int colSelected = [position[1] intValue];
+    [_model deflectorSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    if(masterPowerOn){
+        [_model checkEmitterConnection];
+        [_model getLaserPath];
+        [_model checkEmitterConnection];
+        [_grid emit:[_model getLaserPath]];
+        [_grid setStateWithArray:[_model emitters]];
+        [_grid setStateWithArray:[_model receivers]];
+        [_grid setStateWithArray:[_model deflectors]];
+        //check connection for receivers
+        bool connected = [_model connected];
+        bool shorted = [_model shorted];
+        if (shorted) {
+            [_grid shorted];
+            
+            if (_language == 2) {
+                _okay = @"好";
+            }
+            
+            UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:_titleLose
+                                                               message:_restart
+                                                              delegate:self
+                                                     cancelButtonTitle:_okay otherButtonTitles:nil];
+            loseView.tag = 0; // To determine the alert view is a losing view
+            
+            [loseView show];
+        }
+        // if the circuit is connected, light up the bulb, and display win message
+        // the message will ask the user to go to next level
+        // if current level is the last level, nothing will happen
+        else if (connected) {
+            [_grid win];
+            [_audioPlayerWin prepareToPlay];
+            [_audioPlayerWin play];
+            
+            NSString *message;
+            if (_level < _numLevels ) {
+                message = _next;
+            } else {
+                message = _all;
+                if (_language == 2) {
+                    _okay = @"退出游戏";
+                }
+            }
+            
+            UIAlertView *winView = [[UIAlertView alloc] initWithTitle:_titleWin
+                                                              message:message
+                                                             delegate:self
+                                                    cancelButtonTitle:_okay otherButtonTitles:nil];
+            winView.tag = 1; // To determine the alert view is a win view
+            
+            [winView show];
+        }
+    }
+}
+
 // if the battery is on, check the circuit connection
 -(void) powerOn{
     bool connected = [_model connected];
     bool shorted = [_model shorted];
-    
+    masterPowerOn = YES;
+    //do two checks before displaying on the grid in case a receiver has been turned on or off
+    [_model checkEmitterConnection];
+    [_model getLaserPath];
+    [_model checkEmitterConnection];
+    [_grid emit:[_model getLaserPath]];
+    [_grid setStateWithArray:[_model emitters]];
+    [_grid setStateWithArray:[_model receivers]];
+    [_grid setStateWithArray:[_model deflectors]];
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
     if (shorted) {

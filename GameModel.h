@@ -14,8 +14,14 @@
 -(void) generateGrid: (int) level;
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
+-(void) deflectorSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(BOOL) connected;
 -(BOOL) shorted;
+-(void) checkEmitterConnection;
+-(NSArray *) getLaserPath;
+-(NSArray *)emitters;
+-(NSArray *)deflectors;
+-(NSArray *)receivers;
 
 - (int) getNumRows;
 - (int) getNumCols;
