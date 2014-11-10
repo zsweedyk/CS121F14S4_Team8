@@ -21,6 +21,7 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
-- (NSString*) rotateSwitch;
+- (void) changeDirection: (NSString*) dir;
+- (void) changeImage: (NSString*) dir
 
 @end

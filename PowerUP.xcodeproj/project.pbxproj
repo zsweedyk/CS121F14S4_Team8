@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		65501E4D1A11338E001DF94E /* DirectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65501E4C1A11338E001DF94E /* DirectionController.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
 		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
@@ -160,6 +161,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65501E4B1A11338E001DF94E /* DirectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionController.h; sourceTree = SOURCE_ROOT; };
+		65501E4C1A11338E001DF94E /* DirectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionController.m; sourceTree = SOURCE_ROOT; };
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				A86E10C61A005B1E0029011B /* MenuViewController.m */,
 				A86E10C71A005B1E0029011B /* Switch.h */,
 				A86E10C81A005B1E0029011B /* Switch.m */,
+				65501E4B1A11338E001DF94E /* DirectionController.h */,
+				65501E4C1A11338E001DF94E /* DirectionController.m */,
 				A86E10C91A005B1E0029011B /* Wire.h */,
 				A86E10CA1A005B1E0029011B /* Wire.m */,
 				A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */,
@@ -814,6 +819,7 @@
 				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
 				A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */,
 				A84F7F0619FDC1C6001AEC0D /* main.m in Sources */,
+				65501E4D1A11338E001DF94E /* DirectionController.m in Sources */,
 				A86E10CB1A005B1E0029011B /* Battery.m in Sources */,
 				A86E10CF1A005B1E0029011B /* Grid.m in Sources */,
 				A86E10D11A005B1E0029011B /* MenuViewController.m in Sources */,
