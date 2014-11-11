@@ -13,6 +13,7 @@
 {
     NSMutableArray* _grid;
     NSMutableArray *_bulbs;
+
     //laser component arrays
     NSMutableArray* _lasers;
     NSMutableArray* _emitters;
@@ -23,6 +24,7 @@
     int _numCols;
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
+    NSMutableArray* connectedBulbs;
 
     int _numLevels; // total number of levels
 }
@@ -654,7 +656,11 @@
 
 -(BOOL) connected
 {
+    // store the indices of all connected bulbs
+    connectedBulbs = [[NSMutableArray alloc] init];
+    
     BOOL connectedToReceiver = NO;
+
     // Check conenctivity for each bulb
     for (int i = 0; i < _bulbs.count; ++i) {
 
@@ -673,23 +679,32 @@
         bool path2Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
         bool path2Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
         
-        for (int i = 0;i<_receivers.count;i++){
-            if([[_receivers[i] getState] isEqual:@"On"]){
-                bool path1 = [self breadthSearchFrom:bulb To:_receivers[i] inDirection:connections[0] CheckingForShort:false];
-                bool path2 = [self breadthSearchFrom:bulb To:_receivers[i] inDirection:connections[1] CheckingForShort:false];
-                if(path1&&path2){
+        // If one of paths is bult, add the index of the bulb to an array
+        if ((path1Pos && path1Neg) || (path2Pos && path2Neg))
+            [connectedBulbs addObject:[NSNumber numberWithInt:i]];
+
+        for (int j = 0;j<_receivers.count;j++){
+            if([[_receivers[j] getState] isEqual:@"On"]){
+                bool path1 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[0] CheckingForShort:false];
+                bool path2 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[1] CheckingForShort:false];
+                
+                if(path1&&path2)
+                {
                     connectedToReceiver = YES;
+                    [connectedBulbs addObject:[NSNumber numberWithInt:i]];
                 }
             }
         }
-        
-        // If it's not at least one of the possible paths then it's false
-        if ( !((path1Pos && path1Neg) || (path2Pos && path2Neg) || connectedToReceiver) ) {
-            return false;
-        }
     }
+    
+    if ((connectedBulbs.count == _bulbs.count) || connectedToReceiver)
+        return true;
+    else
+        return false;
+}
 
-    return true;
+- (NSArray*) bulbIndices {
+    return connectedBulbs;
 }
 
 -(void) checkEmitterConnection

@@ -97,23 +97,15 @@
     CGFloat y = buttonHeight / 2;
     CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
     
-//    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
-//    [_backToLevel setBackgroundColor:[UIColor clearColor]];
-//    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
-//    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-//    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
-//
-//    [self.view addSubview:_backToLevel];
-
-    _test = [[UIButton alloc] initWithFrame:buttonFrame];
-    [_test setBackgroundColor:[UIColor clearColor]];
-    [_test setTitle:@"Test" forState:UIControlStateNormal];
+    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
+    [_backToLevel setBackgroundColor:[UIColor clearColor]];
+    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    [_test setTitleColor:tintColor forState:UIControlStateNormal];
-    [self.view addSubview:_test];
-    [_test addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
+    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+
+    [self.view addSubview:_backToLevel];
+   
+    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setLanguage];
 }
@@ -173,8 +165,8 @@
 - (void)backToLevel:(id)sender
 {
     // go back to levelviewcontroller
-//    [self.navigationController popViewControllerAnimated:YES];
-    [self newLevel];
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self newLevel];
 }
 
 - (void) newLevel{
@@ -232,6 +224,9 @@
     
     bool connected = [_model connected];
     bool shorted = [_model shorted];
+
+    NSArray* connectedBulbs = [_model bulbIndices]; // the array stores the indices of all connected bulbs
+    [_grid bulbConnectedWithIndices:connectedBulbs]; // light up bulbs that are connected
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
@@ -250,11 +245,11 @@
         
         [loseView show];
     }
-    // if the circuit is connected, light up the bulb, and display win message
-    // the message will ask the user to go to next level
+    // light up the connected bulbs
+    // if all bulbs are connected, display win message,
+    // and the message will ask the user to go to next level
     // if current level is the last level, nothing will happen
-    else if (connected) {
-        [_grid win];
+    else if (connected){
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
         
