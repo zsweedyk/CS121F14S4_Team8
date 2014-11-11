@@ -220,7 +220,6 @@
         compWithConn = [@"emitter" stringByAppendingString:laserconnections];
     } else if ( [type isEqual:@"Receiver"]) {
         compWithConn = [@"receiver" stringByAppendingString:laserconnections];
-        NSLog(compWithConn);
     } else if ( [type isEqual:@"Deflector"]) {
         compWithConn = @"deflector";
     }
@@ -438,116 +437,137 @@
     int emRow = [comp getRow];
     int emCol = [comp getCol];
     if([[comp getState] isEqual:@"On"]){
+        NSString* dir = [comp direction];
         
-        [self createLaserAtRow:emRow Col:emCol Direction:[comp direction]];
+        if([dir isEqual:@"U"])
+            [self createLaserTopAtRow:emRow Col:emCol];
+        else if ([dir isEqual:@"D"])
+            [self createLaserBotAtRow:emRow Col:emCol];
+        else if ([dir isEqual:@"L"])
+            [self createLaserLeftAtRow:emRow Col:emCol];
+        else if ([dir isEqual:@"R"])
+            [self createLaserRightAtRow:emRow Col:emCol];
     }
 }
 
-- (void) createLaserAtRow:(int)r Col:(int)c Direction:(NSString*)dir
+- (void) createLaserTopAtRow:(int)row Col:(int)col
 {
-    if([dir isEqual:@"U"]){
-        NSLog(@"creating laser");
-        int row = r;
-        int col = c;
-        while ((row>1)&&([[_grid[row-1][col] getType] isEqual:@"Empty"])){
-            NSLog(@"getting path");
-            ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row-1 AndCol:col AndState:@"laserXXTB"];
-            [_lasers addObject:comp];
-            row = row-1;
-        }
+    while ((row>1)&&([[_grid[row-1][col] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row-1 AndCol:col AndState:@"laserXXTB"];
+        [_lasers addObject:comp];
         row = row-1;
-        ComponentModel *obstacle = _grid[row][col];
-        if([[obstacle getType] isEqual:@"Deflector"]){
-            if([[obstacle direction] isEqual:@"LXXB"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"L"];
-            }else if([[obstacle direction] isEqual:@"XRXB"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"R"];
-            }else{
-                [obstacle setState:@"Off"];
-            }
-        }else if([[obstacle getType] isEqual:@"Receiver"]){
-            if([[obstacle direction] isEqual:@"D"]){
-                [obstacle setState:@"On"];
-            }
+    }
+ 
+    row = row-1;
+    ComponentModel *obstacle = _grid[row][col];
+    
+    if([[obstacle getType] isEqual:@"Deflector"]){
+    
+        if([[obstacle direction] isEqual:@"LXXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+        }else{
+            [obstacle setState:@"Off"];
         }
-    }else if([dir isEqual:@"D"]){
-        int row = r;
-        int col = c;
-        while ((row<13)&&([[_grid[row+1][col] getType] isEqual:@"Empty"])){
-            ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row+1 AndCol:col AndState:@"laserXXTB"];
-            [_lasers addObject:comp];
-            row = row+1;
+    }else if([[obstacle getType] isEqual:@"Receiver"]){
+      
+        if([[obstacle direction] isEqual:@"D"]){
+            [obstacle setState:@"On"];
         }
+    }
+}
+
+- (void) createLaserBotAtRow:(int)row Col:(int)col
+{
+    while ((row<13)&&([[_grid[row+1][col] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row+1 AndCol:col AndState:@"laserXXTB"];
+        [_lasers addObject:comp];
         row = row+1;
-        ComponentModel *obstacle = _grid[row][col];
-        if([[obstacle getType] isEqual:@"Deflector"]){
-            if([[obstacle direction] isEqual:@"LXTX"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"L"];
-            }else if([[obstacle direction] isEqual:@"XRTX"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"R"];
-            }else{
-                [obstacle setState:@"Off"];
-            }
-        }else if([[obstacle getType] isEqual:@"Receiver"]){
-            if([[obstacle direction] isEqual:@"U"]){
-                [obstacle setState:@"On"];
-            }
+    }
+ 
+    row = row+1;
+    ComponentModel *obstacle = _grid[row][col];
+    
+    if([[obstacle getType] isEqual:@"Deflector"]){
+    
+        if([[obstacle direction] isEqual:@"LXTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+        }else{
+            [obstacle setState:@"Off"];
         }
-    }else if([dir isEqual:@"L"]){
-        int row = r;
-        int col = c;
-        while ((col>1)&&([[_grid[row][col-1] getType] isEqual:@"Empty"])){
-            ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col-1 AndState:@"laserLRXX"];
-                [_lasers addObject:comp];
-                col = col-1;
+    }else if([[obstacle getType] isEqual:@"Receiver"]){
+        
+        if([[obstacle direction] isEqual:@"U"]){
+            [obstacle setState:@"On"];
         }
+    }
+}
+
+- (void) createLaserLeftAtRow:(int)row Col:(int)col
+{
+    while ((col>1)&&([[_grid[row][col-1] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col-1 AndState:@"laserLRXX"];
+        [_lasers addObject:comp];
         col = col-1;
-        ComponentModel *obstacle = _grid[row][col];
-        if([[obstacle getType] isEqual:@"Deflector"]){
-            if([[obstacle direction] isEqual:@"XRTX"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"U"];
-            }else if([[obstacle direction] isEqual:@"XRXB"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"D"];
-            }else{
-                [obstacle setState:@"Off"];
-            }
-        }else if([[obstacle getType] isEqual:@"Receiver"]){
-            if([[obstacle direction] isEqual:@"R"]){
-                [obstacle setState:@"On"];
-            }
+    }
+   
+    col = col-1;
+    ComponentModel *obstacle = _grid[row][col];
+    
+    if([[obstacle getType] isEqual:@"Deflector"]){
+    
+        if([[obstacle direction] isEqual:@"XRTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserBotAtRow:row Col:col];
+        }else{
+            [obstacle setState:@"Off"];
         }
-    }else if([dir isEqual:@"R"]){
-        int row = r;
-        int col = c;
-        NSLog([_grid[row][col+1] getType]);
-        NSLog(@"%d",col);
-        while ((col<13)&&([[_grid[row][col+1] getType] isEqual:@"Empty"])){
-            ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col+1 AndState:@"laserLRXX"];
-            [_lasers addObject:comp];
-            col = col+1;
+    }else if([[obstacle getType] isEqual:@"Receiver"]){
+        
+        if([[obstacle direction] isEqual:@"R"]){
+            [obstacle setState:@"On"];
         }
+    }
+}
+
+
+- (void) createLaserRightAtRow:(int)row Col:(int)col
+{
+    while ((col<13)&&([[_grid[row][col+1] getType] isEqual:@"Empty"])){
+        
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col+1 AndState:@"laserLRXX"];
+        [_lasers addObject:comp];
         col = col+1;
-        ComponentModel *obstacle = _grid[row][col];
-        if([[obstacle getType] isEqual:@"Deflector"]){
-            if([[obstacle direction] isEqual:@"LXTX"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"U"];
-            }else if([[obstacle direction] isEqual:@"LXXB"]){
-                [obstacle setState:@"On"];
-                [self createLaserAtRow:row Col:col Direction:@"D"];
-            }else{
-                [obstacle setState:@"Off"];
-            }
-        }else if([[obstacle getType] isEqual:@"Receiver"]){
-            if([[obstacle direction] isEqual:@"L"]){
-                [obstacle setState:@"On"];
-            }
+    }
+    
+    col = col+1;
+    ComponentModel *obstacle = _grid[row][col];
+    
+    if([[obstacle getType] isEqual:@"Deflector"]){
+    
+        if([[obstacle direction] isEqual:@"LXTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LXXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserBotAtRow:row Col:col];
+        }else{
+            [obstacle setState:@"Off"];
+        }
+    } else if([[obstacle getType] isEqual:@"Receiver"]){
+     
+        if([[obstacle direction] isEqual:@"L"]){
+            [obstacle setState:@"On"];
         }
     }
 }
@@ -674,9 +694,9 @@
 
 -(void) checkEmitterConnection
 {
-    //BOOL atLeastOneConnected = NO;
     // Check conenctivity for each bulb
     BOOL connectedToReceiver = NO;
+    
     for (int i = 0; i<_emitters.count;i++) {
         [_emitters[i] setState:@"Off"];
     }
@@ -714,7 +734,6 @@
         }
     }
     
-    //return atLeastOneConnected;
 }
 
 - (NSArray*) getAllConnectionsTo:(ComponentModel*)component{
