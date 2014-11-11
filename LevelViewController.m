@@ -6,14 +6,17 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+// Please add your comments on anything that you think can be improved
+
 #import "LevelViewController.h"
 #import "GameViewController.h"
 #import "MenuViewController.h"
 
 @interface LevelViewController () {
-    NSMutableArray* _buttons;
+    NSMutableArray* _buttons; // buttons for different levels
+    
     int _language;
-    int _numLevels;
+    int _numLevels; // total levels the game has
     int _currentLevel;
 }
 
@@ -31,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 5;
+    _numLevels = 6;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // set up tint color
