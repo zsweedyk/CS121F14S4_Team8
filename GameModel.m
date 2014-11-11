@@ -349,7 +349,8 @@
         // See if the bulb is connected following the two possible paths
         bool path1 = [self breadthSearchFrom:_bulbs[i] To:battPos withDirection:pathStarts[0]] && [self breadthSearchFrom:_bulbs[i] To:battNeg withDirection:pathStarts[1]];
         bool path2 = [self breadthSearchFrom:_bulbs[i] To:battNeg withDirection:pathStarts[0]] && [self breadthSearchFrom:_bulbs[i] To:battPos withDirection:pathStarts[1]];
-        
+        NSLog(@"bulb1: %@ battPos: %@, battNeg: %@", _bulbs[i], battPos, battNeg);
+
         // If it's not at least one of the possible paths then it's false
         if (!(path1 || path2)) {
             return false;

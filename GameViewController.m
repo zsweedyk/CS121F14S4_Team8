@@ -231,7 +231,7 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (shorted){
-        _level--;
+        --_level;
         [self newLevel];
     } else if (_level < _numLevels - 1)
         [self newLevel];
