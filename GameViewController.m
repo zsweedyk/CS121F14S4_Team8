@@ -232,7 +232,7 @@
     
     bool connected = [_model connected];
     bool shorted = [_model shorted];
-    
+
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
     if (shorted) {
@@ -284,7 +284,6 @@
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-
     // if the circuit is shorted, restart the current level
     // if the circuit is not shorted and connected, go to the next level
     if (alertView.tag == 0){
