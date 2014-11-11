@@ -11,6 +11,8 @@
 #import "LevelViewController.h"
 #import "GameViewController.h"
 #import "MenuViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface LevelViewController () {
     NSMutableArray* _buttons; // buttons for different levels
@@ -18,6 +20,9 @@
     int _language;
     int _numLevels; // total levels the game has
     int _currentLevel;
+    
+    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer* _audioPlayerMenuPressed;
 }
 
 @end
@@ -36,6 +41,15 @@
     
     _numLevels = 6;
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    // set up sounds
+    NSString *levelPath  = [[NSBundle mainBundle] pathForResource:@"mouse-doubleclick-02" ofType:@"wav"];
+    NSURL *levelPathURL = [NSURL fileURLWithPath : levelPath];
+    _audioPlayerLevelPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:levelPathURL error:nil];
+    
+    NSString *menuPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *menuPathURL = [NSURL fileURLWithPath : menuPath];
+    _audioPlayerMenuPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:menuPathURL error:nil];
     
     // set up tint color
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
@@ -106,12 +120,18 @@
 
 - (void)backToMain:(id)sender
 {
+    [_audioPlayerMenuPressed prepareToPlay];
+    [_audioPlayerMenuPressed play];
+    
     // go back to root viewcontroller (menuviewcontroller)
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)cellSelected:(id)sender
 {
+    [_audioPlayerLevelPressed prepareToPlay];
+    [_audioPlayerLevelPressed play];
+    
     UIButton* button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     

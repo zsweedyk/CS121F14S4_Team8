@@ -40,6 +40,8 @@
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
+    AVAudioPlayer* _audioPlayerExplosion;
+    AVAudioPlayer* _audioPlayerLevelPressed;
     
     BOOL masterPowerOn;
 }
@@ -73,6 +75,14 @@
     NSString *noPath  = [[NSBundle mainBundle] pathForResource:@"beep-rejected" ofType:@"aif"];
     NSURL *noPathURL = [NSURL fileURLWithPath : noPath];
     _audioPlayerNo = [[AVAudioPlayer alloc] initWithContentsOfURL:noPathURL error:nil];
+    
+    NSString *explosionPath  = [[NSBundle mainBundle] pathForResource:@"bomb-02" ofType:@"wav"];
+    NSURL *explosionPathURL = [NSURL fileURLWithPath : explosionPath];
+    _audioPlayerExplosion = [[AVAudioPlayer alloc] initWithContentsOfURL:explosionPathURL error:nil];
+    
+    NSString *levelPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *levelPathURL = [NSURL fileURLWithPath : levelPath];
+    _audioPlayerLevelPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:levelPathURL error:nil];
     
     // initialize model
     _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
@@ -164,9 +174,11 @@
 
 - (void)backToLevel:(id)sender
 {
+    [_audioPlayerLevelPressed prepareToPlay];
+    [_audioPlayerLevelPressed play];
+    
     // go back to levelviewcontroller
     [self.navigationController popViewControllerAnimated:YES];
-    //[self newLevel];
 }
 
 - (void) newLevel{
@@ -231,6 +243,9 @@
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
     if (shorted) {
+        [_audioPlayerExplosion prepareToPlay];
+        [_audioPlayerExplosion play];
+        
         [_grid shorted];
         
         if (_language == 2) {

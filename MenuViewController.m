@@ -16,6 +16,7 @@
     NSInteger _language; // 0 english, 1 spanish, 2 chinese
     AVAudioPlayer* _audioPlayerLanguagePressed;
     AVAudioPlayer* _audioPlayerAboutPressed;
+    AVAudioPlayer* _audioPlayerLevelPressed;
     
     UISegmentedControl* _segmentControl;
     UIButton* _level;
@@ -49,9 +50,9 @@
     NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
     
-    NSString *aboutPath  = [[NSBundle mainBundle] pathForResource:@"beep-horn" ofType:@"aif"];
-    NSURL *aboutPathURL = [NSURL fileURLWithPath : aboutPath];
-    _audioPlayerAboutPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:aboutPathURL error:nil];
+    _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
+    
+    _audioPlayerLevelPressed = _audioPlayerAboutPressed;
     
     // segemented control set up
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
@@ -92,6 +93,9 @@
 
 - (void)chooseLevel:(id)sender
 {
+    [_audioPlayerLevelPressed prepareToPlay];
+    [_audioPlayerLevelPressed play];
+    
     // initialize level viewcontroller with language choice
     LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
     self.navigationController.navigationBarHidden = YES;
@@ -131,6 +135,9 @@
 }
 
 - (void)displayHelpMessage:(id) sender{
+    [_audioPlayerAboutPressed prepareToPlay];
+    [_audioPlayerAboutPressed play];
+    
     NSString *title;
     NSString *message;
     

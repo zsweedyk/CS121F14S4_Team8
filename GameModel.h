@@ -18,6 +18,7 @@
 -(BOOL) connected;
 -(BOOL) shorted;
 -(void) checkEmitterConnection;
+-(NSArray *) bulbIndices;
 -(NSArray *) getLaserPath;
 -(NSArray *)emitters;
 -(NSArray *)deflectors;

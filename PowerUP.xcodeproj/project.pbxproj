@@ -59,6 +59,8 @@
 		A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75D1A01E94F0004F539 /* beep-rejected.aif */; };
 		A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */; };
 		A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75F1A01E94F0004F539 /* slide-magic.aif */; };
+		A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5681A12084A008DD69D /* bomb-02.wav */; };
+		A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */; };
 		A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DDE1A043DA90076501D /* beep-horn.aif */; };
 		A8E84DE11A0591480076501D /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DE01A0591480076501D /* level3 */; };
 		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
@@ -231,6 +233,8 @@
 		A893D75D1A01E94F0004F539 /* beep-rejected.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-rejected.aif"; sourceTree = "<group>"; };
 		A893D75E1A01E94F0004F539 /* beep-warmguitar.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-warmguitar.aif"; sourceTree = "<group>"; };
 		A893D75F1A01E94F0004F539 /* slide-magic.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "slide-magic.aif"; sourceTree = "<group>"; };
+		A8C2D5681A12084A008DD69D /* bomb-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bomb-02.wav"; sourceTree = "<group>"; };
+		A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mouse-doubleclick-02.wav"; sourceTree = "<group>"; };
 		A8E84DDE1A043DA90076501D /* beep-horn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-horn.aif"; sourceTree = "<group>"; };
 		A8E84DE01A0591480076501D /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
@@ -471,6 +475,8 @@
 		A8B618611A0D702800541E43 /* PowerUPSounds */ = {
 			isa = PBXGroup;
 			children = (
+				A8C2D5681A12084A008DD69D /* bomb-02.wav */,
+				A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */,
 				A8E84DDE1A043DA90076501D /* beep-horn.aif */,
 				A893D75C1A01E94F0004F539 /* beep-attention.aif */,
 				A893D75D1A01E94F0004F539 /* beep-rejected.aif */,
@@ -807,6 +813,7 @@
 				A8E910DF1A081F6800E591BE /* wireXRTB.png in Resources */,
 				A8E910961A081F6800E591BE /* batteryNegXXXBshort.png in Resources */,
 				A8E910BD1A081F6800E591BE /* emitterLeftXXTBon.png in Resources */,
+				A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */,
 				A8E910D71A081F6800E591BE /* wireLRXXon.png in Resources */,
 				A8E910B01A081F6800E591BE /* emitterBottomLRXX.png in Resources */,
 				A8E910AF1A081F6800E591BE /* emitterBottomLRTXon.png in Resources */,
@@ -823,6 +830,7 @@
 				A8E910E11A081F6800E591BE /* wireXRTX.png in Resources */,
 				A8E910BF1A081F6800E591BE /* emitterRightLXTBon.png in Resources */,
 				A8E910AD1A081F6800E591BE /* emitter.pxm in Resources */,
+				A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
 				A8E910B31A081F6800E591BE /* emitterBottomLXTXon.png in Resources */,
 				A8E910B11A081F6800E591BE /* emitterBottomLRXXon.png in Resources */,
