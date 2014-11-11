@@ -40,6 +40,8 @@
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
+    
+    BOOL masterPowerOn;
 }
 
 @end
@@ -58,6 +60,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    masterPowerOn = NO;
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
@@ -201,8 +205,31 @@
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
 }
 
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
+{
+    int rowSelected = [position[0] intValue];
+    int colSelected = [position[1] intValue];
+    
+    [_model deflectorSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    if(masterPowerOn){
+        [self powerOn];
+    }
+}
+
 // if the battery is on, check the circuit connection
 -(void) powerOn{
+    masterPowerOn = YES;
+    
+    //do two checks before displaying on the grid in case a receiver has been turned on or off
+    [_model checkEmitterConnection];
+    [_model getLaserPath];
+    [_model checkEmitterConnection];
+    [_grid emit:[_model getLaserPath]];
+    [_grid setStateWithArray:[_model emitters]];
+    [_grid setStateWithArray:[_model receivers]];
+    [_grid setStateWithArray:[_model deflectors]];
+    
     bool connected = [_model connected];
     bool shorted = [_model shorted];
     
