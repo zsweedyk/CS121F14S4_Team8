@@ -10,6 +10,8 @@
     int _row;
     int _col;
     NSString* _type;
+    NSString* _state;
+    NSString* _direction;
     bool _connectedTop;
     bool _connectedBottom;
     bool _connectedRight;
@@ -19,15 +21,25 @@
 
 @implementation ComponentModel
 
-- (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col
+- (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(NSString*)state
 {
     if (self = [super init]) {
         _row = row;
         _col = col;
         _type = type;
+        _state = state;
     }
 
     return self;
+}
+- (NSString*)direction
+{
+    return _direction;
+}
+
+- (void) pointTo:(NSString *)dir
+{
+    _direction = dir;
 }
 
 - (void) connectedRight:(bool)connection
@@ -53,6 +65,16 @@
 - (NSString *) getType
 {
     return _type;
+}
+
+- (NSString *) getState
+{
+    return _state;
+}
+
+- (void) setState:(NSString*)state
+{
+    _state = state;
 }
 
 - (int) getRow

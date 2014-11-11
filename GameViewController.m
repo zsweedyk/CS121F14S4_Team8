@@ -40,6 +40,8 @@
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
+    
+    BOOL masterPowerOn;
 }
 
 @end
@@ -58,6 +60,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    masterPowerOn = NO;
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
@@ -100,15 +104,7 @@
     [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
 
     [self.view addSubview:_backToLevel];
-
-//    _test = [[UIButton alloc] initWithFrame:buttonFrame];
-//    [_test setBackgroundColor:[UIColor clearColor]];
-//    [_test setTitle:@"Test" forState:UIControlStateNormal];
-//    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-//    [_test setTitleColor:tintColor forState:UIControlStateNormal];
-//    [self.view addSubview:_test];
-//    [_test addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
-    
+   
     [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setLanguage];
@@ -201,10 +197,34 @@
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
 }
 
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
+{
+    int rowSelected = [position[0] intValue];
+    int colSelected = [position[1] intValue];
+    
+    [_model deflectorSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    if(masterPowerOn){
+        [self powerOn];
+    }
+}
+
 // if the battery is on, check the circuit connection
 -(void) powerOn{
-    bool shorted = [_model shorted];
+    masterPowerOn = YES;
+    
+    //do two checks before displaying on the grid in case a receiver has been turned on or off
+    [_model checkEmitterConnection];
+    [_model getLaserPath];
+    [_model checkEmitterConnection];
+    [_grid emit:[_model getLaserPath]];
+    [_grid setStateWithArray:[_model emitters]];
+    [_grid setStateWithArray:[_model receivers]];
+    [_grid setStateWithArray:[_model deflectors]];
+    
     bool connected = [_model connected];
+    bool shorted = [_model shorted];
+
     NSArray* connectedBulbs = [_model bulbIndices]; // the array stores the indices of all connected bulbs
     [_grid bulbConnectedWithIndices:connectedBulbs]; // light up bulbs that are connected
     
