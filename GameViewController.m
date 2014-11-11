@@ -232,7 +232,7 @@
     
     bool connected = [_model connected];
     bool shorted = [_model shorted];
-
+    
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
     if (shorted) {
