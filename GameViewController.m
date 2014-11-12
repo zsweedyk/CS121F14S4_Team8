@@ -151,12 +151,12 @@
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"You win (spanish)";
-            _next = @"Current level is unlocked. Let's try next level! (spanish)";
-            _all = @"All levels are unlocked. Congratulation! (spanish)";
+            _titleWin = @"Ganas!";
+            _next = @"Nivel actual está desbloqueado. Vamos a intentar siguiente nivel!";
+            _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
             _okay = @"OK";
-            _titleLose = @"You lose (spanish)";
-            _restart = @"The circuit is shorted. Let's give it another try! (spanish)";
+            _titleLose = @"Pierdes";
+            _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
             break;
         case 2:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];

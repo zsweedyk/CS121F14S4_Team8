@@ -78,7 +78,7 @@
         if (_language == 2)
             titleStr = [NSString stringWithFormat:@"关卡 %d", i];
         else if (_language == 1)
-            titleStr = [NSString stringWithFormat:@"Level %d (spanish)", i];
+            titleStr = [NSString stringWithFormat:@"Nivel %d (spanish)", i];
         else
             titleStr = [NSString stringWithFormat:@"Level %d", i];
             
@@ -104,7 +104,7 @@
     if (_language == 2)
         backtoMenu = @"回到主菜单";
     else if (_language == 1)
-        backtoMenu = @"Back to main menu (spanish)";
+        backtoMenu = @"Volver al menú principal)";
     else
         backtoMenu = @"Back to main menu";
     
