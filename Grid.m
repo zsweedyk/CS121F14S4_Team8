@@ -15,8 +15,10 @@
 #import "Laser.h"
 #import "Deflector.h"
 #import "ComponentModel.h"
+#import "ExplosionScene.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface Grid()
 {
@@ -49,7 +51,7 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
-
+    
     _numRows = rows;
     _numCols = cols;
 
@@ -252,6 +254,7 @@
     }
 }
 
+
 - (void) shorted {
     // explode all battery components
     for (int i = 0; i < _batCols.count; ++i)
@@ -261,5 +264,6 @@
         [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
     }
 }
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Battery.h"
+#import "ExplosionScene.h"
 
 @implementation Battery{
     NSString* _name;
@@ -41,8 +42,13 @@
 
 - (void) exploded
 {
-    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
-    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(0,0)];
+    
+    SKView *spriteView = self;
+    [spriteView presentScene: explosion];
+    
+    //NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    //[_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 @end

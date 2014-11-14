@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "Switch.h"
 #import "Battery.h"
 
@@ -19,7 +20,7 @@
 @end
 
 
-@interface Grid : UIView <SwitchDelegate,BatteryDelegate>
+@interface Grid : SKView <SwitchDelegate,BatteryDelegate>
 
 @property (nonatomic, strong) id delegate;
 

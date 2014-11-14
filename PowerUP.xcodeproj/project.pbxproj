@@ -34,6 +34,7 @@
 		5BEF174D1A0F2DAE00354C84 /* receiverRightXXTBon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF17451A0F2DAE00354C84 /* receiverRightXXTBon.png */; };
 		5BEF174E1A0F2DAE00354C84 /* receiverTopLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF17461A0F2DAE00354C84 /* receiverTopLRXX.png */; };
 		5BEF174F1A0F2DAE00354C84 /* receiverTopLRXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF17471A0F2DAE00354C84 /* receiverTopLRXXon.png */; };
+		A82CBBF31A15A0B90002F118 /* ExplosionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A82CBBF21A15A0B90002F118 /* ExplosionScene.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
 		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
@@ -61,6 +62,8 @@
 		A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75F1A01E94F0004F539 /* slide-magic.aif */; };
 		A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5681A12084A008DD69D /* bomb-02.wav */; };
 		A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */; };
+		A8D80AFE1A15C4B40013599D /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A8D80AFC1A15C4B40013599D /* Explosion.sks */; };
+		A8D80AFF1A15C4B40013599D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D80AFD1A15C4B40013599D /* spark.png */; };
 		A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DDE1A043DA90076501D /* beep-horn.aif */; };
 		A8E84DE11A0591480076501D /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DE01A0591480076501D /* level3 */; };
 		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
@@ -192,6 +195,8 @@
 		5BEF17451A0F2DAE00354C84 /* receiverRightXXTBon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receiverRightXXTBon.png; path = receivers1/receiverRightXXTBon.png; sourceTree = "<group>"; };
 		5BEF17461A0F2DAE00354C84 /* receiverTopLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receiverTopLRXX.png; path = receivers1/receiverTopLRXX.png; sourceTree = "<group>"; };
 		5BEF17471A0F2DAE00354C84 /* receiverTopLRXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receiverTopLRXXon.png; path = receivers1/receiverTopLRXXon.png; sourceTree = "<group>"; };
+		A82CBBF11A15A0B90002F118 /* ExplosionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionScene.h; sourceTree = "<group>"; };
+		A82CBBF21A15A0B90002F118 /* ExplosionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionScene.m; sourceTree = "<group>"; };
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -235,6 +240,8 @@
 		A893D75F1A01E94F0004F539 /* slide-magic.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "slide-magic.aif"; sourceTree = "<group>"; };
 		A8C2D5681A12084A008DD69D /* bomb-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bomb-02.wav"; sourceTree = "<group>"; };
 		A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mouse-doubleclick-02.wav"; sourceTree = "<group>"; };
+		A8D80AFC1A15C4B40013599D /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = ../../Explosion.sks; sourceTree = "<group>"; };
+		A8D80AFD1A15C4B40013599D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../../spark.png; sourceTree = "<group>"; };
 		A8E84DDE1A043DA90076501D /* beep-horn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-horn.aif"; sourceTree = "<group>"; };
 		A8E84DE01A0591480076501D /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
@@ -403,6 +410,8 @@
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
 				A86E10BF1A005B1E0029011B /* GameViewController.h */,
 				A86E10C01A005B1E0029011B /* GameViewController.m */,
+				A82CBBF11A15A0B90002F118 /* ExplosionScene.h */,
+				A82CBBF21A15A0B90002F118 /* ExplosionScene.m */,
 				A86E10C11A005B1E0029011B /* Grid.h */,
 				A86E10C21A005B1E0029011B /* Grid.m */,
 				A86E10C31A005B1E0029011B /* LevelViewController.h */,
@@ -490,6 +499,8 @@
 			isa = PBXGroup;
 			children = (
 				A86321961A0B540A00ED1F5C /* blank.png */,
+				A8D80AFC1A15C4B40013599D /* Explosion.sks */,
+				A8D80AFD1A15C4B40013599D /* spark.png */,
 				5BEF173F1A0F2D8E00354C84 /* receivers */,
 				A8E910291A081F6700E591BE /* batteries */,
 				A8E9103E1A081F6800E591BE /* bulbs */,
@@ -754,6 +765,7 @@
 				A8E910A41A081F6800E591BE /* deflector.pxm in Resources */,
 				A8E910E91A081F6800E591BE /* wireXXXB.png in Resources */,
 				A8E910C91A081F6800E591BE /* emitterTopLRXXon.png in Resources */,
+				A8D80AFF1A15C4B40013599D /* spark.png in Resources */,
 				A8E910D81A081F6800E591BE /* wireLXTB.png in Resources */,
 				A8E910BA1A081F6800E591BE /* emitterLeftXRXB.png in Resources */,
 				5BEF17481A0F2DAE00354C84 /* receiverBottomLRXX.png in Resources */,
@@ -795,6 +807,7 @@
 				A8E910DD1A081F6800E591BE /* wireLXXBon.png in Resources */,
 				A8E910CA1A081F6800E591BE /* emitterTopLXXB.png in Resources */,
 				A8E910971A081F6800E591BE /* batteryPos.pxm in Resources */,
+				A8D80AFE1A15C4B40013599D /* Explosion.sks in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				A8E910AE1A081F6800E591BE /* emitterBottomLRTX.png in Resources */,
 				A8E9109D1A081F6800E591BE /* batteryPosXXTXshort.png in Resources */,
@@ -876,6 +889,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A82CBBF31A15A0B90002F118 /* ExplosionScene.m in Sources */,
 				A86E10DC1A0073C80029011B /* Bomb.m in Sources */,
 				A86E10CC1A005B1E0029011B /* Bulb.m in Sources */,
 				A86E10CD1A005B1E0029011B /* GameModel.m in Sources */,

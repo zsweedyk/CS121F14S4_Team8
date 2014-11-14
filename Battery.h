@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 
 @protocol BatteryDelegate
 @required
@@ -16,7 +17,7 @@
 
 @end
 
-@interface Battery: UIView
+@interface Battery: SKView
 
 @property (nonatomic, strong) id delegate;
 
