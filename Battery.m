@@ -42,13 +42,8 @@
 
 - (void) exploded
 {
-    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(0,0)];
-    
-    SKView *spriteView = self;
-    [spriteView presentScene: explosion];
-    
-    //NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
-    //[_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
 @end

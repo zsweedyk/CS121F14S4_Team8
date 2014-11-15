@@ -17,7 +17,7 @@
 
 @end
 
-@interface Battery: SKView
+@interface Battery: UIView
 
 @property (nonatomic, strong) id delegate;
 

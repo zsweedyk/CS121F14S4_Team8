@@ -50,7 +50,7 @@
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols
 {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor blackColor];
     
     _numRows = rows;
     _numCols = cols;
@@ -102,13 +102,11 @@
             // initially set all cells to a clear label. Initialized to proper component later
             CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
             UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            [blankTile setBackgroundColor:[UIColor whiteColor]];
+            [blankTile setBackgroundColor:[UIColor clearColor]];
             
             [self addSubview:blankTile];
             [_cells[row] addObject:blankTile];
         }
-        
-
     }
 }
 
@@ -256,6 +254,11 @@
 
 
 - (void) shorted {
+    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(200,200)];
+    
+    SKView *spriteView = self;
+    [spriteView presentScene: explosion];
+    
     // explode all battery components
     for (int i = 0; i < _batCols.count; ++i)
     {

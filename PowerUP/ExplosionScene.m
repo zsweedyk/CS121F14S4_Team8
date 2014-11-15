@@ -24,6 +24,11 @@
     NSString* explosionPath = [[NSBundle mainBundle] pathForResource:@"Explosion" ofType:@"sks"];
     
     SKEmitterNode* explosionNode = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+    [explosionNode setNumParticlesToEmit:1000];
+    [explosionNode setParticleBirthRate:450];
+    [explosionNode setParticleLifetime:2];
+    [explosionNode setXScale:0.4];
+    [explosionNode setYScale:0.4];
     
     explosionNode.position = CGPointMake(100,100);
     
