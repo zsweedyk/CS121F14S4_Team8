@@ -13,8 +13,14 @@
 
 - (void)didMoveToView: (SKView *) view
 {
-    [self createSceneContents];
+    [self setBackgroundColor:[UIColor blackColor]];
 }
+
+-(void)dealloc {
+    NSLog(@"Dealloc <scene name>");
+}
+
+
 
 - (void)createSceneContents
 {

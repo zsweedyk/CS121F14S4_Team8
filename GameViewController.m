@@ -12,6 +12,7 @@
 #import "LevelViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
+#import "ExplosionScene.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -23,6 +24,7 @@
 
     GameModel* _model;
     Grid* _grid;
+    SKView* _backgroud;
     UIButton* _backToLevel;
     UIButton* _test;
 
@@ -59,13 +61,23 @@
     return self;
 }
 
+- (void) dealloc {
+    NSLog(@"dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     masterPowerOn = NO;
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    // backgroud set up
+    _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_backgroud];
+    
+    SKScene* bgd = [[SKScene alloc] initWithSize:CGSizeMake(200,200)];
+    bgd.backgroundColor = [UIColor blackColor];
+    [_backgroud presentScene:bgd];
     
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
@@ -245,6 +257,11 @@
     if (shorted) {
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
+        
+        ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(200,200)];
+        
+        [_backgroud presentScene: explosion];
+        [explosion createSceneContents];
         
         [_grid shorted];
         

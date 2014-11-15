@@ -10,4 +10,7 @@
 
 @interface ExplosionScene : SKScene
 
+- (void)createExplosionAtX:(int) x AndY: (int) y;
+- (void)createSceneContents;
+
 @end

@@ -254,10 +254,10 @@
 
 
 - (void) shorted {
-    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(200,200)];
+    //ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:CGSizeMake(200,200)];
     
-    SKView *spriteView = self;
-    [spriteView presentScene: explosion];
+    //SKView *spriteView = self;
+    //[spriteView presentScene: explosion];
     
     // explode all battery components
     for (int i = 0; i < _batCols.count; ++i)

@@ -20,7 +20,7 @@
 @end
 
 
-@interface Grid : SKView <SwitchDelegate,BatteryDelegate>
+@interface Grid : UIView <SwitchDelegate,BatteryDelegate>
 
 @property (nonatomic, strong) id delegate;
 
