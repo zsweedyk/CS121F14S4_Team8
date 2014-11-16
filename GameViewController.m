@@ -354,7 +354,7 @@
     [_backgroud presentScene: explosion];
     int frameY = self.view.frame.size.height;
     
-    for (int i = 0; i < indices.count; i++)
+    for (int i = 0; i < indices.count; ++i)
     {
         int xPos = [_grid getBombXWithIndex:i] + xGrid;
         int yPos = [_grid getBombYWithIndex:i] + yGrid;
