@@ -8,18 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 
 @protocol BatteryDelegate
 @required
+
 - (void) powerUp:(id)sender;
+
 @end
 
-@interface Battery: UIButton
+@interface Battery: UIView
 
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name;
-- (void) turnOnPower;
+- (void) turnedOff;
+- (void) turnedOn;
+- (void) exploded;
 
 @end
 

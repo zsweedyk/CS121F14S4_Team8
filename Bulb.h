@@ -12,7 +12,7 @@
 @interface Bulb : UIImageView
 
 - (id) initWithFrame:(CGRect)frame;
-
+- (void) lightDown;
 - (void) lightUp;
 
 @end
