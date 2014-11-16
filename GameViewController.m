@@ -25,6 +25,7 @@
     GameModel* _model;
     Grid* _grid;
     SKView* _backgroud;
+    ExplosionScene* _explosion;
     UIButton* _backToLevel;
     UIButton* _test;
 
@@ -80,9 +81,10 @@
     _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_backgroud];
     
-    SKScene* bgd = [[SKScene alloc] initWithSize:CGSizeMake(200,200)];
-    bgd.backgroundColor = [UIColor blackColor];
-    [_backgroud presentScene:bgd];
+    // set up explosion scene
+    _explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
+    _explosion.backgroundColor = [UIColor blackColor];
+    [_backgroud presentScene: _explosion];
     
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
@@ -334,24 +336,16 @@
 
 -(void) explodeBattery
 {
-    // set up explosion scene
-    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
-    
-    [_backgroud presentScene: explosion];
     int xPos = [_grid getBatteryX] + xGrid;
     int yPos = [_grid getBatteryY] + yGrid;
     int frameY = self.view.frame.size.height;
     int xPoint = xPos + 50;
     int yPoint = frameY - yPos - 10;
-    [explosion createExplosionAtX:xPoint AndY:yPoint];
+    [_explosion createExplosionAtX:xPoint AndY:yPoint];
 }
 
 -(void) explodeBombsWithIndices: (NSArray*) indices
 {
-    // set up explosion scene
-    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
-    
-    [_backgroud presentScene: explosion];
     int frameY = self.view.frame.size.height;
     
     for (int i = 0; i < indices.count; ++i)
@@ -360,7 +354,7 @@
         int yPos = [_grid getBombYWithIndex:i] + yGrid;
         int xPoint = xPos + 25;
         int yPoint = frameY - yPos - 10;
-        [explosion createExplosionAtX:xPoint AndY:yPoint];
+        [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }
 
