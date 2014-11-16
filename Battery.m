@@ -7,6 +7,7 @@
 //
 
 #import "Battery.h"
+#import "ExplosionScene.h"
 
 @implementation Battery{
     NSString* _name;

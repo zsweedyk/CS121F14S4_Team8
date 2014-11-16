@@ -12,6 +12,7 @@
 #import "LevelViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
+#import "ExplosionScene.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -23,6 +24,7 @@
 
     GameModel* _model;
     Grid* _grid;
+    SKView* _backgroud;
     UIButton* _backToLevel;
     UIButton* _test;
 
@@ -43,6 +45,11 @@
     AVAudioPlayer* _audioPlayerExplosion;
     AVAudioPlayer* _audioPlayerLevelPressed;
     
+    // position variables
+    float framePortion;
+    CGFloat xGrid;
+    CGFloat yGrid;
+    
     BOOL masterPowerOn;
 }
 
@@ -59,13 +66,23 @@
     return self;
 }
 
+- (void) dealloc {
+    NSLog(@"dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     masterPowerOn = NO;
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    // backgroud set up
+    _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_backgroud];
+    
+    SKScene* bgd = [[SKScene alloc] initWithSize:CGSizeMake(200,200)];
+    bgd.backgroundColor = [UIColor blackColor];
+    [_backgroud presentScene:bgd];
     
     // sound set up
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
@@ -124,9 +141,9 @@
 {
     CGRect frame = self.view.frame;
 
-    float framePortion = 0.8;
-    CGFloat xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
-    CGFloat yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
+    framePortion = 0.8;
+    xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
+    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
 
@@ -239,12 +256,34 @@
 
     NSArray* connectedBulbs = [_model bulbIndices]; // the array stores the indices of all connected bulbs
     [_grid bulbConnectedWithIndices:connectedBulbs]; // light up bulbs that are connected
+    NSArray* connectedBombs = [_model connectedBombs];
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
-    if (shorted) {
+    if (connectedBombs.count > 0)
+    {
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
+        
+        [self explodeBombsWithIndices:connectedBombs];
+        
+        if (_language == 2) {
+            _okay = @"好";
+        }
+        
+        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:_titleLose
+                                                           message:_restart
+                                                          delegate:self
+                                                 cancelButtonTitle:_okay otherButtonTitles:nil];
+        loseView.tag = 0; // To determine the alert view is a losing view
+        
+        [loseView show];
+    }
+    else if (shorted) {
+        [_audioPlayerExplosion prepareToPlay];
+        [_audioPlayerExplosion play];
+        
+        [self explodeBattery];
         
         [_grid shorted];
         
@@ -292,6 +331,39 @@
         [_audioPlayerNo play];
     }
 }
+
+-(void) explodeBattery
+{
+    // set up explosion scene
+    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
+    
+    [_backgroud presentScene: explosion];
+    int xPos = [_grid getBatteryX] + xGrid;
+    int yPos = [_grid getBatteryY] + yGrid;
+    int frameY = self.view.frame.size.height;
+    int xPoint = xPos + 50;
+    int yPoint = frameY - yPos - 10;
+    [explosion createExplosionAtX:xPoint AndY:yPoint];
+}
+
+-(void) explodeBombsWithIndices: (NSArray*) indices
+{
+    // set up explosion scene
+    ExplosionScene* explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
+    
+    [_backgroud presentScene: explosion];
+    int frameY = self.view.frame.size.height;
+    
+    for (int i = 0; i < indices.count; ++i)
+    {
+        int xPos = [_grid getBombXWithIndex:i] + xGrid;
+        int yPos = [_grid getBombYWithIndex:i] + yGrid;
+        int xPoint = xPos + 25;
+        int yPoint = frameY - yPos - 10;
+        [explosion createExplosionAtX:xPoint AndY:yPoint];
+    }
+}
+
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     // if the circuit is shorted, restart the current level

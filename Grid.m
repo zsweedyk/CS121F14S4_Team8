@@ -14,9 +14,12 @@
 #import "Receiver.h"
 #import "Laser.h"
 #import "Deflector.h"
+#import "Bomb.h"
 #import "ComponentModel.h"
+#import "ExplosionScene.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface Grid()
 {
@@ -25,11 +28,15 @@
     
     NSMutableArray* _bulbRows;
     NSMutableArray* _bulbCols;
+    NSMutableArray* _bombRows;
+    NSMutableArray* _bombCols;
     NSMutableArray* _batRows;
     NSMutableArray* _batCols;
     NSMutableArray* _cells;
     //Lasers
     NSMutableArray* _lasers;
+    
+    CGFloat cellSize;
     
     AVAudioPlayer* _audioPlayerPressed;
 }
@@ -49,7 +56,7 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
-
+    
     _numRows = rows;
     _numCols = cols;
 
@@ -61,11 +68,6 @@
     }
 
     [self setUpGrid];
-    
-    _batCols = [[NSMutableArray alloc] init];
-    _batRows = [[NSMutableArray alloc] init];
-    _bulbCols = [[NSMutableArray alloc] init];
-    _bulbRows = [[NSMutableArray alloc] init];
     
     _lasers = [[NSMutableArray alloc] init];
     
@@ -84,11 +86,13 @@
     _batRows = [[NSMutableArray alloc] init];
     _bulbCols = [[NSMutableArray alloc] init];
     _bulbRows = [[NSMutableArray alloc] init];
-    
+    _bombCols = [[NSMutableArray alloc] init];
+    _bombRows = [[NSMutableArray alloc] init];
+   
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
-    CGFloat cellSize = MIN(cellHeight, cellWidth);
+    cellSize = MIN(cellHeight, cellWidth);
     
     // Set each cell on the grid
     for (int row = 0; row < _numRows; ++row){
@@ -100,13 +104,11 @@
             // initially set all cells to a clear label. Initialized to proper component later
             CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
             UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            [blankTile setBackgroundColor:[UIColor whiteColor]];
+            [blankTile setBackgroundColor:[UIColor clearColor]];
             
             [self addSubview:blankTile];
             [_cells[row] addObject:blankTile];
         }
-        
-
     }
 }
 
@@ -117,6 +119,7 @@
 // 6: positive battery
 // 4: bulb
 // 7: switch
+// 9: bomb
 - (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType
 {
     // white label to replace
@@ -153,6 +156,10 @@
         ((Deflector *)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
+        newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_bombRows addObject:[NSNumber numberWithInt:row]];
+        [_bombCols addObject:[NSNumber numberWithInt:col]];
     }else {
         return;
     }
@@ -252,6 +259,7 @@
     }
 }
 
+
 - (void) shorted {
     // explode all battery components
     for (int i = 0; i < _batCols.count; ++i)
@@ -261,5 +269,26 @@
         [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
     }
 }
+
+- (int) getBatteryX
+{
+    return (cellSize * [_batCols[0] intValue]);
+}
+
+- (int) getBatteryY
+{
+    return (cellSize * [_batRows[0] intValue]);
+}
+
+- (int) getBombXWithIndex: (int) i
+{
+    return (cellSize * [_bombCols[i] intValue]);
+}
+
+- (int) getBombYWithIndex: (int) i
+{
+    return (cellSize * [_bombRows[i] intValue]);
+}
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "Switch.h"
 #import "Battery.h"
 
@@ -30,5 +31,9 @@
 - (void) shorted;
 - (void) emit:(NSArray *)locs;
 - (void) setStateWithArray:(NSArray *)locs;
+- (int) getBatteryX;
+- (int) getBatteryY;
+- (int) getBombXWithIndex: (int) i;
+- (int) getBombYWithIndex: (int) i;
 
 @end
