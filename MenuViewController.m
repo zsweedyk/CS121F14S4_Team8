@@ -88,7 +88,6 @@
     [self.view addSubview:_about];
     
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void)chooseLevel:(id)sender
