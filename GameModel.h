@@ -15,10 +15,11 @@
 -(NSString*) getTypeAtRow: (int) row andCol: (int) col;
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(void) deflectorSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
--(BOOL) connected;
--(NSArray*) connectedBombs;
--(BOOL) shorted;
 -(void) checkEmitterConnection;
+-(BOOL) connected;
+-(BOOL) shorted;
+
+-(NSArray*) connectedBombs;
 -(NSArray *) bulbIndices;
 -(NSArray *) getLaserPath;
 -(NSArray *)emitters;

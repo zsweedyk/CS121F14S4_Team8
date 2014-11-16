@@ -669,7 +669,7 @@
     connectedBombs = [[NSMutableArray alloc] init];
     
     // Check conenctivity for each bulb
-    for (int i = 0; i < _bulbs.count; ++i) {
+    for (int i = 0; i < _bombs.count; ++i) {
         
         // Make sure bulbs are actually bulbs
         ComponentModel* bomb = _bombs[i];
