@@ -16,6 +16,7 @@
 -(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(void) deflectorSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 -(BOOL) connected;
+-(NSArray*) connectedBombs;
 -(BOOL) shorted;
 -(void) checkEmitterConnection;
 -(NSArray *) bulbIndices;

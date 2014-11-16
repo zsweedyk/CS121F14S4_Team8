@@ -10,4 +10,6 @@
 
 @interface Bomb : UIImageView
 
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName;
+
 @end

@@ -31,5 +31,9 @@
 - (void) shorted;
 - (void) emit:(NSArray *)locs;
 - (void) setStateWithArray:(NSArray *)locs;
+- (int) getBatteryX;
+- (int) getBatteryY;
+- (int) getBombXWithIndex: (int) i;
+- (int) getBombYWithIndex: (int) i;
 
 @end

@@ -10,6 +10,14 @@
 
 @implementation Bomb
 
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
+{
+    self = [super initWithFrame:frame];
+    self.image = [UIImage imageNamed:imageName];
+    
+    return self;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

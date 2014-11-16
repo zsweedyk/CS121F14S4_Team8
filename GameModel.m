@@ -12,7 +12,8 @@
 @interface GameModel()
 {
     NSMutableArray* _grid;
-    NSMutableArray *_bulbs;
+    NSMutableArray* _bulbs;
+    NSMutableArray* _bombs;
 
     //laser component arrays
     NSMutableArray* _lasers;
@@ -25,6 +26,7 @@
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
     NSMutableArray* connectedBulbs;
+    NSMutableArray* connectedBombs;
 
     int _numLevels; // total number of levels
 }
@@ -42,6 +44,7 @@
         _numRows = 15;
         _numCols = 15;
         _bulbs = [[NSMutableArray alloc] init];
+        _bombs = [[NSMutableArray alloc] init];
         
         // initialize arrays with enough space for all the data in the rows
         _grid = [[NSMutableArray alloc] init];
@@ -94,6 +97,7 @@
     }
 
     [_bulbs removeAllObjects];
+    [_bombs removeAllObjects];
 }
 
 // Used in generateGrid
@@ -132,6 +136,9 @@
                 component = [[ComponentModel alloc] initOfType:@"Deflector" AtRow:r AndCol:c AndState:@"Off"];
                 [component pointTo:@"XRTX"];
                 [_deflectors addObject:component];
+            } else if ([datum isEqual:@"9"]) {
+                component = [[ComponentModel  alloc] initOfType:@"Bomb" AtRow:r AndCol:c AndState:@"Off"];
+                [_bombs addObject:component];
             } else {
                 component = [[ComponentModel  alloc] initOfType:@"Empty" AtRow:r AndCol:c AndState:@"Off"];
             }
@@ -198,6 +205,7 @@
 // 6: positive battery
 // 4: bulb
 // 7: switch
+// 9: bomb
 - (NSString*) getComponentWithConnectionsFor:(ComponentModel*)component
 {
     // Get typ and location from component
@@ -224,6 +232,8 @@
         compWithConn = [@"receiver" stringByAppendingString:laserconnections];
     } else if ( [type isEqual:@"Deflector"]) {
         compWithConn = @"deflector";
+    } else if ( [type isEqual:@"Bomb"] ) {
+        compWithConn = [@"bomb" stringByAppendingString:connections];
     }
     else {
         compWithConn = @"empty";
@@ -575,7 +585,6 @@
 }
 
 
-
 -(BOOL) shorted
 {
     // check if two nodes of battery are connected directly
@@ -652,6 +661,37 @@
     }
     
     return NO;
+}
+
+-(NSArray*) connectedBombs
+{
+    // store the indices of all connected bulbs
+    connectedBombs = [[NSMutableArray alloc] init];
+    
+    // Check conenctivity for each bulb
+    for (int i = 0; i < _bulbs.count; ++i) {
+        
+        // Make sure bulbs are actually bulbs
+        ComponentModel* bomb = _bombs[i];
+        NSAssert([[bomb getType] isEqual:@"Bomb"], @"Elements in bulb array are not actually bulbs");
+        
+        NSArray* connections = [self getAllConnectionsTo:bomb];
+        
+        // Make sure the bulb is valid on the grid
+        NSAssert(connections.count == 2, @"Invalid number of connections to bulb");
+        
+        // See if the bulb is connected following the two possible paths
+        bool path1Pos = [self breadthSearchFrom:bomb To:_batteryPos inDirection:connections[0] CheckingForShort:false];
+        bool path1Neg = [self breadthSearchFrom:bomb To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
+        bool path2Neg = [self breadthSearchFrom:bomb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
+        bool path2Pos = [self breadthSearchFrom:bomb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
+        
+        // If one of paths is bult, add the index of the bulb to an array
+        if ((path1Pos && path1Neg) || (path2Pos && path2Neg))
+            [connectedBombs addObject:[NSNumber numberWithInt:i]];
+    }
+    
+    return connectedBombs;
 }
 
 -(BOOL) connected

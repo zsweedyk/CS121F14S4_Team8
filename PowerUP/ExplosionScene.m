@@ -20,23 +20,21 @@
     NSLog(@"Dealloc <scene name>");
 }
 
-
-
-- (void)createSceneContents
+- (void)createExplosionAtX:(int) x AndY: (int) y
 {
     self.backgroundColor = [SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
-
+    
     NSString* explosionPath = [[NSBundle mainBundle] pathForResource:@"Explosion" ofType:@"sks"];
     
     SKEmitterNode* explosionNode = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
     [explosionNode setNumParticlesToEmit:1000];
     [explosionNode setParticleBirthRate:450];
     [explosionNode setParticleLifetime:2];
-    [explosionNode setXScale:0.4];
-    [explosionNode setYScale:0.4];
+    [explosionNode setXScale:1];
+    [explosionNode setYScale:1];
     
-    explosionNode.position = CGPointMake(100,100);
+    explosionNode.position = CGPointMake(x,y);
     
     [self addChild:explosionNode];
 }
