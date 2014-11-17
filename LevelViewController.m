@@ -168,8 +168,7 @@
     
     if (lock[buttonTag] == [NSNumber numberWithInt:1])
     {
-        NSLog(@"Current level is locked");
-        [self displayLockedMessage];
+               [self displayLockedMessage];
     } else {
         GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language AndLocks:lock];
         
@@ -189,8 +188,8 @@
             message = @"Please unlock all previous levels to play current level.";
             break;
         case 1:
-            title = @"Missing in spanish";
-            message = @"Missing in spanish";
+            title = @"Nivel actual está bloqueado";
+            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
             break;
         case 2:
             title = @"当前关卡未解锁";
