@@ -24,7 +24,6 @@
     int _numCols;
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
-    NSMutableArray* connectedBulbs;
 
     int _numLevels; // total number of levels
 }
@@ -41,42 +40,37 @@
         
         _numRows = 15;
         _numCols = 15;
-        _bulbs = [[NSMutableArray alloc] init];
         
-        // initialize arrays with enough space for all the data in the rows
+        // initialize arrays
         _grid = [[NSMutableArray alloc] init];
+        _bulbs = [[NSMutableArray alloc] init];
+        _lasers = [[NSMutableArray alloc] init];
+        _emitters = [[NSMutableArray alloc] init];
+        _deflectors = [[NSMutableArray alloc] init];
+        _receivers = [[NSMutableArray alloc] init];
         
-        // in each row spot add another array for the columns
+        // in each row spot add another array for the columns in the grid
         for (int r = 0; r < _numRows; ++r) {
             NSMutableArray *column = [[NSMutableArray alloc] init];
             [_grid addObject:column];
         }
-        _lasers = [[NSMutableArray alloc] init];
-        //initialize component arrays
-        _emitters = [[NSMutableArray alloc] init];
-        
-        _deflectors = [[NSMutableArray alloc] init];
-        
-        _receivers = [[NSMutableArray alloc] init];
     }
     
     return self;
 }
 
-
-// assumptions: level is in [-3, numLevels]
+// assumptions: level is in [-4, numLevels]
 -(void) generateGrid: (int) level
 {
     [self clearGridAndBulbs];
     
     // Make sure that the input for this method is valid
     NSAssert((level <= _numLevels), @"Invalid level argument");
-    NSAssert((level >= -3), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
+    NSAssert((level >= -4), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
     
     // get the txt file with the grid data
     NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
     NSError* error;
-    
 
     NSString* data = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     [self setComponentsWithData:data];
@@ -109,33 +103,30 @@
             NSString* datum = [rowData substringWithRange:NSMakeRange(2*c, 1)];
             ComponentModel* component;
             if ([datum isEqual:@"1"]) {
-                component = [[ComponentModel  alloc] initOfType:@"Wire" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"Wire" AtRow:r AndCol:c AndState:NO];
             } else if ([datum isEqual:@"3"]) {
-                component = [[ComponentModel  alloc] initOfType:@"BatteryNeg" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"BatteryNeg" AtRow:r AndCol:c AndState:NO];
                 _batteryNeg = component;
             } else if ([datum isEqual:@"4"]) {
-                component = [[ComponentModel  alloc] initOfType:@"Bulb" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"Bulb" AtRow:r AndCol:c AndState:NO];
                 [_bulbs addObject:component];
             } else if ([datum isEqual:@"6"]) {
-                component = [[ComponentModel  alloc] initOfType:@"BatteryPos" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"BatteryPos" AtRow:r AndCol:c AndState:NO];
                 _batteryPos = component;
             } else if ([datum isEqual:@"7"]) {
-                component = [[ComponentModel  alloc] initOfType:@"Switch" AtRow:r AndCol:c AndState:@"Off"];
-            } else if ([datum isEqual:@"2"]) //code for laser components
-            {
-                component = [[ComponentModel alloc] initOfType:@"Emitter" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"Switch" AtRow:r AndCol:c AndState:NO];
+            } else if ([datum isEqual:@"2"]) { //code for laser components
+                component = [[ComponentModel alloc] initOfType:@"Emitter" AtRow:r AndCol:c AndState:NO];
                 [_emitters addObject:component];
             } else if ([datum isEqual:@"5"]) {
-                component = [[ComponentModel alloc] initOfType:@"Receiver" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"Receiver" AtRow:r AndCol:c AndState:NO];
                 [_receivers addObject:component];
             } else if ([datum isEqual:@"8"]) {
-                component = [[ComponentModel alloc] initOfType:@"Deflector" AtRow:r AndCol:c AndState:@"Off"];
-                [component pointTo:@"XRTX"];
+                component = [[ComponentModel alloc] initOfType:@"Deflector" AtRow:r AndCol:c AndState:NO];
                 [_deflectors addObject:component];
             } else {
-                component = [[ComponentModel  alloc] initOfType:@"Empty" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel alloc] initOfType:@"Empty" AtRow:r AndCol:c AndState:NO];
             }
-
 
             [[_grid objectAtIndex:r] addObject:component];
         }
@@ -166,11 +157,11 @@
                 [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:true];
                 [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:true];
             } else if ([datum isEqual:@"+"]) {
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] pointTo:@"R"];
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] pointTo:@"L"];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] pointTo:@"Right"];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] pointTo:@"Left"];
             } else if ([datum isEqual:@"*"]) {
-                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] pointTo:@"D"];
-                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] pointTo:@"U"];
+                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] pointTo:@"Bottom"];
+                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] pointTo:@"Top"];
             }
         }
     }
@@ -194,17 +185,22 @@
 // components table:
 // 0: blank
 // 1: wire
+// 2: emitter
 // 3: negative battery
-// 6: positive battery
 // 4: bulb
+// 5: receiver
+// 6: positive battery
 // 7: switch
+// 8: deflector
 - (NSString*) getComponentWithConnectionsFor:(ComponentModel*)component
 {
-    // Get typ and location from component
+    
+    NSString* connections;
+    
+    // get the component type
     NSString* type = [component getType];
 
-    NSString* connections = [self getConnectionsFor:component Laser:NO];
-    NSString* laserconnections = [self getConnectionsFor:component Laser:YES];
+    connections = [self getConnectionsFor:component];
 
     NSString* compWithConn;
 
@@ -218,34 +214,45 @@
         compWithConn = @"bulb";
     } else if ( [type isEqual:@"Switch"] ) {
         compWithConn = @"switch";
-    } else if ( [type isEqual:@"Emitter"]) {
-        compWithConn = [@"emitter" stringByAppendingString:laserconnections];
-    } else if ( [type isEqual:@"Receiver"]) {
-        compWithConn = [@"receiver" stringByAppendingString:laserconnections];
-    } else if ( [type isEqual:@"Deflector"]) {
+    } else if ( [type isEqual:@"Emitter"] ) {
+        compWithConn = [@"emitter" stringByAppendingString:connections];
+    } else if ( [type isEqual:@"Receiver"] ) {
+        compWithConn = [@"receiver" stringByAppendingString:connections];
+    } else if ( [type isEqual:@"Deflector"] ) {
         compWithConn = @"deflector";
-    }
-    else {
+    } else if ( [type isEqual:@"Laser"] ) {
+        compWithConn = [@"laser" stringByAppendingString:connections];
+    } else {
         compWithConn = @"empty";
     }
+    
     return compWithConn;
 }
 
 // These connections are for imagename generation so we include the possibility of being connected to a switch
--(NSString*) getConnectionsFor:(ComponentModel*)component Laser:(BOOL)laser
+-(NSString*) getConnectionsFor:(ComponentModel*)component
 {
     
     NSString* connections = @"";
+    
+    // get type, slightly different connection suffix for lasers
+    NSString* type = [component getType];
+    
     //Check for laser connections
-    if(laser){
-        if( [[component direction] isEqual:@"U"]){
+    if([type isEqual:@"Emitter"] || [type isEqual:@"Receiver"]){
+        
+        NSString* laserDir = [component getDirection];
+        
+        if ([laserDir isEqual:@"Top"]){
             connections = [connections stringByAppendingString:@"Top"];
-        }else if([[component direction] isEqual:@"D"]){
+        } else if([laserDir isEqual:@"Bottom"]){
             connections = [connections stringByAppendingString:@"Bottom"];
-        }else if([[component direction] isEqual:@"L"]){
+        } else if([laserDir isEqual:@"Left"]){
             connections = [connections stringByAppendingString:@"Left"];
-        }else if([[component direction] isEqual:@"R"]){
+        } else if([laserDir isEqual:@"Right"]){
             connections = [connections stringByAppendingString:@"Right"];
+        } else {
+            [NSException raise:@"Invalid laser direction" format:@"Laser direction:%@ is invalid", laserDir];
         }
     }
 
@@ -277,7 +284,7 @@
     return connections;
 }
 
-- (bool) hasSwitchTo:(NSString*)direction OfComponent:(ComponentModel*)component
+- (BOOL) hasSwitchTo:(NSString*)direction OfComponent:(ComponentModel*)component
 {
     int row = [component getRow];
     int col = [component getCol];
@@ -323,7 +330,7 @@
 }
 
 // Update the grid with the connection of the switch
--(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation
+-(void) componentSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation
 {
     // Make sure orientation input is valid
     NSRegularExpression *orientationForm = [[NSRegularExpression alloc] initWithPattern:@"[LX][RX][TX][BX]" options:0 error:nil];
@@ -338,251 +345,281 @@
     ComponentModel* component = _grid[row][col];
 
     // Make sure that row and col describe switch location
-    NSAssert([[component getType] isEqual:@"Switch"], @"Input location does not correspond to switch");
+    NSAssert([[component getType] isEqual:@"Switch"]||[[component getType] isEqual:@"Deflector"], @"Input location does not correspond to switch");
     
     // As long as location is not left most column, adjust left cell
     if ( col != 0 ) {
         if ([[newOrientation substringWithRange:NSMakeRange(0, 1)] isEqual:@"L"]) {
-            [component connectedLeft:true];
-            [_grid[row][col - 1] connectedRight:true];
+            [component connectedLeft:YES];
+            [_grid[row][col - 1] connectedRight:YES];
         } else {
-            [component connectedLeft:false];
-            [_grid[row][col - 1] connectedRight:false];
+            [component connectedLeft:NO];
+            [_grid[row][col - 1] connectedRight:NO];
         }
     }
     
     // As long as location is not right most column, adjust right cell
     if ( col != _numCols-1 ) {
         if ([[newOrientation substringWithRange:NSMakeRange(1, 1)] isEqual:@"R"]) {
-            [component connectedRight:true];
-            [_grid[row][col + 1] connectedLeft:true];
+            [component connectedRight:YES];
+            [_grid[row][col + 1] connectedLeft:YES];
         } else {
-            [component connectedRight:false];
-            [_grid[row][col + 1] connectedLeft:false];
+            [component connectedRight:NO];
+            [_grid[row][col + 1] connectedLeft:NO];
         }
     }
     
     // As long as location is not upper most row, adjust above cell
     if (row != 0) {
         if ([[newOrientation substringWithRange:NSMakeRange(2, 1)] isEqual:@"T"]) {
-            [component connectedTop:true];
-            [_grid[row - 1][col] connectedBottom:true];
+            [component connectedTop:YES];
+            [_grid[row - 1][col] connectedBottom:YES];
         } else {
-            [component connectedTop:false];
-            [_grid[row - 1][col] connectedBottom:false];
+            [component connectedTop:NO];
+            [_grid[row - 1][col] connectedBottom:NO];
         }
     }
     
     // As long as location is not lower most row, adjust below cell
     if (row != _numRows - 1) {
         if ([[newOrientation substringWithRange:NSMakeRange(3, 1)] isEqual:@"B"]) {
-            [component connectedBottom:true];
-            [_grid[row + 1][col] connectedTop:true];
+            [component connectedBottom:YES];
+            [_grid[row + 1][col] connectedTop:YES];
         } else {
-            [component connectedBottom:false];
-            [_grid[row + 1][col] connectedTop:false];
+            [component connectedBottom:NO];
+            [_grid[row + 1][col] connectedTop:NO];
+        }
+    }
+}
+
+
+
+-(NSArray*) getConnectedEmitters
+{
+    return [self getConnectedLocations:_emitters withState:YES];
+}
+
+-(NSArray*) getConnectedDeflectors
+{
+    return [self getConnectedLocations:_deflectors withState:YES];
+}
+
+-(NSArray*) getConnectedReceivers
+{
+    return [self getConnectedLocations:_receivers withState:YES];
+}
+
+-(NSArray*) getLasers
+{
+    return [self getConnectedLocations:_lasers withState:NO];
+}
+
+- (NSArray*) getConnectedBulbs
+{
+    return [self getConnectedLocations:_bulbs withState:YES];
+}
+
+// When we want to get a location array to apss to gameviewcontroller
+// Sometimes we only need the location, other times we also need the state
+- (NSArray*) getConnectedLocations:(NSArray*)components withState:(BOOL)needState
+{
+    NSMutableArray* compLocs = [[NSMutableArray alloc] init];
+    NSMutableArray* compRows = [[NSMutableArray alloc] init];
+    NSMutableArray* compCols = [[NSMutableArray alloc] init];
+    
+    [compLocs addObject:compRows];
+    [compLocs addObject:compCols];
+    
+    if (needState) {
+        NSMutableArray* compStates = [[NSMutableArray alloc] init];
+        [compLocs addObject:compStates];
+    }
+    
+    for (ComponentModel* comp in components) {
+        if (needState || [comp getState]) {
+            [compLocs[0] addObject:[NSNumber numberWithInt:[comp getRow]]];
+            [compLocs[1] addObject:[NSNumber numberWithInt:[comp getCol]]];
+        }
+        if (needState) {
+            [compLocs[2] addObject:[NSNumber numberWithBool:[comp getState]]];
         }
     }
     
+    return compLocs;
 }
 
--(void) deflectorSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation
+- (void) updateLasers
 {
-    // Make sure orientation input is valid
-    NSRegularExpression *orientationForm = [[NSRegularExpression alloc] initWithPattern:@"[LX][RX][TX][BX]" options:0 error:nil];
-    NSUInteger numMatchesToForm = [orientationForm numberOfMatchesInString:newOrientation options:0 range:NSMakeRange(0, 4)];
-    NSAssert(numMatchesToForm == 1, @"Invalid orientation argument");
     
-    // Make sure row and col input is valid
-    NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument");
-    NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument");
+    for (int i = 0; i < _lasers.count; ++i) {
+        int laserRow = [_lasers[i] getRow];
+        int laserCol = [_lasers[i] getCol];
+        
+        ComponentModel* component = [[ComponentModel alloc] initOfType:@"Empty" AtRow:laserRow AndCol:laserCol AndState:NO];
+        _grid[laserRow][laserCol] = component;
+    }
     
-    // Get the component
-    ComponentModel* component = _grid[row][col];
-    
-    // Make sure that row and col describe switch location
-    NSAssert([[component getType] isEqual:@"Deflector"], @"Input location does not correspond to deflector");
-    
-    [component pointTo:newOrientation];
-}
-
--(NSArray*)emitters{
-    return _emitters;
-}
--(NSArray*)deflectors{
-    return _deflectors;
-}
--(NSArray*)receivers{
-    return _receivers;
-}
-
--(NSArray*)getLaserPath
-{
     [_lasers removeAllObjects];
     
-    for(int i = 0;i<_deflectors.count;i++){
-        [_deflectors[i] setState:@"Off"];
+    for(int i = 0; i<_deflectors.count; ++i){
+        [_deflectors[i] setState:NO];
     }
-    for(int i = 0;i<_receivers.count;i++){
-        [_receivers[i] setState:@"Off"];
+    for(int i = 0; i<_receivers.count; ++i){
+        [_receivers[i] setState:NO];
     }
-    for(int i = 0;i<_emitters.count;i++){
-        [self getLaserPathAtComp:_emitters[i]];
+    for(int i = 0; i<_emitters.count; ++i){
+        [self createLaserPathFromComp:_emitters[i]];
     }
-    return _lasers;
 }
 
-- (void) getLaserPathAtComp:(ComponentModel*)comp
+// create a laser beam path from an emitter
+- (void) createLaserPathFromComp:(ComponentModel*)comp
 {
     NSAssert([[comp getType] isEqual:@"Emitter"], @"Input location does not correspond to emitter");
-    NSAssert([[comp direction] isEqual:@"U"]||[[comp direction] isEqual:@"D"]||[[comp direction] isEqual:@"L"]||[[comp direction] isEqual:@"R"],@"illegal direction");
+    
     int emRow = [comp getRow];
     int emCol = [comp getCol];
-    if([[comp getState] isEqual:@"On"]){
-        NSString* dir = [comp direction];
+    
+    if([comp getState]){
+        NSString* dir = [comp getDirection];
         
-        if([dir isEqual:@"U"])
-            [self createLaserTopAtRow:emRow Col:emCol];
-        else if ([dir isEqual:@"D"])
-            [self createLaserBotAtRow:emRow Col:emCol];
-        else if ([dir isEqual:@"L"])
-            [self createLaserLeftAtRow:emRow Col:emCol];
-        else if ([dir isEqual:@"R"])
-            [self createLaserRightAtRow:emRow Col:emCol];
+        if([dir isEqual:@"Top"]) {
+            [self laserTopAtRow:emRow Col:emCol];
+        } else if ([dir isEqual:@"Bottom"]) {
+            [self laserBottomAtRow:emRow Col:emCol];
+        } else if ([dir isEqual:@"Left"]) {
+            [self laserLeftAtRow:emRow Col:emCol];
+        } else if ([dir isEqual:@"Right"]) {
+            [self laserRightAtRow:emRow Col:emCol];
+        } else {
+            
+        }
     }
 }
 
-- (void) createLaserTopAtRow:(int)row Col:(int)col
+- (void) laserTopAtRow:(int)row Col:(int)col
 {
-    while ((row>1)&&([[_grid[row-1][col] getType] isEqual:@"Empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row-1 AndCol:col AndState:@"laserXXTB"];
+    // Draw a beam above the emitter until we reach an obstacle
+    while ((row>0)&&([[_grid[row-1][col] getType] isEqual:@"Empty"])){
+        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row-1 AndCol:col AndState:@"On"];
+        [comp connectedBottom:YES];
+        [comp connectedTop:YES];
+        
+        _grid[row-1][col] = comp;
         [_lasers addObject:comp];
-        row = row-1;
+        --row;
+    }
+    if (row != 0) {
+        --row;
+        [self encounteredObstacleAtRow:row AndCol:col From:@"Bottom"];
+    }
+}
+
+- (void) laserBottomAtRow:(int)row Col:(int)col
+{
+    // Draw a beam below until we reach an obstacle
+    while ((row<_numRows-1)&&([[_grid[row+1][col] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row+1 AndCol:col AndState:@"On"];
+        [comp connectedBottom:YES];
+        [comp connectedTop:YES];
+        
+        _grid[row+1][col] = comp;
+        [_lasers addObject:comp];
+        ++row;
     }
  
-    row = row-1;
-    ComponentModel *obstacle = _grid[row][col];
-    
-    if([[obstacle getType] isEqual:@"Deflector"]){
-    
-        if([[obstacle direction] isEqual:@"LXXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
-      
-        if([[obstacle direction] isEqual:@"D"]){
-            [obstacle setState:@"On"];
-        }
+    if (row != _numRows-1) {
+        ++row;
+        [self encounteredObstacleAtRow:row AndCol:col From:@"Top"];
     }
 }
 
-- (void) createLaserBotAtRow:(int)row Col:(int)col
+- (void) laserLeftAtRow:(int)row Col:(int)col
 {
-    while ((row<13)&&([[_grid[row+1][col] getType] isEqual:@"Empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row+1 AndCol:col AndState:@"laserXXTB"];
-        [_lasers addObject:comp];
-        row = row+1;
-    }
- 
-    row = row+1;
-    ComponentModel *obstacle = _grid[row][col];
-    
-    if([[obstacle getType] isEqual:@"Deflector"]){
-    
-        if([[obstacle direction] isEqual:@"LXTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
+    while ((col>0)&&([[_grid[row][col-1] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row AndCol:col-1 AndState:@"On"];
+        [comp connectedLeft:YES];
+        [comp connectedRight:YES];
         
-        if([[obstacle direction] isEqual:@"U"]){
-            [obstacle setState:@"On"];
-        }
+        _grid[row][col-1] = comp;
+        [_lasers addObject:comp];
+        --col;
+    }
+    
+    if (col != 0) {
+        --col;
+        [self encounteredObstacleAtRow:row AndCol:col From:@"Right"];
     }
 }
 
-- (void) createLaserLeftAtRow:(int)row Col:(int)col
+- (void) laserRightAtRow:(int)row Col:(int)col
 {
-    while ((col>1)&&([[_grid[row][col-1] getType] isEqual:@"Empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col-1 AndState:@"laserLRXX"];
-        [_lasers addObject:comp];
-        col = col-1;
-    }
-   
-    col = col-1;
-    ComponentModel *obstacle = _grid[row][col];
-    
-    if([[obstacle getType] isEqual:@"Deflector"]){
-    
-        if([[obstacle direction] isEqual:@"XRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
+    while ((col<_numCols-1)&&([[_grid[row][col+1] getType] isEqual:@"Empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row AndCol:col+1 AndState:@"On"];
+        [comp connectedLeft:YES];
+        [comp connectedRight:YES];
         
-        if([[obstacle direction] isEqual:@"R"]){
-            [obstacle setState:@"On"];
-        }
+        _grid[row][col+1] = comp;
+        [_lasers addObject:comp];
+        ++col;
+    }
+    
+    if (col != _numCols-1) {
+        ++col;
+        [self encounteredObstacleAtRow:row AndCol:col From:@"Left"];
     }
 }
 
-
-- (void) createLaserRightAtRow:(int)row Col:(int)col
+- (void) encounteredObstacleAtRow:(int)row AndCol:(int)col From:(NSString*)dir
 {
-    while ((col<13)&&([[_grid[row][col+1] getType] isEqual:@"Empty"])){
-        
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Beam" AtRow:row AndCol:col+1 AndState:@"laserLRXX"];
-        [_lasers addObject:comp];
-        col = col+1;
-    }
     
-    col = col+1;
     ComponentModel *obstacle = _grid[row][col];
     
-    if([[obstacle getType] isEqual:@"Deflector"]){
-    
-        if([[obstacle direction] isEqual:@"LXTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LXXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
+    if ([[obstacle getType] isEqual:@"Deflector"]) { // Handle the obstacle being a deflector
+        // First determine the state of the deflector
+        if ([obstacle isConnectedBottom] && [dir isEqual:@"Bottom"]) {
+            [obstacle setState:YES];
+        } else if ([obstacle isConnectedTop] && [dir isEqual:@"Top"]) {
+            [obstacle setState:YES];
+        } else if ([obstacle isConnectedLeft] && [dir isEqual:@"Left"]) {
+            [obstacle setState:YES];
+        } else if ([obstacle isConnectedRight] && [dir isEqual:@"Right"]) {
+            [obstacle setState:YES];
+        } else {
+            return; // The deflector doesn't point to the laser beam
         }
-    } else if([[obstacle getType] isEqual:@"Receiver"]){
-     
-        if([[obstacle direction] isEqual:@"L"]){
-            [obstacle setState:@"On"];
+        
+        // If the deflector was in an appropriate state we can continue the beam
+        if ([obstacle isConnectedBottom] && ![dir isEqual:@"Bottom"]) {
+            [self laserBottomAtRow:row Col:col];
+        } else if ([obstacle isConnectedTop] && ![dir isEqual:@"Top"]) {
+            [self laserTopAtRow:row Col:col];
+        } else if ([obstacle isConnectedLeft] && ![dir isEqual:@"Left"]) {
+            [self laserLeftAtRow:row Col:col];
+        } else if ([obstacle isConnectedRight] && ![dir isEqual:@"Right"]) {
+            [self laserRightAtRow:row Col:col];
+        } else {
+            return; // The deflector doesn't deflect anywhere
         }
+        
+        
+    } else if ([[obstacle getType] isEqual:@"Receiver"]) { // Handle the obstacle being a reflector
+        if ([[obstacle getDirection] isEqual:dir]) {
+            [obstacle setState:YES];
+        }
+    } else {
+        return; // Some other type of obstacle
     }
+    
 }
 
-
-
--(BOOL) shorted
+-(BOOL) isShorted
 {
     // check if two nodes of battery are connected directly
     return [self breadthSearchFrom:_batteryNeg To:_batteryPos inDirection:@"Right" CheckingForShort:true];
 }
 
--(BOOL) breadthSearchFrom:(ComponentModel*)startComp To:(ComponentModel*)targetComp inDirection:(NSString*)direction CheckingForShort:(bool)checkForShort
+-(BOOL) breadthSearchFrom:(ComponentModel*)startComp To:(ComponentModel*)targetComp inDirection:(NSString*)direction CheckingForShort:(BOOL)checkForShort
 {
     NSMutableArray* visited = [[NSMutableArray alloc] initWithCapacity:_numRows];
     
@@ -629,10 +666,14 @@
         if ([element isSameComponentAs:targetComp]) {
             return YES;
         }
+        
         // Ignore a path with a lightbulb in the short case
-        if ((checkForShort && [[element getType] isEqual:@"Bulb"])||(checkForShort && [[element getType] isEqual:@"Emitter"])) {
-            continue;
+        if (checkForShort) {
+            if ([[element getType] isEqual:@"Bulb"] || [[element getType] isEqual:@"Emitter"]) {
+                continue;
+            }
         }
+        
         // check left neighbor
         if ([element isConnectedLeft] && ![visited[row][col - 1] isEqual:[NSNumber numberWithInt:1]]) {
             [connectionQueue addObject:_grid[row][col-1]];
@@ -650,125 +691,138 @@
             [connectionQueue addObject:_grid[row+1][col]];
         }
     }
-    
     return NO;
 }
 
--(BOOL) connected
+-(BOOL) isConnected
 {
-    // store the indices of all connected bulbs
-    connectedBulbs = [[NSMutableArray alloc] init];
+    NSArray* connectedBulbLoc = [self getConnectedLocations:_bulbs withState:NO];
+    NSArray* connectedBulbs = connectedBulbLoc[0];
     
-    BOOL connectedToReceiver = NO;
-
-    // Check conenctivity for each bulb
-    for (int i = 0; i < _bulbs.count; ++i) {
-
-        // Make sure bulbs are actually bulbs
-        ComponentModel* bulb = _bulbs[i];
-        NSAssert([[bulb getType] isEqual:@"Bulb"], @"Elements in bulb array are not actually bulbs");
-
-        NSArray* connections = [self getAllConnectionsTo:bulb];
-
-        // Make sure the bulb is valid on the grid
-        NSAssert(connections.count == 2, @"Invalid number of connections to bulb");
-
-        // See if the bulb is connected following the two possible paths
-        bool path1Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[0] CheckingForShort:false];
-        bool path1Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
-        bool path2Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
-        bool path2Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
-        
-        // If one of paths is bult, add the index of the bulb to an array
-        if ((path1Pos && path1Neg) || (path2Pos && path2Neg))
-            [connectedBulbs addObject:[NSNumber numberWithInt:i]];
-
-        for (int j = 0;j<_receivers.count;j++){
-            if([[_receivers[j] getState] isEqual:@"On"]){
-                bool path1 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[0] CheckingForShort:false];
-                bool path2 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[1] CheckingForShort:false];
-                
-                if(path1&&path2)
-                {
-                    connectedToReceiver = YES;
-                    [connectedBulbs addObject:[NSNumber numberWithInt:i]];
-                }
-            }
-        }
-    }
-    
-    if ((connectedBulbs.count == _bulbs.count) || connectedToReceiver)
+    if (connectedBulbs.count == _bulbs.count) {
         return true;
-    else
+    } else {
         return false;
-}
-
-- (NSArray*) bulbIndices {
-    return connectedBulbs;
-}
-
--(void) checkEmitterConnection
-{
-    // Check conenctivity for each bulb
-    BOOL connectedToReceiver = NO;
-    
-    for (int i = 0; i<_emitters.count;i++) {
-        [_emitters[i] setState:@"Off"];
     }
-    for (int i = 0; i < _emitters.count; ++i) {
+}
+
+- (void) updateStateOfComponents:(NSArray*)components
+{
+    // Check conectivity for each bulb
+    for (int i = 0; i < components.count; ++i) {
         
         // Make sure bulbs are actually bulbs
-        ComponentModel* emitter = _emitters[i];
-        NSAssert([[emitter getType] isEqual:@"Emitter"], @"Elements in emitter array are not actually emitters");
+        ComponentModel* comp = components[i];
         
-        NSArray* connections = [self getAllConnectionsTo:emitter];
+        NSArray* connections = [self getAllConnectionsTo:comp];
         
-        // Make sure the bulb is valid on the grid
-        NSAssert(connections.count == 2, @"Invalid number of connections to connections");
+        // Make sure the component is valid
+        NSAssert(connections.count == 2, @"Invalid number of connections to comp");
         
-        // See if the bulb is connected following the two possible paths
-        bool path1Pos = [self breadthSearchFrom:emitter To:_batteryPos inDirection:connections[0] CheckingForShort:false];
-        bool path1Neg = [self breadthSearchFrom:emitter To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
-        bool path2Neg = [self breadthSearchFrom:emitter To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
-        bool path2Pos = [self breadthSearchFrom:emitter To:_batteryPos inDirection:connections[1] CheckingForShort:false];
+        // Check if the component is connected by battery following the two possible paths
+        BOOL path1Pos = [self breadthSearchFrom:comp To:_batteryPos inDirection:connections[0] CheckingForShort:NO];
+        BOOL path1Neg = [self breadthSearchFrom:comp To:_batteryNeg inDirection:connections[1] CheckingForShort:NO];
+        BOOL path2Neg = [self breadthSearchFrom:comp To:_batteryNeg inDirection:connections[0] CheckingForShort:NO];
+        BOOL path2Pos = [self breadthSearchFrom:comp To:_batteryPos inDirection:connections[1] CheckingForShort:NO];
         
-        for (int i = 0;i<_receivers.count;i++){
-            if([[_receivers[i] getState] isEqual:@"On"]){
-                bool path1 = [self breadthSearchFrom:emitter To:_receivers[i] inDirection:connections[0] CheckingForShort:false];
-                bool path2 = [self breadthSearchFrom:emitter To:_receivers[i] inDirection:connections[1] CheckingForShort:false];
-                if(path1&&path2){
-                    connectedToReceiver = YES;
+        // If one of paths is built, set the state to on
+        if ((path1Pos && path1Neg) || (path2Pos && path2Neg)) {
+            [comp setState:YES];
+            continue;
+        }
+        
+        // Now check if the component is connected by a receiver
+        if (![[comp getType] isEqual:@"Receiver"]) {
+            for (int j = 0; j < _receivers.count; ++j){
+                    
+                BOOL path1 = [self breadthSearchFrom:comp To:_receivers[j] inDirection:connections[0] CheckingForShort:NO];
+                BOOL path2 = [self breadthSearchFrom:comp To:_receivers[j] inDirection:connections[1] CheckingForShort:NO];
+                
+                if (path1 && path2 && [_receivers[j] getState]) {
+                    [comp setState:YES];
+                    break;
+                } else {
+                    [comp setState:NO];
                 }
             }
         }
-        
-        // If it's not at least one of the possible paths then it's false
-        if ((path1Pos && path1Neg) || (path2Pos && path2Neg) || connectedToReceiver) {
-            //atLeastOneConnected = YES;
-            [emitter setState:@"On"];
-        }
     }
-    
 }
 
 - (NSArray*) getAllConnectionsTo:(ComponentModel*)component{
 
     NSMutableArray* connections = [[NSMutableArray alloc] init];
 
-    if ( [component isConnectedLeft] || [self hasSwitchTo:@"Left" OfComponent:component] ) {
+    if ( [component isConnectedLeft] ) {
         [connections addObject:@"Left"];
     }
-    if ( [component isConnectedRight] ||[self hasSwitchTo:@"Right" OfComponent:component] ) {
+    if ( [component isConnectedRight] ) {
         [connections addObject:@"Right"];
     }
-    if ( [component isConnectedTop] || [self hasSwitchTo:@"Top" OfComponent:component] ) {
+    if ( [component isConnectedTop] ) {
         [connections addObject:@"Top"];
     }
-    if ( [component isConnectedBottom] || [self hasSwitchTo:@"Bottom" OfComponent:component] ) {
+    if ( [component isConnectedBottom] ) {
         [connections addObject:@"Bottom"];
     }
 
     return connections;
+}
+
+- (void) powerOn
+{
+    [_batteryPos setState:YES];
+    [self resetEmitters];
+    [self resetBulbs];
+    
+    [self updateStateOfComponents:_emitters];
+    
+    while (true) {
+        [self updateLasers];
+        NSLog(@"%lu", _lasers.count);
+        [self updateStateOfComponents:_bulbs];
+        
+        NSArray* emitterStates = [self stateOfEmitters];
+        [self updateStateOfComponents:_emitters];
+        if (![self didEmitterStateChange:emitterStates]) {
+            break;
+        }
+    }
+
+}
+
+- (NSArray*) stateOfEmitters
+{
+    NSMutableArray* states = [[NSMutableArray alloc] init];
+    for (ComponentModel* comp in _emitters) {
+        [states addObject:[NSNumber numberWithBool:[comp getState]]];
+    }
+
+    return states;
+}
+
+- (BOOL) didEmitterStateChange:(NSArray*)states
+{
+    for (int i = 0; i < _emitters.count; ++i) {
+        if ([states[i] boolValue] != [_emitters[i] getState]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void) resetEmitters
+{
+    for (ComponentModel* comp in _emitters) {
+        [comp setState:NO];
+    }
+}
+
+- (void) resetBulbs
+{
+    for (ComponentModel* comp in _bulbs) {
+        [comp setState:NO];
+    }
 }
 
 - (int) getNumRows

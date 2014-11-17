@@ -13,8 +13,7 @@
 @protocol GridDelegate
 
 @required
-- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
-- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
+- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) powerOn;
 @end
 
@@ -26,9 +25,8 @@
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
 - (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) bulbConnectedWithIndices: (NSArray*) bulbs;
 - (void) shorted;
-- (void) emit:(NSArray *)locs;
-- (void) setStateWithArray:(NSArray *)locs;
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
+- (void) resetLasers;
 
 @end

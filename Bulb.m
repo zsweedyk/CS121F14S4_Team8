@@ -18,12 +18,12 @@
     return self;
 }
 
-- (void) lightUp
+- (void) turnOn
 {
     self.image = [UIImage imageNamed:@"bulbon"];
 }
 
-- (void) lightDown
+- (void) turnOff
 {
     self.image = [UIImage imageNamed:@"bulb"];
 }

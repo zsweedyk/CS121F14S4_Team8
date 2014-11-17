@@ -14,7 +14,6 @@
 #import "Receiver.h"
 #import "Laser.h"
 #import "Deflector.h"
-#import "ComponentModel.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -61,11 +60,6 @@
     }
 
     [self setUpGrid];
-    
-    _batCols = [[NSMutableArray alloc] init];
-    _batRows = [[NSMutableArray alloc] init];
-    _bulbCols = [[NSMutableArray alloc] init];
-    _bulbRows = [[NSMutableArray alloc] init];
     
     _lasers = [[NSMutableArray alloc] init];
     
@@ -153,6 +147,9 @@
         ((Deflector *)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"la"]) { // laser case
+        newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_lasers addObject:newComponent];
     }else {
         return;
     }
@@ -167,7 +164,7 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) wireSelected:(id)sender
@@ -181,75 +178,30 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) powerUp:(id)sender
 {
-    // turn on all battery components
-    for (int i = 0; i < _batCols.count; ++i) {
-        int batRow = [_batRows[i] intValue];
-        int batCol = [_batCols[i] intValue];
-        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
-    }
-    
     [self.delegate performSelector:@selector(powerOn)];
 }
 
-
-- (void) bulbConnectedWithIndices: (NSArray*) bulbs{
-    // turn off all bulbs first
-    for (int i = 0; i < _bulbRows.count; ++i)
-    {
-        int bulbRow = [_bulbRows[i] intValue];
-        int bulbCol = [_bulbCols[i] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
-    }
-    
-    // turn on all connected bulbs
-    for (int j = 0; j < bulbs.count; ++j)
-    {
-        int index = [bulbs[j] integerValue];
-        int bulbRow = [_bulbRows[index] intValue];
-        int bulbCol = [_bulbCols[index] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state
+{
+    if (state) {
+        [_cells[row][col] turnOn];
+    } else {
+        [_cells[row][col] turnOff];
     }
 }
 
-- (void) setStateWithArray:(NSArray *)locs
+- (void) resetLasers
 {
-    for(int i=0;i<locs.count;i++){
-        if([[(ComponentModel *)locs[i] getState] isEqual:@"On"]){
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOn];
-        }else{
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOff];
-        }
-    }
-}
-
--(void)emit:(NSArray *)locs
-{
-    for(int i = 0;i<_lasers.count;i++){
+    for (int i = 0; i < _lasers.count; ++i){
         [_lasers[i] removeFromSuperview];
     }
+    
     [_lasers removeAllObjects];
-    for(int i = 0;i<locs.count;i++){
-        int row = [(ComponentModel *)locs[i] getRow];
-        int col = [(ComponentModel *)locs[i] getCol];
-        NSString * imagename = [(ComponentModel *)locs[i] getState];
-        UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-        [label removeFromSuperview];
-        
-        Laser *beam = [[Laser alloc] initWithFrame:label.frame andOrientation:imagename];
-        beam.tag = label.tag;
-        [self addSubview:beam];
-        [_lasers addObject:beam];
-        [[_cells objectAtIndex:row] setObject:beam atIndex:col];
-    }
 }
 
 - (void) shorted {
