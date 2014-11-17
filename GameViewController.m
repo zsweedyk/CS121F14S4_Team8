@@ -51,17 +51,21 @@
     CGFloat xGrid;
     CGFloat yGrid;
     
+    // other variables
     BOOL masterPowerOn;
+    NSMutableArray* _locks;
 }
 
 @end
 
 @implementation GameViewController
 
-- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language{
+- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language AndLocks: (NSMutableArray*) locks{
     _level = startLevel;
     _numLevels = totalLevels;
     _language = language;
+    _locks = locks;
+    
     [self viewDidLoad];
     
     return self;
@@ -197,6 +201,8 @@
     [_audioPlayerLevelPressed play];
     
     // go back to levelviewcontroller
+    LevelViewController* levelVC = [self.navigationController viewControllers][1];
+    [levelVC unlockLevelWithIndices:_locks];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -367,7 +373,10 @@
         [self newLevel];
     }
     else if (_level < _numLevels - 1)
+    {
         [self newLevel];
+        _locks[_level] = [NSNumber numberWithInt:0];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

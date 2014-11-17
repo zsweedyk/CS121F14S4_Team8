@@ -23,6 +23,10 @@
     
     AVAudioPlayer* _audioPlayerLevelPressed;
     AVAudioPlayer* _audioPlayerMenuPressed;
+    
+    
+    NSMutableArray* lock;
+    BOOL test;
 }
 
 @end
@@ -115,7 +119,34 @@
     
     [menuButton addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
     
+    // locks set up
+    // an array to store the lock state for each levels
+    // 0 means unlocked
+    // 1 means locked
+    lock = [[NSMutableArray alloc] init];
+    [lock addObject: [NSNumber numberWithInt:0]]; //the first level is always unlocked
+    test = false;
+    [self assignLocks];
+    
     // Do any additional setup after loading the view.
+}
+
+- (void)assignLocks
+{
+    if (_numLevels > 1)
+    {
+        for (int i = 1; i < _numLevels; i++){
+            if (test)
+                [lock addObject:[NSNumber numberWithInt:0]];
+            else
+                [lock addObject:[NSNumber numberWithInt:1]];
+        }
+    }
+}
+
+- (void) unlockLevelWithIndices: (NSMutableArray*) locks
+{
+    lock = locks;
 }
 
 - (void)backToMain:(id)sender
@@ -135,10 +166,45 @@
     UIButton* button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     
-    GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language];
+    if (lock[buttonTag] == [NSNumber numberWithInt:1])
+    {
+               [self displayLockedMessage];
+    } else {
+        GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language AndLocks:lock];
+        
+        // add gameviewcontroller to navigationviewcontroller stack
+        [self.navigationController pushViewController:gameVC animated:YES];
+    }
+}
+
+- (void)displayLockedMessage{
+    NSString *title;
+    NSString *message;
     
-    // add gameviewcontroller to navigationviewcontroller stack
-    [self.navigationController pushViewController:gameVC animated:YES];
+    // change the language of help message based on language choice
+    switch (_language) {
+        case 0:
+            title = @"Current level is locked";
+            message = @"Please unlock all previous levels to play current level.";
+            break;
+        case 1:
+            title = @"Nivel actual está bloqueado";
+            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
+            break;
+        case 2:
+            title = @"当前关卡未解锁";
+            message = @"只有解锁之前的所有关卡才可以开始这关";
+            break;
+        default:
+            break;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alertView show];
 }
 
 - (void)didReceiveMemoryWarning {

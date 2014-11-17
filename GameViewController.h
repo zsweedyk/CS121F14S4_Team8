@@ -10,6 +10,6 @@
 
 @interface GameViewController : UIViewController <UIAlertViewDelegate>
 
-- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language;
+- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language AndLocks: (NSMutableArray*) locks;
 
 @end
