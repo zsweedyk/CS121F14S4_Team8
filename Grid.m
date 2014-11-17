@@ -149,6 +149,7 @@
         // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
+        newComponent.tag = 70;
     } else if ([typeIndicator isEqual:@"em"]) {//emitter case
         newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
     } else if ([typeIndicator isEqual:@"de"]) {//deflector case
@@ -290,5 +291,118 @@
     return (cellSize * [_bombRows[i] intValue]);
 }
 
+
+//Tags: Switches are 70-74
+// -0 means that normal/ has not been touched yet
+// -1 means touch started outside of view and is now inside of view
+// -2 means that touch started outside of view, went inside of view and has now exited view
+// -3 means that touch started inside of view and is still inside of view
+// -4 means that touch started inside of view and has now exited view
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInView:self];
+    for(Switch* view in self.subviews){
+        // touch begins inside a switch
+        if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
+            view.tag = 73;
+        }
+    }
+    
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInView:self];
+    CGPoint prevLocation = [[touches anyObject] previousLocationInView:self];
+    
+    for(Switch* view in self.subviews){
+        
+        // touch has entered a switch
+        if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
+            if (prevLocation.x < view.frame.origin.x) {
+                view._enteredDir = @"L";
+            }else if (prevLocation.x > view.frame.origin.x + view.frame.size.width) {
+                view._enteredDir = @"R";
+            }else if (prevLocation.y < view.frame.origin.y) {
+                view._enteredDir = @"T";
+            }else if (prevLocation.y > view.frame.origin.y + view.frame.size.height) {
+                view._enteredDir = @"B";
+            }
+            [view addImageDirection:view._enteredDir];
+            view.tag = 71;
+            
+            // touch has entered and exited a switch
+        } else if(view.tag == 71 && CGRectContainsPoint(view.frame, prevLocation) && !CGRectContainsPoint(view.frame, location)){
+            if (location.x < view.frame.origin.x) {
+                view._exitedDir = @"L";
+            }else if (location.x > view.frame.origin.x + view.frame.size.width) {
+                view._exitedDir = @"R";
+            }else if (location.y < view.frame.origin.y) {
+                view._exitedDir = @"T";
+            }else if (location.y > view.frame.origin.y + view.frame.size.height) {
+                view._exitedDir = @"B";
+            }
+            if ([view._exitedDir isEqualToString:view._enteredDir]) {
+                [view removeImageDirection:view._enteredDir];
+                view._exitedDir = @"X";
+                view._enteredDir = @"X";
+                view.tag = 70;
+            } else {
+                [view addImageDirection:view._exitedDir];
+                view.tag = 72;
+            }
+            
+            // touch has entered, exited and re-entered a switch
+        } else if(view.tag == 72 && CGRectContainsPoint(view.frame, location)) {
+            [view removeImageDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 71;
+            
+            // touch started in a switch and has now exited
+        } else if(view.tag == 73 && CGRectContainsPoint(view.frame, prevLocation) && !CGRectContainsPoint(view.frame, location)){
+            if (location.x < view.frame.origin.x) {
+                view._exitedDir = @"L";
+            }else if (location.x > view.frame.origin.x + view.frame.size.width) {
+                view._exitedDir = @"R";
+            }else if (location.y < view.frame.origin.y) {
+                view._exitedDir = @"T";
+            }else if (location.y > view.frame.origin.y + view.frame.size.height) {
+                view._exitedDir = @"B";
+            }
+            [view addImageDirection:view._exitedDir];
+            view.tag = 74;
+            
+            // touch has started in a switch, exited and now re-entered
+        } else if(view.tag == 74 && CGRectContainsPoint(view.frame, location)){
+            [view removeImageDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 73;
+        }
+    }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* touch = [touches anyObject];
+    for(Switch* view in self.subviews){
+        if(view.tag == 71){
+            [view addDirection:view._enteredDir];
+            view._enteredDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 72){
+            [view addDirection:view._enteredDir];
+            [view addDirection:view._exitedDir];
+            view._enteredDir = @"X";
+            view._exitedDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 74){
+            [view addDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 73 && touch.tapCount == 1){
+            [view resetDirection];
+            view.tag = 70;
+        }
+    }
+}
 
 @end

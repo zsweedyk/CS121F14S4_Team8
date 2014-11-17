@@ -19,8 +19,13 @@
 @interface Switch : UIView
 
 @property (nonatomic, strong) id delegate;
+@property NSString* _enteredDir;
+@property NSString* _exitedDir;
 
 - (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
-- (NSString*) rotateSwitch;
+- (void) addImageDirection: (NSString*) dir;
+- (void) removeImageDirection: (NSString*) dir;
+- (void) addDirection: (NSString*) dir;
+- (void) resetDirection;
 
 @end
