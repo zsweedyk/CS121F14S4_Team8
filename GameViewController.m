@@ -54,6 +54,8 @@
     // other variables
     BOOL masterPowerOn;
     NSMutableArray* _locks;
+    
+    NSMutableArray* connectedBombs;
 
 }
 
