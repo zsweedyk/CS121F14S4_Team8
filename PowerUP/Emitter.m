@@ -21,6 +21,7 @@
     self.image = [UIImage imageNamed:name];
     return self;
 }
+
 //with turnOn and turnOff, simply reset the names
 - (void) turnOn
 {

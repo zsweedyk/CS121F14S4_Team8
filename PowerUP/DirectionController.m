@@ -47,6 +47,7 @@ CGPoint end;
         }
     }
 }
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *aTouch = [touches anyObject];
     end = [aTouch locationInView:self.superview];
@@ -58,15 +59,15 @@ CGPoint end;
     }else{
         if (abs(dx)>abs(dy)) {
             if (dx>0) {
-                [self.delegate performSelector:@selector(changeDirection:) withObject:@"L"];
+                [self.delegate performSelector:@selector(rotateDeflector:) withObject:@"L"];
             }else{
-                [self.delegate performSelector:@selector(changeDirection:) withObject:@"R"];
+                [self.delegate performSelector:@selector(rotateDeflector:) withObject:@"R"];
             }
         }else{
             if (dy>0) {
-                [self.delegate performSelector:@selector(changeDirection:) withObject:@"T"];
+                [self.delegate performSelector:@selector(rotateDeflector:) withObject:@"T"];
             }else{
-                [self.delegate performSelector:@selector(changeDirection:) withObject:@"B"];
+                [self.delegate performSelector:@selector(rotateDeflector:) withObject:@"B"];
             }
         }
     }

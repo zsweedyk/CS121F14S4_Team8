@@ -21,8 +21,8 @@
 - (void) rotateDeflector:(int)dir;
 - (void) turnOn;
 - (void) turnOff;
+
 //direction control
-- (void) changeDirection: (NSString*) dir;
 - (void) changeImage: (NSString*) dir;
 - (void) onTap;
 

@@ -62,6 +62,7 @@
     
     return self;
 }
+
 //switch to other deflector types on tap
 - (void) onTap
 {
@@ -97,7 +98,7 @@
             }
         }else if(dir == 1){
             if (_currentOrientation == 0){
-                _currentOrientation = [_possibleOrientations count] - 1;
+                _currentOrientation = (int)([_possibleOrientations count] - 1);
             } else {
                 --_currentOrientation;
             }
@@ -122,18 +123,7 @@
     NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     previousDir = @"X";
     [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
-    
-    //return _possibleOrientations[_currentOrientation];
 }
-
-//- (void) changeDirection:(NSString *)dir
-//{
-//    //_orientation = [self newOrientation:dir];
-//    //    NSLog(_orientation);
-//    //    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
-//    //    previousDir = @"X";
-//    //    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
-//}
 
 - (void) changeImage:(NSString *)dir
 {
@@ -142,7 +132,6 @@
 
 -(void) newOrientation:(NSString*)dir
 {
-    //NSString* orientation;
     if ([previousDir isEqual:@"R"]){
         if([dir isEqual:@"T"]){
             [self rotateDeflector:1];
@@ -177,22 +166,18 @@
         }
     }
     previousDir = dir;
-    //NSLog(orientation);
-    //return orientation;
 }
 
 - (void) turnOn
 {
     NSString* onName = [name stringByAppendingString:@"on"];
     
-    //[_deflector setBackgroundImage:[UIImage imageNamed:onName] forState:UIControlStateNormal];
     _deflector.image = [UIImage imageNamed:onName];
     
 }
 
 - (void) turnOff
 {
-    //[_deflector setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
     _deflector.image = [UIImage imageNamed:name];
 }
 

@@ -256,6 +256,7 @@
     [_model powerOff];
     [_grid batteryTurnedOff];
     [_grid bulbTurnedOff];
+    [_grid resetLasers];
 }
 
 
