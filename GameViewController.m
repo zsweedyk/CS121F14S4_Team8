@@ -79,8 +79,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    masterPowerOn = NO;
-    
     // backgroud set up
     _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_backgroud];
@@ -145,11 +143,14 @@
 
 - (void) initializeGrid
 {
+    // reset master power on
+    masterPowerOn = NO;
+    
     CGRect frame = self.view.frame;
 
     framePortion = 0.8;
     xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
-    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 2;
+    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 1;
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
 
@@ -209,6 +210,9 @@
 - (void) newLevel{
     ++_level;
     [_model generateGrid:_level];
+    
+    // reset master power on
+    masterPowerOn = NO;
 
     [self setUpDisplay];
 }
@@ -232,6 +236,10 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    [_grid batteryTurnedOff];
+    [_grid bulbTurnedOff];
+    masterPowerOn = NO;
 }
 
 - (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
@@ -246,10 +254,20 @@
     }
 }
 
+-(void) masterPowerTurnedOn{
+    masterPowerOn = !masterPowerOn;
+    
+    if (masterPowerOn)
+        [self powerOn];
+    else
+    {
+        [_grid batteryTurnedOff];
+        [_grid bulbTurnedOff];
+    }
+}
+
 // if the battery is on, check the circuit connection
 -(void) powerOn{
-    masterPowerOn = YES;
-    
     //do two checks before displaying on the grid in case a receiver has been turned on or off
     [_model checkEmitterConnection];
     [_model getLaserPath];
@@ -356,8 +374,9 @@
     
     for (int i = 0; i < indices.count; ++i)
     {
-        int xPos = [_grid getBombXWithIndex:i] + xGrid;
-        int yPos = [_grid getBombYWithIndex:i] + yGrid;
+        int bombIndex = (int)[indices[i] longValue];
+        int xPos = [_grid getBombXWithIndex:bombIndex] + xGrid;
+        int yPos = [_grid getBombYWithIndex:bombIndex] + yGrid;
         int xPoint = xPos + 25;
         int yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];

@@ -59,7 +59,7 @@
     
     _numRows = rows;
     _numCols = cols;
-
+    
     //initialize _cells 2-D array
     _cells = [[NSMutableArray alloc] init];
     for (int i = 0; i < _numRows; ++i) {
@@ -68,8 +68,6 @@
     }
 
     [self setUpGrid];
-    
-    _lasers = [[NSMutableArray alloc] init];
     
     // sound set up
     NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
@@ -88,6 +86,7 @@
     _bulbRows = [[NSMutableArray alloc] init];
     _bombCols = [[NSMutableArray alloc] init];
     _bombRows = [[NSMutableArray alloc] init];
+    _lasers = [[NSMutableArray alloc] init];
    
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
@@ -201,18 +200,13 @@
         [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
     }
     
-    [self.delegate performSelector:@selector(powerOn)];
+    [self.delegate performSelector:@selector(masterPowerTurnedOn)];
 }
 
 
 - (void) bulbConnectedWithIndices: (NSArray*) bulbs{
     // turn off all bulbs first
-    for (int i = 0; i < _bulbRows.count; ++i)
-    {
-        int bulbRow = [_bulbRows[i] intValue];
-        int bulbCol = [_bulbCols[i] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
-    }
+    [self bulbTurnedOff];
     
     // turn on all connected bulbs
     for (int j = 0; j < bulbs.count; ++j)
@@ -402,6 +396,27 @@
             [view resetDirection];
             view.tag = 70;
         }
+    }
+}
+
+-(void)bulbTurnedOff
+{
+    for (int i = 0; i < _bulbRows.count; ++i)
+    {
+        int bulbRow = [_bulbRows[i] intValue];
+        int bulbCol = [_bulbCols[i] intValue];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
+    }
+}
+
+-(void)batteryTurnedOff
+{
+    // explode all battery components
+    for (int i = 0; i < _batCols.count; ++i)
+    {
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOff];
     }
 }
 

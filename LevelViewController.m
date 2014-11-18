@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 6;
+    _numLevels = 9;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // set up sounds
@@ -65,7 +65,7 @@
     CGFloat frameHeight = self.view.frame.size.height;
     CGFloat buttonWidth = frameWidth / 2;
     CGFloat buttonHeight = buttonWidth / 3;
-    CGFloat buttonSpace = frameHeight / (_numLevels * 2);
+    CGFloat buttonSpace = frameHeight / (_numLevels * 1.5);
     
     for (int i = 0; i < _numLevels; i++){
         CGFloat x = (frameWidth - buttonWidth) / 2;

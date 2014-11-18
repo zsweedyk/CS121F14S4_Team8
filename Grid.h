@@ -16,7 +16,7 @@
 @required
 - (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
-- (void) powerOn;
+- (void) masterPowerTurnedOn;
 @end
 
 
@@ -31,6 +31,8 @@
 - (void) shorted;
 - (void) emit:(NSArray *)locs;
 - (void) setStateWithArray:(NSArray *)locs;
+- (void) batteryTurnedOff;
+- (void) bulbTurnedOff;
 - (int) getBatteryX;
 - (int) getBatteryY;
 - (int) getBombXWithIndex: (int) i;

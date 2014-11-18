@@ -70,7 +70,7 @@
 // assumptions: level is in [-3, numLevels]
 -(void) generateGrid: (int) level
 {
-    [self clearGridAndBulbs];
+    [self clearGridAndComponents];
     
     // Make sure that the input for this method is valid
     NSAssert((level <= _numLevels), @"Invalid level argument");
@@ -90,12 +90,17 @@
 }
 
 // Used in generateGrid
--(void) clearGridAndBulbs
+-(void) clearGridAndComponents
 {
     for (int x = 0; x < _grid.count; ++x) {
         [_grid[x] removeAllObjects];
     }
 
+    _lasers = [[NSMutableArray alloc] init];
+    _emitters = [[NSMutableArray alloc] init];
+    _deflectors = [[NSMutableArray alloc] init];
+    _receivers = [[NSMutableArray alloc] init];
+    
     [_bulbs removeAllObjects];
     [_bombs removeAllObjects];
 }
@@ -168,10 +173,10 @@
                 [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:true];
                 [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:true];
             } else if ([datum isEqual:@"7"]) {
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] connectedRight:true];
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] connectedLeft:true];
-                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:true];
-                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:true];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] connectedRight:false];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] connectedLeft:false];
+                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:false];
+                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:false];
             } else if ([datum isEqual:@"+"]) {
                 [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] pointTo:@"R"];
                 [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] pointTo:@"L"];
@@ -792,9 +797,6 @@
 
         NSArray* connections = [self getAllConnectionsTo:bulb];
 
-        // Make sure the bulb is valid on the grid
-        NSAssert(connections.count == 2, @"Invalid number of connections to bulb");
-
         // See if the bulb is connected following the two possible paths
         bool path1Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[0] CheckingForShort:false];
         bool path1Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
@@ -819,7 +821,7 @@
         }
     }
     
-    if ((connectedBulbs.count == _bulbs.count) || connectedToReceiver)
+    if ((connectedBulbs.count == _bulbs.count) && connectedToReceiver)
         return true;
     else
         return false;
@@ -844,9 +846,6 @@
         NSAssert([[emitter getType] isEqual:@"Emitter"], @"Elements in emitter array are not actually emitters");
         
         NSArray* connections = [self getAllConnectionsTo:emitter];
-        
-        // Make sure the bulb is valid on the grid
-        NSAssert(connections.count == 2, @"Invalid number of connections to connections");
         
         // See if the bulb is connected following the two possible paths
         bool path1Pos = [self breadthSearchFrom:emitter To:_batteryPos inDirection:connections[0] CheckingForShort:false];

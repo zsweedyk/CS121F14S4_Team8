@@ -25,13 +25,11 @@
     
     _row = row;
     _col = col;
-    _orientation = @"XXXX";
-    _imageOrientation = @"XXXX";
     
     CGRect switchFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _switch = [[UIImageView alloc] initWithFrame:switchFrame];
-    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
     
+    [self resetDirection];
     [self addSubview:_switch];
     
     [[self layer] setBorderWidth:2.0f];
