@@ -14,9 +14,14 @@
 @protocol GridDelegate
 
 @required
+<<<<<<< HEAD
 - (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) masterPowerTurnedOn;
+=======
+- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
+- (void) powerOn;
+>>>>>>> PowerUp_architecturalChanges
 @end
 
 
@@ -27,8 +32,8 @@
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
 - (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) bulbConnectedWithIndices: (NSArray*) bulbs;
 - (void) shorted;
+<<<<<<< HEAD
 - (void) emit:(NSArray *)locs;
 - (void) setStateWithArray:(NSArray *)locs;
 - (void) batteryTurnedOff;
@@ -37,5 +42,9 @@
 - (int) getBatteryY;
 - (int) getBombXWithIndex: (int) i;
 - (int) getBombYWithIndex: (int) i;
+=======
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
+- (void) resetLasers;
+>>>>>>> PowerUp_architecturalChanges
 
 @end

@@ -14,9 +14,12 @@
 #import "Receiver.h"
 #import "Laser.h"
 #import "Deflector.h"
+<<<<<<< HEAD
 #import "Bomb.h"
 #import "ComponentModel.h"
 #import "ExplosionScene.h"
+=======
+>>>>>>> PowerUp_architecturalChanges
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import <SpriteKit/SpriteKit.h>
@@ -69,6 +72,11 @@
 
     [self setUpGrid];
     
+<<<<<<< HEAD
+=======
+    _lasers = [[NSMutableArray alloc] init];
+    
+>>>>>>> PowerUp_architecturalChanges
     // sound set up
     NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *pressedPathURL = [NSURL fileURLWithPath : pressedPath];
@@ -156,10 +164,16 @@
         ((Deflector *)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+<<<<<<< HEAD
     } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
         newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
         [_bombRows addObject:[NSNumber numberWithInt:row]];
         [_bombCols addObject:[NSNumber numberWithInt:col]];
+=======
+    } else if ([typeIndicator isEqual:@"la"]) { // laser case
+        newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_lasers addObject:newComponent];
+>>>>>>> PowerUp_architecturalChanges
     }else {
         return;
     }
@@ -174,7 +188,7 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) wireSelected:(id)sender
@@ -188,11 +202,12 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) powerUp:(id)sender
 {
+<<<<<<< HEAD
     // turn on all battery components
     for (int i = 0; i < _batCols.count; ++i) {
         int batRow = [_batRows[i] intValue];
@@ -219,39 +234,27 @@
 }
 
 - (void) setStateWithArray:(NSArray *)locs
+=======
+    [self.delegate performSelector:@selector(powerOn)];
+}
+
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state
+>>>>>>> PowerUp_architecturalChanges
 {
-    for(int i=0;i<locs.count;i++){
-        if([[(ComponentModel *)locs[i] getState] isEqual:@"On"]){
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOn];
-        }else{
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOff];
-        }
+    if (state) {
+        [_cells[row][col] turnOn];
+    } else {
+        [_cells[row][col] turnOff];
     }
 }
 
--(void)emit:(NSArray *)locs
+- (void) resetLasers
 {
-    for(int i = 0;i<_lasers.count;i++){
+    for (int i = 0; i < _lasers.count; ++i){
         [_lasers[i] removeFromSuperview];
     }
+    
     [_lasers removeAllObjects];
-    for(int i = 0;i<locs.count;i++){
-        int row = [(ComponentModel *)locs[i] getRow];
-        int col = [(ComponentModel *)locs[i] getCol];
-        NSString * imagename = [(ComponentModel *)locs[i] getState];
-        UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-        [label removeFromSuperview];
-        
-        Laser *beam = [[Laser alloc] initWithFrame:label.frame andOrientation:imagename];
-        beam.tag = label.tag;
-        [self addSubview:beam];
-        [_lasers addObject:beam];
-        [[_cells objectAtIndex:row] setObject:beam atIndex:col];
-    }
 }
 
 

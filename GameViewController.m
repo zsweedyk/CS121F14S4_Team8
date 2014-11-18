@@ -46,6 +46,7 @@
     AVAudioPlayer* _audioPlayerExplosion;
     AVAudioPlayer* _audioPlayerLevelPressed;
     
+<<<<<<< HEAD
     // position variables
     float framePortion;
     CGFloat xGrid;
@@ -54,6 +55,9 @@
     // other variables
     BOOL masterPowerOn;
     NSMutableArray* _locks;
+=======
+    BOOL _gridPowered;
+>>>>>>> PowerUp_architecturalChanges
 }
 
 @end
@@ -64,10 +68,16 @@
     _level = startLevel;
     _numLevels = totalLevels;
     _language = language;
+<<<<<<< HEAD
     _locks = locks;
     
     [self viewDidLoad];
+=======
+>>>>>>> PowerUp_architecturalChanges
     
+    _gridPowered = NO;
+    
+    [self viewDidLoad];
     return self;
 }
 
@@ -79,6 +89,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+<<<<<<< HEAD
     // backgroud set up
     _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_backgroud];
@@ -87,8 +98,50 @@
     _explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
     _explosion.backgroundColor = [UIColor blackColor];
     [_backgroud presentScene: _explosion];
+=======
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+>>>>>>> PowerUp_architecturalChanges
     
-    // sound set up
+    // initialize model
+    _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
+
+    // with the generated grid we know the number of rows and cols so we can set the variables
+    _numRows = [_model getNumRows];
+    _numCols = [_model getNumCols];
+    
+    // generate a grid
+    [_model generateGrid:_level];
+
+    [self setUpSound];
+    [self initializeGrid];
+    [self setUpDisplay];
+    [self setUpBackButton];
+    [self setLanguage];
+}
+
+- (void) setUpBackButton
+{
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 6;
+    
+    CGFloat x = (frameWidth - buttonWidth) / 2;
+    CGFloat y = buttonHeight / 2;
+    CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+    
+    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
+    [_backToLevel setBackgroundColor:[UIColor clearColor]];
+    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
+    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+    
+    [self.view addSubview:_backToLevel];
+    
+    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) setUpSound
+{
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
     NSURL *winPathURL = [NSURL fileURLWithPath : winPath];
     _audioPlayerWin = [[AVAudioPlayer alloc] initWithContentsOfURL:winPathURL error:nil];
@@ -104,41 +157,6 @@
     NSString *levelPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *levelPathURL = [NSURL fileURLWithPath : levelPath];
     _audioPlayerLevelPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:levelPathURL error:nil];
-    
-    // initialize model
-    _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
-
-    // with the generated grid we know the number of rows and cols so we can set the variables
-    _numRows = [_model getNumRows];
-    _numCols = [_model getNumCols];
-    
-    // generate a grid
-    [_model generateGrid:_level];
-
-    [self initializeGrid];
-    
-    [self setUpDisplay];
-    
-    // set up back to level button
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 6;
-    
-    CGFloat x = (frameWidth - buttonWidth) / 2;
-    CGFloat y = buttonHeight / 2;
-    CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
-    
-    _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
-    [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
-
-    [self.view addSubview:_backToLevel];
-   
-    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self setLanguage];
 }
 
 - (void) initializeGrid
@@ -209,11 +227,16 @@
 
 - (void) newLevel{
     ++_level;
+    _gridPowered = NO;
+    
     [_model generateGrid:_level];
+<<<<<<< HEAD
     
     // reset master power on
     masterPowerOn = NO;
 
+=======
+>>>>>>> PowerUp_architecturalChanges
     [self setUpDisplay];
 }
 
@@ -228,32 +251,36 @@
             [_grid setValueAtRow:row col:col to:componentType];
         }
     }
-    
 }
 
-- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
+- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
 {
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
+<<<<<<< HEAD
     [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
     
     [_grid batteryTurnedOff];
     [_grid bulbTurnedOff];
     masterPowerOn = NO;
-}
-
-- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
-{
-    int rowSelected = [position[0] intValue];
-    int colSelected = [position[1] intValue];
-    
-    [_model deflectorSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
-    
-    if(masterPowerOn){
-        [self powerOn];
+=======
+    [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    if (_gridPowered) {
+        [_model powerOn];
+        [self updateGrid];
     }
+>>>>>>> PowerUp_architecturalChanges
 }
 
+// If the battery was selected, power on and update
+-(void) powerOn {
+    _gridPowered = YES;
+    
+    [_model powerOn];
+    [self updateGrid];
+}
+
+<<<<<<< HEAD
 -(void) masterPowerTurnedOn{
     masterPowerOn = !masterPowerOn;
     
@@ -283,6 +310,25 @@
     NSArray* connectedBulbs = [_model bulbIndices]; // the array stores the indices of all connected bulbs
     [_grid bulbConnectedWithIndices:connectedBulbs]; // light up bulbs that are connected
     NSArray* connectedBombs = [_model connectedBombs];
+=======
+- (void) updateGrid
+{
+    NSArray* lasers = [_model getLasers];
+    NSArray* emitters = [_model getConnectedEmitters];
+    NSArray* deflectors = [_model getConnectedDeflectors];
+    NSArray* receivers = [_model getConnectedReceivers];
+    NSArray* bulbs = [_model getConnectedBulbs];
+    
+    [_grid resetLasers];
+    [self updateComponents:lasers];
+    [self updateStates:emitters];
+    [self updateStates:deflectors];
+    [self updateStates:receivers];
+    [self updateStates:bulbs];
+    
+    BOOL shorted = [_model isShorted];
+    BOOL connected = [_model isConnected];
+>>>>>>> PowerUp_architecturalChanges
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
@@ -313,28 +359,28 @@
         
         [_grid shorted];
         
-        if (_language == 2) {
-            _okay = @"好";
-        }
+        [self displayMessageFor:@"Lose"];
         
-        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:_titleLose
-                                                          message:_restart
-                                                         delegate:self
-                                                cancelButtonTitle:_okay otherButtonTitles:nil];
-        loseView.tag = 0; // To determine the alert view is a losing view
-        
-        [loseView show];
-    }
-    // light up the connected bulbs
-    // if all bulbs are connected, display win message,
-    // and the message will ask the user to go to next level
-    // if current level is the last level, nothing will happen
-    else if (connected){
+    } else if (connected){
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
         
-        NSString *message;
-        if (_level < _numLevels ) {
+        [self displayMessageFor:@"Win"];
+    } else { // if neither shorted or connected, do nothing but play sound that indicates a bad move
+        [_audioPlayerNo prepareToPlay];
+        [_audioPlayerNo play];
+    }
+}
+
+// Display alert view
+- (void) displayMessageFor:(NSString*)win
+{
+    NSString* title;
+    NSString* message;
+    if ([win isEqual:@"Win"]) {
+        title = _titleWin;
+        
+        if (_level < _numLevels) {
             message = _next;
         } else {
             message = _all;
@@ -342,19 +388,47 @@
                 _okay = @"退出游戏";
             }
         }
-
-        UIAlertView *winView = [[UIAlertView alloc] initWithTitle:_titleWin
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:_okay otherButtonTitles:nil];
-        winView.tag = 1; // To determine the alert view is a win view
-        
-        [winView show];
+    } else {
+        title = _titleLose;
+        message = _restart;
+        if (_language == 2) {
+            _okay = @"好";
+        }
     }
-    // if neither shorted or connected, do nothing but play sound that indicates a bad move
-    else {
-        [_audioPlayerNo prepareToPlay];
-        [_audioPlayerNo play];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
+    
+    if ([win isEqual:@"Win"]) {
+        alert.tag = 1;
+    } else {
+        alert.tag = 0;
+    }
+    
+    [alert show];
+    
+}
+
+- (void) updateComponents:(NSArray*)components
+{
+    NSArray* rows = components[0];
+    NSArray* cols = components[1];
+    
+    for (int i = 0; i < rows.count; ++i) {
+        NSString* compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
+        [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
+    }
+}
+
+- (void) updateStates:(NSArray*)components
+{
+    if (components.count > 0) {
+        NSArray* rows = components[0];
+        NSArray* cols = components[1];
+        NSArray* states = components[2];
+        
+        for (int i = 0; i < rows.count; ++i) {
+            [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
+        }
     }
 }
 

@@ -10,18 +10,20 @@
     int _row;
     int _col;
     NSString* _type;
-    NSString* _state;
+    BOOL _state;
     NSString* _direction;
-    bool _connectedTop;
-    bool _connectedBottom;
-    bool _connectedRight;
-    bool _connectedLeft;
+    BOOL _connectedTop;
+    BOOL _connectedBottom;
+    BOOL _connectedRight;
+    BOOL _connectedLeft;
+    
 }
+
 @end
 
 @implementation ComponentModel
 
-- (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(NSString*)state
+- (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(BOOL)state
 {
     if (self = [super init]) {
         _row = row;
@@ -32,32 +34,37 @@
 
     return self;
 }
-- (NSString*)direction
+
+- (NSString*) getDirection
 {
+    NSAssert(_direction, @"Direction still hasn't been initialized");
+    NSAssert([_type isEqual:@"Receiver"]||[_type isEqual:@"Emitter"], @"Component type of %@ does not have direction", _type);
     return _direction;
 }
 
 - (void) pointTo:(NSString *)dir
 {
+    // We allow empty because it makes initialization easier
+    NSAssert([_type isEqual:@"Receiver"]||[_type isEqual:@"Emitter"]||[_type isEqual:@"Empty"], @"Component type of %@ does not point", _type);
     _direction = dir;
 }
 
-- (void) connectedRight:(bool)connection
+- (void) connectedRight:(BOOL)connection
 {
     _connectedRight = connection;
 }
 
-- (void) connectedTop:(bool)connection
+- (void) connectedTop:(BOOL)connection
 {
     _connectedTop = connection;
 }
 
-- (void) connectedBottom:(bool)connection
+- (void) connectedBottom:(BOOL)connection
 {
     _connectedBottom = connection;
 }
 
-- (void) connectedLeft:(bool)connection
+- (void) connectedLeft:(BOOL)connection
 {
     _connectedLeft = connection;
 }
@@ -67,12 +74,12 @@
     return _type;
 }
 
-- (NSString *) getState
+- (BOOL) getState
 {
     return _state;
 }
 
-- (void) setState:(NSString*)state
+- (void) setState:(BOOL)state
 {
     _state = state;
 }
@@ -87,27 +94,27 @@
     return _col;
 }
 
-- (bool) isConnectedRight
+- (BOOL) isConnectedRight
 {
     return _connectedRight;
 }
 
-- (bool) isConnectedTop
+- (BOOL) isConnectedTop
 {
     return _connectedTop;
 }
 
-- (bool) isConnectedBottom
+- (BOOL) isConnectedBottom
 {
     return _connectedBottom;
 }
 
-- (bool) isConnectedLeft
+- (BOOL) isConnectedLeft
 {
     return _connectedLeft;
 }
 
-- (bool) isSameComponentAs:(ComponentModel*)otherComp
+- (BOOL) isSameComponentAs:(ComponentModel*)otherComp
 {
     return (_row == [otherComp getRow] && _col == [otherComp getCol] && [_type isEqual:[otherComp getType]]);
 }

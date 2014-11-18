@@ -22,7 +22,7 @@
 
 - (void)setUp {
     [super setUp];
-    _model = [[GameModel alloc] initWithTotalLevels:3];
+    _model = [[GameModel alloc] initWithTotalLevels:5];
     [_model generateGrid:-1];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
@@ -44,16 +44,17 @@
 - (void) testValuesCorrectInGrid
 {
 
-    // Read in test grid
-    [_model generateGrid:-1];
-
     // Make sure the correct components were read in by generateGrid
+    
     // Read in switch
     XCTAssert([[_model getTypeAtRow:0 andCol:4] isEqual:@"switch"], @"Failure reading in switch");
 
     // Read in Bulb
     XCTAssert([[_model getTypeAtRow:0 andCol:7] isEqualToString:@"bulb"], @"Failure reading in bulb");
 
+    // Read in deflector
+    XCTAssert([[_model getTypeAtRow:0 andCol:11] isEqual:@"deflector"], @"Failure reading in deflector");
+    
     // Read in wires of various configurations.
     XCTAssert([[_model getTypeAtRow:1 andCol:1] isEqualToString:@"wireXXXX"], @"Failure reading in wire with no conenctions around it");
     XCTAssert([[_model getTypeAtRow:1 andCol:3] isEqualToString:@"wireLXXX"], @"Failure reading in wire with left connection");
@@ -86,7 +87,27 @@
     XCTAssert([[_model getTypeAtRow:11 andCol:5] isEqualToString:@"batteryPosLRXX"], @"Failure reading in positive battery with left and right switch");
     XCTAssert([[_model getTypeAtRow:11 andCol:9] isEqualToString:@"batteryPosLXXB"], @"Failure reading in positive battery with left and below switch");
     XCTAssert([[_model getTypeAtRow:11 andCol:11] isEqualToString:@"batteryPosXRTX"], @"Failure reading in positive battery with right and above switch");
-
+    
+    // Read in new grid for laser components
+    [_model generateGrid:-2];
+    
+    // Read in emitter and receivers
+    XCTAssert([[_model getTypeAtRow:1 andCol:1] isEqualToString:@"emitterTopXXXX"], @"Failure reading in emitter with no connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:3] isEqualToString:@"deflectorBottomLXXX"], @"Failure reading in deflector with left connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:4] isEqualToString:@"emitterTopXRXX"], @"Failure reading in emitter with right connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:6] isEqualToString:@"deflectorBottomXXTX"], @"Failure reading in deflector with top connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:7] isEqualToString:@"emitterTopXXXB"], @"Failure reading in emitter with below connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:9] isEqualToString:@"deflectorBottomLXTX"], @"Failure reading in deflector with left and top connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:10] isEqualToString:@"emitterTopXRTX"], @"Failure reading in emitter with top and right connection");
+    XCTAssert([[_model getTypeAtRow:1 andCol:12] isEqualToString:@"deflectorBottomXRXB"], @"Failure reading in deflector with right and bottom connection");
+    XCTAssert([[_model getTypeAtRow:4 andCol:1] isEqualToString:@"emitterLeftLXXB"], @"Failure reading in emitter with bottom and left connection");
+    XCTAssert([[_model getTypeAtRow:4 andCol:2] isEqualToString:@"deflectorRightXXTB"], @"Failure reading in deflector with top and bottom connection");
+    XCTAssert([[_model getTypeAtRow:4 andCol:5] isEqualToString:@"emitterLeftLRXX"], @"Failure reading in emitter with left and right connection");
+    XCTAssert([[_model getTypeAtRow:4 andCol:9] isEqualToString:@"deflectorRightLRTX"], @"Failure reading in deflector with left, top, and right connection");
+    XCTAssert([[_model getTypeAtRow:4 andCol:12] isEqualToString:@"emitterLeftXRTB"], @"Failure reading in emitter with top, right, and bottom connection");
+    XCTAssert([[_model getTypeAtRow:7 andCol:1] isEqualToString:@"deflectorTopLRXB"], @"Failure reading in deflector with left, right, and bottom connection");
+    XCTAssert([[_model getTypeAtRow:7 andCol:5] isEqualToString:@"emitterRightLXTB"], @"Failure reading in emitter with left, top, and botton connection");
+    XCTAssert([[_model getTypeAtRow:7 andCol:8] isEqualToString:@"deflectorLeftLRTB"], @"Failure reading in deflector with all connection");
 }
 
 
@@ -138,7 +159,7 @@
 
 - (void) testGridConnection
 {
-    [_model generateGrid:-2]; // bring in a different grid for testing
+    [_model generateGrid:-3]; // bring in a different grid for testing
 
     XCTAssertFalse([_model connected]); // originally unconnected
 
@@ -162,7 +183,7 @@
 
 - (void) testShortConnection
 {
-    [_model generateGrid:-3];
+    [_model generateGrid:-4];
     
     XCTAssertFalse([_model shorted]); // originally unshorted
     
