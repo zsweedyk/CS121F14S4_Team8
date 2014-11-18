@@ -25,11 +25,6 @@
     int _numCols;
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
-<<<<<<< HEAD
-    NSMutableArray* connectedBulbs;
-    NSMutableArray* connectedBombs;
-=======
->>>>>>> PowerUp_architecturalChanges
 
     int _numLevels; // total number of levels
 }
@@ -46,15 +41,11 @@
         
         _numRows = 15;
         _numCols = 15;
-<<<<<<< HEAD
-        _bulbs = [[NSMutableArray alloc] init];
-        _bombs = [[NSMutableArray alloc] init];
-=======
->>>>>>> PowerUp_architecturalChanges
         
         // initialize arrays
         _grid = [[NSMutableArray alloc] init];
         _bulbs = [[NSMutableArray alloc] init];
+        _bombs = [[NSMutableArray alloc] init];
         _lasers = [[NSMutableArray alloc] init];
         _emitters = [[NSMutableArray alloc] init];
         _deflectors = [[NSMutableArray alloc] init];
@@ -211,11 +202,9 @@
 // 5: receiver
 // 6: positive battery
 // 7: switch
-<<<<<<< HEAD
-// 9: bomb
-=======
 // 8: deflector
->>>>>>> PowerUp_architecturalChanges
+// 9: bomb
+
 - (NSString*) getComponentWithConnectionsFor:(ComponentModel*)component
 {
     
@@ -244,16 +233,12 @@
         compWithConn = [@"receiver" stringByAppendingString:connections];
     } else if ( [type isEqual:@"Deflector"] ) {
         compWithConn = @"deflector";
-<<<<<<< HEAD
     } else if ( [type isEqual:@"Bomb"] ) {
         compWithConn = [@"bomb" stringByAppendingString:connections];
-    }
-    else {
-=======
     } else if ( [type isEqual:@"Laser"] ) {
         compWithConn = [@"laser" stringByAppendingString:connections];
     } else {
->>>>>>> PowerUp_architecturalChanges
+
         compWithConn = @"empty";
     }
     
@@ -540,52 +525,10 @@
         [_lasers addObject:comp];
         --row;
     }
-<<<<<<< HEAD
- 
-    row = row-1;
-    ComponentModel *obstacle = _grid[row][col];
-    
-    if([[obstacle getType] isEqual:@"Deflector"]){
-        
-        if([[obstacle direction] isEqual:@"LXXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LXTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
-        
-        if([[obstacle direction] isEqual:@"D"]){
-            [obstacle setState:@"On"];
-        }
-        //set the bomb on if laser sees a bomb
-    }else if([[obstacle getType] isEqual:@"Bomb"]){ //set the state of the bomb to be on if laser sees a bomb
-        [obstacle setState:@"On"];
-=======
+
     if (row != 0) {
         --row;
         [self encounteredObstacleAtRow:row AndCol:col From:@"Bottom"];
->>>>>>> PowerUp_architecturalChanges
     }
 }
 
@@ -601,51 +544,10 @@
         [_lasers addObject:comp];
         ++row;
     }
- 
-<<<<<<< HEAD
-    row = row+1;
-    ComponentModel *obstacle = _grid[row][col];
-    
-    if([[obstacle getType] isEqual:@"Deflector"]){
-        
-        if([[obstacle direction] isEqual:@"LXTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LXTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserLeftAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
-        
-        if([[obstacle direction] isEqual:@"U"]){
-            [obstacle setState:@"On"];
-        }
-    }else if([[obstacle getType] isEqual:@"Bomb"]){
-        [obstacle setState:@"On"];
-=======
+
     if (row != _numRows-1) {
         ++row;
         [self encounteredObstacleAtRow:row AndCol:col From:@"Top"];
->>>>>>> PowerUp_architecturalChanges
     }
 
 }
@@ -661,51 +563,10 @@
         [_lasers addObject:comp];
         --col;
     }
-<<<<<<< HEAD
-   
-    col = col-1;
-    ComponentModel *obstacle = _grid[row][col];
-    if([[obstacle getType] isEqual:@"Deflector"]){
-        
-        if([[obstacle direction] isEqual:@"XRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"XRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserLeftAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    }else if([[obstacle getType] isEqual:@"Receiver"]){
-        
-        if([[obstacle direction] isEqual:@"R"]){
-            [obstacle setState:@"On"];
-        }
-    }else if([[obstacle getType] isEqual:@"Bomb"]){
-        [obstacle setState:@"On"];
-=======
     
     if (col != 0) {
         --col;
         [self encounteredObstacleAtRow:row AndCol:col From:@"Right"];
->>>>>>> PowerUp_architecturalChanges
     }
 
 }
@@ -731,43 +592,6 @@
 - (void) encounteredObstacleAtRow:(int)row AndCol:(int)col From:(NSString*)dir
 {
     
-<<<<<<< HEAD
-    if([[obstacle getType] isEqual:@"Deflector"]){
-        
-        if([[obstacle direction] isEqual:@"LXTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LXXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTX"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LXTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRXB"]){
-            [obstacle setState:@"On"];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserBotAtRow:row Col:col];
-        }else if([[obstacle direction] isEqual:@"LRTB"]){
-            [obstacle setState:@"On"];
-            [self createLaserBotAtRow:row Col:col];
-            [self createLaserRightAtRow:row Col:col];
-            [self createLaserTopAtRow:row Col:col];
-        }else{
-            [obstacle setState:@"Off"];
-        }
-    } else if([[obstacle getType] isEqual:@"Receiver"]){
-        
-        if([[obstacle direction] isEqual:@"L"]){
-            [obstacle setState:@"On"];
-        }
-    }else if([[obstacle getType] isEqual:@"Bomb"]){
-        [obstacle setState:@"On"];
-=======
     ComponentModel *obstacle = _grid[row][col];
     
     if ([[obstacle getType] isEqual:@"Deflector"]) { // Handle the obstacle being a deflector
@@ -804,17 +628,11 @@
         }
     } else {
         return; // Some other type of obstacle
->>>>>>> PowerUp_architecturalChanges
     }
     
 }
 
-<<<<<<< HEAD
-
--(BOOL) shorted
-=======
 -(BOOL) isShorted
->>>>>>> PowerUp_architecturalChanges
 {
     // check if two nodes of battery are connected directly
     return [self breadthSearchFrom:_batteryNeg To:_batteryPos inDirection:@"Right" CheckingForShort:true];
@@ -895,100 +713,12 @@
     return NO;
 }
 
-<<<<<<< HEAD
--(NSArray*) connectedBombs
-{
-    // store the indices of all connected bulbs
-    connectedBombs = [[NSMutableArray alloc] init];
-    
-    // Check conenctivity for each bulb
-    for (int i = 0; i < _bombs.count; ++i) {
-        
-        // Make sure bulbs are actually bulbs
-        ComponentModel* bomb = _bombs[i];
-        NSAssert([[bomb getType] isEqual:@"Bomb"], @"Elements in bulb array are not actually bulbs");
-        
-        NSArray* connections = [self getAllConnectionsTo:bomb];
-        
-        if (connections.count == 2){
-            bool path1Pos = [self breadthSearchFrom:bomb To:_batteryPos inDirection:connections[0] CheckingForShort:false];
-            bool path1Neg = [self breadthSearchFrom:bomb To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
-            bool path2Neg = [self breadthSearchFrom:bomb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
-            bool path2Pos = [self breadthSearchFrom:bomb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
-            
-            // If one of paths is bult, add the index of the bulb to an array
-            if ((path1Pos && path1Neg) || (path2Pos && path2Neg))
-                [connectedBombs addObject:[NSNumber numberWithInt:i]];
-        }
-        //see if a bomb has been turn on by the lasers
-        else{
-            if ([[bomb getState] isEqual:@"On"]){
-                [connectedBombs addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-        
-        for (int j = 0;j<_receivers.count;j++){
-            if([[_receivers[j] getState] isEqual:@"On"]){
-                bool path1 = [self breadthSearchFrom:bomb To:_receivers[j] inDirection:connections[0] CheckingForShort:false];
-                bool path2 = [self breadthSearchFrom:bomb To:_receivers[j] inDirection:connections[1] CheckingForShort:false];
-                
-                if(path1&&path2)
-                    [connectedBombs addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-    }
-    
-    return connectedBombs;
-}
-
--(BOOL) connected
-=======
 -(BOOL) isConnected
->>>>>>> PowerUp_architecturalChanges
 {
     NSArray* connectedBulbLoc = [self getConnectedLocations:_bulbs withState:NO];
     NSArray* connectedBulbs = connectedBulbLoc[0];
-    
-<<<<<<< HEAD
-    BOOL connectedToReceiver = NO;
 
-    // Check conenctivity for each bulb
-    for (int i = 0; i < _bulbs.count; ++i) {
-
-        // Make sure bulbs are actually bulbs
-        ComponentModel* bulb = _bulbs[i];
-        NSAssert([[bulb getType] isEqual:@"Bulb"], @"Elements in bulb array are not actually bulbs");
-
-        NSArray* connections = [self getAllConnectionsTo:bulb];
-
-        // See if the bulb is connected following the two possible paths
-        bool path1Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[0] CheckingForShort:false];
-        bool path1Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
-        bool path2Neg = [self breadthSearchFrom:bulb To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
-        bool path2Pos = [self breadthSearchFrom:bulb To:_batteryPos inDirection:connections[1] CheckingForShort:false];
-        
-        // If one of paths is bult, add the index of the bulb to an array
-        if ((path1Pos && path1Neg) || (path2Pos && path2Neg))
-            [connectedBulbs addObject:[NSNumber numberWithInt:i]];
-
-        for (int j = 0;j<_receivers.count;j++){
-            if([[_receivers[j] getState] isEqual:@"On"]){
-                bool path1 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[0] CheckingForShort:false];
-                bool path2 = [self breadthSearchFrom:bulb To:_receivers[j] inDirection:connections[1] CheckingForShort:false];
-                
-                if(path1&&path2)
-                {
-                    connectedToReceiver = YES;
-                    [connectedBulbs addObject:[NSNumber numberWithInt:i]];
-                }
-            }
-        }
-    }
-    
-    if ((connectedBulbs.count == _bulbs.count) && connectedToReceiver)
-=======
     if (connectedBulbs.count == _bulbs.count) {
->>>>>>> PowerUp_architecturalChanges
         return true;
     } else {
         return false;
@@ -1005,13 +735,6 @@
         
         NSArray* connections = [self getAllConnectionsTo:comp];
         
-<<<<<<< HEAD
-        // See if the bulb is connected following the two possible paths
-        bool path1Pos = [self breadthSearchFrom:emitter To:_batteryPos inDirection:connections[0] CheckingForShort:false];
-        bool path1Neg = [self breadthSearchFrom:emitter To:_batteryNeg inDirection:connections[1] CheckingForShort:false];
-        bool path2Neg = [self breadthSearchFrom:emitter To:_batteryNeg inDirection:connections[0] CheckingForShort:false];
-        bool path2Pos = [self breadthSearchFrom:emitter To:_batteryPos inDirection:connections[1] CheckingForShort:false];
-=======
         // Make sure the component is valid
         NSAssert(connections.count == 2, @"Invalid number of connections to comp");
         
@@ -1020,7 +743,6 @@
         BOOL path1Neg = [self breadthSearchFrom:comp To:_batteryNeg inDirection:connections[1] CheckingForShort:NO];
         BOOL path2Neg = [self breadthSearchFrom:comp To:_batteryNeg inDirection:connections[0] CheckingForShort:NO];
         BOOL path2Pos = [self breadthSearchFrom:comp To:_batteryPos inDirection:connections[1] CheckingForShort:NO];
->>>>>>> PowerUp_architecturalChanges
         
         // If one of paths is built, set the state to on
         if ((path1Pos && path1Neg) || (path2Pos && path2Neg)) {

@@ -26,16 +26,7 @@
 		5BEF17351A0EC1C800354C84 /* Emitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17341A0EC1C800354C84 /* Emitter.m */; };
 		5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17371A0EC1E500354C84 /* Deflector.m */; };
 		5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF173A1A0EC79600354C84 /* Receiver.m */; };
-<<<<<<< HEAD
-		6512169E1A19AECD0014436C /* Components.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6512169D1A19AECD0014436C /* Components.xcassets */; };
-		651216A21A19B20A0014436C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 651216A11A19B20A0014436C /* spark.png */; };
-		939D16891A1B05830070A5FC /* level6 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16861A1B05830070A5FC /* level6 */; };
-		939D168A1A1B05830070A5FC /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16871A1B05830070A5FC /* level7 */; };
-		939D168B1A1B05830070A5FC /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16881A1B05830070A5FC /* level8 */; };
-		939D168D1A1B12E00070A5FC /* level9 in Resources */ = {isa = PBXBuildFile; fileRef = 939D168C1A1B12E00070A5FC /* level9 */; };
-		A820F97F1A171F9700A6DA6A /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A820F97E1A171F9700A6DA6A /* Explosion.sks */; };
-		A82CBBF31A15A0B90002F118 /* ExplosionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A82CBBF21A15A0B90002F118 /* ExplosionScene.m */; };
-=======
+
 		5BEF173D1A0F252F00354C84 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF173C1A0F252F00354C84 /* level5 */; };
 		5BEF17481A0F2DAE00354C84 /* receiverBottomLRXX.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF17401A0F2DAE00354C84 /* receiverBottomLRXX.png */; };
 		5BEF17491A0F2DAE00354C84 /* receiverBottomLRXXon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF17411A0F2DAE00354C84 /* receiverBottomLRXXon.png */; };
@@ -49,7 +40,7 @@
 		74B2E4501A19E11800FFCC51 /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 74B2E44D1A19E11800FFCC51 /* level7 */; };
 		74B2E4511A19E11800FFCC51 /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 74B2E44E1A19E11800FFCC51 /* level8 */; };
 		74C568A01A1913A900C8ABE6 /* level-2 in Resources */ = {isa = PBXBuildFile; fileRef = 74C5689F1A1913A900C8ABE6 /* level-2 */; };
->>>>>>> PowerUp_architecturalChanges
+
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
 		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
@@ -80,10 +71,7 @@
 		A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5681A12084A008DD69D /* bomb-02.wav */; };
 		A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */; };
 		A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DDE1A043DA90076501D /* beep-horn.aif */; };
-<<<<<<< HEAD
-		A8E910271A07278200E591BE /* level-3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E910261A07278200E591BE /* level-3 */; };
-		C08E33F583226436092FCBF4 /* level-2 in Resources */ = {isa = PBXBuildFile; fileRef = C08E3BBDF2D1F37DE1A4AF54 /* level-2 */; };
-=======
+
 		A8E84DE11A0591480076501D /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DE01A0591480076501D /* level3 */; };
 		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
 		A8E910271A07278200E591BE /* level-4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E910261A07278200E591BE /* level-4 */; };
@@ -182,7 +170,7 @@
 		A8E910E91A081F6800E591BE /* wireXXXB.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9108B1A081F6800E591BE /* wireXXXB.png */; };
 		A8E910EA1A081F6800E591BE /* wireXXXX.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E9108C1A081F6800E591BE /* wireXXXX.png */; };
 		C08E33F583226436092FCBF4 /* level-3 in Resources */ = {isa = PBXBuildFile; fileRef = C08E3BBDF2D1F37DE1A4AF54 /* level-3 */; };
->>>>>>> PowerUp_architecturalChanges
+
 		C08E3C51D66438CE9748FA06 /* level-1 in Resources */ = {isa = PBXBuildFile; fileRef = C08E38997C01381A4E7DF1AA /* level-1 */; };
 		C08E3E456AF7E3D464D6278E /* ComponentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C08E333456A9EA36EE6BDD8B /* ComponentModel.m */; };
 /* End PBXBuildFile section */
@@ -208,17 +196,7 @@
 		5BEF17371A0EC1E500354C84 /* Deflector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deflector.m; sourceTree = "<group>"; };
 		5BEF17391A0EC79600354C84 /* Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receiver.h; sourceTree = "<group>"; };
 		5BEF173A1A0EC79600354C84 /* Receiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Receiver.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		6512169D1A19AECD0014436C /* Components.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Components.xcassets; path = ../Components.xcassets; sourceTree = "<group>"; };
-		651216A11A19B20A0014436C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		939D16861A1B05830070A5FC /* level6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level6; sourceTree = "<group>"; };
-		939D16871A1B05830070A5FC /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level7; sourceTree = "<group>"; };
-		939D16881A1B05830070A5FC /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level8; sourceTree = "<group>"; };
-		939D168C1A1B12E00070A5FC /* level9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level9; sourceTree = "<group>"; };
-		A820F97E1A171F9700A6DA6A /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
-		A82CBBF11A15A0B90002F118 /* ExplosionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionScene.h; sourceTree = "<group>"; };
-		A82CBBF21A15A0B90002F118 /* ExplosionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionScene.m; sourceTree = "<group>"; };
-=======
+
 		5BEF173C1A0F252F00354C84 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = "<group>"; };
 		5BEF17401A0F2DAE00354C84 /* receiverBottomLRXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receiverBottomLRXX.png; path = receivers1/receiverBottomLRXX.png; sourceTree = "<group>"; };
 		5BEF17411A0F2DAE00354C84 /* receiverBottomLRXXon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receiverBottomLRXXon.png; path = receivers1/receiverBottomLRXXon.png; sourceTree = "<group>"; };
@@ -232,7 +210,7 @@
 		74B2E44D1A19E11800FFCC51 /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level7; path = ../../../../Desktop/level7; sourceTree = "<group>"; };
 		74B2E44E1A19E11800FFCC51 /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level8; path = ../../../../Desktop/level8; sourceTree = "<group>"; };
 		74C5689F1A1913A900C8ABE6 /* level-2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "level-2"; path = "../../../../Desktop/level-2"; sourceTree = "<group>"; };
->>>>>>> PowerUp_architecturalChanges
+
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -279,9 +257,7 @@
 		A8C2D5681A12084A008DD69D /* bomb-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bomb-02.wav"; sourceTree = "<group>"; };
 		A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mouse-doubleclick-02.wav"; sourceTree = "<group>"; };
 		A8E84DDE1A043DA90076501D /* beep-horn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-horn.aif"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		A8E910261A07278200E591BE /* level-3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-3"; sourceTree = "<group>"; };
-=======
+
 		A8E84DE01A0591480076501D /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
 		A8E910261A07278200E591BE /* level-4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-4"; sourceTree = "<group>"; };
@@ -379,7 +355,7 @@
 		A8E9108A1A081F6800E591BE /* wireXXTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXTX.png; sourceTree = "<group>"; };
 		A8E9108B1A081F6800E591BE /* wireXXXB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXXB.png; sourceTree = "<group>"; };
 		A8E9108C1A081F6800E591BE /* wireXXXX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireXXXX.png; sourceTree = "<group>"; };
->>>>>>> PowerUp_architecturalChanges
+
 		C08E333456A9EA36EE6BDD8B /* ComponentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModel.m; sourceTree = SOURCE_ROOT; };
 		C08E3346B0B9BA5F2F430755 /* ComponentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModel.h; sourceTree = SOURCE_ROOT; };
 		C08E38997C01381A4E7DF1AA /* level-1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-1"; sourceTree = "<group>"; };
@@ -478,18 +454,7 @@
 		A84F7F0319FDC1C6001AEC0D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				939D16861A1B05830070A5FC /* level6 */,
-				939D16871A1B05830070A5FC /* level7 */,
-				939D16881A1B05830070A5FC /* level8 */,
-				A8646BC21A1AF5F500EB5C58 /* level4 */,
-				A8646BC31A1AF5F500EB5C58 /* level3 */,
-				A8646BC41A1AF5F500EB5C58 /* level2 */,
-				A8646BC51A1AF5F500EB5C58 /* level1 */,
-				A8646BC61A1AF5F500EB5C58 /* level5 */,
-				A8646BC71A1AF5F500EB5C58 /* level0 */,
-				939D168C1A1B12E00070A5FC /* level9 */,
-=======
+
 				74B2E44C1A19E11800FFCC51 /* level6 */,
 				74B2E44D1A19E11800FFCC51 /* level7 */,
 				74B2E44E1A19E11800FFCC51 /* level8 */,
@@ -499,7 +464,7 @@
 				A8E84DE01A0591480076501D /* level3 */,
 				A8E9101E1A06FA7100E591BE /* level4 */,
 				5BEF173C1A0F252F00354C84 /* level5 */,
->>>>>>> PowerUp_architecturalChanges
+
 				A84F7F0419FDC1C6001AEC0D /* Info.plist */,
 				A84F7F0519FDC1C6001AEC0D /* main.m */,
 				C08E38997C01381A4E7DF1AA /* level-1 */,
@@ -626,18 +591,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				6512169E1A19AECD0014436C /* Components.xcassets in Resources */,
-				A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */,
-				A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */,
-				A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */,
-				A8646BCA1A1AF5F500EB5C58 /* level2 in Resources */,
-				939D168B1A1B05830070A5FC /* level8 in Resources */,
-				939D168A1A1B05830070A5FC /* level7 in Resources */,
-				939D16891A1B05830070A5FC /* level6 in Resources */,
-				A8646BC81A1AF5F500EB5C58 /* level4 in Resources */,
-				A820F97F1A171F9700A6DA6A /* Explosion.sks in Resources */,
-=======
+
 				A8E910C71A081F6800E591BE /* emitterTopLRXBon.png in Resources */,
 				A8E910E51A081F6800E591BE /* wireXRXX.png in Resources */,
 				74B2E4511A19E11800FFCC51 /* level8 in Resources */,
@@ -716,7 +670,7 @@
 				A8E910DD1A081F6800E591BE /* wireLXXBon.png in Resources */,
 				A8E910CA1A081F6800E591BE /* emitterTopLXXB.png in Resources */,
 				A8E910971A081F6800E591BE /* batteryPos.pxm in Resources */,
->>>>>>> PowerUp_architecturalChanges
+
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				651216A21A19B20A0014436C /* spark.png in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
@@ -730,11 +684,7 @@
 				A8646BCB1A1AF5F500EB5C58 /* level1 in Resources */,
 				A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
-<<<<<<< HEAD
-				C08E33F583226436092FCBF4 /* level-2 in Resources */,
-				A8646BCC1A1AF5F500EB5C58 /* level5 in Resources */,
-				A8E910271A07278200E591BE /* level-3 in Resources */,
-=======
+
 				A8E910B31A081F6800E591BE /* emitterBottomLXTXon.png in Resources */,
 				A8E910B11A081F6800E591BE /* emitterBottomLRXXon.png in Resources */,
 				A8E910E71A081F6800E591BE /* wireXXTBon.png in Resources */,
@@ -746,7 +696,7 @@
 				A8E910A31A081F6800E591BE /* bulbon.png in Resources */,
 				A8E910AC1A081F6800E591BE /* deflectorXRXBon.png in Resources */,
 				A8E910BB1A081F6800E591BE /* emitterLeftXRXBon.png in Resources */,
->>>>>>> PowerUp_architecturalChanges
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

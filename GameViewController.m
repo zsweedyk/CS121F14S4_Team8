@@ -24,7 +24,7 @@
 
     GameModel* _model;
     Grid* _grid;
-    SKView* _backgroud;
+    SKView* _background;
     ExplosionScene* _explosion;
     UIButton* _backToLevel;
     UIButton* _test;
@@ -46,7 +46,6 @@
     AVAudioPlayer* _audioPlayerExplosion;
     AVAudioPlayer* _audioPlayerLevelPressed;
     
-<<<<<<< HEAD
     // position variables
     float framePortion;
     CGFloat xGrid;
@@ -55,9 +54,7 @@
     // other variables
     BOOL masterPowerOn;
     NSMutableArray* _locks;
-=======
-    BOOL _gridPowered;
->>>>>>> PowerUp_architecturalChanges
+
 }
 
 @end
@@ -68,39 +65,27 @@
     _level = startLevel;
     _numLevels = totalLevels;
     _language = language;
-<<<<<<< HEAD
     _locks = locks;
-    
-    [self viewDidLoad];
-=======
->>>>>>> PowerUp_architecturalChanges
-    
-    _gridPowered = NO;
+    masterPowerOn = NO;
     
     [self viewDidLoad];
     return self;
 }
 
-- (void) dealloc {
-    NSLog(@"dealloc");
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-<<<<<<< HEAD
-    // backgroud set up
-    _backgroud = [[SKView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:_backgroud];
+
+    // background set up
+    _background = [[SKView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_background];
     
     // set up explosion scene
     _explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
     _explosion.backgroundColor = [UIColor blackColor];
-    [_backgroud presentScene: _explosion];
-=======
+    [_background presentScene: _explosion];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
->>>>>>> PowerUp_architecturalChanges
     
     // initialize model
     _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
@@ -227,16 +212,12 @@
 
 - (void) newLevel{
     ++_level;
-    _gridPowered = NO;
     
     [_model generateGrid:_level];
-<<<<<<< HEAD
-    
+
     // reset master power on
     masterPowerOn = NO;
-
-=======
->>>>>>> PowerUp_architecturalChanges
+    
     [self setUpDisplay];
 }
 
@@ -257,31 +238,29 @@
 {
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
-<<<<<<< HEAD
-    [_model switchSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
     
     [_grid batteryTurnedOff];
     [_grid bulbTurnedOff];
-    masterPowerOn = NO;
-=======
+
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
-    if (_gridPowered) {
+    if (masterPowerOn) {
         [_model powerOn];
         [self updateGrid];
     }
->>>>>>> PowerUp_architecturalChanges
 }
 
 // If the battery was selected, power on and update
--(void) powerOn {
-    _gridPowered = YES;
+-(void) powerOn
+{
+    masterPowerOn = YES;
     
     [_model powerOn];
     [self updateGrid];
 }
 
-<<<<<<< HEAD
--(void) masterPowerTurnedOn{
+
+-(void) masterPowerSelected
+{
     masterPowerOn = !masterPowerOn;
     
     if (masterPowerOn)
@@ -293,24 +272,6 @@
     }
 }
 
-// if the battery is on, check the circuit connection
--(void) powerOn{
-    //do two checks before displaying on the grid in case a receiver has been turned on or off
-    [_model checkEmitterConnection];
-    [_model getLaserPath];
-    [_model checkEmitterConnection];
-    [_grid emit:[_model getLaserPath]];
-    [_grid setStateWithArray:[_model emitters]];
-    [_grid setStateWithArray:[_model receivers]];
-    [_grid setStateWithArray:[_model deflectors]];
-    
-    bool connected = [_model connected];
-    bool shorted = [_model shorted];
-
-    NSArray* connectedBulbs = [_model bulbIndices]; // the array stores the indices of all connected bulbs
-    [_grid bulbConnectedWithIndices:connectedBulbs]; // light up bulbs that are connected
-    NSArray* connectedBombs = [_model connectedBombs];
-=======
 - (void) updateGrid
 {
     NSArray* lasers = [_model getLasers];
@@ -328,7 +289,6 @@
     
     BOOL shorted = [_model isShorted];
     BOOL connected = [_model isConnected];
->>>>>>> PowerUp_architecturalChanges
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
@@ -339,17 +299,7 @@
         
         [self explodeBombsWithIndices:connectedBombs];
         
-        if (_language == 2) {
-            _okay = @"好";
-        }
-        
-        UIAlertView *loseView = [[UIAlertView alloc] initWithTitle:_titleLose
-                                                           message:_restart
-                                                          delegate:self
-                                                 cancelButtonTitle:_okay otherButtonTitles:nil];
-        loseView.tag = 0; // To determine the alert view is a losing view
-        
-        [loseView show];
+        [self displayMessageFor:@"Lose"];
     }
     else if (shorted) {
         [_audioPlayerExplosion prepareToPlay];

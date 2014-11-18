@@ -14,12 +14,10 @@
 #import "Receiver.h"
 #import "Laser.h"
 #import "Deflector.h"
-<<<<<<< HEAD
+
 #import "Bomb.h"
-#import "ComponentModel.h"
 #import "ExplosionScene.h"
-=======
->>>>>>> PowerUp_architecturalChanges
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import <SpriteKit/SpriteKit.h>
@@ -72,11 +70,8 @@
 
     [self setUpGrid];
     
-<<<<<<< HEAD
-=======
     _lasers = [[NSMutableArray alloc] init];
     
->>>>>>> PowerUp_architecturalChanges
     // sound set up
     NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *pressedPathURL = [NSURL fileURLWithPath : pressedPath];
@@ -164,16 +159,13 @@
         ((Deflector *)newComponent).delegate = self;
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
-<<<<<<< HEAD
     } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
         newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
         [_bombRows addObject:[NSNumber numberWithInt:row]];
         [_bombCols addObject:[NSNumber numberWithInt:col]];
-=======
     } else if ([typeIndicator isEqual:@"la"]) { // laser case
         newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
         [_lasers addObject:newComponent];
->>>>>>> PowerUp_architecturalChanges
     }else {
         return;
     }
@@ -205,20 +197,6 @@
     [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
-- (void) powerUp:(id)sender
-{
-<<<<<<< HEAD
-    // turn on all battery components
-    for (int i = 0; i < _batCols.count; ++i) {
-        int batRow = [_batRows[i] intValue];
-        int batCol = [_batCols[i] intValue];
-        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
-    }
-    
-    [self.delegate performSelector:@selector(masterPowerTurnedOn)];
-}
-
-
 - (void) bulbConnectedWithIndices: (NSArray*) bulbs{
     // turn off all bulbs first
     [self bulbTurnedOff];
@@ -226,20 +204,26 @@
     // turn on all connected bulbs
     for (int j = 0; j < bulbs.count; ++j)
     {
-        int index = [bulbs[j] integerValue];
+        int index = [bulbs[j] intValue];
         int bulbRow = [_bulbRows[index] intValue];
         int bulbCol = [_bulbCols[index] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] turnOn];
     }
 }
 
-- (void) setStateWithArray:(NSArray *)locs
-=======
-    [self.delegate performSelector:@selector(powerOn)];
+- (void) powerUp:(id)sender
+{
+    // turn on all battery components
+    for (int i = 0; i < _batCols.count; ++i) {
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
+    }
+    
+    [self.delegate performSelector:@selector(masterPowerSelected)];
 }
 
 - (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state
->>>>>>> PowerUp_architecturalChanges
 {
     if (state) {
         [_cells[row][col] turnOn];
@@ -408,7 +392,7 @@
     {
         int bulbRow = [_bulbRows[i] intValue];
         int bulbCol = [_bulbCols[i] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] turnOff];
     }
 }
 
