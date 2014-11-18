@@ -474,21 +474,41 @@
     ComponentModel *obstacle = _grid[row][col];
     
     if([[obstacle getType] isEqual:@"Deflector"]){
-    
+        
         if([[obstacle direction] isEqual:@"LXXB"]){
             [obstacle setState:@"On"];
             [self createLaserLeftAtRow:row Col:col];
         }else if([[obstacle direction] isEqual:@"XRXB"]){
             [obstacle setState:@"On"];
             [self createLaserRightAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LXTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserLeftAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
         }else{
             [obstacle setState:@"Off"];
         }
     }else if([[obstacle getType] isEqual:@"Receiver"]){
-      
+        
         if([[obstacle direction] isEqual:@"D"]){
             [obstacle setState:@"On"];
         }
+        //set the bomb on if laser sees a bomb
+    }else if([[obstacle getType] isEqual:@"Bomb"]){ //set the state of the bomb to be on if laser sees a bomb
+        [obstacle setState:@"On"];
     }
 }
 
@@ -504,13 +524,30 @@
     ComponentModel *obstacle = _grid[row][col];
     
     if([[obstacle getType] isEqual:@"Deflector"]){
-    
+        
         if([[obstacle direction] isEqual:@"LXTX"]){
             [obstacle setState:@"On"];
             [self createLaserLeftAtRow:row Col:col];
         }else if([[obstacle direction] isEqual:@"XRTX"]){
             [obstacle setState:@"On"];
             [self createLaserRightAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LXTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserLeftAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
         }else{
             [obstacle setState:@"Off"];
         }
@@ -519,7 +556,10 @@
         if([[obstacle direction] isEqual:@"U"]){
             [obstacle setState:@"On"];
         }
+    }else if([[obstacle getType] isEqual:@"Bomb"]){
+        [obstacle setState:@"On"];
     }
+
 }
 
 - (void) createLaserLeftAtRow:(int)row Col:(int)col
@@ -532,15 +572,31 @@
    
     col = col-1;
     ComponentModel *obstacle = _grid[row][col];
-    
     if([[obstacle getType] isEqual:@"Deflector"]){
-    
+        
         if([[obstacle direction] isEqual:@"XRTX"]){
             [obstacle setState:@"On"];
             [self createLaserTopAtRow:row Col:col];
         }else if([[obstacle direction] isEqual:@"XRXB"]){
             [obstacle setState:@"On"];
             [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"XRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserBotAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserLeftAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
         }else{
             [obstacle setState:@"Off"];
         }
@@ -549,7 +605,10 @@
         if([[obstacle direction] isEqual:@"R"]){
             [obstacle setState:@"On"];
         }
+    }else if([[obstacle getType] isEqual:@"Bomb"]){
+        [obstacle setState:@"On"];
     }
+
 }
 
 
@@ -566,21 +625,40 @@
     ComponentModel *obstacle = _grid[row][col];
     
     if([[obstacle getType] isEqual:@"Deflector"]){
-    
+        
         if([[obstacle direction] isEqual:@"LXTX"]){
             [obstacle setState:@"On"];
             [self createLaserTopAtRow:row Col:col];
         }else if([[obstacle direction] isEqual:@"LXXB"]){
             [obstacle setState:@"On"];
             [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTX"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LXTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserBotAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRXB"]){
+            [obstacle setState:@"On"];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserBotAtRow:row Col:col];
+        }else if([[obstacle direction] isEqual:@"LRTB"]){
+            [obstacle setState:@"On"];
+            [self createLaserBotAtRow:row Col:col];
+            [self createLaserRightAtRow:row Col:col];
+            [self createLaserTopAtRow:row Col:col];
         }else{
             [obstacle setState:@"Off"];
         }
     } else if([[obstacle getType] isEqual:@"Receiver"]){
-     
+        
         if([[obstacle direction] isEqual:@"L"]){
             [obstacle setState:@"On"];
         }
+    }else if([[obstacle getType] isEqual:@"Bomb"]){
+        [obstacle setState:@"On"];
     }
 }
 
