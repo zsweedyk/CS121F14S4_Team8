@@ -31,6 +31,7 @@
 		939D16891A1B05830070A5FC /* level6 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16861A1B05830070A5FC /* level6 */; };
 		939D168A1A1B05830070A5FC /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16871A1B05830070A5FC /* level7 */; };
 		939D168B1A1B05830070A5FC /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 939D16881A1B05830070A5FC /* level8 */; };
+		939D168D1A1B12E00070A5FC /* level9 in Resources */ = {isa = PBXBuildFile; fileRef = 939D168C1A1B12E00070A5FC /* level9 */; };
 		A820F97F1A171F9700A6DA6A /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A820F97E1A171F9700A6DA6A /* Explosion.sks */; };
 		A82CBBF31A15A0B90002F118 /* ExplosionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A82CBBF21A15A0B90002F118 /* ExplosionScene.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
@@ -95,6 +96,7 @@
 		939D16861A1B05830070A5FC /* level6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level6; sourceTree = "<group>"; };
 		939D16871A1B05830070A5FC /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level7; sourceTree = "<group>"; };
 		939D16881A1B05830070A5FC /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level8; sourceTree = "<group>"; };
+		939D168C1A1B12E00070A5FC /* level9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level9; sourceTree = "<group>"; };
 		A820F97E1A171F9700A6DA6A /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		A82CBBF11A15A0B90002F118 /* ExplosionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionScene.h; sourceTree = "<group>"; };
 		A82CBBF21A15A0B90002F118 /* ExplosionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionScene.m; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				A8646BC51A1AF5F500EB5C58 /* level1 */,
 				A8646BC61A1AF5F500EB5C58 /* level5 */,
 				A8646BC71A1AF5F500EB5C58 /* level0 */,
+				939D168C1A1B12E00070A5FC /* level9 */,
 				A84F7F0419FDC1C6001AEC0D /* Info.plist */,
 				A84F7F0519FDC1C6001AEC0D /* main.m */,
 				C08E38997C01381A4E7DF1AA /* level-1 */,
@@ -390,6 +393,7 @@
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				651216A21A19B20A0014436C /* spark.png in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
+				939D168D1A1B12E00070A5FC /* level9 in Resources */,
 				A8646BC91A1AF5F500EB5C58 /* level3 in Resources */,
 				A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,

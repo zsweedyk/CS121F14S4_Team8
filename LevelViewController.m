@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 9;
+    _numLevels = 10;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // set up sounds

@@ -776,6 +776,16 @@
                 [connectedBombs addObject:[NSNumber numberWithInt:i]];
             }
         }
+        
+        for (int j = 0;j<_receivers.count;j++){
+            if([[_receivers[j] getState] isEqual:@"On"]){
+                bool path1 = [self breadthSearchFrom:bomb To:_receivers[j] inDirection:connections[0] CheckingForShort:false];
+                bool path2 = [self breadthSearchFrom:bomb To:_receivers[j] inDirection:connections[1] CheckingForShort:false];
+                
+                if(path1&&path2)
+                    [connectedBombs addObject:[NSNumber numberWithInt:i]];
+            }
+        }
     }
     
     return connectedBombs;
