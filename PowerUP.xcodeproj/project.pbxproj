@@ -26,7 +26,6 @@
 		5BEF17351A0EC1C800354C84 /* Emitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17341A0EC1C800354C84 /* Emitter.m */; };
 		5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17371A0EC1E500354C84 /* Deflector.m */; };
 		5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF173A1A0EC79600354C84 /* Receiver.m */; };
-		5BEF173D1A0F252F00354C84 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF173C1A0F252F00354C84 /* level5 */; };
 		6512169E1A19AECD0014436C /* Components.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6512169D1A19AECD0014436C /* Components.xcassets */; };
 		651216A21A19B20A0014436C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 651216A11A19B20A0014436C /* spark.png */; };
 		A820F97F1A171F9700A6DA6A /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A820F97E1A171F9700A6DA6A /* Explosion.sks */; };
@@ -38,6 +37,12 @@
 		A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1019FDC1C6001AEC0D /* Images.xcassets */; };
 		A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */; };
 		A84F7F2019FDC1C6001AEC0D /* GameModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */; };
+		A8646BC81A1AF5F500EB5C58 /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC21A1AF5F500EB5C58 /* level4 */; };
+		A8646BC91A1AF5F500EB5C58 /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC31A1AF5F500EB5C58 /* level3 */; };
+		A8646BCA1A1AF5F500EB5C58 /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC41A1AF5F500EB5C58 /* level2 */; };
+		A8646BCB1A1AF5F500EB5C58 /* level1 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC51A1AF5F500EB5C58 /* level1 */; };
+		A8646BCC1A1AF5F500EB5C58 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC61A1AF5F500EB5C58 /* level5 */; };
+		A8646BCD1A1AF5F500EB5C58 /* level0 in Resources */ = {isa = PBXBuildFile; fileRef = A8646BC71A1AF5F500EB5C58 /* level0 */; };
 		A86E10CB1A005B1E0029011B /* Battery.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BA1A005B1E0029011B /* Battery.m */; };
 		A86E10CC1A005B1E0029011B /* Bulb.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BC1A005B1E0029011B /* Bulb.m */; };
 		A86E10CD1A005B1E0029011B /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10BE1A005B1E0029011B /* GameModel.m */; };
@@ -47,9 +52,6 @@
 		A86E10D11A005B1E0029011B /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10C61A005B1E0029011B /* MenuViewController.m */; };
 		A86E10D21A005B1E0029011B /* Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10C81A005B1E0029011B /* Switch.m */; };
 		A86E10D31A005B1E0029011B /* Wire.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10CA1A005B1E0029011B /* Wire.m */; };
-		A86E10D71A005C4E0029011B /* level0 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D41A005C4E0029011B /* level0 */; };
-		A86E10D81A005C4E0029011B /* level1 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D51A005C4E0029011B /* level1 */; };
-		A86E10D91A005C4E0029011B /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = A86E10D61A005C4E0029011B /* level2 */; };
 		A86E10DC1A0073C80029011B /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = A86E10DB1A0073C80029011B /* Bomb.m */; };
 		A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75C1A01E94F0004F539 /* beep-attention.aif */; };
 		A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */ = {isa = PBXBuildFile; fileRef = A893D75D1A01E94F0004F539 /* beep-rejected.aif */; };
@@ -58,8 +60,6 @@
 		A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5681A12084A008DD69D /* bomb-02.wav */; };
 		A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */; };
 		A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DDE1A043DA90076501D /* beep-horn.aif */; };
-		A8E84DE11A0591480076501D /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E84DE01A0591480076501D /* level3 */; };
-		A8E9101F1A06FA7100E591BE /* level4 in Resources */ = {isa = PBXBuildFile; fileRef = A8E9101E1A06FA7100E591BE /* level4 */; };
 		A8E910271A07278200E591BE /* level-3 in Resources */ = {isa = PBXBuildFile; fileRef = A8E910261A07278200E591BE /* level-3 */; };
 		C08E33F583226436092FCBF4 /* level-2 in Resources */ = {isa = PBXBuildFile; fileRef = C08E3BBDF2D1F37DE1A4AF54 /* level-2 */; };
 		C08E3C51D66438CE9748FA06 /* level-1 in Resources */ = {isa = PBXBuildFile; fileRef = C08E38997C01381A4E7DF1AA /* level-1 */; };
@@ -87,7 +87,6 @@
 		5BEF17371A0EC1E500354C84 /* Deflector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deflector.m; sourceTree = "<group>"; };
 		5BEF17391A0EC79600354C84 /* Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receiver.h; sourceTree = "<group>"; };
 		5BEF173A1A0EC79600354C84 /* Receiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Receiver.m; sourceTree = "<group>"; };
-		5BEF173C1A0F252F00354C84 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = "<group>"; };
 		6512169D1A19AECD0014436C /* Components.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Components.xcassets; path = ../Components.xcassets; sourceTree = "<group>"; };
 		651216A11A19B20A0014436C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A820F97E1A171F9700A6DA6A /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
@@ -106,6 +105,12 @@
 		A84F7F1919FDC1C6001AEC0D /* PowerUPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F1E19FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameModelTests.m; sourceTree = "<group>"; };
+		A8646BC21A1AF5F500EB5C58 /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
+		A8646BC31A1AF5F500EB5C58 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
+		A8646BC41A1AF5F500EB5C58 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
+		A8646BC51A1AF5F500EB5C58 /* level1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1; sourceTree = "<group>"; };
+		A8646BC61A1AF5F500EB5C58 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = "<group>"; };
+		A8646BC71A1AF5F500EB5C58 /* level0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0; sourceTree = "<group>"; };
 		A86E10B91A005B1E0029011B /* Battery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Battery.h; path = ../Battery.h; sourceTree = "<group>"; };
 		A86E10BA1A005B1E0029011B /* Battery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Battery.m; path = ../Battery.m; sourceTree = "<group>"; };
 		A86E10BB1A005B1E0029011B /* Bulb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bulb.h; path = ../Bulb.h; sourceTree = "<group>"; };
@@ -124,9 +129,6 @@
 		A86E10C81A005B1E0029011B /* Switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Switch.m; path = ../Switch.m; sourceTree = "<group>"; };
 		A86E10C91A005B1E0029011B /* Wire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wire.h; path = ../Wire.h; sourceTree = "<group>"; };
 		A86E10CA1A005B1E0029011B /* Wire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wire.m; path = ../Wire.m; sourceTree = "<group>"; };
-		A86E10D41A005C4E0029011B /* level0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0; sourceTree = "<group>"; };
-		A86E10D51A005C4E0029011B /* level1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1; sourceTree = "<group>"; };
-		A86E10D61A005C4E0029011B /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
 		A86E10DA1A0073C80029011B /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
 		A86E10DB1A0073C80029011B /* Bomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bomb.m; sourceTree = "<group>"; };
 		A893D75C1A01E94F0004F539 /* beep-attention.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-attention.aif"; sourceTree = "<group>"; };
@@ -136,8 +138,6 @@
 		A8C2D5681A12084A008DD69D /* bomb-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bomb-02.wav"; sourceTree = "<group>"; };
 		A8C2D5691A12084A008DD69D /* mouse-doubleclick-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mouse-doubleclick-02.wav"; sourceTree = "<group>"; };
 		A8E84DDE1A043DA90076501D /* beep-horn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-horn.aif"; sourceTree = "<group>"; };
-		A8E84DE01A0591480076501D /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
-		A8E9101E1A06FA7100E591BE /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level4; sourceTree = "<group>"; };
 		A8E910261A07278200E591BE /* level-3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-3"; sourceTree = "<group>"; };
 		C08E333456A9EA36EE6BDD8B /* ComponentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModel.m; sourceTree = SOURCE_ROOT; };
 		C08E3346B0B9BA5F2F430755 /* ComponentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModel.h; sourceTree = SOURCE_ROOT; };
@@ -237,12 +237,12 @@
 		A84F7F0319FDC1C6001AEC0D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A86E10D41A005C4E0029011B /* level0 */,
-				A86E10D51A005C4E0029011B /* level1 */,
-				A86E10D61A005C4E0029011B /* level2 */,
-				A8E84DE01A0591480076501D /* level3 */,
-				A8E9101E1A06FA7100E591BE /* level4 */,
-				5BEF173C1A0F252F00354C84 /* level5 */,
+				A8646BC21A1AF5F500EB5C58 /* level4 */,
+				A8646BC31A1AF5F500EB5C58 /* level3 */,
+				A8646BC41A1AF5F500EB5C58 /* level2 */,
+				A8646BC51A1AF5F500EB5C58 /* level1 */,
+				A8646BC61A1AF5F500EB5C58 /* level5 */,
+				A8646BC71A1AF5F500EB5C58 /* level0 */,
 				A84F7F0419FDC1C6001AEC0D /* Info.plist */,
 				A84F7F0519FDC1C6001AEC0D /* main.m */,
 				C08E38997C01381A4E7DF1AA /* level-1 */,
@@ -368,27 +368,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A86E10D81A005C4E0029011B /* level1 in Resources */,
-				A8E84DE11A0591480076501D /* level3 in Resources */,
 				6512169E1A19AECD0014436C /* Components.xcassets in Resources */,
-				5BEF173D1A0F252F00354C84 /* level5 in Resources */,
 				A8E84DDF1A043DA90076501D /* beep-horn.aif in Resources */,
 				A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */,
 				A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */,
-				A8E9101F1A06FA7100E591BE /* level4 in Resources */,
+				A8646BCA1A1AF5F500EB5C58 /* level2 in Resources */,
+				A8646BC81A1AF5F500EB5C58 /* level4 in Resources */,
 				A820F97F1A171F9700A6DA6A /* Explosion.sks in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
-				A86E10D71A005C4E0029011B /* level0 in Resources */,
 				651216A21A19B20A0014436C /* spark.png in Resources */,
-				A86E10D91A005C4E0029011B /* level2 in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
+				A8646BC91A1AF5F500EB5C58 /* level3 in Resources */,
 				A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
 				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
+				A8646BCD1A1AF5F500EB5C58 /* level0 in Resources */,
 				A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */,
+				A8646BCB1A1AF5F500EB5C58 /* level1 in Resources */,
 				A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
 				C08E33F583226436092FCBF4 /* level-2 in Resources */,
+				A8646BCC1A1AF5F500EB5C58 /* level5 in Resources */,
 				A8E910271A07278200E591BE /* level-3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
