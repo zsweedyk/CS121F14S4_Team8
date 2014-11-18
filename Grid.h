@@ -33,8 +33,8 @@
 - (void) bulbTurnedOff;
 - (int) getBatteryX;
 - (int) getBatteryY;
-- (int) getBombXWithIndex: (int) i;
-- (int) getBombYWithIndex: (int) i;
+- (int) getBombXAtRow:(int)row AndCol:(int)col;
+- (int) getBombYAtRow:(int)row AndCol:(int)col;
 - (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
 - (void) resetLasers;
 

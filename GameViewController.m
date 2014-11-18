@@ -54,8 +54,6 @@
     // other variables
     BOOL masterPowerOn;
     NSMutableArray* _locks;
-    
-    NSMutableArray* connectedBombs;
 
 }
 
@@ -68,7 +66,6 @@
     _numLevels = totalLevels;
     _language = language;
     _locks = locks;
-    masterPowerOn = NO;
     
     [self viewDidLoad];
     return self;
@@ -241,23 +238,23 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     
-    [_grid batteryTurnedOff];
-    [_grid bulbTurnedOff];
+    [self powerOff];
 
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
-    if (masterPowerOn) {
-        [_model powerOn];
-        [self updateGrid];
-    }
 }
 
 // If the battery was selected, power on and update
 -(void) powerOn
 {
-    masterPowerOn = YES;
-    
     [_model powerOn];
     [self updateGrid];
+}
+
+- (void) powerOff
+{
+    [_model powerOff];
+    [_grid batteryTurnedOff];
+    [_grid bulbTurnedOff];
 }
 
 
@@ -265,12 +262,10 @@
 {
     masterPowerOn = !masterPowerOn;
     
-    if (masterPowerOn)
+    if (masterPowerOn) {
         [self powerOn];
-    else
-    {
-        [_grid batteryTurnedOff];
-        [_grid bulbTurnedOff];
+    } else {
+        [self powerOff];
     }
 }
 
@@ -281,6 +276,7 @@
     NSArray* deflectors = [_model getConnectedDeflectors];
     NSArray* receivers = [_model getConnectedReceivers];
     NSArray* bulbs = [_model getConnectedBulbs];
+    NSArray* bombs = [_model getConnectedBombs];
     
     [_grid resetLasers];
     [self updateComponents:lasers];
@@ -294,16 +290,15 @@
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
-    if (connectedBombs.count > 0)
-    {
+    if (bombs.count > 0) {
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
         
-        [self explodeBombsWithIndices:connectedBombs];
+        [self explodeBombs:bombs];
         
         [self displayMessageFor:@"Lose"];
-    }
-    else if (shorted) {
+        
+    } else if (shorted) {
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
         
@@ -394,15 +389,17 @@
     [_explosion createExplosionAtX:xPoint AndY:yPoint];
 }
 
--(void) explodeBombsWithIndices: (NSArray*) indices
+-(void) explodeBombs:(NSArray*)bombs
 {
     int frameY = self.view.frame.size.height;
     
-    for (int i = 0; i < indices.count; ++i)
-    {
-        int bombIndex = (int)[indices[i] longValue];
-        int xPos = [_grid getBombXWithIndex:bombIndex] + xGrid;
-        int yPos = [_grid getBombYWithIndex:bombIndex] + yGrid;
+    NSArray* bombsRow = bombs[0];
+    NSArray* bombsCol = bombs[1];
+    
+    for (int i = 0; i < bombsRow.count; ++i) {
+        int xPos = [_grid getBombXAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + xGrid;
+        int yPos = [_grid getBombYAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + yGrid;
+        
         int xPoint = xPos + 25;
         int yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];

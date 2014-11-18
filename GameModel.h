@@ -17,6 +17,7 @@
 - (BOOL) isConnected;
 - (BOOL) isShorted;
 - (void) powerOn;
+- (void) powerOff;
 
 - (NSArray*) getConnectedBombs;
 - (NSArray*) getConnectedBulbs;

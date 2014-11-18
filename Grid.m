@@ -136,37 +136,47 @@
     if ([typeIndicator isEqual: @"wi"]) {
         // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
+        
     } else if ([typeIndicator isEqual:@"ba"]) {
         // battery case
         [_batRows addObject:[NSNumber numberWithInt:row]];
         [_batCols addObject:[NSNumber numberWithInt:col]];
+        
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
+        
     } else if ([typeIndicator isEqual:@"bu"]) {
         // bulb case
         [_bulbRows addObject:[NSNumber numberWithInt:row]];
         [_bulbCols addObject:[NSNumber numberWithInt:col]];
+        
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
     } else if ([typeIndicator isEqual:@"sw"]) {
         // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
         newComponent.tag = 70;
+        
     } else if ([typeIndicator isEqual:@"em"]) {//emitter case
         newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
+        
     } else if ([typeIndicator isEqual:@"de"]) {//deflector case
         newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Deflector *)newComponent).delegate = self;
+        
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+        
     } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
         newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
         [_bombRows addObject:[NSNumber numberWithInt:row]];
         [_bombCols addObject:[NSNumber numberWithInt:col]];
+        
     } else if ([typeIndicator isEqual:@"la"]) { // laser case
         newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
         [_lasers addObject:newComponent];
-    }else {
+        
+    } else {
         return;
     }
 
@@ -262,14 +272,14 @@
     return (cellSize * [_batRows[0] intValue]);
 }
 
-- (int) getBombXWithIndex: (int) i
+- (int) getBombXAtRow:(int)row AndCol:(int)col
 {
-    return (cellSize * [_bombCols[i] intValue]);
+    return (cellSize * row);
 }
 
-- (int) getBombYWithIndex: (int) i
+- (int) getBombYAtRow:(int)row AndCol:(int)col
 {
-    return (cellSize * [_bombRows[i] intValue]);
+    return (cellSize * col);
 }
 
 

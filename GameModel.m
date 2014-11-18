@@ -435,6 +435,11 @@
     return [self getConnectedLocations:_bulbs withState:YES];
 }
 
+- (NSArray*) getConnectedBombs
+{
+    return [self getConnectedLocations:_bombs withState:NO];
+}
+
 // When we want to get a location array to apss to gameviewcontroller
 // Sometimes we only need the location, other times we also need the state
 - (NSArray*) getConnectedLocations:(NSArray*)components withState:(BOOL)needState
@@ -464,9 +469,8 @@
     return compLocs;
 }
 
-- (void) updateLasers
+- (void) resetLasers
 {
-    
     for (int i = 0; i < _lasers.count; ++i) {
         int laserRow = [_lasers[i] getRow];
         int laserCol = [_lasers[i] getCol];
@@ -476,6 +480,12 @@
     }
     
     [_lasers removeAllObjects];
+}
+
+- (void) updateLasers
+{
+    
+    [self resetLasers];
     
     for(int i = 0; i<_deflectors.count; ++i){
         [_deflectors[i] setState:NO];
@@ -595,6 +605,7 @@
     ComponentModel *obstacle = _grid[row][col];
     
     if ([[obstacle getType] isEqual:@"Deflector"]) { // Handle the obstacle being a deflector
+        
         // First determine the state of the deflector
         if ([obstacle isConnectedBottom] && [dir isEqual:@"Bottom"]) {
             [obstacle setState:YES];
@@ -620,12 +631,15 @@
         } else {
             return; // The deflector doesn't deflect anywhere
         }
-        
-        
     } else if ([[obstacle getType] isEqual:@"Receiver"]) { // Handle the obstacle being a reflector
+        
         if ([[obstacle getDirection] isEqual:dir]) {
             [obstacle setState:YES];
         }
+        
+    } else if ([[obstacle getType] isEqual:@"Bomb"]) { // Handle the obstacle being a bomb
+        
+        [obstacle setState:YES];
     } else {
         return; // Some other type of obstacle
     }
@@ -686,9 +700,9 @@
             return YES;
         }
         
-        // Ignore a path with a lightbulb in the short case
+        // Ignore a path with a lightbulb, emitter or bomb in the short case
         if (checkForShort) {
-            if ([[element getType] isEqual:@"Bulb"] || [[element getType] isEqual:@"Emitter"]) {
+            if ([[element getType] isEqual:@"Bulb"] || [[element getType] isEqual:@"Emitter"] || [[element getType] isEqual:@"Bomb"]) {
                 continue;
             }
         }
@@ -730,7 +744,6 @@
     // Check conectivity for each bulb
     for (int i = 0; i < components.count; ++i) {
         
-        // Make sure bulbs are actually bulbs
         ComponentModel* comp = components[i];
         
         NSArray* connections = [self getAllConnectionsTo:comp];
@@ -791,15 +804,15 @@
 - (void) powerOn
 {
     [_batteryPos setState:YES];
-    [self resetEmitters];
-    [self resetBulbs];
+    [self resetComponents];
     
     [self updateStateOfComponents:_emitters];
     
     while (true) {
         [self updateLasers];
-        NSLog(@"%lu", _lasers.count);
+
         [self updateStateOfComponents:_bulbs];
+        [self updateStateOfComponents:_bombs];
         
         NSArray* emitterStates = [self stateOfEmitters];
         [self updateStateOfComponents:_emitters];
@@ -807,7 +820,20 @@
             break;
         }
     }
+}
 
+- (void) powerOff
+{
+    [_batteryPos setState:NO];
+    [self resetComponents];
+}
+
+- (void) resetComponents
+{
+    [self reset:_emitters];
+    [self reset:_bulbs];
+    [self reset:_bombs];
+    [self resetLasers];
 }
 
 - (NSArray*) stateOfEmitters
@@ -830,16 +856,9 @@
     return NO;
 }
 
-- (void) resetEmitters
+- (void) reset:(NSArray*)components
 {
-    for (ComponentModel* comp in _emitters) {
-        [comp setState:NO];
-    }
-}
-
-- (void) resetBulbs
-{
-    for (ComponentModel* comp in _bulbs) {
+    for (ComponentModel* comp in components) {
         [comp setState:NO];
     }
 }

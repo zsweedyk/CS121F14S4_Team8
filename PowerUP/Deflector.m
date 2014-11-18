@@ -126,14 +126,14 @@
     //return _possibleOrientations[_currentOrientation];
 }
 
-- (void) changeDirection:(NSString *)dir
-{
-    //_orientation = [self newOrientation:dir];
-    //    NSLog(_orientation);
-    //    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
-    //    previousDir = @"X";
-    //    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
-}
+//- (void) changeDirection:(NSString *)dir
+//{
+//    //_orientation = [self newOrientation:dir];
+//    //    NSLog(_orientation);
+//    //    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+//    //    previousDir = @"X";
+//    //    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
+//}
 
 - (void) changeImage:(NSString *)dir
 {
