@@ -332,6 +332,7 @@
 				TargetAttributes = {
 					A84F7EFF19FDC1C6001AEC0D = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 3SNSJW6HJ4;
 					};
 					A84F7F1819FDC1C6001AEC0D = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -569,6 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PowerUP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -579,6 +581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PowerUP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

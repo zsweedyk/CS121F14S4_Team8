@@ -53,7 +53,7 @@ CGPoint end;
     int dx = start.x-end.x;
     int dy = start.y-end.y;
     //if user taps the component, do onTap
-    if((dx == 0)&&(dy == 0)){
+    if(aTouch.tapCount == 1){
         [self.delegate performSelector:@selector(onTap)];
     }else{
         if (abs(dx)>abs(dy)) {

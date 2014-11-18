@@ -125,7 +125,7 @@
     // 1 means locked
     lock = [[NSMutableArray alloc] init];
     [lock addObject: [NSNumber numberWithInt:0]]; //the first level is always unlocked
-    test = false;
+    test = YES;
     [self assignLocks];
     
     // Do any additional setup after loading the view.
