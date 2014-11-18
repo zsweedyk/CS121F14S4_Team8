@@ -10,7 +10,6 @@
 
 @interface GameViewController : UIViewController <UIAlertViewDelegate>
 
-@property (nonatomic) NSInteger language;
-@property (weak, nonatomic) IBOutlet UIButton* back;
+- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language AndLocks: (NSMutableArray*) locks;
 
 @end

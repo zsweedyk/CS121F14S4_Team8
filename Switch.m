@@ -9,37 +9,91 @@
 #import "Switch.h"
 
 @implementation Switch {
-    NSArray* _possibleOrientations;
-    int _currentOrientation;
+    UIImageView* _switch;
+    NSString* _orientation;
+    NSString* _imageOrientation;
+    int _row;
+    int _col;
 }
 
-- (id) initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col
 {
     self = [super initWithFrame:frame];
+    // Initialize fields for touch interaction
+    self._exitedDir = @"X";
+    self._enteredDir = @"X";
     
-    _possibleOrientations = [[NSArray alloc] initWithObjects:@"XXXX",@"LXXX",@"LRXX",@"LRTX",@"LRTB",@"LRXB",@"LXTX",@"LXTB",@"LXXB",@"XRXX",@"XRTX",@"XRTB",@"XRXB",@"XXTX",@"XXTB",@"XXXB", nil];
-    _currentOrientation = 0;
+    _row = row;
+    _col = col;
+    _orientation = @"XXXX";
+    _imageOrientation = @"XXXX";
     
-    [self setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _possibleOrientations[_currentOrientation]]] forState:UIControlStateNormal];
+    CGRect switchFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _switch = [[UIImageView alloc] initWithFrame:switchFrame];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+    
+    [self addSubview:_switch];
+    
     [[self layer] setBorderWidth:2.0f];
     [[self layer] setBorderColor:[UIColor redColor].CGColor];
-    [self addTarget:self.delegate action:@selector(switchSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     return self;
 }
 
-
-
-- (NSString*) rotateSwitch
+- (void) addImageDirection: (NSString*) dir
 {
-    if (_currentOrientation == [_possibleOrientations count]-1) {
-        _currentOrientation = 0;
-    } else {
-        ++_currentOrientation;
-    }
-    [self setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"wire%@", _possibleOrientations[_currentOrientation]]] forState:UIControlStateNormal];
-    
-    return _possibleOrientations[_currentOrientation];
+    _imageOrientation = [self addOrientation:dir to:_imageOrientation];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
 }
+
+- (void) removeImageDirection: (NSString*) dir
+{
+    _imageOrientation = [_imageOrientation stringByReplacingOccurrencesOfString:dir withString:@"X"];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+}
+
+- (void) addDirection: (NSString*) dir
+{
+    _orientation = [self addOrientation:dir to:_orientation];
+    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
+    
+    //These lines may not be necesarry
+    _imageOrientation = _orientation;
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+}
+
+- (void) resetDirection
+{
+    _orientation = @"XXXX";
+    _imageOrientation = @"XXXX";
+    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+}
+
+- (NSString*) addOrientation: (NSString*) dir to: (NSString*) currOrientation
+{
+    NSString* newOrientation;
+    NSString* start;
+    NSString* end;
+    if ([dir isEqual:@"L"]) {
+        start = @"";
+        end = [currOrientation substringFromIndex:1];
+    } else if ([dir isEqual:@"R"]) {
+        start = [currOrientation substringToIndex:1];
+        end = [currOrientation substringFromIndex:2];
+    } else if ([dir isEqual:@"T"]) {
+        start = [currOrientation substringToIndex:2];
+        end = [currOrientation substringFromIndex:3];
+    } else if ([dir isEqual:@"B"]) {
+        start = [currOrientation substringToIndex:3];
+        end = @"";
+    }
+    newOrientation = [NSString stringWithFormat:@"%@%@%@", start, dir, end];
+    return newOrientation;
+}
+
+
 
 @end

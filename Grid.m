@@ -10,14 +10,35 @@
 #import "Wire.h"
 #import "Bulb.h"
 #import "Battery.h"
+#import "Emitter.h"
+#import "Receiver.h"
+#import "Laser.h"
+#import "Deflector.h"
+#import "Bomb.h"
+#import "ComponentModel.h"
+#import "ExplosionScene.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface Grid()
 {
     int _numRows;
     int _numCols;
-    int _bulbRow;
-    int _bulbCol;
+    
+    NSMutableArray* _bulbRows;
+    NSMutableArray* _bulbCols;
+    NSMutableArray* _bombRows;
+    NSMutableArray* _bombCols;
+    NSMutableArray* _batRows;
+    NSMutableArray* _batCols;
     NSMutableArray* _cells;
+    //Lasers
+    NSMutableArray* _lasers;
+    
+    CGFloat cellSize;
+    
+    AVAudioPlayer* _audioPlayerPressed;
 }
 @end
 
@@ -36,109 +57,352 @@
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     
+    _numRows = rows;
+    _numCols = cols;
+
+    //initialize _cells 2-D array
     _cells = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _numRows; ++i) {
+        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        [_cells addObject:rowCells];
+    }
+
+    [self setUpGrid];
     
-    [self setUpGridForNumRows:rows andCols:cols];
+    _lasers = [[NSMutableArray alloc] init];
+    
+    // sound set up
+    NSString *pressedPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *pressedPathURL = [NSURL fileURLWithPath : pressedPath];
+    _audioPlayerPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:pressedPathURL error:nil];
     
     return self;
 }
 
-- (void) setUpGridForNumRows:(int)rows andCols:(int)cols
+- (void) setUpGrid
 {
-    _numRows = rows;
-    _numCols = cols;
-    
+    // reset bat and bulb coordinates
+    _batCols = [[NSMutableArray alloc] init];
+    _batRows = [[NSMutableArray alloc] init];
+    _bulbCols = [[NSMutableArray alloc] init];
+    _bulbRows = [[NSMutableArray alloc] init];
+    _bombCols = [[NSMutableArray alloc] init];
+    _bombRows = [[NSMutableArray alloc] init];
+   
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
-    CGFloat cellSize = MIN(cellHeight, cellWidth);
+    cellSize = MIN(cellHeight, cellWidth);
     
     // Set each cell on the grid
     for (int row = 0; row < _numRows; ++row){
-        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
         for (int col = 0; col < _numCols; ++col){
             // location of cell
             CGFloat xLabel = col * cellSize;
             CGFloat yLabel = row * cellSize;
             
-            // initially set all cells to a white label. Initialized to proper component later
+            // initially set all cells to a clear label. Initialized to proper component later
             CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
             UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            blankTile.tag = row*10+col; // keep track of where each cell is
-            [blankTile setBackgroundColor:[UIColor whiteColor]];
+            [blankTile setBackgroundColor:[UIColor clearColor]];
             
             [self addSubview:blankTile];
-            [rowCells addObject:blankTile];
+            [_cells[row] addObject:blankTile];
         }
-        
-        [_cells addObject:rowCells];
     }
-    
-    
 }
 
-// 0 empty cell
-// 1 wire
-// 2 battery neg
-// 6,3 battery pos
-// 4 bulb
-// 5 bulb connector
-// 9 switch
-- (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType{
-    
+// components table:
+// 0: blank
+// 1: wire
+// 3: negative battery
+// 6: positive battery
+// 4: bulb
+// 7: switch
+// 9: bomb
+- (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType
+{
     // white label to replace
-    UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-    [label removeFromSuperview];
-    
+    UIView* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+
     // new component to replace with
     UIView* newComponent;
     
     // check component type and use the appropriate object
     NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
-    if ([typeIndicator isEqual: @"wi"]) { // wire case
+    
+    if ([typeIndicator isEqual: @"wi"]) {
+        // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
-    } else if ([typeIndicator isEqual:@"ba"]) { // battery case
-        //newComponent = [[UIImageView alloc] initWithFrame:label.frame];
-        //[(UIImageView*)newComponent setImage:[UIImage imageNamed:componentType]];
+    } else if ([typeIndicator isEqual:@"ba"]) {
+        // battery case
+        [_batRows addObject:[NSNumber numberWithInt:row]];
+        [_batCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
-    } else if ([typeIndicator isEqual:@"bu"]) { // bulb case
-        _bulbRow = row;
-        _bulbCol = col;
+    } else if ([typeIndicator isEqual:@"bu"]) {
+        // bulb case
+        [_bulbRows addObject:[NSNumber numberWithInt:row]];
+        [_bulbCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
-    } else if ([typeIndicator isEqual:@"sw"]) { // switch case
-        newComponent = [[Switch alloc] initWithFrame:label.frame];
+    } else if ([typeIndicator isEqual:@"sw"]) {
+        // switch case
+        newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
-    } else {
-        newComponent = label;
+        newComponent.tag = 70;
+    } else if ([typeIndicator isEqual:@"em"]) {//emitter case
+        newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"de"]) {//deflector case
+        newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
+        ((Deflector *)newComponent).delegate = self;
+    } else if ([typeIndicator isEqual:@"re"]) {//receiver case
+        newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+    } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
+        newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_bombRows addObject:[NSNumber numberWithInt:row]];
+        [_bombCols addObject:[NSNumber numberWithInt:col]];
+    }else {
+        return;
     }
-    newComponent.tag = label.tag;
+
+    [label removeFromSuperview];
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
-    
 }
 
-- (void) switchSelected:(id)sender
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
 {
-    NSNumber* senderTag = [[NSNumber alloc] initWithInt:(int)((Switch*)sender).tag];
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
     
-    NSString* newOrientation = [(Switch*)sender rotateSwitch];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+}
+
+- (void) wireSelected:(id)sender
+{
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
+}
+
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
+{
+    [_audioPlayerPressed prepareToPlay];
+    [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(switchSelectedWithTag:withOrientation:) withObject:senderTag withObject:newOrientation];
+    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) powerUp:(id)sender
 {
-    [(Battery*)sender turnOnPower];
+    // turn on all battery components
+    for (int i = 0; i < _batCols.count; ++i) {
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
+    }
     
     [self.delegate performSelector:@selector(powerOn)];
 }
 
 
-- (void) win{
+- (void) bulbConnectedWithIndices: (NSArray*) bulbs{
+    // turn off all bulbs first
+    for (int i = 0; i < _bulbRows.count; ++i)
+    {
+        int bulbRow = [_bulbRows[i] intValue];
+        int bulbCol = [_bulbCols[i] intValue];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
+    }
     
-    [(Bulb*)[[_cells objectAtIndex:_bulbRow] objectAtIndex:_bulbCol] lightUp];
+    // turn on all connected bulbs
+    for (int j = 0; j < bulbs.count; ++j)
+    {
+        int index = [bulbs[j] integerValue];
+        int bulbRow = [_bulbRows[index] intValue];
+        int bulbCol = [_bulbCols[index] intValue];
+        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+    }
+}
+
+- (void) setStateWithArray:(NSArray *)locs
+{
+    for(int i=0;i<locs.count;i++){
+        if([[(ComponentModel *)locs[i] getState] isEqual:@"On"]){
+            int row = [locs[i] getRow];
+            int col = [locs[i] getCol];
+            [_cells[row][col] turnOn];
+        }else{
+            int row = [locs[i] getRow];
+            int col = [locs[i] getCol];
+            [_cells[row][col] turnOff];
+        }
+    }
+}
+
+-(void)emit:(NSArray *)locs
+{
+    for(int i = 0;i<_lasers.count;i++){
+        [_lasers[i] removeFromSuperview];
+    }
+    [_lasers removeAllObjects];
+    for(int i = 0;i<locs.count;i++){
+        int row = [(ComponentModel *)locs[i] getRow];
+        int col = [(ComponentModel *)locs[i] getCol];
+        NSString * imagename = [(ComponentModel *)locs[i] getState];
+        UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+        [label removeFromSuperview];
+        
+        Laser *beam = [[Laser alloc] initWithFrame:label.frame andOrientation:imagename];
+        beam.tag = label.tag;
+        [self addSubview:beam];
+        [_lasers addObject:beam];
+        [[_cells objectAtIndex:row] setObject:beam atIndex:col];
+    }
+}
+
+
+- (void) shorted {
+    // explode all battery components
+    for (int i = 0; i < _batCols.count; ++i)
+    {
+        int batRow = [_batRows[i] intValue];
+        int batCol = [_batCols[i] intValue];
+        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
+    }
+}
+
+- (int) getBatteryX
+{
+    return (cellSize * [_batCols[0] intValue]);
+}
+
+- (int) getBatteryY
+{
+    return (cellSize * [_batRows[0] intValue]);
+}
+
+- (int) getBombXWithIndex: (int) i
+{
+    return (cellSize * [_bombCols[i] intValue]);
+}
+
+- (int) getBombYWithIndex: (int) i
+{
+    return (cellSize * [_bombRows[i] intValue]);
+}
+
+
+//Tags: Switches are 70-74
+// -0 means that normal/ has not been touched yet
+// -1 means touch started outside of view and is now inside of view
+// -2 means that touch started outside of view, went inside of view and has now exited view
+// -3 means that touch started inside of view and is still inside of view
+// -4 means that touch started inside of view and has now exited view
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInView:self];
+    for(Switch* view in self.subviews){
+        // touch begins inside a switch
+        if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
+            view.tag = 73;
+        }
+    }
     
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint location = [[touches anyObject] locationInView:self];
+    CGPoint prevLocation = [[touches anyObject] previousLocationInView:self];
+    
+    for(Switch* view in self.subviews){
+        
+        // touch has entered a switch
+        if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
+            if (prevLocation.x < view.frame.origin.x) {
+                view._enteredDir = @"L";
+            }else if (prevLocation.x > view.frame.origin.x + view.frame.size.width) {
+                view._enteredDir = @"R";
+            }else if (prevLocation.y < view.frame.origin.y) {
+                view._enteredDir = @"T";
+            }else if (prevLocation.y > view.frame.origin.y + view.frame.size.height) {
+                view._enteredDir = @"B";
+            }
+            [view addImageDirection:view._enteredDir];
+            view.tag = 71;
+            
+            // touch has entered and exited a switch
+        } else if(view.tag == 71 && CGRectContainsPoint(view.frame, prevLocation) && !CGRectContainsPoint(view.frame, location)){
+            if (location.x < view.frame.origin.x) {
+                view._exitedDir = @"L";
+            }else if (location.x > view.frame.origin.x + view.frame.size.width) {
+                view._exitedDir = @"R";
+            }else if (location.y < view.frame.origin.y) {
+                view._exitedDir = @"T";
+            }else if (location.y > view.frame.origin.y + view.frame.size.height) {
+                view._exitedDir = @"B";
+            }
+            if ([view._exitedDir isEqualToString:view._enteredDir]) {
+                [view removeImageDirection:view._enteredDir];
+                view._exitedDir = @"X";
+                view._enteredDir = @"X";
+                view.tag = 70;
+            } else {
+                [view addImageDirection:view._exitedDir];
+                view.tag = 72;
+            }
+            
+            // touch has entered, exited and re-entered a switch
+        } else if(view.tag == 72 && CGRectContainsPoint(view.frame, location)) {
+            [view removeImageDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 71;
+            
+            // touch started in a switch and has now exited
+        } else if(view.tag == 73 && CGRectContainsPoint(view.frame, prevLocation) && !CGRectContainsPoint(view.frame, location)){
+            if (location.x < view.frame.origin.x) {
+                view._exitedDir = @"L";
+            }else if (location.x > view.frame.origin.x + view.frame.size.width) {
+                view._exitedDir = @"R";
+            }else if (location.y < view.frame.origin.y) {
+                view._exitedDir = @"T";
+            }else if (location.y > view.frame.origin.y + view.frame.size.height) {
+                view._exitedDir = @"B";
+            }
+            [view addImageDirection:view._exitedDir];
+            view.tag = 74;
+            
+            // touch has started in a switch, exited and now re-entered
+        } else if(view.tag == 74 && CGRectContainsPoint(view.frame, location)){
+            [view removeImageDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 73;
+        }
+    }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* touch = [touches anyObject];
+    for(Switch* view in self.subviews){
+        if(view.tag == 71){
+            [view addDirection:view._enteredDir];
+            view._enteredDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 72){
+            [view addDirection:view._enteredDir];
+            [view addDirection:view._exitedDir];
+            view._enteredDir = @"X";
+            view._exitedDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 74){
+            [view addDirection:view._exitedDir];
+            view._exitedDir = @"X";
+            view.tag = 70;
+        } else if (view.tag == 73 && touch.tapCount == 1){
+            [view resetDirection];
+            view.tag = 70;
+        }
+    }
 }
 
 @end

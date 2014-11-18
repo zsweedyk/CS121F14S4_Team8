@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "Switch.h"
 #import "Battery.h"
 
 @protocol GridDelegate
 
 @required
-- (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation;
+- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
+- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
 - (void) powerOn;
 @end
 
@@ -23,8 +25,15 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
-- (void) setUpGridForNumRows:(int)rows andCols:(int)cols;
+- (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) win;
+- (void) bulbConnectedWithIndices: (NSArray*) bulbs;
+- (void) shorted;
+- (void) emit:(NSArray *)locs;
+- (void) setStateWithArray:(NSArray *)locs;
+- (int) getBatteryX;
+- (int) getBatteryY;
+- (int) getBombXWithIndex: (int) i;
+- (int) getBombYWithIndex: (int) i;
 
 @end
