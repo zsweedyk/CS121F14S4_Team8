@@ -16,6 +16,7 @@
 - (void) componentSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 - (BOOL) isConnected;
 - (BOOL) isShorted;
+- (BOOL) isBombConnected;
 - (void) powerOn;
 - (void) powerOff;
 

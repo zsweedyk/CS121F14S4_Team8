@@ -238,6 +238,7 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     
+    masterPowerOn = NO;
     [self powerOff];
 
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
@@ -287,10 +288,11 @@
     
     BOOL shorted = [_model isShorted];
     BOOL connected = [_model isConnected];
+    BOOL bombConnected = [_model isBombConnected];
     
     // if the circuit is shorted, explode the battery, and display lose message
     // the message will ask the user to restart the game
-    if (bombs.count > 0) {
+    if (bombConnected) {
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
         
@@ -393,8 +395,8 @@
 {
     int frameY = self.view.frame.size.height;
     
-    NSArray* bombsRow = bombs[0];
-    NSArray* bombsCol = bombs[1];
+    NSArray* bombsRow = bombs[1];
+    NSArray* bombsCol = bombs[0];
     
     for (int i = 0; i < bombsRow.count; ++i) {
         int xPos = [_grid getBombXAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + xGrid;

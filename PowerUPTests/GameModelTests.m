@@ -125,59 +125,59 @@
 }
 
 
-- (void) testSwitchSelectedAtInvalidRowandColandOrientation
+- (void) testcomponentSelectedAtInvalidRowandColandOrientation
 {
     // Tests for invalid row and col inputs
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:-1 andCol:0 withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:__INT_MAX__ andCol:0 withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:-1 withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:__INT_MAX__ withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:-1 andCol:-1 withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:__INT_MAX__ andCol:__INT_MAX__ withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:-1 andCol:0 withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:__INT_MAX__ andCol:0 withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:-1 withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:__INT_MAX__ withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:-1 andCol:-1 withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:__INT_MAX__ andCol:__INT_MAX__ withOrientation:@"XXXX"], NSException);
 
     // Tests for invalid orientation inputs
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"AAAA"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"XXXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"RLBT"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"LXTH"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"XXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"AAAA"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"XXXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"RLBT"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"LXTH"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"XXXX"], NSException);
 
     // Tests for locations that are not switches
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:0 andCol:0 withOrientation:@"XXXX"], NSException);
-    XCTAssertThrowsSpecific([_model switchSelectedAtRow:2 andCol:7 withOrientation:@"LRTB"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:0 andCol:0 withOrientation:@"XXXX"], NSException);
+    XCTAssertThrowsSpecific([_model componentSelectedAtRow:2 andCol:7 withOrientation:@"LRTB"], NSException);
 }
 
 - (void) testGridUpdatingAtEdgeCases
 {
     // Make the switch have a wire that would attempt to dash outside of grid.
     // Index out of bound error will occur if these edge cases are not accounted for
-    [_model switchSelectedAtRow:0 andCol:4 withOrientation:@"XXTX"];
-    [_model switchSelectedAtRow:5 andCol:0 withOrientation:@"LXXX"];
-    [_model switchSelectedAtRow:14 andCol:1 withOrientation:@"XXXB"];
-    [_model switchSelectedAtRow:6 andCol:14 withOrientation:@"XRXX"];
+    [_model componentSelectedAtRow:0 andCol:4 withOrientation:@"XXTX"];
+    [_model componentSelectedAtRow:5 andCol:0 withOrientation:@"LXXX"];
+    [_model componentSelectedAtRow:14 andCol:1 withOrientation:@"XXXB"];
+    [_model componentSelectedAtRow:6 andCol:14 withOrientation:@"XRXX"];
 }
 
 - (void) testGridConnection
 {
     [_model generateGrid:-3]; // bring in a different grid for testing
 
-    XCTAssertFalse([_model connected]); // originally unconnected
+    XCTAssertFalse([_model isConnected]); // originally unconnected
 
-    [_model switchSelectedAtRow:11 andCol:8 withOrientation:@"LXXX"];
-    XCTAssertFalse([_model connected]); // still unconnected
+    [_model componentSelectedAtRow:11 andCol:8 withOrientation:@"LXXX"];
+    XCTAssertFalse([_model isConnected]); // still unconnected
 
-    [_model switchSelectedAtRow:11 andCol:8 withOrientation:@"LRXX"];
-    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTX"];
-    XCTAssertFalse([_model connected]); // still unconnected
+    [_model componentSelectedAtRow:11 andCol:8 withOrientation:@"LRXX"];
+    [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XXTX"];
+    XCTAssertFalse([_model isConnected]); // still unconnected
 
-    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
-    XCTAssertFalse([_model connected]);
+    [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
+    XCTAssertFalse([_model isConnected]);
 
-    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
-    XCTAssertFalse([_model connected]);
+    [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
+    XCTAssertFalse([_model isConnected]);
 
-    [_model switchSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
-    XCTAssertTrue([_model connected]);
+    [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
+    XCTAssertTrue([_model isConnected]);
 
 }
 
@@ -185,11 +185,11 @@
 {
     [_model generateGrid:-4];
     
-    XCTAssertFalse([_model shorted]); // originally unshorted
+    XCTAssertFalse([_model isShorted]); // originally unshorted
     
-    [_model switchSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
+    [_model componentSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
  
-    XCTAssertTrue([_model shorted]); // originally unshorted
+    XCTAssertTrue([_model isShorted]); // originally unshorted
 }
 
 @end

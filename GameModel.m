@@ -133,7 +133,7 @@
                 component = [[ComponentModel alloc] initOfType:@"Deflector" AtRow:r AndCol:c AndState:NO];
                 [_deflectors addObject:component];
             } else if ([datum isEqual:@"9"]) {
-                component = [[ComponentModel  alloc] initOfType:@"Bomb" AtRow:r AndCol:c AndState:@"Off"];
+                component = [[ComponentModel  alloc] initOfType:@"Bomb" AtRow:r AndCol:c AndState:NO];
                 [_bombs addObject:component];
             } else {
                 component = [[ComponentModel alloc] initOfType:@"Empty" AtRow:r AndCol:c AndState:NO];
@@ -437,6 +437,7 @@
 
 - (NSArray*) getConnectedBombs
 {
+    NSArray* result = [self getConnectedLocations:_bombs withState:NO];
     return [self getConnectedLocations:_bombs withState:NO];
 }
 
@@ -737,6 +738,13 @@
     } else {
         return false;
     }
+}
+
+-(BOOL) isBombConnected
+{
+    NSArray* connectedBombLoc = [self getConnectedLocations:_bombs withState:NO];
+    NSArray* connectedBombs = connectedBombLoc[0];
+    return (connectedBombs.count > 0);
 }
 
 - (void) updateStateOfComponents:(NSArray*)components

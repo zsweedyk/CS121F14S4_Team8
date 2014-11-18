@@ -45,7 +45,7 @@
 - (void) pointTo:(NSString *)dir
 {
     // We allow empty because it makes initialization easier
-    NSAssert([_type isEqual:@"Receiver"]||[_type isEqual:@"Emitter"]||[_type isEqual:@"Empty"], @"Component type of %@ does not point", _type);
+    //NSAssert([_type isEqual:@"Receiver"]||[_type isEqual:@"Emitter"]||[_type isEqual:@"Empty"], @"Component type of %@ does not point", _type);
     _direction = dir;
 }
 

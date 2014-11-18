@@ -31,10 +31,10 @@
 		74996BD41A1B40E500D48CAA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 74996BCB1A1B40E500D48CAA /* Explosion.sks */; };
 		74996BD51A1B40E500D48CAA /* ExplosionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 74996BCD1A1B40E500D48CAA /* ExplosionScene.m */; };
 		74996BD61A1B40E500D48CAA /* level-2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74996BCE1A1B40E500D48CAA /* level-2.txt */; };
-		74996BD71A1B40E500D48CAA /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74996BCF1A1B40E500D48CAA /* level6.txt */; };
-		74996BD81A1B40E500D48CAA /* level7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD01A1B40E500D48CAA /* level7.txt */; };
-		74996BD91A1B40E500D48CAA /* level8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD11A1B40E500D48CAA /* level8.txt */; };
-		74996BDA1A1B40E500D48CAA /* level9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level9.txt */; };
+		74996BD71A1B40E500D48CAA /* level6 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BCF1A1B40E500D48CAA /* level6 */; };
+		74996BD81A1B40E500D48CAA /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD01A1B40E500D48CAA /* level7 */; };
+		74996BD91A1B40E500D48CAA /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD11A1B40E500D48CAA /* level8 */; };
+		74996BDA1A1B40E500D48CAA /* level9 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level9 */; };
 		74996BDB1A1B40E500D48CAA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD31A1B40E500D48CAA /* spark.png */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
@@ -98,10 +98,10 @@
 		74996BCC1A1B40E500D48CAA /* ExplosionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExplosionScene.h; path = ../ExplosionScene.h; sourceTree = "<group>"; };
 		74996BCD1A1B40E500D48CAA /* ExplosionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExplosionScene.m; path = ../ExplosionScene.m; sourceTree = "<group>"; };
 		74996BCE1A1B40E500D48CAA /* level-2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "level-2.txt"; path = "../level-2.txt"; sourceTree = "<group>"; };
-		74996BCF1A1B40E500D48CAA /* level6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level6.txt; path = ../level6.txt; sourceTree = "<group>"; };
-		74996BD01A1B40E500D48CAA /* level7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level7.txt; path = ../level7.txt; sourceTree = "<group>"; };
-		74996BD11A1B40E500D48CAA /* level8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level8.txt; path = ../level8.txt; sourceTree = "<group>"; };
-		74996BD21A1B40E500D48CAA /* level9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level9.txt; path = ../level9.txt; sourceTree = "<group>"; };
+		74996BCF1A1B40E500D48CAA /* level6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level6; path = ../level6; sourceTree = "<group>"; };
+		74996BD01A1B40E500D48CAA /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level7; path = ../level7; sourceTree = "<group>"; };
+		74996BD11A1B40E500D48CAA /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level8; path = ../level8; sourceTree = "<group>"; };
+		74996BD21A1B40E500D48CAA /* level9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level9; path = ../level9; sourceTree = "<group>"; };
 		74996BD31A1B40E500D48CAA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -252,10 +252,10 @@
 				A8646BC41A1AF5F500EB5C58 /* level2 */,
 				A8646BC51A1AF5F500EB5C58 /* level1 */,
 				74996BCE1A1B40E500D48CAA /* level-2.txt */,
-				74996BCF1A1B40E500D48CAA /* level6.txt */,
-				74996BD01A1B40E500D48CAA /* level7.txt */,
-				74996BD11A1B40E500D48CAA /* level8.txt */,
-				74996BD21A1B40E500D48CAA /* level9.txt */,
+				74996BCF1A1B40E500D48CAA /* level6 */,
+				74996BD01A1B40E500D48CAA /* level7 */,
+				74996BD11A1B40E500D48CAA /* level8 */,
+				74996BD21A1B40E500D48CAA /* level9 */,
 				A8646BC61A1AF5F500EB5C58 /* level5 */,
 				A8646BC71A1AF5F500EB5C58 /* level0 */,
 				A84F7F0419FDC1C6001AEC0D /* Info.plist */,
@@ -396,11 +396,11 @@
 				A8646BC91A1AF5F500EB5C58 /* level3 in Resources */,
 				A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
-				74996BD71A1B40E500D48CAA /* level6.txt in Resources */,
+				74996BD71A1B40E500D48CAA /* level6 in Resources */,
 				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
-				74996BD91A1B40E500D48CAA /* level8.txt in Resources */,
-				74996BD81A1B40E500D48CAA /* level7.txt in Resources */,
-				74996BDA1A1B40E500D48CAA /* level9.txt in Resources */,
+				74996BD91A1B40E500D48CAA /* level8 in Resources */,
+				74996BD81A1B40E500D48CAA /* level7 in Resources */,
+				74996BDA1A1B40E500D48CAA /* level9 in Resources */,
 				A8646BCD1A1AF5F500EB5C58 /* level0 in Resources */,
 				74996BDB1A1B40E500D48CAA /* spark.png in Resources */,
 				A893D7601A01E94F0004F539 /* beep-attention.aif in Resources */,
