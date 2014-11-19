@@ -33,7 +33,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="uoJ-LK-65S" kind="presentation" identifier="presentGame" id="o2h-rW-Ejm"/>
+                        <segue destination="uoJ-LK-65S" kind="showDetail" identifier="presentGame" id="o2h-rW-Ejm"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="backToMain" id="ez8-GL-iAw"/>
                     </connections>
                 </viewController>
@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="1389" y="325"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="ldU-iO-PVQ">
             <objects>
-                <viewController id="uoJ-LK-65S" sceneMemberID="viewController">
+                <viewController id="uoJ-LK-65S" customClass="GameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jbk-Q0-9Cb"/>
                         <viewControllerLayoutGuide type="bottom" id="6xw-Zd-hvZ"/>
@@ -55,7 +55,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="Ty6-Eu-zgt" kind="presentation" identifier="backToLevel" id="WiZ-D0-BDn"/>
+                        <segue destination="Ty6-Eu-zgt" kind="showDetail" identifier="backToLevel" id="WiZ-D0-BDn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEj-BW-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,6 +65,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hFf-FL-agw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwC-jc-nKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jFp-4C-7jH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -77,13 +78,12 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hGd-X4-vmS"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vwC-jc-nKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="677" y="-420"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="hGd-X4-vmS"/>
         <segue reference="WiZ-D0-BDn"/>
-        <segue reference="ez8-GL-iAw"/>
     </inferredMetricsTieBreakers>
 </document>

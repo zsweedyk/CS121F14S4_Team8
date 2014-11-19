@@ -10,8 +10,7 @@
 
 @interface LevelViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger language;
-- (id) initWithLanguage: (int) language;
-- (void) unlockLevelWithIndices: (NSMutableArray*) lock;
+@property (nonatomic, assign) NSInteger levelLanguage;
+@property (nonatomic, strong) NSMutableArray*  lock;
 
 @end

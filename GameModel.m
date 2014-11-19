@@ -437,7 +437,6 @@
 
 - (NSArray*) getConnectedBombs
 {
-    NSArray* result = [self getConnectedLocations:_bombs withState:NO];
     return [self getConnectedLocations:_bombs withState:NO];
 }
 

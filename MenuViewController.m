@@ -13,10 +13,12 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MenuViewController (){
+    // sounds
     AVAudioPlayer* _audioPlayerLanguagePressed;
     AVAudioPlayer* _audioPlayerAboutPressed;
     AVAudioPlayer* _audioPlayerLevelPressed;
     
+    // language control and buttons
     UISegmentedControl* _segmentControl;
     UIButton* _level;
     UIButton* _about;
@@ -26,14 +28,7 @@
 
 @implementation MenuViewController
 
-@synthesize mainLanguage;
-
-- (id) initWithLanguage: (int) language {
-    mainLanguage = language;
-    [self viewDidLoad];
-    
-    return self;
-}
+@synthesize mainLanguage; // keep track of the selected language
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,12 +36,14 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 3;
-    
-    // sound set up
+    // set up sounds, segmented control, and buttons
+    [self setUpSounds];
+    [self setUpSegControl];
+    [self setUpButtons];
+}
+
+- (void) setUpSounds
+{
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
@@ -54,15 +51,30 @@
     _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
     
     _audioPlayerLevelPressed = _audioPlayerAboutPressed;
+}
+
+- (void) setUpSegControl
+{
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat frameHeight = self.view.frame.size.height;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 3;
     
-    // segemented control set up
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
     
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
     [_segmentControl setSelectedSegmentIndex:mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
-    
+}
+
+- (void) setUpButtons
+{
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat frameHeight = self.view.frame.size.height;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 3;
+   
     // set up tint color
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     
@@ -72,7 +84,6 @@
     
     [_level setBackgroundColor:[UIColor clearColor]];
     [_level setTitleColor:tintColor forState:UIControlStateNormal];
-    
     [_level addTarget:self action:@selector(chooseLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     // about button set up
@@ -81,14 +92,16 @@
     
     [_about setBackgroundColor:[UIColor clearColor]];
     [_about setTitleColor:tintColor forState:UIControlStateNormal];
+    [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
     
     [self changeButtonLanguage:mainLanguage];
     [self.view addSubview:_level];
     [self.view addSubview:_about];
-    
-    [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+/*
+ *  If a level button is pressed, segue to levelviewcontroller
+ */
 - (void)chooseLevel:(id)sender
 {
     [_audioPlayerLevelPressed prepareToPlay];
@@ -97,6 +110,10 @@
     [self performSegueWithIdentifier:@"PresentLevels" sender:self];
 }
 
+/*
+ *  Set the language based on the value of segcontrol
+ *  Note that english - 0, spanish - 1, chinese -2
+ */
 -(void)segmentedControlValueDidChange:(UISegmentedControl *)segment
 {
     [_audioPlayerLanguagePressed prepareToPlay];
@@ -106,7 +123,10 @@
     [self changeButtonLanguage:segment.selectedSegmentIndex];
 }
 
-- (void) changeButtonLanguage: (int) choice
+/*
+ *  Change the display title of buttons according to different language
+ */
+- (void) changeButtonLanguage: (NSInteger) choice
 {
     switch (choice) {
         case 0:
@@ -132,6 +152,9 @@
     }
 }
 
+/*
+ *  Display help message according to the language selected
+ */
 - (void)displayHelpMessage:(id) sender{
     [_audioPlayerAboutPressed prepareToPlay];
     [_audioPlayerAboutPressed play];
@@ -165,10 +188,13 @@
     [alertView show];
 }
 
+/*
+ *  Pass data to level viewcontroller
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PresentLevels"]) {
         LevelViewController *destViewController = segue.destinationViewController;
-        destViewController.language = mainLanguage;
+        destViewController.levelLanguage = mainLanguage;
     }
 }
 
