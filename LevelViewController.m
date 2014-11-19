@@ -38,7 +38,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     _numLevels = 10;
-    test = NO;        // turn on test for debugging
+    test = YES;        // turn on test for debugging
     
     [self setUpSounds];
     [self setUpButtons];

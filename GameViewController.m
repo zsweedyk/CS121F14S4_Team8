@@ -32,6 +32,7 @@
     NSString* _all;
     NSString* _okay;
     NSString* _titleLose;
+    NSString* _restartBomb;
     NSString* _restart;
     
     // sound effect variables
@@ -159,6 +160,7 @@
             _okay = @"OK";
             _titleLose = @"You lose";
             _restart = @"The circuit is shorted. Let's give it another try!";
+            _restartBomb = @"The bomb is activated. Let's give it another try!";
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
@@ -168,6 +170,7 @@
             _okay = @"OK";
             _titleLose = @"Pierdes";
             _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
+            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
             break;
         case 2:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
@@ -301,7 +304,7 @@
         [self setUpExplosionScene];
         [self explodeBombs:bombs];
         
-        [self displayMessageFor:@"Lose"];
+        [self displayMessageFor:@"Bomb"];
         
     } else if (shorted) {
         // if the circuit is shorted, explode the battery, and display lose message
@@ -348,9 +351,15 @@
                 _okay = @"退出游戏";
             }
         }
-    } else {
+    } else if ([win isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
+        if (gameLanguage == 2) {
+            _okay = @"好";
+        }
+    } else {
+        title = _titleLose;
+        message = _restartBomb;
         if (gameLanguage == 2) {
             _okay = @"好";
         }
