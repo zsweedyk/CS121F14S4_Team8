@@ -13,7 +13,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MenuViewController (){
-    NSInteger _language; // 0 english, 1 spanish, 2 chinese
     AVAudioPlayer* _audioPlayerLanguagePressed;
     AVAudioPlayer* _audioPlayerAboutPressed;
     AVAudioPlayer* _audioPlayerLevelPressed;
@@ -27,8 +26,10 @@
 
 @implementation MenuViewController
 
+@synthesize mainLanguage;
+
 - (id) initWithLanguage: (int) language {
-    _language = language;
+    mainLanguage = language;
     [self viewDidLoad];
     
     return self;
@@ -58,7 +59,7 @@
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
     
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
-    [_segmentControl setSelectedSegmentIndex:_language];
+    [_segmentControl setSelectedSegmentIndex:mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
     
@@ -70,10 +71,7 @@
     _level = [[UIButton alloc] initWithFrame:levelFrame];
     
     [_level setBackgroundColor:[UIColor clearColor]];
-    [_level setTitle:@"Start new game" forState:UIControlStateNormal];
     [_level setTitleColor:tintColor forState:UIControlStateNormal];
-    
-    [self.view addSubview:_level];
     
     [_level addTarget:self action:@selector(chooseLevel:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -82,9 +80,10 @@
     _about = [[UIButton alloc] initWithFrame:aboutFrame];
     
     [_about setBackgroundColor:[UIColor clearColor]];
-    [_about setTitle:@"How to play" forState:UIControlStateNormal];
     [_about setTitleColor:tintColor forState:UIControlStateNormal];
     
+    [self changeButtonLanguage:mainLanguage];
+    [self.view addSubview:_level];
     [self.view addSubview:_about];
     
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -95,12 +94,7 @@
     [_audioPlayerLevelPressed prepareToPlay];
     [_audioPlayerLevelPressed play];
     
-    // initialize level viewcontroller with language choice
-    LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
-    self.navigationController.navigationBarHidden = YES;
-    
-    // add level view controller to navigation view controller stack
-    [self.navigationController pushViewController:levelVC animated:YES];
+    [self performSegueWithIdentifier:@"PresentLevels" sender:self];
 }
 
 -(void)segmentedControlValueDidChange:(UISegmentedControl *)segment
@@ -109,9 +103,14 @@
     [_audioPlayerLanguagePressed play];
     
     // change the language and title of the buttons
-    switch (segment.selectedSegmentIndex) {
+    [self changeButtonLanguage:segment.selectedSegmentIndex];
+}
+
+- (void) changeButtonLanguage: (int) choice
+{
+    switch (choice) {
         case 0:
-            _language = 0;
+            mainLanguage = 0;
             [_level setTitle:@"Start new game" forState:UIControlStateNormal];
             [_about setTitle:@"How to play" forState:UIControlStateNormal];
             break;
@@ -119,13 +118,13 @@
         case 1:
             [_level setTitle:@"Juego nuevo" forState:UIControlStateNormal];
             [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
-            _language = 1;
+            mainLanguage = 1;
             break;
             
         case 2:
             [_level setTitle:@"开始新游戏" forState:UIControlStateNormal];
             [_about setTitle:@"游戏指南" forState:UIControlStateNormal];
-            _language = 2;
+            mainLanguage = 2;
             break;
             
         default:
@@ -141,7 +140,7 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (_language) {
+    switch (mainLanguage) {
         case 0:
             title = @"How to Play";
             message = @"In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions.";
@@ -165,6 +164,14 @@
     
     [alertView show];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PresentLevels"]) {
+        LevelViewController *destViewController = segue.destinationViewController;
+        destViewController.language = mainLanguage;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

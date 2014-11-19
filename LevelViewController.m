@@ -17,7 +17,6 @@
 @interface LevelViewController () {
     NSMutableArray* _buttons; // buttons for different levels
     
-    int _language;
     int _numLevels; // total levels the game has
     int _currentLevel;
     
@@ -33,8 +32,9 @@
 
 @implementation LevelViewController
 
+@synthesize language;
+
 - (id) initWithLanguage: (int) language {
-    _language = language;
     [self viewDidLoad];
     
     return self;
@@ -79,9 +79,9 @@
         [button setBackgroundColor:[UIColor clearColor]];
         
         NSString* titleStr;
-        if (_language == 2)
+        if (language == 2)
             titleStr = [NSString stringWithFormat:@"关卡 %d", i];
-        else if (_language == 1)
+        else if (language == 1)
             titleStr = [NSString stringWithFormat:@"Nivel %d", i];
         else
             titleStr = [NSString stringWithFormat:@"Level %d", i];
@@ -105,9 +105,9 @@
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
     NSString* backtoMenu;
-    if (_language == 2)
+    if (language == 2)
         backtoMenu = @"回到主菜单";
-    else if (_language == 1)
+    else if (language == 1)
         backtoMenu = @"Volver al menú principal";
     else
         backtoMenu = @"Back to main menu";
@@ -154,8 +154,8 @@
     [_audioPlayerMenuPressed prepareToPlay];
     [_audioPlayerMenuPressed play];
     
-    // go back to root viewcontroller (menuviewcontroller)
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // go back to menu viewcontroller
+    [self performSegueWithIdentifier:@"backToMain" sender:self];
 }
 
 - (void)cellSelected:(id)sender
@@ -170,7 +170,7 @@
     {
                [self displayLockedMessage];
     } else {
-        GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language AndLocks:lock];
+        GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:language AndLocks:lock];
         
         // add gameviewcontroller to navigationviewcontroller stack
         [self.navigationController pushViewController:gameVC animated:YES];
@@ -182,7 +182,7 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (_language) {
+    switch (language) {
         case 0:
             title = @"Current level is locked";
             message = @"Please unlock all previous levels to play current level.";
@@ -205,6 +205,13 @@
                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alertView show];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"backToMain"]) {
+        MenuViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = language;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

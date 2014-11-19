@@ -10,6 +10,7 @@
 
 @interface MenuViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger mainLanguage;
 - (id) initWithLanguage: (int) language;
 
 @end
