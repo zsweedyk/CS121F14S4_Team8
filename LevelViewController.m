@@ -16,6 +16,7 @@
     NSMutableArray* _buttons; // buttons for different levels
     
     int _numLevels;           // total levels the game has
+    int _possibleLevels;
     
     AVAudioPlayer* _audioPlayerLevelPressed;
     AVAudioPlayer* _audioPlayerMenuPressed;
@@ -38,13 +39,14 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     _numLevels = 10;
+    _possibleLevels = 20;
     test = YES;        // turn on test for debugging
-    
-    [self setUpSounds];
-    [self setUpButtons];
     
     if ([lock count] == 0)
         [self setUpLocks];
+    
+    [self setUpSounds];
+    [self setUpButtons];
     
     // Do any additional setup after loading the view.
 }
@@ -74,41 +76,58 @@
     
     CGFloat frameWidth = self.view.frame.size.width;
     CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 3;
-    CGFloat buttonSpace = frameHeight / (_numLevels * 1.5);
+    CGFloat buttonWidth = frameWidth / 10;
+    CGFloat buttonHeight = buttonWidth;
+    CGFloat buttonHeightSpace = (frameHeight - buttonHeight * 5) / 6;
+    CGFloat buttonWidthSpace = (frameWidth -buttonWidth * 4) / 5;
     
-    for (int i = 0; i < _numLevels; i++){
-        CGFloat x = (frameWidth - buttonWidth) / 2;
-        CGFloat y = 2 * buttonSpace + buttonSpace * i;
-        CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+    for (int k = 0; k < 5; k++){
         
-        UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
+        CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k;
         
-        button.tag = i;
-        
-        [button setBackgroundColor:[UIColor clearColor]];
-        
-        NSString* titleStr;
-        if (levelLanguage == 2)
-            titleStr = [NSString stringWithFormat:@"关卡 %d", i];
-        else if (levelLanguage == 1)
-            titleStr = [NSString stringWithFormat:@"Nivel %d", i];
-        else
-            titleStr = [NSString stringWithFormat:@"Level %d", i];
-        
-        [button setTitle:titleStr forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        [self.view addSubview:button];
-        [_buttons addObject:button];
-        
-        [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
+        for (int p = 0 ; p < 4; p++)
+        {
+            CGFloat x = buttonWidthSpace * (p + 1) + buttonWidth * p;
+            
+            CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+            
+            UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
+            
+            int i = k * 4 + p;
+            button.tag = i;
+            
+            NSString* titleStr;
+            if (levelLanguage == 2)
+                titleStr = [NSString stringWithFormat:@"%d", i];
+            else if (levelLanguage == 1)
+                titleStr = [NSString stringWithFormat:@"%d", i];
+            else
+                titleStr = [NSString stringWithFormat:@"%d", i];
+            
+            [button setTitle:titleStr forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
+            if ([lock[i] integerValue] == 0)
+                [button setBackgroundImage:[UIImage imageNamed:@"bulbon"] forState:UIControlStateNormal];
+            else if ([lock[i] integerValue] == 1)
+                [button setBackgroundImage:[UIImage imageNamed:@"bulb"] forState:UIControlStateNormal];
+            else
+                [button setBackgroundImage:[UIImage imageNamed:@"bombLRTB"] forState:UIControlStateNormal];
+            
+            [self.view addSubview:button];
+            [_buttons addObject:button];
+            
+            [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     
     // back to main menu button set up
+    buttonWidth = frameWidth / 2;
+    buttonHeight = buttonWidth / 6;
+
     CGFloat xMain = (frameWidth - buttonWidth) / 2;
-    CGFloat yMain = buttonHeight / 4;
+    CGFloat yMain = buttonHeight / 2;
+    
     CGRect menuButtonFrame = CGRectMake(xMain, yMain, buttonWidth, buttonHeight);
     
     UIButton* menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
@@ -134,6 +153,7 @@
  * initialize an array to store the lock state for each levels
  * 0: unlocked
  * 1: locked
+ * 2: unavailable
  */
 - (void)setUpLocks
 {
@@ -152,6 +172,10 @@
             [lock addObject:[NSNumber numberWithInt:0]];
         else
             [lock addObject:[NSNumber numberWithInt:1]];
+    }
+    
+    for (int i = _numLevels; i < _possibleLevels; i++){
+        [lock addObject: [NSNumber numberWithInt:2]];
     }
 }
 
@@ -181,6 +205,11 @@
         [_audioPlayerNo play];
         
         [self displayLockedMessage];
+    } else if (lock[buttonTag] == [NSNumber numberWithInt:2]){
+        [_audioPlayerNo prepareToPlay];
+        [_audioPlayerNo play];
+        
+        [self displayUnavailableMessage];
     } else {
         [_audioPlayerLevelPressed prepareToPlay];
         [_audioPlayerLevelPressed play];
@@ -210,6 +239,39 @@
         case 2:
             title = @"当前关卡未解锁";
             message = @"只有解锁之前的所有关卡才可以开始这关";
+            break;
+        default:
+            break;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alertView show];
+}
+
+/*
+ *  Display message when user selects an unavailable level
+ */
+- (void)displayUnavailableMessage{
+    NSString *title;
+    NSString *message;
+    
+    // change the language of help message based on language choice
+    switch (levelLanguage) {
+        case 0:
+            title = @"Current level is unavailbe";
+            message = @"Please play available levels for now.";
+            break;
+        case 1:
+            title = @"Nivel actual está bloqueado";
+            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
+            break;
+        case 2:
+            title = @"当前关卡正在开发";
+            message = @"先试试别的关卡吧！";
             break;
         default:
             break;
