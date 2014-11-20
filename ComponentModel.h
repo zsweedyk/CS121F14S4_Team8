@@ -13,17 +13,18 @@
 - (void) connectedTop:(BOOL)connection;
 - (void) connectedBottom:(BOOL)connection;
 - (void) connectedLeft:(BOOL)connection;
+- (void) setState:(BOOL)state;
+- (void) pointTo:(NSString *)dir;
+
 - (NSString*) getType;
 - (BOOL) getState;
-- (void) setState:(BOOL)state;
 - (int) getRow;
 - (int) getCol;
+- (NSString*) getDirection;
 - (BOOL) isConnectedRight;
 - (BOOL) isConnectedTop;
 - (BOOL) isConnectedBottom;
 - (BOOL) isConnectedLeft;
 - (BOOL) isSameComponentAs:(ComponentModel*)otherComp;
-- (void) pointTo:(NSString *)dir;
-- (NSString*) getDirection;
 
 @end
