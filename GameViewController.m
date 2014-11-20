@@ -164,8 +164,8 @@
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganas!";
-            _next = @"Nivel actual está desbloqueado. Vamos a intentar siguiente nivel!";
+            _titleWin = @"Ganaste!";
+            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
             _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
             _okay = @"OK";
             _titleLose = @"Pierdes";
@@ -234,10 +234,20 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     
-    masterPowerOn = NO;
-    [self powerOff];
-
+    NSString* selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
+    
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    if ([selectedCompType isEqual:@"switch"]) {
+        masterPowerOn = NO;
+        [self powerOff];
+    } else if ([selectedCompType isEqual:@"deflector"]) {
+        if (masterPowerOn) {
+            [self powerOn];
+        }
+    }
+
+
 }
 
 /*
@@ -255,9 +265,8 @@
 - (void) powerOff
 {
     [_model powerOff];
-    [_grid batteryTurnedOff];
-    [_grid bulbTurnedOff];
     [_grid resetLasers];
+    [_grid componentsTurnedOff];
 }
 
 /*

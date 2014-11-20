@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
             endingLineNumber = "221"
-            landmarkName = "-newLevel"
+            landmarkName = "-setUpDisplay"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,27 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437888954.085442"
+            timestampString = "438177846.820943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-clearGridAndComponents"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameModel.m"
-            timestampString = "437888954.085442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-setComponentsWithData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437888954.085442"
+            timestampString = "438177846.820943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-setComponentsWithData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437888954.085442"
+            timestampString = "438177846.820943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-setComponentsWithData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -127,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
-            landmarkName = "-initOfType:AtRow:AndCol:AndState:"
-            landmarkType = "5">
+            landmarkName = "@implementation ComponentModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -138,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437888954.085442"
+            timestampString = "438177846.820943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-initWithTotalLevels:"
-            landmarkType = "5">
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "@implementation GameModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437996482.742745"
+            timestampString = "438206973.884741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
             landmarkName = "-updateLasers"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437996482.742745"
+            timestampString = "438206973.884741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
-            landmarkName = "-createLaserPathFromComp:"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
+            landmarkName = "-createLaserPathFrom:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
             endingLineNumber = "206"
-            landmarkName = "-backToLevel:"
+            landmarkName = "-newLevel"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437898964.275504"
+            timestampString = "438206973.884741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "587"
+            endingLineNumber = "587"
             landmarkName = "-hasSwitchTo:OfComponent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437995862.658118"
+            timestampString = "438206973.884741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "631"
+            endingLineNumber = "631"
             landmarkName = "-getConnectedLocations:withState:"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,28 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameModel.m"
-            timestampString = "437996482.742745"
+            timestampString = "438206973.884741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "804"
-            endingLineNumber = "804"
-            landmarkName = "-powerOn"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameModel.m"
-            timestampString = "437996843.657725"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "825"
-            endingLineNumber = "825"
-            landmarkName = "-powerOff"
+            startingLineNumber = "1040"
+            endingLineNumber = "1040"
+            landmarkName = "-getAllConnectionsTo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -282,13 +250,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameViewController.m"
-            timestampString = "437999215.402368"
+            timestampString = "438207335.250675"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "-powerOff"
-            landmarkType = "5">
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "@implementation GameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

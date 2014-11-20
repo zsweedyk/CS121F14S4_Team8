@@ -136,7 +136,7 @@
             break;
             
         case 1:
-            [_level setTitle:@"Juego nuevo" forState:UIControlStateNormal];
+            [_level setTitle:@"Iniciar Juego" forState:UIControlStateNormal];
             [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
             mainLanguage = 1;
             break;
@@ -170,7 +170,7 @@
             break;
         case 1:
             title = @"Instrucción";
-            message = @"En ese juego, estás tratando de conectar la circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
+            message = @"En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
             break;
         case 2:
             title = @"游戏指南";
