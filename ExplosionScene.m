@@ -17,7 +17,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"Dealloc <scene name>");
+    NSLog(@"Dealloc ExplosionScene");
 }
 
 - (void)createExplosionAtX:(int) x AndY: (int) y

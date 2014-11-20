@@ -18,19 +18,13 @@
 
 @interface GameViewController () <GridDelegate>
 {
-    int _level;     // current level
-    int _numLevels; // total level
-    int _language;  // language choice
-
+    // general variables
     GameModel* _model;
     Grid* _grid;
-    SKView* _background;
-    ExplosionScene* _explosion;
-    UIButton* _backToLevel;
-    UIButton* _test;
-
     int _numRows;
     int _numCols;
+    UIButton* _backToLevel;
+    UIButton* _test;
     
     // message title variables
     NSString* _titleWin;
@@ -38,6 +32,7 @@
     NSString* _all;
     NSString* _okay;
     NSString* _titleLose;
+    NSString* _restartBomb;
     NSString* _restart;
     
     // sound effect variables
@@ -51,50 +46,38 @@
     CGFloat xGrid;
     CGFloat yGrid;
     
+    // explosion effect variables
+    SKView* _background;
+    ExplosionScene* _explosion;
+    
     // other variables
     BOOL masterPowerOn;
-    NSMutableArray* _locks;
-
 }
 
 @end
 
 @implementation GameViewController
 
-- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language AndLocks: (NSMutableArray*) locks{
-    _level = startLevel;
-    _numLevels = totalLevels;
-    _language = language;
-    _locks = locks;
-    
-    [self viewDidLoad];
-    return self;
-}
+@synthesize gameLanguage;
+@synthesize gameLevel;
+@synthesize totalLevel;
+@synthesize locks;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    // background set up
-    _background = [[SKView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:_background];
-    
-    // set up explosion scene
-    _explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
-    _explosion.backgroundColor = [UIColor blackColor];
-    [_background presentScene: _explosion];
-    
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor blackColor]];
     
     // initialize model
-    _model = [[GameModel alloc] initWithTotalLevels:_numLevels];
+    _model = [[GameModel alloc] initWithTotalLevels:(int)totalLevel];
 
     // with the generated grid we know the number of rows and cols so we can set the variables
     _numRows = [_model getNumRows];
     _numCols = [_model getNumCols];
     
     // generate a grid
-    [_model generateGrid:_level];
+    [_model generateGrid:(int)gameLevel];
 
     [self setUpSound];
     [self initializeGrid];
@@ -145,7 +128,7 @@
 
 - (void) initializeGrid
 {
-    // reset master power on
+    // reset master power off
     masterPowerOn = NO;
     
     CGRect frame = self.view.frame;
@@ -163,9 +146,12 @@
     [self.view addSubview:_grid];
 }
 
+/*
+ * change display language for alertviews
+ */
 - (void) setLanguage
 {
-    switch (_language) {
+    switch (gameLanguage) {
         case 0:
             [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
             _titleWin = @"You win";
@@ -174,6 +160,7 @@
             _okay = @"OK";
             _titleLose = @"You lose";
             _restart = @"The circuit is shorted. Let's give it another try!";
+            _restartBomb = @"The bomb is activated. Let's give it another try!";
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
@@ -183,6 +170,7 @@
             _okay = @"OK";
             _titleLose = @"Pierdes";
             _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
+            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
             break;
         case 2:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
@@ -198,28 +186,36 @@
     }
 }
 
+/*
+ * segue back to level viewcontroller
+ */
 - (void)backToLevel:(id)sender
 {
     [_audioPlayerLevelPressed prepareToPlay];
     [_audioPlayerLevelPressed play];
     
     // go back to levelviewcontroller
-    LevelViewController* levelVC = [self.navigationController viewControllers][1];
-    [levelVC unlockLevelWithIndices:_locks];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:@"backToLevel" sender:self];
 }
 
+/*
+ * move to the next level
+ */
 - (void) newLevel{
-    ++_level;
-    
-    [_model generateGrid:_level];
+    NSAssert(gameLevel < totalLevel, @"Level out of bound");
 
-    // reset master power on
+    ++gameLevel;
+    [_model generateGrid:(int)gameLevel];
+
+    // reset master power off
     masterPowerOn = NO;
     
     [self setUpDisplay];
 }
 
+/*
+ * set up display on the grid
+ */
 - (void) setUpDisplay{
     // reset all grids
     [_grid setUpGrid];
@@ -244,13 +240,18 @@
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
 }
 
-// If the battery was selected, power on and update
+/*
+ * If the battery was turned on, power on and update
+ */
 -(void) powerOn
 {
     [_model powerOn];
     [self updateGrid];
 }
 
+/*
+ * If the battery was turned off, reset components
+ */
 - (void) powerOff
 {
     [_model powerOff];
@@ -259,7 +260,9 @@
     [_grid resetLasers];
 }
 
-
+/*
+ * Switch the power on choice
+ */
 -(void) masterPowerSelected
 {
     masterPowerOn = !masterPowerOn;
@@ -291,20 +294,25 @@
     BOOL connected = [_model isConnected];
     BOOL bombConnected = [_model isBombConnected];
     
-    // if the circuit is shorted, explode the battery, and display lose message
-    // the message will ask the user to restart the game
+    // first check bomb connection, then short circuit, and finally connected circuit
     if (bombConnected) {
+        // if the bomb is connected, explode that bomb, and display lose message
+        // the message will ask the user to restart the game
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
         
+        [self setUpExplosionScene];
         [self explodeBombs:bombs];
         
-        [self displayMessageFor:@"Lose"];
+        [self displayMessageFor:@"Bomb"];
         
     } else if (shorted) {
+        // if the circuit is shorted, explode the battery, and display lose message
+        // the message will ask the user to restart the game
         [_audioPlayerExplosion prepareToPlay];
         [_audioPlayerExplosion play];
         
+        [self setUpExplosionScene];
         [self explodeBattery];
         
         [_grid shorted];
@@ -312,17 +320,22 @@
         [self displayMessageFor:@"Lose"];
         
     } else if (connected){
+        // if the circuit is connected, display win message
+        // the message will ask the user to go to the next level
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
         
         [self displayMessageFor:@"Win"];
-    } else { // if neither shorted or connected, do nothing but play sound that indicates a bad move
+    } else {
+        // if neither shorted or connected, do nothing but play sound that indicates a bad move
         [_audioPlayerNo prepareToPlay];
         [_audioPlayerNo play];
     }
 }
 
-// Display alert view
+/*
+ * Display alert view
+ */
 - (void) displayMessageFor:(NSString*)win
 {
     NSString* title;
@@ -330,18 +343,24 @@
     if ([win isEqual:@"Win"]) {
         title = _titleWin;
         
-        if (_level < _numLevels) {
+        if (gameLevel < totalLevel) {
             message = _next;
         } else {
             message = _all;
-            if (_language == 2) {
+            if (gameLanguage == 2) {
                 _okay = @"退出游戏";
             }
         }
-    } else {
+    } else if ([win isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
-        if (_language == 2) {
+        if (gameLanguage == 2) {
+            _okay = @"好";
+        }
+    } else {
+        title = _titleLose;
+        message = _restartBomb;
+        if (gameLanguage == 2) {
             _okay = @"好";
         }
     }
@@ -358,6 +377,9 @@
     
 }
 
+/*
+ * change component type on grid
+ */
 - (void) updateComponents:(NSArray*)components
 {
     NSArray* rows = components[0];
@@ -369,6 +391,9 @@
     }
 }
 
+/*
+ * update a component state on grid if they have been pressed
+ */
 - (void) updateStates:(NSArray*)components
 {
     if (components.count > 0) {
@@ -382,6 +407,25 @@
     }
 }
 
+/*
+ * prepare for explosion effect
+ */
+-(void) setUpExplosionScene
+{
+    // background set up
+    _background = [[SKView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_background];
+    [self.view sendSubviewToBack:_background]; // put background to the back of all views
+    
+    // set up explosion scene
+    _explosion = [[ExplosionScene alloc] initWithSize:self.view.frame.size];
+    _explosion.backgroundColor = [UIColor blackColor];
+    [_background presentScene: _explosion];
+}
+
+/*
+ * explode battery
+ */
 -(void) explodeBattery
 {
     int xPos = [_grid getBatteryX] + xGrid;
@@ -392,6 +436,9 @@
     [_explosion createExplosionAtX:xPoint AndY:yPoint];
 }
 
+/*
+ * explode connected bombs
+ */
 -(void) explodeBombs:(NSArray*)bombs
 {
     int frameY = self.view.frame.size.height;
@@ -409,20 +456,37 @@
     }
 }
 
-
+/*
+ * if the circuit is shorted or bombed, the user can restart the current level
+ * if the circuit is well connected, the user can go to the next level
+ */
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [_background removeFromSuperview];
+    
     // if the circuit is shorted, restart the current level
     // if the circuit is not shorted and connected, go to the next level
     if (alertView.tag == 0){
-        _level--;
+        gameLevel--;
         [self newLevel];
     }
-    else if (_level < _numLevels - 1)
+    else if (gameLevel < totalLevel - 1)
     {
         [self newLevel];
-        _locks[_level] = [NSNumber numberWithInt:0];
+        locks[gameLevel] = [NSNumber numberWithInt:0];
     }
 }
+
+/*
+ * pass data to level viewcontroller
+ */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"backToLevel"]) {
+        LevelViewController *destViewController = segue.destinationViewController;
+        destViewController.levelLanguage = gameLanguage;
+        destViewController.lock = locks;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

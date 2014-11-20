@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
-// Please add your comments on anything that you think can be improved
-
 #import "LevelViewController.h"
 #import "GameViewController.h"
 #import "MenuViewController.h"
@@ -17,36 +15,42 @@
 @interface LevelViewController () {
     NSMutableArray* _buttons; // buttons for different levels
     
-    int _language;
-    int _numLevels; // total levels the game has
-    int _currentLevel;
+    int _numLevels;           // total levels the game has
     
     AVAudioPlayer* _audioPlayerLevelPressed;
     AVAudioPlayer* _audioPlayerMenuPressed;
+    AVAudioPlayer* _audioPlayerNo;
     
-    
-    NSMutableArray* lock;
-    BOOL test;
+    int selectedLevel;        // current selected level
+    BOOL test;                // if test is on, all levels are unlocked
 }
 
 @end
 
 @implementation LevelViewController
 
-- (id) initWithLanguage: (int) language {
-    _language = language;
-    [self viewDidLoad];
-    
-    return self;
-}
+@synthesize levelLanguage;
+@synthesize lock;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _numLevels = 10;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    // set up sounds
+    _numLevels = 10;
+    test = YES;        // turn on test for debugging
+    
+    [self setUpSounds];
+    [self setUpButtons];
+    
+    if ([lock count] == 0)
+        [self setUpLocks];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)setUpSounds
+{
     NSString *levelPath  = [[NSBundle mainBundle] pathForResource:@"mouse-doubleclick-02" ofType:@"wav"];
     NSURL *levelPathURL = [NSURL fileURLWithPath : levelPath];
     _audioPlayerLevelPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:levelPathURL error:nil];
@@ -55,6 +59,13 @@
     NSURL *menuPathURL = [NSURL fileURLWithPath : menuPath];
     _audioPlayerMenuPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:menuPathURL error:nil];
     
+    NSString *noPath  = [[NSBundle mainBundle] pathForResource:@"beep-rejected" ofType:@"aif"];
+    NSURL *noPathURL = [NSURL fileURLWithPath : noPath];
+    _audioPlayerNo = [[AVAudioPlayer alloc] initWithContentsOfURL:noPathURL error:nil];
+}
+
+- (void)setUpButtons
+{
     // set up tint color
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     
@@ -79,13 +90,13 @@
         [button setBackgroundColor:[UIColor clearColor]];
         
         NSString* titleStr;
-        if (_language == 2)
+        if (levelLanguage == 2)
             titleStr = [NSString stringWithFormat:@"关卡 %d", i];
-        else if (_language == 1)
+        else if (levelLanguage == 1)
             titleStr = [NSString stringWithFormat:@"Nivel %d", i];
         else
             titleStr = [NSString stringWithFormat:@"Level %d", i];
-            
+        
         [button setTitle:titleStr forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
@@ -105,84 +116,89 @@
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
     NSString* backtoMenu;
-    if (_language == 2)
+    if (levelLanguage == 2)
         backtoMenu = @"回到主菜单";
-    else if (_language == 1)
+    else if (levelLanguage == 1)
         backtoMenu = @"Volver al menú principal";
     else
         backtoMenu = @"Back to main menu";
     
     [menuButton setTitle:backtoMenu forState:UIControlStateNormal];
     [menuButton setTitleColor:tintColor forState:UIControlStateNormal];
-    
-    [self.view addSubview:menuButton];
-    
     [menuButton addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
     
-    // locks set up
-    // an array to store the lock state for each levels
-    // 0 means unlocked
-    // 1 means locked
-    lock = [[NSMutableArray alloc] init];
-    [lock addObject: [NSNumber numberWithInt:0]]; //the first level is always unlocked
-    test = YES;
-    [self assignLocks];
-    
-    // Do any additional setup after loading the view.
+    [self.view addSubview:menuButton];
 }
 
-- (void)assignLocks
+/*
+ * initialize an array to store the lock state for each levels
+ * 0: unlocked
+ * 1: locked
+ */
+- (void)setUpLocks
 {
-    if (_numLevels > 1)
-    {
-        for (int i = 1; i < _numLevels; i++){
-            if (test)
-                [lock addObject:[NSNumber numberWithInt:0]];
-            else
-                [lock addObject:[NSNumber numberWithInt:1]];
-        }
+    NSAssert(_numLevels > 1, @"The number of levels is too small");
+    
+    lock = [[NSMutableArray alloc] init];
+    
+    // first two levels are always unlocked
+    int unlockLevels = 2;
+    
+    for (int i = 0; i < unlockLevels; i++)
+        [lock addObject: [NSNumber numberWithInt:0]];
+    
+    for (int i = unlockLevels; i < _numLevels; i++){
+        if (test)
+            [lock addObject:[NSNumber numberWithInt:0]];
+        else
+            [lock addObject:[NSNumber numberWithInt:1]];
     }
 }
 
-- (void) unlockLevelWithIndices: (NSMutableArray*) locks
-{
-    lock = locks;
-}
-
+/*
+ * if a button is pressed, segue to menu viewcontroller
+ */
 - (void)backToMain:(id)sender
 {
     [_audioPlayerMenuPressed prepareToPlay];
     [_audioPlayerMenuPressed play];
     
-    // go back to root viewcontroller (menuviewcontroller)
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // go back to menu viewcontroller
+    [self performSegueWithIdentifier:@"backToMain" sender:self];
 }
 
+/*
+ * if a level is selected, segue to game viewcontroller
+ */
 - (void)cellSelected:(id)sender
 {
-    [_audioPlayerLevelPressed prepareToPlay];
-    [_audioPlayerLevelPressed play];
-    
     UIButton* button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     
     if (lock[buttonTag] == [NSNumber numberWithInt:1])
     {
-               [self displayLockedMessage];
-    } else {
-        GameViewController* gameVC = [[GameViewController alloc] initWithLevel:buttonTag AndTotalLevels:_numLevels AndLanguage:_language AndLocks:lock];
+        [_audioPlayerNo prepareToPlay];
+        [_audioPlayerNo play];
         
-        // add gameviewcontroller to navigationviewcontroller stack
-        [self.navigationController pushViewController:gameVC animated:YES];
+        [self displayLockedMessage];
+    } else {
+        [_audioPlayerLevelPressed prepareToPlay];
+        [_audioPlayerLevelPressed play];
+        
+        selectedLevel = buttonTag;
+        [self performSegueWithIdentifier:@"presentGame" sender:self];
     }
 }
 
+/*
+ *  Display message when user selects a locked level
+ */
 - (void)displayLockedMessage{
     NSString *title;
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (_language) {
+    switch (levelLanguage) {
         case 0:
             title = @"Current level is locked";
             message = @"Please unlock all previous levels to play current level.";
@@ -205,6 +221,22 @@
                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alertView show];
+}
+
+/*
+ *  Pass data to main viewcontroller or game viewcontroller
+ */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"backToMain"]) {
+        MenuViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = levelLanguage;
+    } else if ([segue.identifier isEqualToString:@"presentGame"]) {
+        GameViewController *destViewController = segue.destinationViewController;
+        destViewController.gameLanguage = levelLanguage;
+        destViewController.locks = lock;
+        destViewController.totalLevel = _numLevels;
+        destViewController.gameLevel = selectedLevel;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
