@@ -273,8 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */,
-				A84F7F1D19FDC1C6001AEC0D /* Supporting Files */,
 				7439AA251A1E1D56004AD639 /* ComponentModelTests.m */,
+				A84F7F1D19FDC1C6001AEC0D /* Supporting Files */,
 			);
 			path = PowerUPTests;
 			sourceTree = "<group>";
