@@ -255,9 +255,8 @@
 - (void) powerOff
 {
     [_model powerOff];
-    [_grid batteryTurnedOff];
-    [_grid bulbTurnedOff];
     [_grid resetLasers];
+    [_grid componentsTurnedOff];
 }
 
 /*
