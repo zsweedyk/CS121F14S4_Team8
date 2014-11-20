@@ -456,8 +456,7 @@
         
         NSArray* emitterStates = [self stateOf:_emitters];
         [self updateStateOfComponents:_emitters];
-        NSArray* newEmitterStates = [self stateOf:_emitters];
-        if ([emitterStates isEqualToArray:newEmitterStates]) {
+        if (![self didEmitterStateChange:emitterStates]) {
             break;
         }
     }
@@ -495,7 +494,7 @@
 
     // Based on component type either append or don't append the connections
     NSString* compWithConn;
-    if ( [type isEqual:@"wire"] || [type isEqual:@"batteryNeg"] || [type isEqual:@"batteryPos"] || [type isEqual:@"emitter"] || [type isEqual:@"receiver"] || [type isEqual:@"bomb"] || [type isEqual:@"Laser"] ) {
+    if ( [type isEqual:@"wire"] || [type isEqual:@"batteryNeg"] || [type isEqual:@"batteryPos"] || [type isEqual:@"emitter"] || [type isEqual:@"receiver"] || [type isEqual:@"bomb"] || [type isEqual:@"laser"] ) {
         compWithConn = [type stringByAppendingString:connections];
     } else {
         compWithConn = type;
@@ -750,7 +749,7 @@
         int laserRow = [_lasers[i] getRow];
         int laserCol = [_lasers[i] getCol];
         
-        ComponentModel* component = [[ComponentModel alloc] initOfType:@"Empty" AtRow:laserRow AndCol:laserCol AndState:NO];
+        ComponentModel* component = [[ComponentModel alloc] initOfType:@"empty" AtRow:laserRow AndCol:laserCol AndState:NO];
         _grid[laserRow][laserCol] = component;
     }
     
@@ -816,7 +815,8 @@
 {
     // draw the laser
     while ((row>0)&&([[_grid[row-1][col] getType] isEqual:@"empty"])){
-        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row-1 AndCol:col AndState:@"On"];
+
+        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row-1 AndCol:col AndState:YES];
         [comp connectedBottom:YES];
         [comp connectedTop:YES];
         
@@ -842,7 +842,7 @@
 {
     // draw the lase
     while ((row<_numRows-1)&&([[_grid[row+1][col] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row+1 AndCol:col AndState:@"On"];
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row+1 AndCol:col AndState:YES];
         [comp connectedBottom:YES];
         [comp connectedTop:YES];
         
@@ -867,8 +867,8 @@
 - (void) laserLeftAtRow:(int)row Col:(int)col
 {
     // draw the laser
-    while ((col>0)&&([[_grid[row][col-1] getType] isEqual:@"Empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row AndCol:col-1 AndState:@"On"];
+    while ((col>0)&&([[_grid[row][col-1] getType] isEqual:@"empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col-1 AndState:YES];
         [comp connectedLeft:YES];
         [comp connectedRight:YES];
         
@@ -894,8 +894,8 @@
 - (void) laserRightAtRow:(int)row Col:(int)col
 {
     // draw the laser
-    while ((col<_numCols-1)&&([[_grid[row][col+1] getType] isEqual:@"Empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"Laser" AtRow:row AndCol:col+1 AndState:@"On"];
+    while ((col<_numCols-1)&&([[_grid[row][col+1] getType] isEqual:@"empty"])){
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col+1 AndState:YES];
         [comp connectedLeft:YES];
         [comp connectedRight:YES];
         
@@ -960,7 +960,7 @@
         }
     
     // Handle the bomb case
-    } else if ([[obstacle getType] isEqual:@"Bomb"]) {
+    } else if ([[obstacle getType] isEqual:@"bomb"]) {
         [obstacle setState:YES];
         
     // Other case
@@ -1061,15 +1061,15 @@
 
 
 
-//- (BOOL) didEmitterStateChange:(NSArray*)states
-//{
-//    for (int i = 0; i < _emitters.count; ++i) {
-//        if ([states[i] boolValue] != [_emitters[i] getState]) {
-//            return YES;
-//        }
-//    }
-//    return NO;
-//}
+- (BOOL) didEmitterStateChange:(NSArray*)states
+{
+    for (int i = 0; i < _emitters.count; ++i) {
+        if ([states[i] boolValue] != [_emitters[i] getState]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 
 /**

@@ -10,8 +10,8 @@
 #import <XCTest/XCTest.h>
 #import "ComponentModel.h"
 
-@interface ComponentModelTests : XCTestCase ()
-{
+
+@interface ComponentModelTests : XCTestCase  {
     ComponentModel* _model;
 }
 
@@ -35,19 +35,41 @@
     XCTAssert([[_model getType] isEqual:@"empty"], @"Initialization of type failed");
     XCTAssert([_model getRow] == 0, @"Initialization of row failed");
     XCTAssert([_model getCol] == 0, @"Initialization of col failed");
-    XCTAssertFalse([_model getState], @"Initialization of state failed");
+    XCTAssertFalse([_model getState]);
 }
 
-- (void)testComparison
+- (void)testBasicSetandGet
 {
+    [_model pointTo:@"Left"];
+    XCTAssert([[_model getDirection] isEqual:@"Left"], @"Get Direction failed");
+    
+    [_model connectedRight:YES];
+    XCTAssert([_model isConnectedRight], @"isConnectedRight failed");
+    [_model connectedTop:NO];
+    XCTAssertFalse([_model isConnectedTop]);
+    
+    [_model setType:@"laser"];
+    XCTAssert([[_model geType] isEqual:@"laser"], @"get Type failed");
+    
+    [_model setState:NO];
+    XCTAssertFalse([_model getState]);
     
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testSameComponent
+{
+    ComponentModel* differentType = [[ComponentModel alloc] initOfType:@"emitter" AtRow:0 AndCol:0 AndState:NO];
+    ComponentModel* differentRow = [[ComponentModel alloc] initOfType:@"empty" AtRow:9 AndCol:0 AndState:NO];
+    ComponentModel* differentCol = [[ComponentModel alloc] initOfType:@"empty" AtRow:0 AndCol:6 AndState:NO];
+    ComponentModel* allDifferent = [[ComponentModel alloc] initOfType:@"deflector" AtRow:8 AndCol:5 AndState:NO];
+    ComponentModel* same = [[ComponentModel alloc] initOfType:@"empty" AtRow:0 AndCol:0 AndState:YES];
+    
+    XCTAssertFalse([_model isSameComponentAs:differentType]);
+    XCTAssertFalse([_model isSameComponentAs:differentRow]);
+    XCTAssertFalse([_model isSameComponentAs:differentCol]);
+    XCTAssertFalse([_model isSameComponentAs:allDifferent]);
+    
+    XCTAssert([_model isSameComponentAs:same], @"Failed comparison with same component");
 }
 
 @end

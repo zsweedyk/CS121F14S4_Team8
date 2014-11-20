@@ -234,10 +234,20 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     
-    masterPowerOn = NO;
-    [self powerOff];
-
+    NSString* selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
+    
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    if ([selectedCompType isEqual:@"switch"]) {
+        masterPowerOn = NO;
+        [self powerOff];
+    } else if ([selectedCompType isEqual:@"deflector"]) {
+        if (masterPowerOn) {
+            [self powerOn];
+        }
+    }
+
+
 }
 
 /*
@@ -255,9 +265,8 @@
 - (void) powerOff
 {
     [_model powerOff];
-    [_grid batteryTurnedOff];
-    [_grid bulbTurnedOff];
     [_grid resetLasers];
+    [_grid componentsTurnedOff];
 }
 
 /*
