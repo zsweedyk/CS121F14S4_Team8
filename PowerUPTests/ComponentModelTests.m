@@ -22,7 +22,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    _model = [[ComponentModel alloc] initOfType:@"empty" AtRow:0 AndCol:0 AndState:NO];
+    _model = [[ComponentModel alloc] initOfType:@"receiver" AtRow:0 AndCol:0 AndState:NO];
 }
 
 - (void)tearDown {
@@ -45,11 +45,12 @@
     
     [_model connectedRight:YES];
     XCTAssert([_model isConnectedRight], @"isConnectedRight failed");
+    [_model connectedLeft:YES];
+    XCTAssert([_model isConnectedLeft], @"isConnectedLeft failed");
     [_model connectedTop:NO];
     XCTAssertFalse([_model isConnectedTop]);
-    
-    [_model setType:@"laser"];
-    XCTAssert([[_model geType] isEqual:@"laser"], @"get Type failed");
+    [_model connectedBottom:NO];
+    XCTAssertFalse([_model isConnectedBottom]);
     
     [_model setState:NO];
     XCTAssertFalse([_model getState]);
@@ -62,7 +63,7 @@
     ComponentModel* differentRow = [[ComponentModel alloc] initOfType:@"empty" AtRow:9 AndCol:0 AndState:NO];
     ComponentModel* differentCol = [[ComponentModel alloc] initOfType:@"empty" AtRow:0 AndCol:6 AndState:NO];
     ComponentModel* allDifferent = [[ComponentModel alloc] initOfType:@"deflector" AtRow:8 AndCol:5 AndState:NO];
-    ComponentModel* same = [[ComponentModel alloc] initOfType:@"empty" AtRow:0 AndCol:0 AndState:YES];
+    ComponentModel* same = [[ComponentModel alloc] initOfType:@"receiver" AtRow:0 AndCol:0 AndState:YES];
     
     XCTAssertFalse([_model isSameComponentAs:differentType]);
     XCTAssertFalse([_model isSameComponentAs:differentRow]);
