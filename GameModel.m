@@ -815,7 +815,8 @@
 {
     // draw the laser
     while ((row>0)&&([[_grid[row-1][col] getType] isEqual:@"empty"])){
-        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row-1 AndCol:col AndState:@"On"];
+
+        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row-1 AndCol:col AndState:YES];
         [comp connectedBottom:YES];
         [comp connectedTop:YES];
         
@@ -841,7 +842,7 @@
 {
     // draw the lase
     while ((row<_numRows-1)&&([[_grid[row+1][col] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row+1 AndCol:col AndState:@"On"];
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row+1 AndCol:col AndState:YES];
         [comp connectedBottom:YES];
         [comp connectedTop:YES];
         
@@ -867,7 +868,7 @@
 {
     // draw the laser
     while ((col>0)&&([[_grid[row][col-1] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col-1 AndState:@"On"];
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col-1 AndState:YES];
         [comp connectedLeft:YES];
         [comp connectedRight:YES];
         
@@ -894,7 +895,7 @@
 {
     // draw the laser
     while ((col<_numCols-1)&&([[_grid[row][col+1] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col+1 AndState:@"On"];
+        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col+1 AndState:YES];
         [comp connectedLeft:YES];
         [comp connectedRight:YES];
         

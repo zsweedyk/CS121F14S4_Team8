@@ -10,8 +10,8 @@
 #import <XCTest/XCTest.h>
 #import "ComponentModel.h"
 
-@interface ComponentModelTests : XCTestCase
-{
+
+@interface ComponentModelTests : XCTestCase  {
     ComponentModel* _model;
 }
 
