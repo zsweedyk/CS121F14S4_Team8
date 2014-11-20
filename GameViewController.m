@@ -164,8 +164,8 @@
             break;
         case 1:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganas!";
-            _next = @"Nivel actual está desbloqueado. Vamos a intentar siguiente nivel!";
+            _titleWin = @"Ganaste!";
+            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
             _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
             _okay = @"OK";
             _titleLose = @"Pierdes";
