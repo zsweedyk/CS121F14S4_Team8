@@ -11,7 +11,6 @@
 @protocol DirectionControllerDelegate
 @required
 
-- (void) rotateDeflector:(int)dir;
 - (void) changeImage: (NSString*) dir;
 - (void) onTap;
 
