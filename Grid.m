@@ -14,9 +14,10 @@
 #import "Receiver.h"
 #import "Laser.h"
 #import "Deflector.h"
+
 #import "Bomb.h"
-#import "ComponentModel.h"
 #import "ExplosionScene.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import <SpriteKit/SpriteKit.h>
@@ -26,15 +27,20 @@
     int _numRows;
     int _numCols;
     
-    NSMutableArray* _bulbRows;
-    NSMutableArray* _bulbCols;
-    NSMutableArray* _bombRows;
-    NSMutableArray* _bombCols;
-    NSMutableArray* _batRows;
-    NSMutableArray* _batCols;
+    // components
+    NSMutableArray* _bulbs;
+    NSMutableArray* _bombs;
+    NSMutableArray* _batteries;
     NSMutableArray* _cells;
     //Lasers
     NSMutableArray* _lasers;
+    NSMutableArray* _emitters;
+    NSMutableArray* _deflectors;
+    NSMutableArray* _receivers;
+    
+    // batteries
+    NSMutableArray* _battRows;
+    NSMutableArray* _battCols;
     
     CGFloat cellSize;
     
@@ -59,7 +65,7 @@
     
     _numRows = rows;
     _numCols = cols;
-
+    
     //initialize _cells 2-D array
     _cells = [[NSMutableArray alloc] init];
     for (int i = 0; i < _numRows; ++i) {
@@ -82,12 +88,16 @@
 - (void) setUpGrid
 {
     // reset bat and bulb coordinates
-    _batCols = [[NSMutableArray alloc] init];
-    _batRows = [[NSMutableArray alloc] init];
-    _bulbCols = [[NSMutableArray alloc] init];
-    _bulbRows = [[NSMutableArray alloc] init];
-    _bombCols = [[NSMutableArray alloc] init];
-    _bombRows = [[NSMutableArray alloc] init];
+    _batteries = [[NSMutableArray alloc] init];
+    _bulbs = [[NSMutableArray alloc] init];
+    _bombs = [[NSMutableArray alloc] init];
+    _lasers = [[NSMutableArray alloc] init];
+    _emitters = [[NSMutableArray alloc] init];
+    _deflectors = [[NSMutableArray alloc] init];
+    _receivers = [[NSMutableArray alloc] init];
+    
+    _battRows = [[NSMutableArray alloc] init];
+    _battCols = [[NSMutableArray alloc] init];
    
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
@@ -134,34 +144,48 @@
     if ([typeIndicator isEqual: @"wi"]) {
         // wire case
         newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
+        
     } else if ([typeIndicator isEqual:@"ba"]) {
         // battery case
-        [_batRows addObject:[NSNumber numberWithInt:row]];
-        [_batCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
         ((Battery*)newComponent).delegate = self;
+        
+        [_batteries addObject:newComponent];
+        [_battRows addObject:[NSNumber numberWithInt:row]];
+        [_battCols addObject:[NSNumber numberWithInt:col]];
+        
     } else if ([typeIndicator isEqual:@"bu"]) {
-        // bulb case
-        [_bulbRows addObject:[NSNumber numberWithInt:row]];
-        [_bulbCols addObject:[NSNumber numberWithInt:col]];
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
+        [_bulbs addObject:newComponent];
+        
     } else if ([typeIndicator isEqual:@"sw"]) {
         // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Switch*)newComponent).delegate = self;
         newComponent.tag = 70;
+        
     } else if ([typeIndicator isEqual:@"em"]) {//emitter case
         newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_emitters addObject:newComponent];
+        
     } else if ([typeIndicator isEqual:@"de"]) {//deflector case
         newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Deflector *)newComponent).delegate = self;
+        [_deflectors addObject:newComponent];
+        
     } else if ([typeIndicator isEqual:@"re"]) {//receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_receivers addObject:newComponent];
+    
     } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
         newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
-        [_bombRows addObject:[NSNumber numberWithInt:row]];
-        [_bombCols addObject:[NSNumber numberWithInt:col]];
-    }else {
+        [_bombs addObject:newComponent];
+        
+    } else if ([typeIndicator isEqual:@"la"]) { // laser case
+        newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
+        [_lasers addObject:newComponent];
+        
+    } else {
         return;
     }
 
@@ -175,7 +199,7 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
 
 - (void) wireSelected:(id)sender
@@ -189,106 +213,79 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
+    [self.delegate performSelector:@selector(componentSelectedAtPosition:WithOrientation:) withObject:position withObject:orientation];
 }
-
-- (void) powerUp:(id)sender
-{
-    // turn on all battery components
-    for (int i = 0; i < _batCols.count; ++i) {
-        int batRow = [_batRows[i] intValue];
-        int batCol = [_batCols[i] intValue];
-        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] turnedOn];
-    }
-    
-    [self.delegate performSelector:@selector(powerOn)];
-}
-
 
 - (void) bulbConnectedWithIndices: (NSArray*) bulbs{
     // turn off all bulbs first
-    for (int i = 0; i < _bulbRows.count; ++i)
+    for (int i = 0; i < _bulbs.count; ++i)
     {
-        int bulbRow = [_bulbRows[i] intValue];
-        int bulbCol = [_bulbCols[i] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightDown];
+        [_bulbs[i] turnOff];
     }
     
     // turn on all connected bulbs
     for (int j = 0; j < bulbs.count; ++j)
     {
-        int index = [bulbs[j] integerValue];
-        int bulbRow = [_bulbRows[index] intValue];
-        int bulbCol = [_bulbCols[index] intValue];
-        [(Bulb*)[[_cells objectAtIndex:bulbRow] objectAtIndex:bulbCol] lightUp];
+        int index = [bulbs[j] intValue];
+        [_bulbs[index] turnOn];
     }
 }
 
-- (void) setStateWithArray:(NSArray *)locs
+- (void) powerUp:(id)sender
 {
-    for(int i=0;i<locs.count;i++){
-        if([[(ComponentModel *)locs[i] getState] isEqual:@"On"]){
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOn];
-        }else{
-            int row = [locs[i] getRow];
-            int col = [locs[i] getCol];
-            [_cells[row][col] turnOff];
-        }
+    // turn on all battery components
+    for (int i = 0; i < _batteries.count; ++i) {
+        [_batteries[i] turnedOn];
+    }
+    
+    [self.delegate performSelector:@selector(masterPowerSelected)];
+}
+
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state
+{
+    if (state) {
+        [_cells[row][col] turnOn];
+    } else {
+        [_cells[row][col] turnOff];
     }
 }
 
--(void)emit:(NSArray *)locs
+- (void) resetLasers
 {
-    for(int i = 0;i<_lasers.count;i++){
+    for (int i = 0; i < _lasers.count; ++i){
         [_lasers[i] removeFromSuperview];
     }
+    
     [_lasers removeAllObjects];
-    for(int i = 0;i<locs.count;i++){
-        int row = [(ComponentModel *)locs[i] getRow];
-        int col = [(ComponentModel *)locs[i] getCol];
-        NSString * imagename = [(ComponentModel *)locs[i] getState];
-        UILabel* label = [[_cells objectAtIndex:row] objectAtIndex:col];
-        [label removeFromSuperview];
-        
-        Laser *beam = [[Laser alloc] initWithFrame:label.frame andOrientation:imagename];
-        beam.tag = label.tag;
-        [self addSubview:beam];
-        [_lasers addObject:beam];
-        [[_cells objectAtIndex:row] setObject:beam atIndex:col];
-    }
 }
 
 
 - (void) shorted {
     // explode all battery components
-    for (int i = 0; i < _batCols.count; ++i)
+    for (int i = 0; i < _batteries.count; ++i)
     {
-        int batRow = [_batRows[i] intValue];
-        int batCol = [_batCols[i] intValue];
-        [(Battery*)[[_cells objectAtIndex:batRow] objectAtIndex:batCol] exploded];
+        [_batteries[i] exploded];
     }
 }
 
 - (int) getBatteryX
 {
-    return (cellSize * [_batCols[0] intValue]);
+    return (cellSize * [_battCols[0] intValue]);
 }
 
 - (int) getBatteryY
 {
-    return (cellSize * [_batRows[0] intValue]);
+    return (cellSize * [_battRows[0] intValue]);
 }
 
-- (int) getBombXWithIndex: (int) i
+- (int) getBombXAtRow:(int)row AndCol:(int)col
 {
-    return (cellSize * [_bombCols[i] intValue]);
+    return (cellSize * row);
 }
 
-- (int) getBombYWithIndex: (int) i
+- (int) getBombYAtRow:(int)row AndCol:(int)col
 {
-    return (cellSize * [_bombRows[i] intValue]);
+    return (cellSize * col);
 }
 
 
@@ -404,5 +401,35 @@
         }
     }
 }
+
+-(void)componentsTurnedOff
+{
+    for (int i = 0; i < _receivers.count; ++i)
+    {
+        [_receivers[i] turnOff];
+    }
+    
+    for (int i = 0; i < _emitters.count; ++i)
+    {
+        [_emitters[i] turnOff];
+    }
+    
+    for (int i = 0; i < _deflectors.count; ++i)
+    {
+        [_deflectors[i] turnOff];
+    }
+    
+    for (int i = 0; i < _bulbs.count; ++i)
+    {
+        [_bulbs[i] turnOff];
+    }
+    
+    // turn off all battery components
+    for (int i = 0; i < _batteries.count; ++i)
+    {
+        [_batteries[i] turnedOff];
+    }
+}
+
 
 @end

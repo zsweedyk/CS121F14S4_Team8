@@ -10,6 +10,9 @@
 
 @interface GameViewController : UIViewController <UIAlertViewDelegate>
 
-- (id) initWithLevel: (int) startLevel AndTotalLevels: (int) totalLevels AndLanguage: (int) language AndLocks: (NSMutableArray*) locks;
+@property (nonatomic, assign) NSInteger gameLanguage;
+@property (nonatomic, assign) NSInteger gameLevel;
+@property (nonatomic, assign) NSInteger totalLevel;
+@property (nonatomic, strong) NSMutableArray* locks;
 
 @end

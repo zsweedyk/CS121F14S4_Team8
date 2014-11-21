@@ -10,21 +10,24 @@
 
 @interface GameModel : NSObject
 
--(id) initWithTotalLevels: (int) levels;
--(void) generateGrid: (int) level;
--(NSString*) getTypeAtRow: (int) row andCol: (int) col;
--(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
--(void) deflectorSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
--(void) checkEmitterConnection;
--(BOOL) connected;
--(BOOL) shorted;
+- (id) initWithTotalLevels: (int) levels;
+- (void) generateGrid: (int) level;
 
--(NSArray*) connectedBombs;
--(NSArray *) bulbIndices;
--(NSArray *) getLaserPath;
--(NSArray *)emitters;
--(NSArray *)deflectors;
--(NSArray *)receivers;
+- (NSString*) getTypeAtRow: (int) row andCol: (int) col;
+- (void) componentSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
+
+- (NSArray*) getConnectedBombs;
+- (NSArray*) getConnectedBulbs;
+- (NSArray*) getLasers;
+- (NSArray*) getConnectedEmitters;
+- (NSArray*) getConnectedDeflectors;
+- (NSArray*) getConnectedReceivers;
+
+- (BOOL) isConnected;
+- (BOOL) isShorted;
+- (BOOL) isBombConnected;
+- (void) powerOn;
+- (void) powerOff;
 
 - (int) getNumRows;
 - (int) getNumCols;

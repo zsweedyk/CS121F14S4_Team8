@@ -62,6 +62,7 @@
     
     return self;
 }
+
 //switch to other deflector types on tap
 - (void) onTap
 {
@@ -97,7 +98,7 @@
             }
         }else if(dir == 1){
             if (_currentOrientation == 0){
-                _currentOrientation = [_possibleOrientations count] - 1;
+                _currentOrientation = (int)([_possibleOrientations count] - 1);
             } else {
                 --_currentOrientation;
             }
@@ -138,7 +139,6 @@
 
 -(void) newOrientation:(NSString*)dir
 {
-    //NSString* orientation;
     if ([previousDir isEqual:@"R"]){
         if([dir isEqual:@"T"]){
             [self rotateDeflector:1];
@@ -173,22 +173,18 @@
         }
     }
     previousDir = dir;
-    //NSLog(orientation);
-    //return orientation;
 }
 
 - (void) turnOn
 {
     NSString* onName = [name stringByAppendingString:@"on"];
     
-    //[_deflector setBackgroundImage:[UIImage imageNamed:onName] forState:UIControlStateNormal];
     _deflector.image = [UIImage imageNamed:onName];
     
 }
 
 - (void) turnOff
 {
-    //[_deflector setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
     _deflector.image = [UIImage imageNamed:name];
 }
 

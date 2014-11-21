@@ -13,11 +13,12 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MenuViewController (){
-    NSInteger _language; // 0 english, 1 spanish, 2 chinese
+    // sounds
     AVAudioPlayer* _audioPlayerLanguagePressed;
     AVAudioPlayer* _audioPlayerAboutPressed;
     AVAudioPlayer* _audioPlayerLevelPressed;
     
+    // language control and buttons
     UISegmentedControl* _segmentControl;
     UIButton* _level;
     UIButton* _about;
@@ -27,12 +28,7 @@
 
 @implementation MenuViewController
 
-- (id) initWithLanguage: (int) language {
-    _language = language;
-    [self viewDidLoad];
-    
-    return self;
-}
+@synthesize mainLanguage; // keep track of the selected language
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,12 +36,14 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 3;
-    
-    // sound set up
+    // set up sounds, segmented control, and buttons
+    [self setUpSounds];
+    [self setUpSegControl];
+    [self setUpButtons];
+}
+
+- (void) setUpSounds
+{
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
@@ -53,15 +51,30 @@
     _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
     
     _audioPlayerLevelPressed = _audioPlayerAboutPressed;
+}
+
+- (void) setUpSegControl
+{
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat frameHeight = self.view.frame.size.height;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 3;
     
-    // segemented control set up
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
     
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
-    [_segmentControl setSelectedSegmentIndex:_language];
+    [_segmentControl setSelectedSegmentIndex:mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
-    
+}
+
+- (void) setUpButtons
+{
+    CGFloat frameWidth = self.view.frame.size.width;
+    CGFloat frameHeight = self.view.frame.size.height;
+    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat buttonHeight = buttonWidth / 3;
+   
     // set up tint color
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     
@@ -70,11 +83,7 @@
     _level = [[UIButton alloc] initWithFrame:levelFrame];
     
     [_level setBackgroundColor:[UIColor clearColor]];
-    [_level setTitle:@"Start new game" forState:UIControlStateNormal];
     [_level setTitleColor:tintColor forState:UIControlStateNormal];
-    
-    [self.view addSubview:_level];
-    
     [_level addTarget:self action:@selector(chooseLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     // about button set up
@@ -82,50 +91,60 @@
     _about = [[UIButton alloc] initWithFrame:aboutFrame];
     
     [_about setBackgroundColor:[UIColor clearColor]];
-    [_about setTitle:@"How to play" forState:UIControlStateNormal];
     [_about setTitleColor:tintColor forState:UIControlStateNormal];
-    
-    [self.view addSubview:_about];
-    
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self changeButtonLanguage:mainLanguage];
+    [self.view addSubview:_level];
+    [self.view addSubview:_about];
 }
 
+/*
+ *  If a level button is pressed, segue to levelviewcontroller
+ */
 - (void)chooseLevel:(id)sender
 {
     [_audioPlayerLevelPressed prepareToPlay];
     [_audioPlayerLevelPressed play];
     
-    // initialize level viewcontroller with language choice
-    LevelViewController* levelVC = [[LevelViewController alloc] initWithLanguage:_language];
-    self.navigationController.navigationBarHidden = YES;
-    
-    // add level view controller to navigation view controller stack
-    [self.navigationController pushViewController:levelVC animated:YES];
+    [self performSegueWithIdentifier:@"PresentLevels" sender:self];
 }
 
+/*
+ *  Set the language based on the value of segcontrol
+ *  Note that english - 0, spanish - 1, chinese -2
+ */
 -(void)segmentedControlValueDidChange:(UISegmentedControl *)segment
 {
     [_audioPlayerLanguagePressed prepareToPlay];
     [_audioPlayerLanguagePressed play];
     
     // change the language and title of the buttons
-    switch (segment.selectedSegmentIndex) {
+    [self changeButtonLanguage:segment.selectedSegmentIndex];
+}
+
+/*
+ *  Change the display title of buttons according to different language
+ */
+- (void) changeButtonLanguage: (NSInteger) choice
+{
+    switch (choice) {
         case 0:
-            _language = 0;
+            mainLanguage = 0;
             [_level setTitle:@"Start new game" forState:UIControlStateNormal];
             [_about setTitle:@"How to play" forState:UIControlStateNormal];
             break;
             
         case 1:
-            [_level setTitle:@"Juego nuevo" forState:UIControlStateNormal];
+            [_level setTitle:@"Iniciar Juego" forState:UIControlStateNormal];
             [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
-            _language = 1;
+            mainLanguage = 1;
             break;
             
         case 2:
             [_level setTitle:@"开始新游戏" forState:UIControlStateNormal];
             [_about setTitle:@"游戏指南" forState:UIControlStateNormal];
-            _language = 2;
+            mainLanguage = 2;
             break;
             
         default:
@@ -133,6 +152,9 @@
     }
 }
 
+/*
+ *  Display help message according to the language selected
+ */
 - (void)displayHelpMessage:(id) sender{
     [_audioPlayerAboutPressed prepareToPlay];
     [_audioPlayerAboutPressed play];
@@ -141,14 +163,14 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (_language) {
+    switch (mainLanguage) {
         case 0:
             title = @"How to Play";
             message = @"In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions.";
             break;
         case 1:
             title = @"Instrucción";
-            message = @"En ese juego, estás tratando de conectar la circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
+            message = @"En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
             break;
         case 2:
             title = @"游戏指南";
@@ -165,6 +187,17 @@
     
     [alertView show];
 }
+
+/*
+ *  Pass data to level viewcontroller
+ */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PresentLevels"]) {
+        LevelViewController *destViewController = segue.destinationViewController;
+        destViewController.levelLanguage = mainLanguage;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
