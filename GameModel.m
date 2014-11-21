@@ -167,6 +167,8 @@
                 [_receivers addObject:component];
             } else if ([datum isEqual:@"8"]) {
                 component = [[ComponentModel alloc] initOfType:@"deflector" AtRow:r AndCol:c AndState:NO];
+                [component connectedRight:YES];
+                [component connectedTop:YES];
                 [_deflectors addObject:component];
             } else if ([datum isEqual:@"9"]) {
                 component = [[ComponentModel  alloc] initOfType:@"bomb" AtRow:r AndCol:c AndState:NO];
@@ -983,7 +985,9 @@
         // Make sure the component is valid
         NSArray* connections = [self getAllConnectionsTo:comp];
         if (connections.count < 2) {
-            [comp setState:NO];
+            if (![[comp getType] isEqual:@"bomb"]){
+                [comp setState:NO];
+            }
             continue;
         }
         
