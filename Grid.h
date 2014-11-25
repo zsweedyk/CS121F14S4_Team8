@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "Switch.h"
 #import "Battery.h"
 
 @protocol GridDelegate
 
 @required
-- (void) switchSelectedWithTag:(NSNumber*)tag withOrientation:(NSString*)newOrientation;
-- (void) powerOn;
+
+- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
+- (void) masterPowerSelected;
+
 @end
 
 
@@ -23,8 +26,15 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
-- (void) setUpGridForNumRows:(int)rows andCols:(int)cols;
+- (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) win;
+- (void) shorted;
+- (int) getBatteryX;
+- (int) getBatteryY;
+- (int) getBombXAtRow:(int)row AndCol:(int)col;
+- (int) getBombYAtRow:(int)row AndCol:(int)col;
+- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
+- (void) resetLasers;
+- (void)componentsTurnedOff;
 
 @end

@@ -10,14 +10,26 @@
 
 @interface GameModel : NSObject
 
-@property (nonatomic) int numRows;
-@property (nonatomic) int numCols;
+- (id) initWithTotalLevels: (int) levels;
+- (void) generateGrid: (int) level;
 
--(void) generateGrid: (NSInteger) level;
--(NSString*) getTypeAtRow: (int) row andCol: (int) col;
--(NSString*) getConnectionsAtRow: (int) row andCol: (int) col;
--(void) switchSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
--(BOOL) connected;
+- (NSString*) getTypeAtRow: (int) row andCol: (int) col;
+- (void) componentSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
 
+- (NSArray*) getConnectedBombs;
+- (NSArray*) getConnectedBulbs;
+- (NSArray*) getLasers;
+- (NSArray*) getConnectedEmitters;
+- (NSArray*) getConnectedDeflectors;
+- (NSArray*) getConnectedReceivers;
+
+- (BOOL) isConnected;
+- (BOOL) isShorted;
+- (BOOL) isBombConnected;
+- (void) powerOn;
+- (void) powerOff;
+
+- (int) getNumRows;
+- (int) getNumCols;
 
 @end

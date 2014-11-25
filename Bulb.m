@@ -14,13 +14,19 @@
 - (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    self.image = [UIImage imageNamed:@"bulb_normal"];
+    self.image = [UIImage imageNamed:@"bulb"];
     return self;
 }
 
-- (void) lightUp
+- (void) turnOn
 {
-    self.image = [UIImage imageNamed:@"bulb_light"];
+    self.image = [UIImage imageNamed:@"bulbon"];
 }
+
+- (void) turnOff
+{
+    self.image = [UIImage imageNamed:@"bulb"];
+}
+
 
 @end
