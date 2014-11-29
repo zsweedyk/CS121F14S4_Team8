@@ -304,6 +304,7 @@
     }
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Win", nil) message:message delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
     
+    alert.tag = 1;
     [alert show];
 }
 
@@ -311,6 +312,7 @@
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Lose", nil) message:NSLocalizedString(@"Circuit Shorted", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
     
+    alert.tag = 0;
     [alert show];
 }
 
@@ -318,6 +320,7 @@
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Lose", nil) message:NSLocalizedString(@"Bomb Activated", nil)  delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
     
+    alert.tag = 0;
     [alert show];
 }
 
