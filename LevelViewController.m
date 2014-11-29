@@ -30,7 +30,6 @@
 
 @implementation LevelViewController
 
-@synthesize levelLanguage;
 @synthesize lock;
 
 - (void)viewDidLoad {
@@ -96,15 +95,7 @@
             int i = k * 4 + p;
             button.tag = i;
             
-            NSString* titleStr;
-            if (levelLanguage == 2)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else if (levelLanguage == 1)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            
-            [button setTitle:titleStr forState:UIControlStateNormal];
+            [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             if ([lock[i] integerValue] == 0)
@@ -124,7 +115,7 @@
     // back to main menu button set up
     buttonWidth = frameWidth / 2;
     buttonHeight = buttonWidth / 6;
-
+    
     CGFloat xMain = (frameWidth - buttonWidth) / 2;
     CGFloat yMain = buttonHeight / 2;
     
@@ -133,16 +124,7 @@
     UIButton* menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
     
     [menuButton setBackgroundColor:[UIColor clearColor]];
-    
-    NSString* backtoMenu;
-    if (levelLanguage == 2)
-        backtoMenu = @"回到主菜单";
-    else if (levelLanguage == 1)
-        backtoMenu = @"Volver al menú principal";
-    else
-        backtoMenu = @"Back to main menu";
-    
-    [menuButton setTitle:backtoMenu forState:UIControlStateNormal];
+    [menuButton setTitle:NSLocalizedString(@"Back to Main Menu", nil) forState:UIControlStateNormal];
     [menuButton setTitleColor:tintColor forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -223,31 +205,10 @@
  *  Display message when user selects a locked level
  */
 - (void)displayLockedMessage{
-    NSString *title;
-    NSString *message;
-    
-    // change the language of help message based on language choice
-    switch (levelLanguage) {
-        case 0:
-            title = @"Current level is locked";
-            message = @"Please unlock all previous levels to play current level.";
-            break;
-        case 1:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case 2:
-            title = @"当前关卡未解锁";
-            message = @"只有解锁之前的所有关卡才可以开始这关";
-            break;
-        default:
-            break;
-    }
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Current Locked", nil)
+                                                        message:NSLocalizedString(@"Please Unlock", nil)
                                                        delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
     
     [alertView show];
 }
@@ -256,31 +217,10 @@
  *  Display message when user selects an unavailable level
  */
 - (void)displayUnavailableMessage{
-    NSString *title;
-    NSString *message;
-    
-    // change the language of help message based on language choice
-    switch (levelLanguage) {
-        case 0:
-            title = @"Current level is unavailbe";
-            message = @"Please play available levels for now.";
-            break;
-        case 1:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case 2:
-            title = @"当前关卡正在开发";
-            message = @"先试试别的关卡吧！";
-            break;
-        default:
-            break;
-    }
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Level Unavailable", nil)
+                                                        message:NSLocalizedString(@"Play Available", nil)
                                                        delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
     
     [alertView show];
 }
@@ -289,12 +229,8 @@
  *  Pass data to main viewcontroller or game viewcontroller
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"backToMain"]) {
-        MenuViewController *destViewController = segue.destinationViewController;
-        destViewController.mainLanguage = levelLanguage;
-    } else if ([segue.identifier isEqualToString:@"presentGame"]) {
+    if ([segue.identifier isEqualToString:@"presentGame"]) {
         GameViewController *destViewController = segue.destinationViewController;
-        destViewController.gameLanguage = levelLanguage;
         destViewController.locks = lock;
         destViewController.totalLevel = _numLevels;
         destViewController.gameLevel = selectedLevel;

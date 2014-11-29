@@ -1,0 +1,29 @@
+/*
+ Localizable.strings
+ PowerUP
+ 
+ Created by Daniel Cogan on 11/24/14.
+ Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
+ */
+
+//GameViewController
+"Back to Menu" = "Back to Menu";
+"You Win" = "You Win";
+"You Lose" = "You Lose";
+"Level Unlocked" = "Current level is unlocked. Let's try the next level";
+"All Unlocked" = "All levels are unlocked. Congratulations!";
+"OK" = "OK";
+"Circuit Shorted" = "The circuit is shorted. Let's give it another try";
+"Bomb Activated" = "The bomb was activated. Let's give it another try!";
+
+//LevelViewController
+"Back to Main Menu" = "Back to Main Menu";
+"Current Locked" = "Current level is locked";
+"Please Unlock" = "Please unlock all previous levels to play current level";
+"Level Unavailable" = "Current level is unavailable";
+"Play Available" = "Please play available levels for now";
+
+//MenuViewController
+"Instructions Title" = "About";
+"Instructions" = "In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions";
+"New Game" = "New Game";

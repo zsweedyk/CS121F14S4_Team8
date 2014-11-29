@@ -26,15 +26,6 @@
     UIButton* _backToLevel;
     UIButton* _test;
     
-    // message title variables
-    NSString* _titleWin;
-    NSString* _next;
-    NSString* _all;
-    NSString* _okay;
-    NSString* _titleLose;
-    NSString* _restartBomb;
-    NSString* _restart;
-    
     // sound effect variables
     AVAudioPlayer* _audioPlayerWin;
     AVAudioPlayer* _audioPlayerNo;
@@ -58,7 +49,6 @@
 
 @implementation GameViewController
 
-@synthesize gameLanguage;
 @synthesize gameLevel;
 @synthesize totalLevel;
 @synthesize locks;
@@ -83,7 +73,6 @@
     [self initializeGrid];
     [self setUpDisplay];
     [self setUpBackButton];
-    [self setLanguage];
 }
 
 - (void) setUpBackButton
@@ -98,7 +87,7 @@
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
     [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+    [_backToLevel setTitle:NSLocalizedString(@"Back to Menu", nil) forState:UIControlStateNormal];
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
     
@@ -144,46 +133,6 @@
     _grid.delegate = self;
 
     [self.view addSubview:_grid];
-}
-
-/*
- * change display language for alertviews
- */
-- (void) setLanguage
-{
-    switch (gameLanguage) {
-        case 0:
-            [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            _titleWin = @"You win";
-            _next = @"Current level is unlocked. Let's try next level!";
-            _all = @"All levels are unlocked. Congratulation!";
-            _okay = @"OK";
-            _titleLose = @"You lose";
-            _restart = @"The circuit is shorted. Let's give it another try!";
-            _restartBomb = @"The bomb is activated. Let's give it another try!";
-            break;
-        case 1:
-            [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganaste!";
-            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
-            _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
-            _okay = @"OK";
-            _titleLose = @"Pierdes";
-            _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
-            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
-            break;
-        case 2:
-            [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            _titleWin = @"成功过关！";
-            _next = @"下关已解锁！";
-            _all = @"所有关卡已解锁！";
-            _okay = @"进入下一关";
-            _titleLose = @"你没有过关";
-            _restart = @"再试一次吧！";
-            break;
-        default:
-            break;
-    }
 }
 
 /*
@@ -313,7 +262,7 @@
         [self setUpExplosionScene];
         [self explodeBombs:bombs];
         
-        [self displayMessageFor:@"Bomb"];
+        [self displayMessageForBomb];
         
     } else if (shorted) {
         // if the circuit is shorted, explode the battery, and display lose message
@@ -326,7 +275,7 @@
         
         [_grid shorted];
         
-        [self displayMessageFor:@"Lose"];
+        [self displayMessageForShort];
         
     } else if (connected){
         // if the circuit is connected, display win message
@@ -334,7 +283,7 @@
         [_audioPlayerWin prepareToPlay];
         [_audioPlayerWin play];
         
-        [self displayMessageFor:@"Win"];
+        [self displayMessageForWin];
     } else {
         // if neither shorted or connected, do nothing but play sound that indicates a bad move
         [_audioPlayerNo prepareToPlay];
@@ -343,47 +292,36 @@
 }
 
 /*
- * Display alert view
+ * Display alert views
  */
-- (void) displayMessageFor:(NSString*)win
+- (void) displayMessageForWin
 {
-    NSString* title;
     NSString* message;
-    if ([win isEqual:@"Win"]) {
-        title = _titleWin;
-        
-        if (gameLevel < totalLevel) {
-            message = _next;
-        } else {
-            message = _all;
-            if (gameLanguage == 2) {
-                _okay = @"退出游戏";
-            }
-        }
-    } else if ([win isEqual:@"Lose"]){
-        title = _titleLose;
-        message = _restart;
-        if (gameLanguage == 2) {
-            _okay = @"好";
-        }
+    if (gameLevel < totalLevel) {
+        message = NSLocalizedString(@"Level Unlocked", nil);
     } else {
-        title = _titleLose;
-        message = _restartBomb;
-        if (gameLanguage == 2) {
-            _okay = @"好";
-        }
+        message = NSLocalizedString(@"All Unlocked", nil);
     }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Win", nil) message:message delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
-    
-    if ([win isEqual:@"Win"]) {
-        alert.tag = 1;
-    } else {
-        alert.tag = 0;
-    }
-    
+    alert.tag = 1;
     [alert show];
+}
+
+- (void) displayMessageForShort
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Lose", nil) message:NSLocalizedString(@"Circuit Shorted", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
     
+    alert.tag = 0;
+    [alert show];
+}
+
+- (void) displayMessageForBomb
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You Lose", nil) message:NSLocalizedString(@"Bomb Activated", nil)  delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+    
+    alert.tag = 0;
+    [alert show];
 }
 
 /*
@@ -491,7 +429,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"backToLevel"]) {
         LevelViewController *destViewController = segue.destinationViewController;
-        destViewController.levelLanguage = gameLanguage;
         destViewController.lock = locks;
     }
 }

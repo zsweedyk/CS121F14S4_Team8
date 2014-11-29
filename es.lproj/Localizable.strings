@@ -1,0 +1,29 @@
+/*
+ Localizable.strings
+ PowerUP
+ 
+ Created by Daniel Cogan on 11/24/14.
+ Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
+ */
+
+//GameViewController
+"Back to Menu" = "Volver al menú";
+"You Win" = "¡Ganaste!";
+"You Lose" = "Pierdes";
+"Level Unlocked" = "El proximo Nivel está desbloqueado. ¡Vamos a intentar siguiente nivel!";
+"All Unlocked" = "Todos los niveles están desbloqueados. ¡Enhorabuena!";
+"OK" = "OK";
+"Circuit Shorted" = "El circuito está en cortocircuito. ¡Vamos a intentar otra vez!";
+"Bomb Activated" = "La bomba fue activada. ¡Vamos a intentar otra vez!";
+
+//LevelViewController
+"Back to Main Menu" = "Volver al menú principal";
+"Current Locked" = "Nivel actual está bloqueado";
+"Please Unlock" = "Para jugar a este nivel, desbloquear todos los niveles anteriores";
+"Level Unavailable" = "Nivel actual no está disponible";
+"Play Available" = "Por favor, jugar niveles disponibles por el momento";
+
+//MenuViewController
+"Instructions Title" = "Instrucción";
+"Instructions" = "En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
+"New Game" = "Iniciar Juego";
