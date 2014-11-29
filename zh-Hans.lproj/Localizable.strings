@@ -1,0 +1,29 @@
+/*
+ Localizable.strings
+ PowerUP
+ 
+ Created by Daniel Cogan on 11/24/14.
+ Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
+ */
+
+//GameViewController
+"Back to Menu" = "回到主菜单";
+"You Win" = "成功过关！";
+"You Lose" = "你没有过关";
+"Level Unlocked" = "下关已解锁！";
+"All Unlocked" = "所有关卡已解锁！";
+"OK" = "进入下一关";
+"Circuit Shorted" = "再试一次吧！";
+"Bomb Activated" = "再试一次吧！";
+
+//LevelViewController
+"Back to Main Menu" = "回到主菜单";
+"Current Locked" = "当前关卡未解锁";
+"Please Unlock" = "只有解锁之前的所有关卡才可以开始这关";
+"Level Unavailable" = "当前关卡正在开发";
+"Play Available" = "先试试别的关卡吧！";
+
+//MenuViewController
+"Instructions Title" = "游戏指南";
+"Instructions" = "在这个游戏中，你需要通过变换开关的位置使灯泡发亮。";
+"New Game" = "开始新游戏";
