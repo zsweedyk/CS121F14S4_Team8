@@ -55,6 +55,7 @@ CGPoint end;
     if(aTouch.tapCount == 1){
         [self.delegate performSelector:@selector(onTap)];
     }
+    [self.delegate performSelector:@selector(touchEnd)];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

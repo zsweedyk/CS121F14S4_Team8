@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LaserModel.h"
 
 @interface GameModel : NSObject
 
@@ -31,5 +32,7 @@
 
 - (int) getNumRows;
 - (int) getNumCols;
+
+@property (strong,nonatomic) LaserModel* laserModel;
 
 @end

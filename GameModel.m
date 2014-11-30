@@ -14,12 +14,8 @@
     NSMutableArray* _grid;
     NSMutableArray* _bulbs;
     NSMutableArray* _bombs;
-
-    //laser component arrays
-    NSMutableArray* _lasers;
-    NSMutableArray* _emitters;
-    NSMutableArray* _deflectors;
-    NSMutableArray* _receivers;
+    
+    //LaserModel* _laserModel;
 
     int _numRows;
     int _numCols;
@@ -53,12 +49,10 @@
 
         _bulbs = [[NSMutableArray alloc] init];
         _bombs = [[NSMutableArray alloc] init];
-        _lasers = [[NSMutableArray alloc] init];
-        _emitters = [[NSMutableArray alloc] init];
-        _deflectors = [[NSMutableArray alloc] init];
-        _receivers = [[NSMutableArray alloc] init];
-        
+
         _grid = [[NSMutableArray alloc] init];
+        
+        _laserModel = [[LaserModel alloc] initWithGrid:_grid numRow:_numRows numCol:_numCols];
         // in each row spot add another array for the columns in the grid
         for (int r = 0; r < _numRows; ++r) {
             NSMutableArray *column = [[NSMutableArray alloc] init];
@@ -81,7 +75,7 @@
     
     // Make sure that the input for this method is valid
     NSAssert((level <= _numLevels), @"Invalid level argument");
-    NSAssert((level >= -4), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
+    NSAssert((level >= -5), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
     
     // get the grid data from the txt file
     NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
@@ -109,10 +103,7 @@
     // component array clearing
     [_bulbs removeAllObjects];
     [_bombs removeAllObjects];
-    [_lasers removeAllObjects];
-    [_emitters removeAllObjects];
-    [_deflectors removeAllObjects];
-    [_receivers removeAllObjects];
+    [_laserModel clearLaserComponents];
 }
 
 
@@ -161,15 +152,15 @@
                 component = [[ComponentModel alloc] initOfType:@"switch" AtRow:r AndCol:c AndState:NO];
             } else if ([datum isEqual:@"2"]) {
                 component = [[ComponentModel alloc] initOfType:@"emitter" AtRow:r AndCol:c AndState:NO];
-                [_emitters addObject:component];
+                [_laserModel addComponent:component];
             } else if ([datum isEqual:@"5"]) {
                 component = [[ComponentModel alloc] initOfType:@"receiver" AtRow:r AndCol:c AndState:NO];
-                [_receivers addObject:component];
+                [_laserModel addComponent:component];
             } else if ([datum isEqual:@"8"]) {
                 component = [[ComponentModel alloc] initOfType:@"deflector" AtRow:r AndCol:c AndState:NO];
                 [component connectedRight:YES];
                 [component connectedTop:YES];
-                [_deflectors addObject:component];
+                [_laserModel addComponent:component];
             } else if ([datum isEqual:@"9"]) {
                 component = [[ComponentModel  alloc] initOfType:@"bomb" AtRow:r AndCol:c AndState:NO];
                 [_bombs addObject:component];
@@ -267,7 +258,7 @@
 
 
 /*
- * Adjust the model to a compoent being selected, specifically adjust the connections for the component and the components surrounding it
+ * Adjust the model to a component being selected, specifically adjust the connections for the component and the components surrounding it
  * Input: The position of the component and its new orientation
  * Output: N/A
  */
@@ -334,7 +325,7 @@
  */
 -(NSArray*) getConnectedEmitters
 {
-    return [self getConnectedLocations:_emitters withState:YES];
+    return [self getConnectedLocations:[_laserModel getEmitters] withState:YES];
 }
 
 
@@ -345,7 +336,7 @@
  */
 -(NSArray*) getConnectedDeflectors
 {
-    return [self getConnectedLocations:_deflectors withState:YES];
+    return [self getConnectedLocations:[_laserModel getDeflectors] withState:YES];
 }
 
 /*
@@ -355,7 +346,7 @@
  */
 -(NSArray*) getConnectedReceivers
 {
-    return [self getConnectedLocations:_receivers withState:YES];
+    return [self getConnectedLocations:[_laserModel getReceivers] withState:YES];
 }
 
 
@@ -388,7 +379,7 @@
  */
 -(NSArray*) getLasers
 {
-    return [self getConnectedLocations:_lasers withState:NO];
+    return [self getConnectedLocations:[_laserModel getLasers] withState:NO];
 }
 
 
@@ -446,19 +437,20 @@
     
     [self resetComponents];
     
-    [self updateStateOfComponents:_emitters];
+    [self updateStateOfComponents:[_laserModel getEmitters]];
     
     // With the laser components theres a possibility that certain updates can induce changes in more components
     // Therefore we loop until there are no more differences.
     while (true) {
-        [self updateLasers];
+        //[self updateLasers];
+        [_laserModel updateLasers];
         
         [self updateStateOfComponents:_bulbs];
         [self updateStateOfComponents:_bombs];
         
-        NSArray* emitterStates = [self stateOf:_emitters];
-        [self updateStateOfComponents:_emitters];
-        if (![self didEmitterStateChange:emitterStates]) {
+        NSArray* emitterStates = [self stateOf:[_laserModel getEmitters]];
+        [self updateStateOfComponents:[_laserModel getEmitters]];
+        if (![_laserModel didEmitterStateChange:emitterStates]) {
             break;
         }
     }
@@ -719,10 +711,11 @@
  */
 - (void) resetComponents
 {
-    [self reset:_emitters];
     [self reset:_bulbs];
     [self reset:_bombs];
-    [self resetLasers];
+    //reset the emitters and lasers
+    [_laserModel resetComponents];
+    [_laserModel clearLasers];
 }
 
 
@@ -738,246 +731,6 @@
     }
 }
 
-
-/*
- * Clear the grid of the laser components and empty the array holding the lasers
- * Input: N/A
- * Output: N/A
- */
-- (void) resetLasers
-{
-    // clear the grid of lasers
-    for (int i = 0; i < _lasers.count; ++i) {
-        int laserRow = [_lasers[i] getRow];
-        int laserCol = [_lasers[i] getCol];
-        
-        ComponentModel* component = [[ComponentModel alloc] initOfType:@"empty" AtRow:laserRow AndCol:laserCol AndState:NO];
-        _grid[laserRow][laserCol] = component;
-    }
-    
-    // empty the array
-    [_lasers removeAllObjects];
-}
-
-/*
- * Given the current state of emitters, reset all the laser components
- * Input: N/A
- * Output: N/A
- */
-- (void) updateLasers
-{
-    [self resetLasers];
-    
-    for(int i = 0; i<_deflectors.count; ++i){
-        [_deflectors[i] setState:NO];
-    }
-    for(int i = 0; i<_receivers.count; ++i){
-        [_receivers[i] setState:NO];
-    }
-    for(int i = 0; i<_emitters.count; ++i){
-        [self createLaserPathFrom:_emitters[i]];
-    }
-}
-
-
-/*
- * Draw out the path from an emitter if it's on
- * Input: The emitter from which the laser beam starts
- * Output: N/A
- */
-- (void) createLaserPathFrom:(ComponentModel*)emitter
-{
-    int emRow = [emitter getRow];
-    int emCol = [emitter getCol];
-    
-    if([emitter getState]){
-        NSString* dir = [emitter getDirection];
-        
-        if([dir isEqual:@"Top"]) {
-            [self laserTopAtRow:emRow Col:emCol];
-        } else if ([dir isEqual:@"Bottom"]) {
-            [self laserBottomAtRow:emRow Col:emCol];
-        } else if ([dir isEqual:@"Left"]) {
-            [self laserLeftAtRow:emRow Col:emCol];
-        } else if ([dir isEqual:@"Right"]) {
-            [self laserRightAtRow:emRow Col:emCol];
-        } else {
-            
-        }
-    }
-}
-
-
-/*
- * Continuously draw a laser path upward from a specified location until you hit an obstacle
- * Input: Row and Col info
- * Output: N/A
- */
-- (void) laserTopAtRow:(int)row Col:(int)col
-{
-    // draw the laser
-    while ((row>0)&&([[_grid[row-1][col] getType] isEqual:@"empty"])){
-
-        ComponentModel* comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row-1 AndCol:col AndState:YES];
-        [comp connectedBottom:YES];
-        [comp connectedTop:YES];
-        
-        _grid[row-1][col] = comp;
-        [_lasers addObject:comp];
-        --row;
-    }
-
-    // encountered an obstacle
-    if (row != 0) {
-        --row;
-        [self encounteredObstacleAtRow:row AndCol:col From:@"Bottom"];
-    }
-}
-
-
-/*
- * Continuously draw a laser path downward from a specified location until you hit an obstacle
- * Input: Row and Col info
- * Output: N/A
- */
-- (void) laserBottomAtRow:(int)row Col:(int)col
-{
-    // draw the lase
-    while ((row<_numRows-1)&&([[_grid[row+1][col] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row+1 AndCol:col AndState:YES];
-        [comp connectedBottom:YES];
-        [comp connectedTop:YES];
-        
-        _grid[row+1][col] = comp;
-        [_lasers addObject:comp];
-        ++row;
-    }
-    
-    // encountered an obstacle
-    if (row != _numRows-1) {
-        ++row;
-        [self encounteredObstacleAtRow:row AndCol:col From:@"Top"];
-    }
-
-}
-
-/*
- * Continuously draw a laser path to the left from a specified location until you an obstacle
- * Input: Row and Col info
- * Output: N/A
- */
-- (void) laserLeftAtRow:(int)row Col:(int)col
-{
-    // draw the laser
-    while ((col>0)&&([[_grid[row][col-1] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col-1 AndState:YES];
-        [comp connectedLeft:YES];
-        [comp connectedRight:YES];
-        
-        _grid[row][col-1] = comp;
-        [_lasers addObject:comp];
-        --col;
-    }
-    
-    // encountered an obstacle
-    if (col != 0) {
-        --col;
-        [self encounteredObstacleAtRow:row AndCol:col From:@"Right"];
-    }
-
-}
-
-
-/*
- * Continuously draw a laser path to the right from a specified location until you an obstacle
- * Input: Row and Col info
- * Output: N/A
- */
-- (void) laserRightAtRow:(int)row Col:(int)col
-{
-    // draw the laser
-    while ((col<_numCols-1)&&([[_grid[row][col+1] getType] isEqual:@"empty"])){
-        ComponentModel *comp = [[ComponentModel alloc] initOfType:@"laser" AtRow:row AndCol:col+1 AndState:YES];
-        [comp connectedLeft:YES];
-        [comp connectedRight:YES];
-        
-        _grid[row][col+1] = comp;
-        [_lasers addObject:comp];
-        ++col;
-    }
-    
-    // encountered an obstacle
-    if (col != _numCols-1) {
-        ++col;
-        [self encounteredObstacleAtRow:row AndCol:col From:@"Left"];
-    }
-}
-
-
-/*
- * Handle an object in the way of a laser
- * Input: Row and Col information of the obstacle and the direction from which it was encountered
- * Output: N/A
- */
-- (void) encounteredObstacleAtRow:(int)row AndCol:(int)col From:(NSString*)dir
-{
-    
-    ComponentModel *obstacle = _grid[row][col];
-    
-    // Handle the deflector case
-    if ([[obstacle getType] isEqual:@"deflector"]) {
-        
-        // If the deflector is a state to continue the laser turn it on
-        if ([obstacle isConnectedBottom] && [dir isEqual:@"Bottom"]) {
-            [obstacle setState:YES];
-        } else if ([obstacle isConnectedTop] && [dir isEqual:@"Top"]) {
-            [obstacle setState:YES];
-        } else if ([obstacle isConnectedLeft] && [dir isEqual:@"Left"]) {
-            [obstacle setState:YES];
-        } else if ([obstacle isConnectedRight] && [dir isEqual:@"Right"]) {
-            [obstacle setState:YES];
-        } else {
-            return;
-        }
-        
-        // Continue the beam in a direction specified by deflector
-        if ([obstacle isConnectedBottom] && ![dir isEqual:@"Bottom"]) {
-            [self laserBottomAtRow:row Col:col];
-        }
-        if ([obstacle isConnectedTop] && ![dir isEqual:@"Top"]) {
-            [self laserTopAtRow:row Col:col];
-        }
-        if ([obstacle isConnectedLeft] && ![dir isEqual:@"Left"]) {
-            [self laserLeftAtRow:row Col:col];
-        }
-        if ([obstacle isConnectedRight] && ![dir isEqual:@"Right"]) {
-            [self laserRightAtRow:row Col:col];
-        }
-        
-    // Handle the receiver case
-    } else if ([[obstacle getType] isEqual:@"receiver"]) {
-        
-        if ([[obstacle getDirection] isEqual:dir]) {
-            [obstacle setState:YES];
-        }
-    
-    // Handle the bomb case
-    } else if ([[obstacle getType] isEqual:@"bomb"]) {
-        [obstacle setState:YES];
-        
-    // Other case
-    } else {
-        return;
-    }
-    
-}
-
-
-/*
- * Given a specified list of components, update their connectivity status with BFS
- * Input: An array of components
- * Output: N/A
- */
 - (void) updateStateOfComponents:(NSArray*)components
 {
     for (ComponentModel* comp in components) {
@@ -1005,12 +758,13 @@
         
         // Now check if the component is connected by a receiver that is on
         if (![[comp getType] isEqual:@"receiver"]) {
-            for (int j = 0; j < _receivers.count; ++j){
+            NSArray* receivers = [_laserModel getReceivers];
+            for (int j = 0; j < receivers.count; ++j){
                     
-                BOOL path1 = [self breadthSearchFrom:comp To:_receivers[j] inDirection:connections[0] CheckingForShort:NO];
-                BOOL path2 = [self breadthSearchFrom:comp To:_receivers[j] inDirection:connections[1] CheckingForShort:NO];
+                BOOL path1 = [self breadthSearchFrom:comp To:receivers[j] inDirection:connections[0] CheckingForShort:NO];
+                BOOL path2 = [self breadthSearchFrom:comp To:receivers[j] inDirection:connections[1] CheckingForShort:NO];
                 
-                if (path1 && path2 && [_receivers[j] getState]) {
+                if (path1 && path2 && [receivers[j] getState]) {
                     [comp setState:YES];
                     break;
                 } else {
@@ -1062,19 +816,6 @@
     
     return states;
 }
-
-
-
-- (BOOL) didEmitterStateChange:(NSArray*)states
-{
-    for (int i = 0; i < _emitters.count; ++i) {
-        if ([states[i] boolValue] != [_emitters[i] getState]) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
 
 /**
 -(void) printGrid
