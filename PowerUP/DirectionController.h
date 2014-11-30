@@ -13,6 +13,7 @@
 
 - (void) changeImage: (NSString*) dir;
 - (void) onTap;
+- (void) touchEnd;
 
 @end
 

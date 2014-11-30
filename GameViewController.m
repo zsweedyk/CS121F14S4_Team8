@@ -133,7 +133,7 @@
     
     CGRect frame = self.view.frame;
 
-    framePortion = 0.8;
+    framePortion = 0.9;
     xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
     yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 1;
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
