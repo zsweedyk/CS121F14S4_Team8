@@ -10,13 +10,7 @@
 
 @interface MenuViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet
-UISegmentedControl* segmentedControl;
-@property (weak, nonatomic) IBOutlet UIButton* about;
-@property (weak, nonatomic) IBOutlet UIButton* level;
-
-- (IBAction)indexChanged:(UISegmentedControl *)sender;
-- (IBAction)displayHelpMessage:(UIButton*) sender;
+@property (nonatomic, assign) NSInteger mainLanguage;
 
 @end
 

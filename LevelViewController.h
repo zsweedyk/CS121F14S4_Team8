@@ -10,4 +10,7 @@
 
 @interface LevelViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger levelLanguage;
+@property (nonatomic, strong) NSMutableArray*  lock;
+
 @end
