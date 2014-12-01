@@ -14,10 +14,15 @@
     NSArray* _twoWays;
     NSArray* _threeWays;
     NSArray* _fourWays;
+    //the index for the current orientation
     int _currentOrientation;
     NSString* name;
     NSString* _orientation;
-    int _currentType;
+    //index for the current deflector type,
+    //2 stands for two-way
+    //3 stands for three-way
+    //4 stands for four-way
+    int _currentTypeIndex;
     
     int _row;
     int _col;
@@ -42,7 +47,7 @@
     _threeWays = [[NSArray alloc] initWithObjects:@"LRTX",@"XRTB",@"LRXB",@"LXTB", nil];
     _fourWays = [[NSArray alloc] initWithObjects:@"LRTB", nil];
     _possibleOrientations = _twoWays;
-    _currentType = 2;
+    _currentTypeIndex = 2;
     _currentOrientation = 0;
     _orientation = _possibleOrientations[_currentOrientation];
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
@@ -66,15 +71,15 @@
 //switch to other deflector types on tap
 - (void) onTap
 {
-    if(_currentType == 2){
+    if(_currentTypeIndex == 2){
         _possibleOrientations = _threeWays;
-        _currentType = 3;
-    }else if(_currentType == 3){
+        _currentTypeIndex = 3;
+    }else if(_currentTypeIndex == 3){
         _possibleOrientations = _fourWays;
-        _currentType = 4;
-    }else if(_currentType == 4){
+        _currentTypeIndex = 4;
+    }else if(_currentTypeIndex == 4){
         _possibleOrientations = _twoWays;
-        _currentType = 2;
+        _currentTypeIndex = 2;
     }
     _currentOrientation = 0;
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
@@ -89,7 +94,7 @@
 //0 for clockwise, 1 for counterclockwise, 2 for oppositeDirection
 - (void) rotateDeflector:(int)dir
 {
-    if(_currentType != 4){
+    if(_currentTypeIndex != 4){
         if(dir == 0){
             if (_currentOrientation == [_possibleOrientations count]-1) {
                 _currentOrientation = 0;
@@ -127,9 +132,9 @@
     //return _possibleOrientations[_currentOrientation];
 }
 
-- (void) changeDirection:(NSString *)dir
+- (void) touchEnd
 {
-    
+    previousDir = @"X";
 }
 
 - (void) changeImage:(NSString *)dir

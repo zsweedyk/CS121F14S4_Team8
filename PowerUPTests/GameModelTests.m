@@ -22,7 +22,7 @@
 
 - (void)setUp {
     [super setUp];
-    _model = [[GameModel alloc] initWithTotalLevels:5];
+    _model = [[GameModel alloc] initWithTotalLevels:6];
     [_model generateGrid:-1];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
