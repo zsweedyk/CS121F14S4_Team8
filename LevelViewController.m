@@ -9,6 +9,7 @@
 #import "LevelViewController.h"
 #import "GameViewController.h"
 #import "MenuViewController.h"
+#import "StoryViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -132,9 +133,9 @@
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
     NSString* backtoMenu;
-    if (self.mainLanguage == 2)
+    if (self.mainLanguage == CHINESE)
         backtoMenu = @"回到主菜单";
-    else if (self.mainLanguage == 1)
+    else if (self.mainLanguage == SPANISH)
         backtoMenu = @"Volver al menú principal";
     else
         backtoMenu = @"Back to main menu";
@@ -212,7 +213,11 @@
         [_audioPlayerLevelPressed play];
         
         selectedLevel = buttonTag;
-        [self performSegueWithIdentifier:@"presentGame" sender:self];
+        if ([StoryViewController needToDisplayStoryAtLevel:selectedLevel andState:self.currentState]) {
+            [self performSegueWithIdentifier:@"Instructions" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"presentGame" sender:self];
+        }
     }
 }
 
@@ -225,15 +230,15 @@
     
     // change the language of help message based on language choice
     switch (self.mainLanguage) {
-        case 0:
+        case ENGLISH:
             title = @"Current level is locked";
             message = @"Please unlock all previous levels to play current level.";
             break;
-        case 1:
+        case SPANISH:
             title = @"Nivel actual está bloqueado";
             message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
             break;
-        case 2:
+        case CHINESE:
             title = @"当前关卡未解锁";
             message = @"只有解锁之前的所有关卡才可以开始这关";
             break;
@@ -258,15 +263,15 @@
     
     // change the language of help message based on language choice
     switch (self.mainLanguage) {
-        case 0:
+        case ENGLISH:
             title = @"Current level is unavailbe";
             message = @"Please play available levels for now.";
             break;
-        case 1:
+        case SPANISH:
             title = @"Nivel actual está bloqueado";
             message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
             break;
-        case 2:
+        case CHINESE:
             title = @"当前关卡正在开发";
             message = @"先试试别的关卡吧！";
             break;
@@ -286,13 +291,26 @@
  *  Pass data to main viewcontroller or game viewcontroller
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"backToMain"]) {
         MenuViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
-    } else if ([segue.identifier isEqualToString:@"presentGame"]) {
+    }
+    
+    if ([segue.identifier isEqualToString:@"presentGame"]) {
         GameViewController *destViewController = segue.destinationViewController;
-        destViewController.gameLanguage = self.mainLanguage;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.locks = self.locks;
+        destViewController.totalLevel = _numLevels;
+        destViewController.gameLevel = selectedLevel;
+        destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"Instructions"]) {
+        StoryViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;
         destViewController.totalLevel = _numLevels;
         destViewController.gameLevel = selectedLevel;

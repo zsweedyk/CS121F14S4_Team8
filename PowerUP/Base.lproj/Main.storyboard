@@ -59,11 +59,12 @@
                         <outlet property="next" destination="ZAj-vb-Uz8" id="SPW-JG-SP6"/>
                         <outlet property="textView" destination="eyw-OP-xqP" id="hyY-ww-Nlf"/>
                         <segue destination="Ty6-Eu-zgt" kind="show" identifier="StoryToLevel" id="PvW-I8-hBT"/>
+                        <segue destination="uoJ-LK-65S" kind="show" identifier="FinishedLearning" id="rza-1s-ZaB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sga-7k-Ouk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="1442"/>
+            <point key="canvasLocation" x="973" y="1315"/>
         </scene>
         <!--Level View Controller-->
         <scene sceneID="01F-KR-fIk">
@@ -81,11 +82,12 @@
                     <connections>
                         <segue destination="uoJ-LK-65S" kind="showDetail" identifier="presentGame" id="o2h-rW-Ejm"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="backToMain" id="ez8-GL-iAw"/>
+                        <segue destination="kKY-G3-VII" kind="presentation" identifier="Instructions" id="Oin-ba-zE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBC-N2-9yL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="325"/>
+            <point key="canvasLocation" x="1840" y="-53"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="ldU-iO-PVQ">
@@ -102,11 +104,12 @@
                     </view>
                     <connections>
                         <segue destination="Ty6-Eu-zgt" kind="showDetail" identifier="backToLevel" id="WiZ-D0-BDn"/>
+                        <segue destination="kKY-G3-VII" kind="presentation" identifier="GameToStory" id="rLW-Kz-L9i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEj-BW-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2445" y="325"/>
+            <point key="canvasLocation" x="2368" y="1219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hFf-FL-agw">
@@ -132,7 +135,9 @@
         <image name="MadScientist" width="684" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PvW-I8-hBT"/>
+        <segue reference="WiZ-D0-BDn"/>
+        <segue reference="rza-1s-ZaB"/>
+        <segue reference="rLW-Kz-L9i"/>
         <segue reference="ez8-GL-iAw"/>
     </inferredMetricsTieBreakers>
 </document>

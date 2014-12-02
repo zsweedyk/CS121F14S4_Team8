@@ -10,6 +10,7 @@
 
 #import "GameViewController.h"
 #import "LevelViewController.h"
+#import "StoryViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
 #import "ExplosionScene.h"
@@ -58,11 +59,6 @@
 
 @implementation GameViewController
 
-@synthesize gameLanguage;
-@synthesize gameLevel;
-@synthesize totalLevel;
-@synthesize locks;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -70,14 +66,14 @@
     [self.view setBackgroundColor:[UIColor blackColor]];
     
     // initialize model
-    _model = [[GameModel alloc] initWithTotalLevels:(int)totalLevel];
+    _model = [[GameModel alloc] initWithTotalLevels:(int)self.totalLevel];
 
     // with the generated grid we know the number of rows and cols so we can set the variables
     _numRows = [_model getNumRows];
     _numCols = [_model getNumCols];
     
     // generate a grid
-    [_model generateGrid:(int)gameLevel];
+    [_model generateGrid:(int)self.gameLevel];
 
     [self setUpSound];
     [self initializeGrid];
@@ -151,8 +147,8 @@
  */
 - (void) setLanguage
 {
-    switch (gameLanguage) {
-        case 0:
+    switch (self.mainLanguage) {
+        case ENGLISH:
             [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
             _titleWin = @"You win";
             _next = @"Current level is unlocked. Let's try next level!";
@@ -162,7 +158,7 @@
             _restart = @"The circuit is shorted. Let's give it another try!";
             _restartBomb = @"The bomb is activated. Let's give it another try!";
             break;
-        case 1:
+        case SPANISH:
             [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
             _titleWin = @"Ganaste!";
             _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
@@ -172,7 +168,7 @@
             _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
             _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
             break;
-        case 2:
+        case CHINESE:
             [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
             _titleWin = @"成功过关！";
             _next = @"下关已解锁！";
@@ -202,10 +198,10 @@
  * move to the next level
  */
 - (void) newLevel{
-    NSAssert(gameLevel < totalLevel, @"Level out of bound");
+    NSAssert(self.gameLevel < self.totalLevel, @"Level out of bound");
 
-    ++gameLevel;
-    [_model generateGrid:(int)gameLevel];
+    ++self.gameLevel;
+    [_model generateGrid:(int)self.gameLevel];
 
     // reset master power off
     masterPowerOn = NO;
@@ -352,24 +348,24 @@
     if ([win isEqual:@"Win"]) {
         title = _titleWin;
         
-        if (gameLevel < totalLevel) {
+        if (self.gameLevel < self.totalLevel) {
             message = _next;
         } else {
             message = _all;
-            if (gameLanguage == 2) {
+            if (self.mainLanguage == 2) {
                 _okay = @"退出游戏";
             }
         }
     } else if ([win isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
-        if (gameLanguage == 2) {
+        if (self.mainLanguage == 2) {
             _okay = @"好";
         }
     } else {
         title = _titleLose;
         message = _restartBomb;
-        if (gameLanguage == 2) {
+        if (self.mainLanguage == 2) {
             _okay = @"好";
         }
     }
@@ -475,13 +471,18 @@
     // if the circuit is shorted, restart the current level
     // if the circuit is not shorted and connected, go to the next level
     if (alertView.tag == 0){
-        gameLevel--;
+        --self.gameLevel;
         [self newLevel];
     }
-    else if (gameLevel < totalLevel - 1)
+    else if (self.gameLevel < self.totalLevel - 1)
     {
-        [self newLevel];
-        locks[gameLevel] = [NSNumber numberWithInt:0];
+        if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
+            ++self.gameLevel;
+            [self performSegueWithIdentifier:@"GameToStory" sender:self];
+        } else {
+            [self newLevel];
+            self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
+        }
     }
 }
 
@@ -491,8 +492,18 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"backToLevel"]) {
         LevelViewController *destViewController = segue.destinationViewController;
-        destViewController.mainLanguage = gameLanguage;
-        destViewController.locks = locks;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.locks = self.locks;
+        destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"GameToStory"]) {
+        StoryViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
+        destViewController.gameLevel = self.gameLevel;
+        destViewController.totalLevel = self.totalLevel;
     }
 }
 
@@ -501,16 +512,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
 

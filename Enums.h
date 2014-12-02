@@ -23,5 +23,9 @@ enum LANGUAGES {
     CHINESE
 };
 
+enum TYPE_OF_STORYVIEW {
+    STORY,
+    INSTRUCTION
+};
 
 #endif

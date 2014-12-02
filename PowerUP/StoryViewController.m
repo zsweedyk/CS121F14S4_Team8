@@ -8,6 +8,7 @@
 
 #import "StoryViewController.h"
 #import "LevelViewController.h"
+#import "GameViewController.h"
 #import <CoreText/CoreText.h>
 
 @interface StoryViewController () {
@@ -21,6 +22,7 @@
     int totalPages;
     int currentPage;
 
+    enum TYPE_OF_STORYVIEW type;
 }
 
 @end
@@ -52,15 +54,53 @@
     ++currentPage;
     
     if (currentPage > totalPages) {
+        
         ++self.currentState;
-        [self performSegueWithIdentifier:@"StoryToLevel" sender:self];
+        
+        if (type == STORY) {
+            [self performSegueWithIdentifier:@"StoryToLevel" sender:self];
+        } else if (type == INSTRUCTION) {
+            [self performSegueWithIdentifier:@"FinishedLearning" sender:self];
+        }
+
     } else {
         [self setUpText];
     }
     
 }
 
+#pragma mark - Static Methods
+/*
+ * Determines whether it is time for a story. Used by other classes to decide to segue here or not
+ */
++ (BOOL) needToDisplayStoryAtLevel:(int)level andState:(int)state {
+
+    BOOL needInstruct = NO;
+    
+    StoryViewController *temp = [[StoryViewController alloc] init];
+    temp.currentState = state;
+    int levelToDisplay = [temp getLevelToDisplay];
+
+    if (level == levelToDisplay) {
+        needInstruct = YES;
+    }
+    
+    return needInstruct;
+}
+
 #pragma mark - Helper Methods
+
+/*
+ * Gets the level the story view should be displayed before
+ */
+- (int) getLevelToDisplay
+{
+    [self setUpDictionaries];
+    
+    return [[currentStateText objectForKey:@"levelToDisplay"] intValue];
+}
+
+
 /*
  * Sets the properties of the text view and next button
  */
@@ -82,10 +122,13 @@
     
     NSString *plistPath  = [[NSBundle mainBundle] pathForResource:@"StoryText" ofType:@"plist"];
     allText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    currentStateText = [[NSDictionary alloc] initWithDictionary:[allText objectForKey:[self getStateString]]];
+    NSString *state = [NSString stringWithFormat:@"%d",self.currentState];
+    currentStateText = [[NSDictionary alloc] initWithDictionary:[allText objectForKey:state]];
     
     totalPages = [[currentStateText objectForKey:@"numPages"] intValue];
-    currentPage = 0;
+    currentPage = 1;
+    
+    type = [[currentStateText objectForKey:@"type"] intValue];
     
 }
 
@@ -134,24 +177,6 @@
     return displayReadyString;
 }
 
-/*
- * Takes the enum type of the state we are in and returns a string of that enum type for dictionary keys
- */
-- (NSString*) getStateString {
-    
-    NSString* state;
-    switch (self.currentState) {
-        case FIRST_TIME:
-            state = @"FIRST_TIME";
-            break;
-            
-        default:
-            break;
-    }
-    
-    return state;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -167,6 +192,15 @@
         LevelViewController* destViewController = [segue destinationViewController];
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"FinishedLearning"]) {
+        GameViewController* destViewController = [segue destinationViewController];
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
+        destViewController.gameLevel = self.gameLevel;
+        destViewController.totalLevel = self.totalLevel;
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
