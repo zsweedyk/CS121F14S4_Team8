@@ -491,8 +491,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"backToLevel"]) {
         LevelViewController *destViewController = segue.destinationViewController;
-        destViewController.levelLanguage = gameLanguage;
-        destViewController.lock = locks;
+        destViewController.mainLanguage = gameLanguage;
+        destViewController.locks = locks;
     }
 }
 

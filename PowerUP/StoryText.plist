@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FIRST_TIME</key>
+	<dict>
+		<key>numPages</key>
+		<integer>4</integer>
+		<key>top1</key>
+		<string>Oh dear...</string>
+		<key>middle1</key>
+		<string>I don&apos;t know what just happened...</string>
+		<key>bottom1</key>
+		<string>I was working on my top secret invention when all of a sudden...</string>
+		<key>top2</key>
+		<string>BOOM!</string>
+		<key>middle2</key>
+		<string>All the lights just turned off!</string>
+		<key>bottom2</key>
+		<string>I don&apos;t know what I&apos;m going to do.</string>
+		<key>top3</key>
+		<string>Hey!</string>
+		<key>middle3</key>
+		<string> </string>
+		<key>bottom3</key>
+		<string>Do you think you could help me get all the lights back on?</string>
+		<key>top4</key>
+		<string>Great!</string>
+		<key>middle4</key>
+		<string> </string>
+		<key>bottom4</key>
+		<string>Let&apos;s get started!</string>
+	</dict>
+</dict>
+</plist>
