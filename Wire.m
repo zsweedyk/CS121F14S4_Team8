@@ -15,7 +15,7 @@
 {
     self = [super initWithFrame:frame];
     NSString* newName = [NSString stringWithFormat:@"%@%@", imageName, @"on"];
-    self.image = [UIImage imageNamed:newName];
+    self.image = [UIImage imageNamed:imageName];
     
     return self;
 }
