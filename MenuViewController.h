@@ -6,17 +6,15 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+#import "Enums.h"
 #import <UIKit/UIKit.h>
 
 @interface MenuViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet
-UISegmentedControl* segmentedControl;
-@property (weak, nonatomic) IBOutlet UIButton* about;
-@property (weak, nonatomic) IBOutlet UIButton* level;
+@property (nonatomic, assign) enum LANGUAGES mainLanguage;
+@property (nonatomic, assign) enum GAME_STATES currentState;
 
-- (IBAction)indexChanged:(UISegmentedControl *)sender;
-- (IBAction)displayHelpMessage:(UIButton*) sender;
+@property (weak, nonatomic) IBOutlet UIImageView *background;
 
 @end
 
