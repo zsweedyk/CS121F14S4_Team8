@@ -24,6 +24,9 @@
 		5B4BC8B81A210AD8004FD8AD /* LaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4BC8B71A210AD8004FD8AD /* LaserModel.m */; };
 		5B4BC8BA1A2116B0004FD8AD /* LaserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4BC8B91A2116B0004FD8AD /* LaserTest.m */; };
 		5B4BC8BC1A250881004FD8AD /* level-5 in Resources */ = {isa = PBXBuildFile; fileRef = 5B4BC8BB1A250881004FD8AD /* level-5 */; };
+		5B7FEE891A31961D003FF8CA /* level19 in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FEE881A31961D003FF8CA /* level19 */; };
+		5B7FEE8B1A31B01F003FF8CA /* level17 in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FEE8A1A31B01F003FF8CA /* level17 */; };
+		5B7FEE8D1A31B273003FF8CA /* level16 in Resources */ = {isa = PBXBuildFile; fileRef = 5B7FEE8C1A31B273003FF8CA /* level16 */; };
 		5B8EF3511A1AE30800DF2B7D /* DirectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EF3501A1AE30800DF2B7D /* DirectionController.m */; };
 		5BEF17321A0EC1AB00354C84 /* Laser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17311A0EC1AB00354C84 /* Laser.m */; };
 		5BEF17351A0EC1C800354C84 /* Emitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17341A0EC1C800354C84 /* Emitter.m */; };
@@ -92,6 +95,9 @@
 		5B4BC8B71A210AD8004FD8AD /* LaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserModel.m; sourceTree = "<group>"; };
 		5B4BC8B91A2116B0004FD8AD /* LaserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserTest.m; sourceTree = "<group>"; };
 		5B4BC8BB1A250881004FD8AD /* level-5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-5"; sourceTree = "<group>"; };
+		5B7FEE881A31961D003FF8CA /* level19 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level19; sourceTree = "<group>"; };
+		5B7FEE8A1A31B01F003FF8CA /* level17 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level17; sourceTree = "<group>"; };
+		5B7FEE8C1A31B273003FF8CA /* level16 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level16; sourceTree = "<group>"; };
 		5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionController.h; sourceTree = "<group>"; };
 		5B8EF3501A1AE30800DF2B7D /* DirectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionController.m; sourceTree = "<group>"; };
 		5BEF17301A0EC1AB00354C84 /* Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Laser.h; sourceTree = "<group>"; };
@@ -276,6 +282,9 @@
 				74996BD01A1B40E500D48CAA /* level7 */,
 				74996BD11A1B40E500D48CAA /* level8 */,
 				74996BD21A1B40E500D48CAA /* level9 */,
+				5B7FEE881A31961D003FF8CA /* level19 */,
+				5B7FEE8A1A31B01F003FF8CA /* level17 */,
+				5B7FEE8C1A31B273003FF8CA /* level16 */,
 				A8646BC61A1AF5F500EB5C58 /* level5 */,
 				A8646BC71A1AF5F500EB5C58 /* level0 */,
 				A84F7F0419FDC1C6001AEC0D /* Info.plist */,
@@ -412,12 +421,14 @@
 				A893D7631A01E94F0004F539 /* slide-magic.aif in Resources */,
 				A8646BCA1A1AF5F500EB5C58 /* level2 in Resources */,
 				74996BD41A1B40E500D48CAA /* Explosion.sks in Resources */,
+				5B7FEE8D1A31B273003FF8CA /* level16 in Resources */,
 				74996BD61A1B40E500D48CAA /* level-2 in Resources */,
 				A8646BC81A1AF5F500EB5C58 /* level4 in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				5B4BC8BC1A250881004FD8AD /* level-5 in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
 				A8646BC91A1AF5F500EB5C58 /* level3 in Resources */,
+				5B7FEE891A31961D003FF8CA /* level19 in Resources */,
 				A8C2D56B1A12084A008DD69D /* mouse-doubleclick-02.wav in Resources */,
 				7479E2001A2D954D00CA8F20 /* StoryText.plist in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
@@ -433,6 +444,7 @@
 				A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
 				A8646BCC1A1AF5F500EB5C58 /* level5 in Resources */,
+				5B7FEE8B1A31B01F003FF8CA /* level17 in Resources */,
 				74695C6B1A1B3C2800289E08 /* level-4 in Resources */,
 				A8E910271A07278200E591BE /* level-3 in Resources */,
 			);
