@@ -34,11 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGplain.png"]]];
     
     _numLevels = 20;
     _possibleLevels = 20;
-    test = YES;        // turn on test for debugging
+    test = NO;        // turn on test for debugging
     
     if ([self.locks count] == 0)
         [self setUpLocks];
