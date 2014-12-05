@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -13,11 +13,58 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <segue destination="Ty6-Eu-zgt" kind="show" identifier="PresentLevels" id="RRq-Ep-Gb3"/>
+                        <segue destination="kKY-G3-VII" kind="presentation" identifier="PresentStoryView" id="T7D-BC-g5P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="677" y="325"/>
+        </scene>
+        <!--Story View Controller-->
+        <scene sceneID="A5S-s4-uvH">
+            <objects>
+                <viewController id="kKY-G3-VII" customClass="StoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jl2-b9-sAl"/>
+                        <viewControllerLayoutGuide type="bottom" id="qlt-Kk-zKG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cpi-nf-xvy">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MadScientist" translatesAutoresizingMaskIntoConstraints="NO" id="4qZ-Ie-EFJ">
+                                <rect key="frame" x="191" y="297" width="577" height="480"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyw-OP-xqP">
+                                <rect key="frame" x="16" y="760" width="736" height="244"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAj-vb-Uz8">
+                                <rect key="frame" x="612" y="955" width="110" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextTouched:" destination="kKY-G3-VII" eventType="touchUpInside" id="Xkw-dJ-RoA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.16807208994709" green="0.16807208994709" blue="0.16807208994709" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="next" destination="ZAj-vb-Uz8" id="SPW-JG-SP6"/>
+                        <outlet property="textView" destination="eyw-OP-xqP" id="hyY-ww-Nlf"/>
+                        <segue destination="Ty6-Eu-zgt" kind="show" identifier="StoryToLevel" id="PvW-I8-hBT"/>
+                        <segue destination="uoJ-LK-65S" kind="show" identifier="FinishedLearning" id="rza-1s-ZaB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sga-7k-Ouk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973" y="1315"/>
         </scene>
         <!--Level View Controller-->
         <scene sceneID="01F-KR-fIk">
@@ -28,18 +75,19 @@
                         <viewControllerLayoutGuide type="bottom" id="hmV-ea-zGI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cBM-6D-Jxi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <segue destination="uoJ-LK-65S" kind="showDetail" identifier="presentGame" id="o2h-rW-Ejm"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="backToMain" id="ez8-GL-iAw"/>
+                        <segue destination="kKY-G3-VII" kind="presentation" identifier="Instructions" id="Oin-ba-zE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBC-N2-9yL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389" y="325"/>
+            <point key="canvasLocation" x="1840" y="-53"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="ldU-iO-PVQ">
@@ -50,22 +98,22 @@
                         <viewControllerLayoutGuide type="bottom" id="6xw-Zd-hvZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mDY-YI-k6R">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <segue destination="Ty6-Eu-zgt" kind="showDetail" identifier="backToLevel" id="WiZ-D0-BDn"/>
+                        <segue destination="kKY-G3-VII" kind="presentation" identifier="GameToStory" id="rLW-Kz-L9i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEj-BW-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2085" y="325"/>
+            <point key="canvasLocation" x="2368" y="1219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hFf-FL-agw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vwC-jc-nKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jFp-4C-7jH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -78,12 +126,18 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hGd-X4-vmS"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwC-jc-nKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="677" y="-420"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MadScientist" width="684" height="640"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hGd-X4-vmS"/>
         <segue reference="WiZ-D0-BDn"/>
+        <segue reference="rza-1s-ZaB"/>
+        <segue reference="rLW-Kz-L9i"/>
+        <segue reference="ez8-GL-iAw"/>
     </inferredMetricsTieBreakers>
 </document>
