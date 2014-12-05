@@ -11,29 +11,29 @@
 		<key>numPages</key>
 		<integer>4</integer>
 		<key>top1</key>
-		<string>Haha</string>
+		<string>噢我的天哪</string>
 		<key>middle1</key>
-		<string>I don&apos;t know what just happened...</string>
+		<string>刚刚到底发生了什么</string>
 		<key>bottom1</key>
-		<string>I was working on my top secret invention when all of a sudden...</string>
+		<string>我正专心研究我的发明，可突然间......</string>
 		<key>top2</key>
-		<string>BOOM!</string>
+		<string>嘭！</string>
 		<key>middle2</key>
-		<string>All the lights just turned off!</string>
+		<string>所有的灯都关了！</string>
 		<key>bottom2</key>
-		<string>I don&apos;t know what I&apos;m going to do.</string>
+		<string>我到底应该怎么做？</string>
 		<key>top3</key>
-		<string>Hey!</string>
+		<string>嘿！</string>
 		<key>middle3</key>
-		<string>Do you think you could help me get all the lights back on?</string>
+		<string>你能帮我把灯泡都点亮吗？</string>
 		<key>bottom3</key>
 		<string>  </string>
 		<key>top4</key>
-		<string>Great!</string>
+		<string>太棒了！</string>
 		<key>middle4</key>
 		<string> </string>
 		<key>bottom4</key>
-		<string>Let&apos;s get started!</string>
+		<string>让我们开始游戏吧！</string>
 	</dict>
 	<key>1</key>
 	<dict>
@@ -46,23 +46,23 @@
 		<key>numPages</key>
 		<integer>3</integer>
 		<key>top1</key>
-		<string>So it seems like a lot of the circuits are disconnected.</string>
+		<string>看样子很多电路都没有接好，</string>
 		<key>middle1</key>
-		<string>I think if you reconnect the circuit and restart the power the lights will turn back on.</string>
+		<string>我想你要是重新把电路接上，连上电源，就能点亮灯泡</string>
 		<key>bottom1</key>
 		<string> </string>
 		<key>top2</key>
-		<string>Drag your finger over the orange switches to draw wires</string>
+		<string>橘黄色的东西是开关，用手指在上面滑动来连接电路，</string>
 		<key>middle2</key>
-		<string>Use these wires to try and connect the circuit and all the lightbulbs.</string>
+		<string>连接到不同的电线，直到所有的灯泡都和电源连接为止。</string>
 		<key>bottom2</key>
 		<string> </string>
 		<key>top3</key>
-		<string>When you&apos;re done</string>
+		<string>当你觉得好了以后，</string>
 		<key>middle3</key>
-		<string>tap the battery to see if it works!</string>
+		<string>点一下电源点亮那些小灯泡，</string>
 		<key>bottom3</key>
-		<string>Good Luck!</string>
+		<string>好运！</string>
 	</dict>
 	<key>2</key>
 	<dict>
@@ -75,23 +75,23 @@
 		<key>numPages</key>
 		<integer>3</integer>
 		<key>top1</key>
-		<string>You&apos;re doing a great job with</string>
+		<string>你做的非常完美！</string>
 		<key>middle1</key>
-		<string>these lights but there is something you should watch for out.</string>
+		<string>不过有一些事情你应该注意，</string>
 		<key>bottom1</key>
 		<string> </string>
 		<key>top2</key>
-		<string>One thing that could go wrong is you can &quot;short&quot; the circuit.</string>
+		<string>一个你不能做的事情就是让电路“短路”</string>
 		<key>middle2</key>
-		<string>This happens if you connect the battery to itself without a lightbulb in the path of electricity.</string>
+		<string>它发生在当一个电源通过电线直接连到它自己而没有经过小灯泡的时候</string>
 		<key>bottom2</key>
 		<string> </string>
 		<key>top3</key>
-		<string>I don&apos;t even know what will happen if you start the power with a short circuit...</string>
+		<string>当电路“短路”时，点一下电源会有意想不到的事情发生！</string>
 		<key>middle3</key>
 		<string> </string>
 		<key>bottom3</key>
-		<string>Keep it up!</string>
+		<string>祝你好运！</string>
 	</dict>
 	<key>3</key>
 	<dict>
@@ -104,15 +104,15 @@
 		<key>numPages</key>
 		<integer>2</integer>
 		<key>top1</key>
-		<string>Oh my...</string>
+		<string>天哪，</string>
 		<key>middle1</key>
-		<string>It looks like some of my bombs accidently fell on to the circuit.</string>
+		<string>实验室的炸弹混进了电路里</string>
 		<key>bottom1</key>
 		<string> </string>
 		<key>top2</key>
-		<string>I thing you should avoid connecting the bombs at all costs!</string>
+		<string>你要小心不要让炸弹连上电源</string>
 		<key>middle2</key>
-		<string>Who knows what could happen if you set one off...</string>
+		<string>万一连上了意想不到的事情会再次发生！</string>
 		<key>bottom2</key>
 		<string></string>
 	</dict>
@@ -127,47 +127,47 @@
 		<key>numPages</key>
 		<string>7</string>
 		<key>top1</key>
-		<string>I almost forgot to tell you!</string>
+		<string>我忘记告诉你了，</string>
 		<key>middle1</key>
-		<string>Some of the circuits in my labratory use lasers!</string>
+		<string>有一些电路里用到了激光</string>
 		<key>bottom1</key>
-		<string>I&apos;ll explain how they work.</string>
+		<string>它们是这么工作的：</string>
 		<key>top2</key>
-		<string>If you connect an emitter to a battery it will shoot out a laser.</string>
+		<string>如果激光发射器连上了电源它会射出一束激光</string>
 		<key>middle2</key>
-		<string>If you get a laser to hit an receiver, it will act like a new battery.</string>
+		<string>如果一束激光射进了激光接收器，它会变成一个电源</string>
 		<key>bottom2</key>
 		<string> </string>
 		<key>top3</key>
-		<string>In order to complete some circuits you will have to aim the lasers from</string>
+		<string>为了点亮所有的小灯泡，你需要用发射器发出激光，</string>
 		<key>middle3</key>
-		<string>an emitter so that it hits a receiver.</string>
+		<string>并且让激光接收器收到激光，</string>
 		<key>bottom3</key>
-		<string>You can aim the lasers using the defelctors that are all around my lab.</string>
+		<string>实验室里有一些激光反射器。</string>
 		<key>top4</key>
 		<string> </string>
 		<key>middle4</key>
-		<string>The deflector takes a laser beam and redirects it to another direction.</string>
+		<string>反射器可以收到一束激光并且反射到不同的方向。</string>
 		<key>bottom4</key>
 		<string> </string>
 		<key>top5</key>
-		<string>If you shoot a laser at a deflector,</string>
+		<string>如果激光射入反射器，</string>
 		<key>middle5</key>
-		<string>it will deflect the laser through all of its openings</string>
+		<string>它会反射到所有可能的方向，</string>
 		<key>bottom5</key>
 		<string> </string>
 		<key>top6</key>
-		<string>Tap on the deflector to change its type.</string>
+		<string>点一下反射器来选择不同数目的反射方向，</string>
 		<key>middle6</key>
-		<string>Put your finger on the deflector and then drag your finger around</string>
+		<string>把你的手指放在反射器上，绕着它转圆，</string>
 		<key>bottom6</key>
-		<string>in a circle to orient the deflector in any way you want.</string>
+		<string>反射器会旋转到不同的方向。</string>
 		<key>top7</key>
-		<string>Be careful!</string>
+		<string>小心！</string>
 		<key>middle7</key>
-		<string>The lasers are very high intensity and if a laser hits a bomb,</string>
+		<string>这些激光能量巨大，一旦它们射入炸弹，</string>
 		<key>bottom7</key>
-		<string>it will most likely detonate it!</string>
+		<string>炸弹立刻会引爆！</string>
 	</dict>
 </dict>
 </plist>
