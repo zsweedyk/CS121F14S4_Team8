@@ -32,22 +32,19 @@
     [self resetDirection];
     [self addSubview:_switch];
     
-    [[self layer] setBorderWidth:2.0f];
-    [[self layer] setBorderColor:[UIColor redColor].CGColor];
-    
     return self;
 }
 
 - (void) addImageDirection: (NSString*) dir
 {
     _imageOrientation = [self addOrientation:dir to:_imageOrientation];
-    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@", _imageOrientation]];
 }
 
 - (void) removeImageDirection: (NSString*) dir
 {
     _imageOrientation = [_imageOrientation stringByReplacingOccurrencesOfString:dir withString:@"X"];
-    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@", _imageOrientation]];
 }
 
 - (void) addDirection: (NSString*) dir
@@ -58,7 +55,7 @@
     
     //These lines may not be necesarry
     _imageOrientation = _orientation;
-    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@", _imageOrientation]];
 }
 
 - (void) resetDirection
@@ -67,7 +64,7 @@
     _imageOrientation = @"XXXX";
     NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
-    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"wire%@", _imageOrientation]];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@", _imageOrientation]];
 }
 
 - (NSString*) addOrientation: (NSString*) dir to: (NSString*) currOrientation

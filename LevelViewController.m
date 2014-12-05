@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGplain"]]];
     
     _numLevels = 10;
     _possibleLevels = 20;
@@ -96,23 +96,20 @@
             int i = k * 4 + p;
             button.tag = i;
             
-            NSString* titleStr;
-            if (levelLanguage == 2)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else if (levelLanguage == 1)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else
-                titleStr = [NSString stringWithFormat:@"%d", i];
+            [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
+
             
-            [button setTitle:titleStr forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-            if ([lock[i] integerValue] == 0)
-                [button setBackgroundImage:[UIImage imageNamed:@"bulbon"] forState:UIControlStateNormal];
-            else if ([lock[i] integerValue] == 1)
+            if ([lock[i] integerValue] == 0){
                 [button setBackgroundImage:[UIImage imageNamed:@"bulb"] forState:UIControlStateNormal];
-            else
-                [button setBackgroundImage:[UIImage imageNamed:@"bombLRTB"] forState:UIControlStateNormal];
+                [button setBackgroundImage:[UIImage imageNamed:@"bulbon"] forState:UIControlStateHighlighted];
+                [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            } else if ([lock[i] integerValue] == 1){
+                [button setBackgroundImage:[UIImage imageNamed:@"bombXXXX"] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+            }else {
+                [button setBackgroundImage:[UIImage imageNamed:@"bombXXXX"] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+            }
             
             [self.view addSubview:button];
             [_buttons addObject:button];
