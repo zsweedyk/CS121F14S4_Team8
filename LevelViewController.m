@@ -36,7 +36,7 @@
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    _numLevels = 10;
+    _numLevels = 20;
     _possibleLevels = 20;
     test = YES;        // turn on test for debugging
     
