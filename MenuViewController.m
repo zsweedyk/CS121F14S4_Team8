@@ -10,6 +10,7 @@
 #import "GameViewController.h"
 #import "LevelViewController.h"
 #import "StoryViewController.h"
+#import "SettingsViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -198,6 +199,12 @@
         StoryViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"PresentSettings"]) {
+        SettingsViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.locks = self.locks;
     }
     
 }

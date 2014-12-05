@@ -52,7 +52,7 @@
 		<key>bottom1</key>
 		<string> </string>
 		<key>top2</key>
-		<string>Drag your finger over the red boxes to draw wires.</string>
+		<string>Drag your finger over the orange switches to draw wires</string>
 		<key>middle2</key>
 		<string>Use these wires to try and connect the circuit and all the lightbulbs.</string>
 		<key>bottom2</key>
@@ -71,7 +71,7 @@
 		<key>type</key>
 		<integer>1</integer>
 		<key>levelToDisplay</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>numPages</key>
 		<integer>3</integer>
 		<key>top1</key>
@@ -100,7 +100,7 @@
 		<key>type</key>
 		<integer>1</integer>
 		<key>levelToDisplay</key>
-		<integer>4</integer>
+		<integer>7</integer>
 		<key>numPages</key>
 		<integer>2</integer>
 		<key>top1</key>
@@ -123,7 +123,7 @@
 		<key>type</key>
 		<string>1</string>
 		<key>levelToDisplay</key>
-		<string>5</string>
+		<string>11</string>
 		<key>numPages</key>
 		<string>7</string>
 		<key>top1</key>
@@ -135,7 +135,7 @@
 		<key>top2</key>
 		<string>If you connect an emitter to a battery it will shoot out a laser.</string>
 		<key>middle2</key>
-		<string>If you get a laser to hit an emitter it will act like a new battery.</string>
+		<string>If you get a laser to hit an receiver, it will act like a new battery.</string>
 		<key>bottom2</key>
 		<string> </string>
 		<key>top3</key>
@@ -151,9 +151,9 @@
 		<key>bottom4</key>
 		<string> </string>
 		<key>top5</key>
-		<string>If you shoot a laser at a yellow triangle on a deflector,</string>
+		<string>If you shoot a laser at a deflector,</string>
 		<key>middle5</key>
-		<string>a laser will shoot out of all other yellow triangles on that deflector.</string>
+		<string>it will deflect the laser through all of its openings</string>
 		<key>bottom5</key>
 		<string> </string>
 		<key>top6</key>
