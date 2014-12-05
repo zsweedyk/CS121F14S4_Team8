@@ -62,9 +62,6 @@
     [self addSubview:_deflector];
     [self addSubview:control];
     
-    [[self layer] setBorderWidth:2.0f];
-    [[self layer] setBorderColor:[UIColor yellowColor].CGColor];
-    
     return self;
 }
 

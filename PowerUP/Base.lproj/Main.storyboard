@@ -5,13 +5,142 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="HHw-Dt-rVp">
+            <objects>
+                <viewController title="Settings View Controller" id="qGO-gp-b0T" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="494-44-vqE"/>
+                        <viewControllerLayoutGuide type="bottom" id="kuI-5f-Lrr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U3C-3r-vIs">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BGsettings" translatesAutoresizingMaskIntoConstraints="NO" id="xJ1-bG-7dA">
+                                <rect key="frame" x="-2" y="0.0" width="770" height="1026"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1id-T7-AlD" userLabel="Menu">
+                                <rect key="frame" x="32" y="90" width="95" height="63"/>
+                                <state key="normal" image="menuButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="MkF-r8-bsk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3f4-vd-Ukc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-197" y="325"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="3cZ-qT-x3z">
+            <objects>
+                <viewController title="About View Controller" id="O2A-Rs-g4Z" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V1Q-ie-bmx"/>
+                        <viewControllerLayoutGuide type="bottom" id="WMg-sQ-5ci"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oC9-6j-EOa">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BGabout" translatesAutoresizingMaskIntoConstraints="NO" id="Gbq-Zq-aYl">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dE-CX-ZEr" userLabel="Menu">
+                                <rect key="frame" x="37" y="89" width="95" height="63"/>
+                                <state key="normal" image="menuButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="sq2-dP-Tbt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hoj-XB-HpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-197" y="1496"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S9G-KK-kOQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="qVL-Yc-tHb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="siY-oN-2Cx">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BGmain" translatesAutoresizingMaskIntoConstraints="NO" id="GbG-Pr-HFb">
+                                <rect key="frame" x="-2" y="0.0" width="770" height="1027"/>
+                            </imageView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-qp-et3" userLabel="Play">
+                                <rect key="frame" x="101" y="239" width="62" height="97"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseLevel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KKn-lo-yUh"/>
+                                    <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="yJL-0h-8Nh"/>
+                                    <action selector="setBG1" destination="BYZ-38-t0r" eventType="touchDown" id="Gwp-Uk-bmd"/>
+                                    <action selector="setBG1" destination="BYZ-38-t0r" eventType="touchDragEnter" id="zDW-Fd-C8L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shG-gg-4r9" userLabel="Help">
+                                <rect key="frame" x="202" y="330" width="62" height="97"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="GrS-cV-gyE"/>
+                                    <action selector="setBG2" destination="BYZ-38-t0r" eventType="touchDown" id="bWY-P8-nr6"/>
+                                    <action selector="setBG2" destination="BYZ-38-t0r" eventType="touchDragEnter" id="eDS-Xa-mdd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-Py-rMG" userLabel="About">
+                                <rect key="frame" x="497" y="426" width="62" height="97"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="mfe-a1-hDp"/>
+                                    <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDragEnter" id="ZHT-SS-m60"/>
+                                    <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDown" id="k0o-Nu-JAM"/>
+                                    <segue destination="O2A-Rs-g4Z" kind="show" id="7VB-Wq-Rw7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-bU-Kxh" userLabel="Settings">
+                                <rect key="frame" x="578" y="288" width="62" height="97"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="Vcx-o8-go2"/>
+                                    <action selector="setBG4" destination="BYZ-38-t0r" eventType="touchDown" id="CSc-DS-5FI"/>
+                                    <action selector="setBG4" destination="BYZ-38-t0r" eventType="touchDragEnter" id="sXb-rp-sve"/>
+                                    <segue destination="qGO-gp-b0T" kind="show" id="exW-Hx-MTv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <navigationItem key="navigationItem" id="iVx-Sv-PRS"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="background" destination="GbG-Pr-HFb" id="boL-fU-aJW"/>
                         <segue destination="Ty6-Eu-zgt" kind="show" identifier="PresentLevels" id="RRq-Ep-Gb3"/>
                         <segue destination="kKY-G3-VII" kind="presentation" identifier="PresentStoryView" id="T7D-BC-g5P"/>
                     </connections>
@@ -64,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sga-7k-Ouk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="973" y="1315"/>
+            <point key="canvasLocation" x="881" y="1739"/>
         </scene>
         <!--Level View Controller-->
         <scene sceneID="01F-KR-fIk">
@@ -87,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBC-N2-9yL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1840" y="-53"/>
+            <point key="canvasLocation" x="2172" y="15"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="ldU-iO-PVQ">
@@ -109,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEj-BW-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2368" y="1219"/>
+            <point key="canvasLocation" x="2312" y="1399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hFf-FL-agw">
@@ -128,16 +257,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vwC-jc-nKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677" y="-420"/>
+            <point key="canvasLocation" x="771" y="-1238"/>
         </scene>
     </scenes>
     <resources>
+        <image name="BGabout" width="768" height="1024"/>
+        <image name="BGmain" width="768" height="1024"/>
+        <image name="BGsettings" width="768" height="1024"/>
         <image name="MadScientist" width="684" height="640"/>
+        <image name="menuButton" width="95" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WiZ-D0-BDn"/>
+        <segue reference="MkF-r8-bsk"/>
+        <segue reference="T7D-BC-g5P"/>
+        <segue reference="PvW-I8-hBT"/>
         <segue reference="rza-1s-ZaB"/>
-        <segue reference="rLW-Kz-L9i"/>
-        <segue reference="ez8-GL-iAw"/>
     </inferredMetricsTieBreakers>
 </document>
