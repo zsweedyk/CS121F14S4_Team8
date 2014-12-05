@@ -65,7 +65,7 @@
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
     [_segmentControl setSelectedSegmentIndex:mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
-    //[self.view addSubview:_segmentControl];
+    [self.view addSubview:_segmentControl];
 }
 
 - (void) setUpButtons
@@ -95,49 +95,8 @@
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
     
     [self changeButtonLanguage:mainLanguage];
-    //[self.view addSubview:_level];
-    //[self.view addSubview:_about];
-    
-    [playButton addTarget:self action:@selector(setBG) forControlEvents:UIControlEventTouchDragExit];
-    [helpButton addTarget:self action:@selector(setBG) forControlEvents:UIControlEventTouchDragExit];
-    [aboutButton addTarget:self action:@selector(setBG) forControlEvents:UIControlEventTouchDragExit];
-    [settingsButton addTarget:self action:@selector(setBG) forControlEvents:UIControlEventTouchDragExit];
-    
-    [playButton addTarget:self action:@selector(setBG1) forControlEvents:UIControlEventTouchDown];
-    [helpButton addTarget:self action:@selector(setBG2) forControlEvents:UIControlEventTouchDown];
-    [aboutButton addTarget:self action:@selector(setBG3) forControlEvents:UIControlEventTouchDown];
-    [settingsButton addTarget:self action:@selector(setBG4) forControlEvents:UIControlEventTouchDown];
-    
-    [playButton addTarget:self action:@selector(setBG1) forControlEvents:UIControlEventTouchDragEnter];
-    [helpButton addTarget:self action:@selector(setBG2) forControlEvents:UIControlEventTouchDragEnter];
-    [aboutButton addTarget:self action:@selector(setBG3) forControlEvents:UIControlEventTouchDragEnter];
-    [settingsButton addTarget:self action:@selector(setBG4) forControlEvents:UIControlEventTouchDragEnter];
-
-}
-
--(void) setBG
-{
-    backgroundImage.image = [UIImage imageNamed:@"BGmain.png"];
-}
-
--(void) setBG1
-{
-    backgroundImage.image = [UIImage imageNamed:@"BGmain1.png"];
-}
-
--(void) setBG2
-{
-    backgroundImage.image = [UIImage imageNamed:@"BGmain2.png"];
-}
-
--(void) setBG3
-{
-    backgroundImage.image = [UIImage imageNamed:@"BGmain3.png"];
-}
-
--(void) setBG4
-{
-    backgroundImage.image = [UIImage imageNamed:@"BGmain4.png"];
+    [self.view addSubview:_level];
+    [self.view addSubview:_about];
 }
 
 /*
