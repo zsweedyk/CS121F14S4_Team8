@@ -15,6 +15,7 @@
 @property (nonatomic, assign) enum GAME_STATES currentState;
 
 @property (weak, nonatomic) IBOutlet UIImageView *background;
+@property (nonatomic, strong) NSMutableArray*  locks;
 
 @end
 

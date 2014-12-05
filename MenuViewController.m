@@ -191,6 +191,7 @@
         LevelViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
+        destViewController.locks        = self.locks;
     }
     
     if ([segue.identifier isEqualToString:@"PresentStoryView"]) {
