@@ -9,6 +9,7 @@
 #import "LevelViewController.h"
 #import "GameViewController.h"
 #import "MenuViewController.h"
+#import "StoryViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -30,9 +31,6 @@
 
 @implementation LevelViewController
 
-@synthesize levelLanguage;
-@synthesize lock;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -42,7 +40,7 @@
     _possibleLevels = 20;
     test = YES;        // turn on test for debugging
     
-    if ([lock count] == 0)
+    if ([self.locks count] == 0)
         [self setUpLocks];
     
     [self setUpSounds];
@@ -97,9 +95,9 @@
             button.tag = i;
             
             NSString* titleStr;
-            if (levelLanguage == 2)
+            if (self.mainLanguage == 2)
                 titleStr = [NSString stringWithFormat:@"%d", i];
-            else if (levelLanguage == 1)
+            else if (self.mainLanguage == 1)
                 titleStr = [NSString stringWithFormat:@"%d", i];
             else
                 titleStr = [NSString stringWithFormat:@"%d", i];
@@ -107,9 +105,9 @@
             [button setTitle:titleStr forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
-            if ([lock[i] integerValue] == 0)
+            if ([self.locks[i] integerValue] == 0)
                 [button setBackgroundImage:[UIImage imageNamed:@"bulbon"] forState:UIControlStateNormal];
-            else if ([lock[i] integerValue] == 1)
+            else if ([self.locks[i] integerValue] == 1)
                 [button setBackgroundImage:[UIImage imageNamed:@"bulb"] forState:UIControlStateNormal];
             else
                 [button setBackgroundImage:[UIImage imageNamed:@"bombLRTB"] forState:UIControlStateNormal];
@@ -135,9 +133,9 @@
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
     NSString* backtoMenu;
-    if (levelLanguage == 2)
+    if (self.mainLanguage == CHINESE)
         backtoMenu = @"回到主菜单";
-    else if (levelLanguage == 1)
+    else if (self.mainLanguage == SPANISH)
         backtoMenu = @"Volver al menú principal";
     else
         backtoMenu = @"Back to main menu";
@@ -159,23 +157,23 @@
 {
     NSAssert(_numLevels > 1, @"The number of levels is too small");
     
-    lock = [[NSMutableArray alloc] init];
+    self.locks = [[NSMutableArray alloc] init];
     
     // first two levels are always unlocked
     int unlockLevels = 2;
     
     for (int i = 0; i < unlockLevels; i++)
-        [lock addObject: [NSNumber numberWithInt:0]];
+        [self.locks addObject: [NSNumber numberWithInt:0]];
     
     for (int i = unlockLevels; i < _numLevels; i++){
         if (test)
-            [lock addObject:[NSNumber numberWithInt:0]];
+            [self.locks addObject:[NSNumber numberWithInt:0]];
         else
-            [lock addObject:[NSNumber numberWithInt:1]];
+            [self.locks addObject:[NSNumber numberWithInt:1]];
     }
     
     for (int i = _numLevels; i < _possibleLevels; i++){
-        [lock addObject: [NSNumber numberWithInt:2]];
+        [self.locks addObject: [NSNumber numberWithInt:2]];
     }
 }
 
@@ -199,13 +197,13 @@
     UIButton* button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     
-    if (lock[buttonTag] == [NSNumber numberWithInt:1])
+    if (self.locks[buttonTag] == [NSNumber numberWithInt:1])
     {
         [_audioPlayerNo prepareToPlay];
         [_audioPlayerNo play];
         
         [self displayLockedMessage];
-    } else if (lock[buttonTag] == [NSNumber numberWithInt:2]){
+    } else if (self.locks[buttonTag] == [NSNumber numberWithInt:2]){
         [_audioPlayerNo prepareToPlay];
         [_audioPlayerNo play];
         
@@ -215,7 +213,11 @@
         [_audioPlayerLevelPressed play];
         
         selectedLevel = buttonTag;
-        [self performSegueWithIdentifier:@"presentGame" sender:self];
+        if ([StoryViewController needToDisplayStoryAtLevel:selectedLevel andState:self.currentState]) {
+            [self performSegueWithIdentifier:@"Instructions" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"presentGame" sender:self];
+        }
     }
 }
 
@@ -227,16 +229,16 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (levelLanguage) {
-        case 0:
+    switch (self.mainLanguage) {
+        case ENGLISH:
             title = @"Current level is locked";
             message = @"Please unlock all previous levels to play current level.";
             break;
-        case 1:
+        case SPANISH:
             title = @"Nivel actual está bloqueado";
             message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
             break;
-        case 2:
+        case CHINESE:
             title = @"当前关卡未解锁";
             message = @"只有解锁之前的所有关卡才可以开始这关";
             break;
@@ -260,16 +262,16 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (levelLanguage) {
-        case 0:
+    switch (self.mainLanguage) {
+        case ENGLISH:
             title = @"Current level is unavailbe";
             message = @"Please play available levels for now.";
             break;
-        case 1:
+        case SPANISH:
             title = @"Nivel actual está bloqueado";
             message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
             break;
-        case 2:
+        case CHINESE:
             title = @"当前关卡正在开发";
             message = @"先试试别的关卡吧！";
             break;
@@ -289,13 +291,27 @@
  *  Pass data to main viewcontroller or game viewcontroller
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"backToMain"]) {
         MenuViewController *destViewController = segue.destinationViewController;
-        destViewController.mainLanguage = levelLanguage;
-    } else if ([segue.identifier isEqualToString:@"presentGame"]) {
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"presentGame"]) {
         GameViewController *destViewController = segue.destinationViewController;
-        destViewController.gameLanguage = levelLanguage;
-        destViewController.locks = lock;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.locks = self.locks;
+        destViewController.totalLevel = _numLevels;
+        destViewController.gameLevel = selectedLevel;
+        destViewController.currentState = self.currentState;
+    }
+    
+    if ([segue.identifier isEqualToString:@"Instructions"]) {
+        StoryViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
         destViewController.totalLevel = _numLevels;
         destViewController.gameLevel = selectedLevel;
     }

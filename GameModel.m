@@ -15,8 +15,6 @@
     NSMutableArray* _bulbs;
     NSMutableArray* _bombs;
     
-    //LaserModel* _laserModel;
-
     int _numRows;
     int _numCols;
     ComponentModel* _batteryPos;

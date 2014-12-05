@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "GameViewController.h"
 #import "LevelViewController.h"
+#import "StoryViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -27,8 +28,6 @@
 @end
 
 @implementation MenuViewController
-
-@synthesize mainLanguage; // keep track of the selected language
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,7 +62,7 @@
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
     
     _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
-    [_segmentControl setSelectedSegmentIndex:mainLanguage];
+    [_segmentControl setSelectedSegmentIndex:self.mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];
 }
@@ -94,20 +93,24 @@
     [_about setTitleColor:tintColor forState:UIControlStateNormal];
     [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self changeButtonLanguage:mainLanguage];
+    [self changeButtonLanguage:self.mainLanguage];
     [self.view addSubview:_level];
     [self.view addSubview:_about];
 }
 
 /*
- *  If a level button is pressed, segue to levelviewcontroller
+ *  If a level button is pressed, segue to appropriate view controller
  */
 - (void)chooseLevel:(id)sender
 {
     [_audioPlayerLevelPressed prepareToPlay];
     [_audioPlayerLevelPressed play];
     
-    [self performSegueWithIdentifier:@"PresentLevels" sender:self];
+    if (self.currentState == FIRST_TIME) {
+        [self performSegueWithIdentifier:@"PresentStoryView" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"PresentLevels" sender:self];
+    }
 }
 
 /*
@@ -129,22 +132,22 @@
 - (void) changeButtonLanguage: (NSInteger) choice
 {
     switch (choice) {
-        case 0:
-            mainLanguage = 0;
+        case ENGLISH:
+            self.mainLanguage = ENGLISH;
             [_level setTitle:@"Start new game" forState:UIControlStateNormal];
             [_about setTitle:@"How to play" forState:UIControlStateNormal];
             break;
             
-        case 1:
+        case SPANISH:
             [_level setTitle:@"Iniciar Juego" forState:UIControlStateNormal];
             [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
-            mainLanguage = 1;
+            self.mainLanguage = SPANISH;
             break;
             
-        case 2:
+        case CHINESE:
             [_level setTitle:@"开始新游戏" forState:UIControlStateNormal];
             [_about setTitle:@"游戏指南" forState:UIControlStateNormal];
-            mainLanguage = 2;
+            self.mainLanguage = CHINESE;
             break;
             
         default:
@@ -163,16 +166,16 @@
     NSString *message;
     
     // change the language of help message based on language choice
-    switch (mainLanguage) {
-        case 0:
+    switch (self.mainLanguage) {
+        case ENGLISH:
             title = @"How to Play";
             message = @"In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions.";
             break;
-        case 1:
+        case SPANISH:
             title = @"Instrucción";
             message = @"En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
             break;
-        case 2:
+        case CHINESE:
             title = @"游戏指南";
             message = @"在这个游戏中，你需要通过变换开关的位置使灯泡发亮。";
             break;
@@ -192,10 +195,19 @@
  *  Pass data to level viewcontroller
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"PresentLevels"]) {
         LevelViewController *destViewController = segue.destinationViewController;
-        destViewController.levelLanguage = mainLanguage;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
     }
+    
+    if ([segue.identifier isEqualToString:@"PresentStoryView"]) {
+        StoryViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+    }
+    
 }
 
 

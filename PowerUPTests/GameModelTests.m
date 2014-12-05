@@ -34,16 +34,23 @@
 
 - (void) testInvalidGenerateGrid
 {
-
     // Tests for invalid input
     XCTAssertThrowsSpecific([_model generateGrid:-__INT_MAX__], NSException);
     XCTAssertThrowsSpecific([_model generateGrid:__INT_MAX__], NSException);
 }
 
+- (void) testGetRowAndCol
+{
+    // Test row
+    XCTAssert([_model getNumRows] == 15, @"Row is not read correctly");
+    
+    // Test col
+    XCTAssert([_model getNumCols] == 15, @"Col is not read correctly");
+}
+
 
 - (void) testValuesCorrectInGridGeneration
 {
-
     // Make sure the correct components were read in by generateGrid
     
     // Read in switch
@@ -88,7 +95,7 @@
     XCTAssert([[_model getTypeAtRow:11 andCol:9] isEqualToString:@"batteryPosLXXB"], @"Failure reading in positive battery with left and below switch");
     XCTAssert([[_model getTypeAtRow:11 andCol:11] isEqualToString:@"batteryPosXRTX"], @"Failure reading in positive battery with right and above switch");
     
-    // Read in new grid for laser components
+    // Read in new grid for laser components and bombs
     [_model generateGrid:-2];
     
     // Read in emitter and receivers
@@ -108,8 +115,13 @@
     XCTAssert([[_model getTypeAtRow:7 andCol:1] isEqualToString:@"receiverTopLRXB"], @"Failure reading in receiver with left, right, and bottom connection");
     XCTAssert([[_model getTypeAtRow:7 andCol:5] isEqualToString:@"emitterRightLXTB"], @"Failure reading in emitter with left, top, and botton connection");
     XCTAssert([[_model getTypeAtRow:7 andCol:8] isEqualToString:@"receiverLeftLRTB"], @"Failure reading in receiver with all connection");
+    
+    // Read in bombs
+    // Read in wires of various configurations.
+    XCTAssert([[_model getTypeAtRow:11 andCol:1] isEqualToString:@"bombXXXX"], @"Failure reading in bomb with no conenctions around it");
+    XCTAssert([[_model getTypeAtRow:11 andCol:3] isEqualToString:@"bombLRTB"], @"Failure reading in wire with four connections");
+    XCTAssert([[_model getTypeAtRow:10 andCol:3] isEqualToString:@"bombXXTB"], @"Failure reading in wire with above and below connections");
 }
-
 
 - (void) testGetTypeAtInvalidRowandCol
 {
@@ -160,6 +172,7 @@
 - (void) testGridConnection
 {
     [_model generateGrid:-3]; // bring in a different grid for testing
+    NSArray* bulbs;
     
     [_model powerOn];
     XCTAssertFalse([_model isConnected]); // originally unconnected
@@ -174,11 +187,17 @@
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XXTX"];
     [_model powerOn];
     XCTAssertFalse([_model isConnected]); // still unconnected
+    bulbs = [_model getConnectedBulbs];
+    XCTAssertTrue([bulbs[2][0] integerValue] == 0,@"First bulb is not connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is not connected");
     [_model powerOff];
 
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
     [_model powerOn];
-    XCTAssertFalse([_model isConnected]);
+    XCTAssertFalse([_model isConnected]); // only one bulb is connected
+    bulbs = [_model getConnectedBulbs];
+    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is not connected");
     [_model powerOff];
 
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
@@ -189,6 +208,9 @@
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XRTB"];
     [_model powerOn];
     XCTAssertTrue([_model isConnected]);
+    bulbs = [_model getConnectedBulbs];
+    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 1,@"Second bulb is connected");
     [_model powerOff];
 
 }
@@ -200,8 +222,40 @@
     XCTAssertFalse([_model isShorted]); // originally unshorted
     
     [_model componentSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
- 
-    XCTAssertTrue([_model isShorted]);
+    XCTAssertFalse([_model isShorted]); // still unshorted
+    
+    [_model componentSelectedAtRow:2 andCol:7 withOrientation:@"LRXX"];
+    XCTAssertTrue([_model isShorted]); // shorted
 }
+
+- (void) testBombConnection
+{
+    [_model generateGrid:-4];
+    NSArray* bombs;
+    
+    XCTAssertFalse([_model isBombConnected]); // originally no bomb is connected
+    
+    [_model componentSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
+    [_model powerOn];
+    XCTAssertFalse([_model isBombConnected]); // still no bomb is connected
+    bombs = [_model getConnectedBombs];
+    XCTAssertTrue([bombs[0] count] == 0,@"Two bombs are not connected");
+    [_model powerOff];
+    
+    [_model componentSelectedAtRow:4 andCol:7 withOrientation:@"LRXX"];
+    [_model powerOn];
+    XCTAssertTrue([_model isBombConnected]); // first bomb is connected
+    bombs = [_model getConnectedBombs];
+    XCTAssertTrue([bombs[0] count] == 1,@"One bomb is connected");
+    [_model powerOff];
+    
+    [_model componentSelectedAtRow:6 andCol:7 withOrientation:@"LRXX"];
+    [_model powerOn];
+    XCTAssertTrue([_model isBombConnected]); // first bomb is connected
+    bombs = [_model getConnectedBombs];
+    XCTAssertTrue([bombs[0] count] == 2,@"One bomb is connected");
+    [_model powerOff];
+}
+
 
 @end
