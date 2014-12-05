@@ -63,7 +63,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGgame.png"]]];
     
     // initialize model
     _model = [[GameModel alloc] initWithTotalLevels:(int)self.totalLevel];
@@ -131,7 +131,7 @@
 
     framePortion = 0.9;
     xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
-    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) / 1;
+    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) * 2;
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
 

@@ -37,8 +37,6 @@
     
     // set up sounds, segmented control, and buttons
     [self setUpSounds];
-    [self setUpSegControl];
-    [self setUpButtons];
 }
 
 - (void) setUpSounds
@@ -67,41 +65,34 @@
     [self.view addSubview:_segmentControl];
 }
 
-- (void) setUpButtons
+/*
+ *  change the background if button is pressed
+ */
+- (IBAction) setBG0
 {
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 3;
-   
-    // set up tint color
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    
-    // level button set up
-    CGRect levelFrame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-    _level = [[UIButton alloc] initWithFrame:levelFrame];
-    
-    [_level setBackgroundColor:[UIColor clearColor]];
-    [_level setTitleColor:tintColor forState:UIControlStateNormal];
-    [_level addTarget:self action:@selector(chooseLevel:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // about button set up
-    CGRect aboutFrame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight + buttonHeight * 2) / 2, buttonWidth, buttonHeight);
-    _about = [[UIButton alloc] initWithFrame:aboutFrame];
-    
-    [_about setBackgroundColor:[UIColor clearColor]];
-    [_about setTitleColor:tintColor forState:UIControlStateNormal];
-    [_about addTarget:self action:@selector(displayHelpMessage:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self changeButtonLanguage:self.mainLanguage];
-    [self.view addSubview:_level];
-    [self.view addSubview:_about];
+    self.background.image = [UIImage imageNamed:@"BGmain.png"];
+}
+- (IBAction) setBG1
+{
+    self.background.image = [UIImage imageNamed:@"BGmain1.png"];
+}
+- (IBAction) setBG2
+{
+    self.background.image = [UIImage imageNamed:@"BGmain2.png"];
+}
+- (IBAction) setBG3
+{
+    self.background.image = [UIImage imageNamed:@"BGmain3.png"];
+}
+- (IBAction) setBG4
+{
+    self.background.image = [UIImage imageNamed:@"BGmain4.png"];
 }
 
 /*
  *  If a level button is pressed, segue to appropriate view controller
  */
-- (void)chooseLevel:(id)sender
+- (IBAction) chooseLevel:(id)sender
 {
     [_audioPlayerLevelPressed prepareToPlay];
     [_audioPlayerLevelPressed play];
@@ -215,5 +206,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

@@ -14,5 +14,7 @@
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
 @property (nonatomic, assign) enum GAME_STATES currentState;
 
+@property (weak, nonatomic) IBOutlet UIImageView *background;
+
 @end
 
