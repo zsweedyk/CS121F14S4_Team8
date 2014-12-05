@@ -37,6 +37,7 @@
     ComponentModel* valid = [[ComponentModel alloc]initOfType:@"emitter" AtRow:-1 AndCol:-1 AndState:NO];
     //invalid component
     ComponentModel* invalid = [[ComponentModel alloc]initOfType:@"wire" AtRow:1 AndCol:1 AndState:NO];
+    
     //test for adding valid component
     [_laserModel addComponent:valid];
     int size = [_laserModel getEmitters].count;
@@ -73,7 +74,7 @@
     //turn power on, this should make the laser model to emit lasers since the emitters are already connected
     [_model powerOn];
     
-    //testing if all the component arrays have something in them
+    //testing if all the component arrays have something in them as they should be loaded when generating the grid
     XCTAssertFalse([_laserModel getEmitters].count == 0);
     XCTAssertFalse([_laserModel getDeflectors].count == 0);
     XCTAssertFalse([_laserModel getReceivers].count == 0);
@@ -95,7 +96,7 @@
     [_model generateGrid:-5];
     [_model powerOn];
     
-    //there should be lasers at the specified location
+    //there should be lasers at the specified location with the specified direction
     XCTAssert([[_model getTypeAtRow:3 andCol:7] isEqual:@"laserXXTB"]);
     XCTAssert([[_model getTypeAtRow:4 andCol:7] isEqual:@"laserXXTB"]);
     XCTAssertFalse([_laserModel getLasers].count == 0);
@@ -106,6 +107,7 @@
     //the lasers should no longer be there
     XCTAssert([[_model getTypeAtRow:3 andCol:7] isEqual:@"empty"]);
     XCTAssert([[_model getTypeAtRow:4 andCol:7] isEqual:@"empty"]);
+    //there shouldn't be laser at all when power is off
     XCTAssertTrue([_laserModel getLasers].count == 0);
 }
 
@@ -215,20 +217,6 @@
     //test for reset
     [_laserModel resetComponents];
     XCTAssert([([_laserModel getReceivers][0]) getState]==NO);
-}
-
-
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
 }
 
 @end
