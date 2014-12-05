@@ -9,17 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuViewController : UIViewController
-{
-    
-    IBOutlet UIImageView* backgroundImage;
-    IBOutlet UIButton* playButton;
-    IBOutlet UIButton* helpButton;
-    IBOutlet UIButton* aboutButton;
-    IBOutlet UIButton* settingsButton;
-    
-}
-
-
 
 @property (nonatomic, assign) NSInteger mainLanguage;
 

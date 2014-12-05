@@ -67,7 +67,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGgame.png"]]];
+    [self.view setBackgroundColor:[UIColor blackColor]];
     
     // initialize model
     _model = [[GameModel alloc] initWithTotalLevels:(int)totalLevel];
