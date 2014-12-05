@@ -8,7 +8,7 @@
         <!--Settings View Controller-->
         <scene sceneID="HHw-Dt-rVp">
             <objects>
-                <viewController title="Settings View Controller" id="qGO-gp-b0T" sceneMemberID="viewController">
+                <viewController title="Settings View Controller" id="qGO-gp-b0T" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="494-44-vqE"/>
                         <viewControllerLayoutGuide type="bottom" id="kuI-5f-Lrr"/>
@@ -26,7 +26,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="MkF-r8-bsk"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="settingToMain" id="MkF-r8-bsk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3f4-vd-Ukc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197" y="325"/>
+            <point key="canvasLocation" x="-449" y="365"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="3cZ-qT-x3z">
@@ -130,7 +130,7 @@
                                     <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="Vcx-o8-go2"/>
                                     <action selector="setBG4" destination="BYZ-38-t0r" eventType="touchDown" id="CSc-DS-5FI"/>
                                     <action selector="setBG4" destination="BYZ-38-t0r" eventType="touchDragEnter" id="sXb-rp-sve"/>
-                                    <segue destination="qGO-gp-b0T" kind="show" id="exW-Hx-MTv"/>
+                                    <segue destination="qGO-gp-b0T" kind="show" identifier="PresentSettings" id="exW-Hx-MTv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -268,9 +268,9 @@
         <image name="menuButton" width="95" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MkF-r8-bsk"/>
-        <segue reference="T7D-BC-g5P"/>
-        <segue reference="PvW-I8-hBT"/>
         <segue reference="rza-1s-ZaB"/>
+        <segue reference="T7D-BC-g5P"/>
+        <segue reference="MkF-r8-bsk"/>
+        <segue reference="RRq-Ep-Gb3"/>
     </inferredMetricsTieBreakers>
 </document>

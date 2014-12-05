@@ -52,11 +52,12 @@
 		931666C71A31A1C000C6D700 /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C61A31A1C000C6D700 /* level8 */; };
 		931666C91A31AA3B00C6D700 /* level11 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C81A31AA3B00C6D700 /* level11 */; };
 		931666CB1A31AC4800C6D700 /* level13 in Resources */ = {isa = PBXBuildFile; fileRef = 931666CA1A31AC4800C6D700 /* level13 */; };
-		931666D51A31B41D00C6D700 /* StoryTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666D41A31B41D00C6D700 /* StoryTextChinese.plist */; };
-		931666D71A31B44400C6D700 /* StoryTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666D61A31B44400C6D700 /* StoryTextSpanish.plist */; };
 		931666E11A31BA6900C6D700 /* level16 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E01A31BA6900C6D700 /* level16 */; };
 		931666E31A31BA7900C6D700 /* level17 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E21A31BA7900C6D700 /* level17 */; };
 		931666E51A31BA8200C6D700 /* level19 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E41A31BA8200C6D700 /* level19 */; };
+		931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931666E71A321CBE00C6D700 /* SettingsViewController.m */; };
+		931666EA1A32202100C6D700 /* StoryTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666E91A32202100C6D700 /* StoryTextChinese.plist */; };
+		931666EE1A32204800C6D700 /* StoryTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666ED1A32204800C6D700 /* StoryTextSpanish.plist */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
 		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
@@ -143,11 +144,13 @@
 		931666C61A31A1C000C6D700 /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level8; sourceTree = "<group>"; };
 		931666C81A31AA3B00C6D700 /* level11 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level11; sourceTree = "<group>"; };
 		931666CA1A31AC4800C6D700 /* level13 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level13; sourceTree = "<group>"; };
-		931666D41A31B41D00C6D700 /* StoryTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextChinese.plist; sourceTree = "<group>"; };
-		931666D61A31B44400C6D700 /* StoryTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextSpanish.plist; sourceTree = "<group>"; };
 		931666E01A31BA6900C6D700 /* level16 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level16; sourceTree = SOURCE_ROOT; };
 		931666E21A31BA7900C6D700 /* level17 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level17; sourceTree = SOURCE_ROOT; };
 		931666E41A31BA8200C6D700 /* level19 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level19; sourceTree = SOURCE_ROOT; };
+		931666E61A321CBE00C6D700 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		931666E71A321CBE00C6D700 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		931666E91A32202100C6D700 /* StoryTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextChinese.plist; sourceTree = "<group>"; };
+		931666ED1A32204800C6D700 /* StoryTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextSpanish.plist; sourceTree = "<group>"; };
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 				74996BCC1A1B40E500D48CAA /* ExplosionScene.h */,
 				74996BCD1A1B40E500D48CAA /* ExplosionScene.m */,
 				74996BD31A1B40E500D48CAA /* spark.png */,
+				931666E61A321CBE00C6D700 /* SettingsViewController.h */,
+				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
 			);
 			path = PowerUP;
 			sourceTree = "<group>";
@@ -339,8 +344,8 @@
 				74996BD21A1B40E500D48CAA /* level18 */,
 				A84F7F0519FDC1C6001AEC0D /* main.m */,
 				7479E1FF1A2D954D00CA8F20 /* StoryText.plist */,
-				931666D41A31B41D00C6D700 /* StoryTextChinese.plist */,
-				931666D61A31B44400C6D700 /* StoryTextSpanish.plist */,
+				931666ED1A32204800C6D700 /* StoryTextSpanish.plist */,
+				931666E91A32202100C6D700 /* StoryTextChinese.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -473,8 +478,8 @@
 				74996BD41A1B40E500D48CAA /* Explosion.sks in Resources */,
 				5B7FEE8D1A31B273003FF8CA /* level16 in Resources */,
 				74996BD61A1B40E500D48CAA /* level-2 in Resources */,
+				931666EE1A32204800C6D700 /* StoryTextSpanish.plist in Resources */,
 				A8646BC81A1AF5F500EB5C58 /* level10 in Resources */,
-				931666D71A31B44400C6D700 /* StoryTextSpanish.plist in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				5B4BC8BC1A250881004FD8AD /* level-5 in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
@@ -486,7 +491,7 @@
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
 				931666BF1A319A2500C6D700 /* level2 in Resources */,
 				74996BD71A1B40E500D48CAA /* level14 in Resources */,
-				931666D51A31B41D00C6D700 /* StoryTextChinese.plist in Resources */,
+				931666EA1A32202100C6D700 /* StoryTextChinese.plist in Resources */,
 				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
 				74996BD91A1B40E500D48CAA /* level15 in Resources */,
 				931666C31A319F3E00C6D700 /* level5 in Resources */,
@@ -549,6 +554,7 @@
 				A86E10D31A005B1E0029011B /* Wire.m in Sources */,
 				A86E10CE1A005B1E0029011B /* GameViewController.m in Sources */,
 				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
+				931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */,
 				74996BD51A1B40E500D48CAA /* ExplosionScene.m in Sources */,
 				5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */,
 				A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */,

@@ -119,8 +119,24 @@
  * Reads in the property list and sets up dictionaries
  */
 - (void) setUpDictionaries {
-    
-    NSString *plistPath  = [[NSBundle mainBundle] pathForResource:@"StoryText" ofType:@"plist"];
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"StoryText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"StoryTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"StoryTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+
     allText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     NSString *state = [NSString stringWithFormat:@"%d",self.currentState];
     currentStateText = [[NSDictionary alloc] initWithDictionary:[allText objectForKey:state]];
