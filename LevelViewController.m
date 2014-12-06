@@ -19,6 +19,9 @@
     int _numLevels;           // total levels the game has
     int _possibleLevels;
     
+    int rows;
+    int cols;
+    
     AVAudioPlayer* _audioPlayerLevelPressed;
     AVAudioPlayer* _audioPlayerMenuPressed;
     AVAudioPlayer* _audioPlayerNo;
@@ -38,6 +41,9 @@
     
     _numLevels = 20;
     _possibleLevels = 20;
+
+    rows = 5;
+    cols = 4;
     test = NO;        // turn on test for debugging
     
     if ([self.locks count] == 0)
@@ -79,11 +85,11 @@
     CGFloat buttonHeightSpace = (frameHeight - buttonHeight * 5) / 6;
     CGFloat buttonWidthSpace = (frameWidth -buttonWidth * 4) / 5;
     
-    for (int k = 0; k < 5; k++){
+    for (int k = 0; k < rows; ++k){
         
         CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k;
         
-        for (int p = 0 ; p < 4; p++)
+        for (int p = 0 ; p < cols; ++p)
         {
             CGFloat x = buttonWidthSpace * (p + 1) + buttonWidth * p;
             
@@ -91,7 +97,7 @@
             
             UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
             
-            int i = k * 4 + p;
+            int i = k * cols + p;
             button.tag = i;
             
             NSString* titleStr;
@@ -162,17 +168,17 @@
     // first two levels are always unlocked
     int unlockLevels = 2;
     
-    for (int i = 0; i < unlockLevels; i++)
+    for (int i = 0; i < unlockLevels; ++i)
         [self.locks addObject: [NSNumber numberWithInt:0]];
     
-    for (int i = unlockLevels; i < _numLevels; i++){
+    for (int i = unlockLevels; i < _numLevels; ++i){
         if (test)
             [self.locks addObject:[NSNumber numberWithInt:0]];
         else
             [self.locks addObject:[NSNumber numberWithInt:1]];
     }
     
-    for (int i = _numLevels; i < _possibleLevels; i++){
+    for (int i = _numLevels; i < _possibleLevels; ++i){
         [self.locks addObject: [NSNumber numberWithInt:2]];
     }
 }
@@ -264,7 +270,7 @@
     // change the language of help message based on language choice
     switch (self.mainLanguage) {
         case ENGLISH:
-            title = @"Current level is unavailbe";
+            title = @"Current level is unavailable";
             message = @"Please play available levels for now.";
             break;
         case SPANISH:
@@ -297,6 +303,7 @@
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
         destViewController.locks        = self.locks;
+
     }
     
     if ([segue.identifier isEqualToString:@"presentGame"]) {
@@ -323,14 +330,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
