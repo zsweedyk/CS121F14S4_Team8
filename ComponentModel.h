@@ -8,23 +8,16 @@
 
 @interface ComponentModel : NSObject
 
-- (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(BOOL)state;
-- (void) connectedRight:(BOOL)connection;
-- (void) connectedTop:(BOOL)connection;
-- (void) connectedBottom:(BOOL)connection;
-- (void) connectedLeft:(BOOL)connection;
-- (void) setState:(BOOL)state;
-- (void) pointTo:(NSString *)dir;
+- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state;
 
-- (NSString*) getType;
-- (BOOL) getState;
-- (int) getRow;
-- (int) getCol;
-- (NSString*) getDirection;
-- (BOOL) isConnectedRight;
-- (BOOL) isConnectedTop;
-- (BOOL) isConnectedBottom;
-- (BOOL) isConnectedLeft;
-- (BOOL) isSameComponentAs:(ComponentModel*)otherComp;
+@property(nonatomic, readwrite) BOOL connectedRight;
+@property(nonatomic, readwrite) BOOL connectedLeft;
+@property(nonatomic, readwrite) BOOL connectedTop;
+@property(nonatomic, readwrite) BOOL connectedBottom;
+
+@property(nonatomic, readwrite) BOOL state;
+
+@property(nonatomic, readwrite) int row;
+@property(nonatomic, readonly) int col;
 
 @end

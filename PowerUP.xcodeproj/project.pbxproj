@@ -42,6 +42,14 @@
 		74996BD91A1B40E500D48CAA /* level15 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD11A1B40E500D48CAA /* level15 */; };
 		74996BDA1A1B40E500D48CAA /* level18 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level18 */; };
 		74996BDB1A1B40E500D48CAA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD31A1B40E500D48CAA /* spark.png */; };
+		74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712871A33BEBB00BF4A51 /* WireModel.m */; };
+		74F7128B1A33C56A00BF4A51 /* BatteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128A1A33C56A00BF4A51 /* BatteryModel.m */; };
+		74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128D1A33C98800BF4A51 /* BulbModel.m */; };
+		74F712911A33CA1000BF4A51 /* SwitchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712901A33CA1000BF4A51 /* SwitchModel.m */; };
+		74F712941A33CA7800BF4A51 /* EmitterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712931A33CA7800BF4A51 /* EmitterModel.m */; };
+		74F712971A33CB7600BF4A51 /* ReceiverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712961A33CB7600BF4A51 /* ReceiverModel.m */; };
+		74F7129A1A33CD9500BF4A51 /* DeflectorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712991A33CD9500BF4A51 /* DeflectorModel.m */; };
+		74F7129D1A33CE1300BF4A51 /* BombModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7129C1A33CE1300BF4A51 /* BombModel.m */; };
 		931666BF1A319A2500C6D700 /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = 931666BE1A319A2500C6D700 /* level2 */; };
 		931666C11A319D1800C6D700 /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C01A319D1800C6D700 /* level3 */; };
 		931666C31A319F3E00C6D700 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C21A319F3E00C6D700 /* level5 */; };
@@ -131,6 +139,22 @@
 		74996BD11A1B40E500D48CAA /* level15 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level15; path = ../level15; sourceTree = "<group>"; };
 		74996BD21A1B40E500D48CAA /* level18 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level18; path = ../level18; sourceTree = "<group>"; };
 		74996BD31A1B40E500D48CAA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
+		74F712861A33BEBB00BF4A51 /* WireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WireModel.h; sourceTree = "<group>"; };
+		74F712871A33BEBB00BF4A51 /* WireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WireModel.m; sourceTree = "<group>"; };
+		74F712891A33C56A00BF4A51 /* BatteryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryModel.h; sourceTree = "<group>"; };
+		74F7128A1A33C56A00BF4A51 /* BatteryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryModel.m; sourceTree = "<group>"; };
+		74F7128C1A33C98800BF4A51 /* BulbModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulbModel.h; sourceTree = "<group>"; };
+		74F7128D1A33C98800BF4A51 /* BulbModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulbModel.m; sourceTree = "<group>"; };
+		74F7128F1A33CA1000BF4A51 /* SwitchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchModel.h; sourceTree = "<group>"; };
+		74F712901A33CA1000BF4A51 /* SwitchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchModel.m; sourceTree = "<group>"; };
+		74F712921A33CA7800BF4A51 /* EmitterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterModel.h; sourceTree = "<group>"; };
+		74F712931A33CA7800BF4A51 /* EmitterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterModel.m; sourceTree = "<group>"; };
+		74F712951A33CB7600BF4A51 /* ReceiverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverModel.h; sourceTree = "<group>"; };
+		74F712961A33CB7600BF4A51 /* ReceiverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverModel.m; sourceTree = "<group>"; };
+		74F712981A33CD9500BF4A51 /* DeflectorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeflectorModel.h; sourceTree = "<group>"; };
+		74F712991A33CD9500BF4A51 /* DeflectorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeflectorModel.m; sourceTree = "<group>"; };
+		74F7129B1A33CE1300BF4A51 /* BombModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombModel.h; sourceTree = "<group>"; };
+		74F7129C1A33CE1300BF4A51 /* BombModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombModel.m; sourceTree = "<group>"; };
 		931666BE1A319A2500C6D700 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
 		931666C01A319D1800C6D700 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		931666C21A319F3E00C6D700 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = SOURCE_ROOT; };
@@ -281,8 +305,24 @@
 				5B8EF3501A1AE30800DF2B7D /* DirectionController.m */,
 				5BEF17391A0EC79600354C84 /* Receiver.h */,
 				5BEF173A1A0EC79600354C84 /* Receiver.m */,
-				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
 				C08E3346B0B9BA5F2F430755 /* ComponentModel.h */,
+				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
+				74F712861A33BEBB00BF4A51 /* WireModel.h */,
+				74F712871A33BEBB00BF4A51 /* WireModel.m */,
+				74F712891A33C56A00BF4A51 /* BatteryModel.h */,
+				74F7128A1A33C56A00BF4A51 /* BatteryModel.m */,
+				74F7128C1A33C98800BF4A51 /* BulbModel.h */,
+				74F7128D1A33C98800BF4A51 /* BulbModel.m */,
+				74F7128F1A33CA1000BF4A51 /* SwitchModel.h */,
+				74F712901A33CA1000BF4A51 /* SwitchModel.m */,
+				74F712921A33CA7800BF4A51 /* EmitterModel.h */,
+				74F712931A33CA7800BF4A51 /* EmitterModel.m */,
+				74F712951A33CB7600BF4A51 /* ReceiverModel.h */,
+				74F712961A33CB7600BF4A51 /* ReceiverModel.m */,
+				74F712981A33CD9500BF4A51 /* DeflectorModel.h */,
+				74F712991A33CD9500BF4A51 /* DeflectorModel.m */,
+				74F7129B1A33CE1300BF4A51 /* BombModel.h */,
+				74F7129C1A33CE1300BF4A51 /* BombModel.m */,
 				74996BCB1A1B40E500D48CAA /* Explosion.sks */,
 				74996BCC1A1B40E500D48CAA /* ExplosionScene.h */,
 				74996BCD1A1B40E500D48CAA /* ExplosionScene.m */,
@@ -527,22 +567,30 @@
 				A86E10CD1A005B1E0029011B /* GameModel.m in Sources */,
 				A86E10D21A005B1E0029011B /* Switch.m in Sources */,
 				5B8EF3511A1AE30800DF2B7D /* DirectionController.m in Sources */,
+				74F7129A1A33CD9500BF4A51 /* DeflectorModel.m in Sources */,
 				A86E10D01A005B1E0029011B /* LevelViewController.m in Sources */,
 				5BEF17321A0EC1AB00354C84 /* Laser.m in Sources */,
+				74F712911A33CA1000BF4A51 /* SwitchModel.m in Sources */,
 				A86E10D31A005B1E0029011B /* Wire.m in Sources */,
 				A86E10CE1A005B1E0029011B /* GameViewController.m in Sources */,
 				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
 				931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */,
+				74F7128B1A33C56A00BF4A51 /* BatteryModel.m in Sources */,
 				74996BD51A1B40E500D48CAA /* ExplosionScene.m in Sources */,
 				5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */,
+				74F712941A33CA7800BF4A51 /* EmitterModel.m in Sources */,
 				A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */,
 				A84F7F0619FDC1C6001AEC0D /* main.m in Sources */,
 				A86E10CB1A005B1E0029011B /* Battery.m in Sources */,
 				A86E10CF1A005B1E0029011B /* Grid.m in Sources */,
 				5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */,
 				A86E10D11A005B1E0029011B /* MenuViewController.m in Sources */,
+				74F712971A33CB7600BF4A51 /* ReceiverModel.m in Sources */,
 				5B4BC8B81A210AD8004FD8AD /* LaserModel.m in Sources */,
+				74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */,
 				5BEF17351A0EC1C800354C84 /* Emitter.m in Sources */,
+				74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */,
+				74F7129D1A33CE1300BF4A51 /* BombModel.m in Sources */,
 				C08E3E456AF7E3D464D6278E /* ComponentModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,4 +28,23 @@ enum TYPE_OF_STORYVIEW {
     INSTRUCTION
 };
 
+enum COMPONENTS {
+    WIRE,
+    EMITTER,
+    BATTERY_NEG,
+    BULB,
+    RECEIVER,
+    BATTERY_POS,
+    SWITCH,
+    DEFLECTOR,
+    BOMB
+};
+
+enum DIRECTION {
+    LEFT,
+    RIGHT,
+    BOTTOM,
+    TOP
+};
+
 #endif

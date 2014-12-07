@@ -6,8 +6,17 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+#import "Enums.h"
 #import "GameModel.h"
 #import "ComponentModel.h"
+#import "WireModel.h"
+#import "BatteryModel.h"
+#import "BulbModel.h"
+#import "SwitchModel.h"
+#import "EmitterModel.h"
+#import "ReceiverModel.h"
+#import "DeflectorModel.h"
+#import "BombModel.h"
 
 @interface GameModel()
 {
@@ -17,8 +26,8 @@
     
     int _numRows;
     int _numCols;
-    ComponentModel* _batteryPos;
-    ComponentModel* _batteryNeg;
+    BatteryModel* _batteryPos;
+    BatteryModel* _batteryNeg;
 
     int _numLevels; // total number of levels
 }
@@ -28,7 +37,7 @@
 @implementation GameModel
 
 
-# pragma mark Initialization
+# pragma mark - Initialization
 
 
 /*
@@ -127,46 +136,73 @@
     for (int r = 0; r < _numRows; ++r) {
         
         NSRange range = NSMakeRange(2*r*(2*_numCols+1), 2*_numCols-1); // the range for a row worth of data
-        NSString* rowData = [data substringWithRange:range];
+        NSString *rowData = [data substringWithRange:range];
 
         for (int c = 0; c < _numCols; ++c) {
 
-            NSString* datum = [rowData substringWithRange:NSMakeRange(2*c, 1)]; // The component enum type for one grid location
+            int datum = [[rowData substringWithRange:NSMakeRange(2*c, 1)] intValue]; // The component enum type for one grid location
             
             // set the types as appropriate
-            ComponentModel* component;
-            if ([datum isEqual:@"1"]) {
-                component = [[ComponentModel alloc] initOfType:@"wire" AtRow:r AndCol:c AndState:NO];
-            } else if ([datum isEqual:@"3"]) {
-                component = [[ComponentModel alloc] initOfType:@"batteryNeg" AtRow:r AndCol:c AndState:NO];
-                _batteryNeg = component;
-            } else if ([datum isEqual:@"4"]) {
-                component = [[ComponentModel alloc] initOfType:@"bulb" AtRow:r AndCol:c AndState:NO];
-                [_bulbs addObject:component];
-            } else if ([datum isEqual:@"6"]) {
-                component = [[ComponentModel alloc] initOfType:@"batteryPos" AtRow:r AndCol:c AndState:NO];
-                _batteryPos = component;
-            } else if ([datum isEqual:@"7"]) {
-                component = [[ComponentModel alloc] initOfType:@"switch" AtRow:r AndCol:c AndState:NO];
-            } else if ([datum isEqual:@"2"]) {
-                component = [[ComponentModel alloc] initOfType:@"emitter" AtRow:r AndCol:c AndState:NO];
-                [_laserModel addComponent:component];
-            } else if ([datum isEqual:@"5"]) {
-                component = [[ComponentModel alloc] initOfType:@"receiver" AtRow:r AndCol:c AndState:NO];
-                [_laserModel addComponent:component];
-            } else if ([datum isEqual:@"8"]) {
-                component = [[ComponentModel alloc] initOfType:@"deflector" AtRow:r AndCol:c AndState:NO];
-                [component connectedRight:YES];
-                [component connectedTop:YES];
-                [_laserModel addComponent:component];
-            } else if ([datum isEqual:@"9"]) {
-                component = [[ComponentModel  alloc] initOfType:@"bomb" AtRow:r AndCol:c AndState:NO];
-                [_bombs addObject:component];
-            } else {
-                component = [[ComponentModel alloc] initOfType:@"empty" AtRow:r AndCol:c AndState:NO];
+            switch (datum) {
+                case WIRE: {
+                    WireModel *component = [[WireModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                case EMITTER: {
+                    EmitterModel *component = [[EmitterModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    [_laserModel addComponent:component];
+                    break;
+                }
+                case BATTERY_NEG: {
+                    BatteryModel *component = [[BatteryModel alloc] initAtRow:r AndCol:c WithState:NO Positive:NO];
+                    _batteryNeg = component;
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                case BATTERY_POS: {
+                    BatteryModel *component = [[BatteryModel alloc] initAtRow:r AndCol:c WithState:NO Positive:YES];
+                    _batteryPos = component;
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                case BULB: {
+                    BulbModel *component = [[BulbModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                case RECEIVER: {
+                    ReceiverModel *component = [[ReceiverModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    [_laserModel addComponent:component];
+                    break;
+                }
+                case DEFLECTOR: {
+                    DeflectorModel *component = [[DeflectorModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    [_laserModel addComponent:component];
+                    break;
+                }
+                case SWITCH: {
+                    SwitchModel *component = [[SwitchModel alloc] initAtRow:r AndCol:c WithState:NO];
+//                    [component connectedRight:YES];
+//                    [component connectedTop:YES];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                case BOMB: {
+                    BombModel *component = [[BombModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [_bombs addObject:component];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
+                default: {
+                    ComponentModel* component = [[ComponentModel alloc] initAtRow:r AndCol:c WithState:NO];
+                    [[_grid objectAtIndex:r] addObject:component];
+                    break;
+                }
             }
-
-            [[_grid objectAtIndex:r] addObject:component];
         }
     }
 }
@@ -190,22 +226,17 @@
 
             // Set the connections as appropriate
             if ([datum isEqual:@"-"]) {
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] connectedRight:true];
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] connectedLeft:true];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] setConnectedRight:YES];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] setConnectedLeft:YES];
             } else if ([datum isEqual:@"|"]) {
-                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:true];
-                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:true];
-            } else if ([datum isEqual:@"7"]) {
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] connectedRight:false];
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] connectedLeft:false];
-                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] connectedBottom:false];
-                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] connectedTop:false];
+                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] setConnectedBottom:YES];
+                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] setConnectedTop:YES];
             } else if ([datum isEqual:@"+"]) {
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] pointTo:@"Right"];
-                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] pointTo:@"Left"];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] setDirection:RIGHT];
+                [[[_grid objectAtIndex:r/2] objectAtIndex:(c + 1)/2] setDirection:LEFT];
             } else if ([datum isEqual:@"*"]) {
-                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] pointTo:@"Bottom"];
-                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] pointTo:@"Top"];
+                [[[_grid objectAtIndex:(r - 1)/2] objectAtIndex:c/2] setDirection:BOTTOM];
+                [[[_grid objectAtIndex:(r + 1)/2] objectAtIndex:c/2] setDirection:TOP];
             }
         }
     }
@@ -271,46 +302,44 @@
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument");
     
     ComponentModel* component = _grid[row][col];
-    NSAssert([[component getType] isEqual:@"switch"]||[[component getType] isEqual:@"deflector"], @"Input location does not correspond to switch or deflector");
-    
     // Adjust the connections in all 4 directions, keeping in mind the edge components
     if ( col != 0 ) {
         if ([[newOrientation substringWithRange:NSMakeRange(0, 1)] isEqual:@"L"]) {
-            [component connectedLeft:YES];
-            [_grid[row][col - 1] connectedRight:YES];
+            [component setConnectedLeft:YES];
+            [_grid[row][col - 1] setConnectedRight:YES];
         } else {
-            [component connectedLeft:NO];
-            [_grid[row][col - 1] connectedRight:NO];
+            [component setConnectedLeft:NO];
+            [_grid[row][col - 1] setConnectedRight:NO];
         }
     }
     
     if ( col != _numCols-1 ) {
         if ([[newOrientation substringWithRange:NSMakeRange(1, 1)] isEqual:@"R"]) {
-            [component connectedRight:YES];
-            [_grid[row][col + 1] connectedLeft:YES];
+            [component setConnectedRight:YES];
+            [_grid[row][col + 1] setConnectedLeft:YES];
         } else {
-            [component connectedRight:NO];
-            [_grid[row][col + 1] connectedLeft:NO];
+            [component setConnectedRight:NO];
+            [_grid[row][col + 1] setConnectedLeft:NO];
         }
     }
     
     if (row != 0) {
         if ([[newOrientation substringWithRange:NSMakeRange(2, 1)] isEqual:@"T"]) {
-            [component connectedTop:YES];
-            [_grid[row - 1][col] connectedBottom:YES];
+            [component setConnectedTop:YES];
+            [_grid[row - 1][col] setConnectedBottom:YES];
         } else {
-            [component connectedTop:NO];
-            [_grid[row - 1][col] connectedBottom:NO];
+            [component setConnectedTop:NO];
+            [_grid[row - 1][col] setConnectedBottom:NO];
         }
     }
     
     if (row != _numRows - 1) {
         if ([[newOrientation substringWithRange:NSMakeRange(3, 1)] isEqual:@"B"]) {
-            [component connectedBottom:YES];
-            [_grid[row + 1][col] connectedTop:YES];
+            [component setConnectedBottom:YES];
+            [_grid[row + 1][col] setConnectedTop:YES];
         } else {
-            [component connectedBottom:NO];
-            [_grid[row + 1][col] connectedTop:NO];
+            [component setConnectedBottom:NO];
+            [_grid[row + 1][col] setConnectedTop:NO];
         }
     }
 }
