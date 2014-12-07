@@ -204,7 +204,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hmV-ea-zGI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cBM-6D-Jxi">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -227,7 +227,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6xw-Zd-hvZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mDY-YI-k6R">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -272,5 +272,8 @@
         <segue reference="T7D-BC-g5P"/>
         <segue reference="MkF-r8-bsk"/>
         <segue reference="RRq-Ep-Gb3"/>
+        <segue reference="rLW-Kz-L9i"/>
+        <segue reference="PvW-I8-hBT"/>
+        <segue reference="ez8-GL-iAw"/>
     </inferredMetricsTieBreakers>
 </document>

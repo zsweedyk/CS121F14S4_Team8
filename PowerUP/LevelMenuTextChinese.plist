@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backToMenuTitle</key>
+	<string>回到主菜单</string>
+	<key>lockTitle</key>
+	<string>当前关卡未解锁</string>
+	<key>lockMessage</key>
+	<string>只有解锁之前的所有关卡才可以开始这关</string>
+	<key>unavailableTitle</key>
+	<string>当前关卡正在开发</string>
+	<key>unavailableMessage</key>
+	<string>先试试别的关卡吧！</string>
+</dict>
+</plist>

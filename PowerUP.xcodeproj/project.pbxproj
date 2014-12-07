@@ -45,6 +45,15 @@
 		74996BD91A1B40E500D48CAA /* level15 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD11A1B40E500D48CAA /* level15 */; };
 		74996BDA1A1B40E500D48CAA /* level18 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level18 */; };
 		74996BDB1A1B40E500D48CAA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD31A1B40E500D48CAA /* spark.png */; };
+		74F2A9971A33EFC40084640F /* MenuText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9961A33EFC40084640F /* MenuText.plist */; };
+		74F2A9991A33F3D30084640F /* MenuTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */; };
+		74F2A99B1A33F4D00084640F /* MenuTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */; };
+		74F2A99D1A33F5EE0084640F /* LevelMenuText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A99C1A33F5EE0084640F /* LevelMenuText.plist */; };
+		74F2A99F1A33F7FD0084640F /* LevelMenuTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A99E1A33F7FD0084640F /* LevelMenuTextSpanish.plist */; };
+		74F2A9A11A33F8FC0084640F /* LevelMenuTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A01A33F8FC0084640F /* LevelMenuTextChinese.plist */; };
+		74F2A9A31A33FEC30084640F /* GameText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A21A33FEC30084640F /* GameText.plist */; };
+		74F2A9A51A3401DC0084640F /* GameTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */; };
+		74F2A9A71A3402CC0084640F /* GameTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A61A3402CC0084640F /* GameTextChinese.plist */; };
 		931666BF1A319A2500C6D700 /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = 931666BE1A319A2500C6D700 /* level2 */; };
 		931666C11A319D1800C6D700 /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C01A319D1800C6D700 /* level3 */; };
 		931666C31A319F3E00C6D700 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C21A319F3E00C6D700 /* level5 */; };
@@ -137,6 +146,15 @@
 		74996BD11A1B40E500D48CAA /* level15 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level15; path = ../level15; sourceTree = "<group>"; };
 		74996BD21A1B40E500D48CAA /* level18 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level18; path = ../level18; sourceTree = "<group>"; };
 		74996BD31A1B40E500D48CAA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
+		74F2A9961A33EFC40084640F /* MenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuText.plist; sourceTree = "<group>"; };
+		74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextChinese.plist; sourceTree = "<group>"; };
+		74F2A99C1A33F5EE0084640F /* LevelMenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuText.plist; sourceTree = "<group>"; };
+		74F2A99E1A33F7FD0084640F /* LevelMenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A9A01A33F8FC0084640F /* LevelMenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextChinese.plist; sourceTree = "<group>"; };
+		74F2A9A21A33FEC30084640F /* GameText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameText.plist; sourceTree = "<group>"; };
+		74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A9A61A3402CC0084640F /* GameTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextChinese.plist; sourceTree = "<group>"; };
 		931666BE1A319A2500C6D700 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
 		931666C01A319D1800C6D700 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		931666C21A319F3E00C6D700 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = SOURCE_ROOT; };
@@ -346,6 +364,15 @@
 				7479E1FF1A2D954D00CA8F20 /* StoryText.plist */,
 				931666ED1A32204800C6D700 /* StoryTextSpanish.plist */,
 				931666E91A32202100C6D700 /* StoryTextChinese.plist */,
+				74F2A9961A33EFC40084640F /* MenuText.plist */,
+				74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */,
+				74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */,
+				74F2A99C1A33F5EE0084640F /* LevelMenuText.plist */,
+				74F2A99E1A33F7FD0084640F /* LevelMenuTextSpanish.plist */,
+				74F2A9A01A33F8FC0084640F /* LevelMenuTextChinese.plist */,
+				74F2A9A21A33FEC30084640F /* GameText.plist */,
+				74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */,
+				74F2A9A61A3402CC0084640F /* GameTextChinese.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -467,6 +494,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F2A9991A33F3D30084640F /* MenuTextSpanish.plist in Resources */,
 				931666E31A31BA7900C6D700 /* level17 in Resources */,
 				931666E51A31BA8200C6D700 /* level19 in Resources */,
 				6512169E1A19AECD0014436C /* Components.xcassets in Resources */,
@@ -478,8 +506,11 @@
 				74996BD41A1B40E500D48CAA /* Explosion.sks in Resources */,
 				5B7FEE8D1A31B273003FF8CA /* level16 in Resources */,
 				74996BD61A1B40E500D48CAA /* level-2 in Resources */,
+				74F2A9A11A33F8FC0084640F /* LevelMenuTextChinese.plist in Resources */,
 				931666EE1A32204800C6D700 /* StoryTextSpanish.plist in Resources */,
+				74F2A99B1A33F4D00084640F /* MenuTextChinese.plist in Resources */,
 				A8646BC81A1AF5F500EB5C58 /* level10 in Resources */,
+				74F2A9A71A3402CC0084640F /* GameTextChinese.plist in Resources */,
 				A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */,
 				5B4BC8BC1A250881004FD8AD /* level-5 in Resources */,
 				A893D7621A01E94F0004F539 /* beep-warmguitar.aif in Resources */,
@@ -489,7 +520,10 @@
 				7479E2001A2D954D00CA8F20 /* StoryText.plist in Resources */,
 				931666CB1A31AC4800C6D700 /* level13 in Resources */,
 				A84F7F1119FDC1C6001AEC0D /* Images.xcassets in Resources */,
+				74F2A9A31A33FEC30084640F /* GameText.plist in Resources */,
+				74F2A9971A33EFC40084640F /* MenuText.plist in Resources */,
 				931666BF1A319A2500C6D700 /* level2 in Resources */,
+				74F2A99D1A33F5EE0084640F /* LevelMenuText.plist in Resources */,
 				74996BD71A1B40E500D48CAA /* level14 in Resources */,
 				931666EA1A32202100C6D700 /* StoryTextChinese.plist in Resources */,
 				A893D7611A01E94F0004F539 /* beep-rejected.aif in Resources */,
@@ -497,6 +531,7 @@
 				931666C31A319F3E00C6D700 /* level5 in Resources */,
 				74996BD81A1B40E500D48CAA /* level9 in Resources */,
 				74996BDA1A1B40E500D48CAA /* level18 in Resources */,
+				74F2A9A51A3401DC0084640F /* GameTextSpanish.plist in Resources */,
 				931666C11A319D1800C6D700 /* level3 in Resources */,
 				A8646BCD1A1AF5F500EB5C58 /* level0 in Resources */,
 				931666E11A31BA6900C6D700 /* level16 in Resources */,
@@ -505,6 +540,7 @@
 				931666C71A31A1C000C6D700 /* level8 in Resources */,
 				A8646BCB1A1AF5F500EB5C58 /* level1 in Resources */,
 				A8C2D56A1A12084A008DD69D /* bomb-02.wav in Resources */,
+				74F2A99F1A33F7FD0084640F /* LevelMenuTextSpanish.plist in Resources */,
 				C08E3C51D66438CE9748FA06 /* level-1 in Resources */,
 				A8646BCC1A1AF5F500EB5C58 /* level5 in Resources */,
 				5B7FEE8B1A31B01F003FF8CA /* level17 in Resources */,

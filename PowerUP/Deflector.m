@@ -10,14 +10,14 @@
 
 @implementation Deflector
 {
-    NSArray* _possibleOrientations;
-    NSArray* _twoWays;
-    NSArray* _threeWays;
-    NSArray* _fourWays;
+    NSArray *_possibleOrientations;
+    NSArray *_twoWays;
+    NSArray *_threeWays;
+    NSArray *_fourWays;
     //the index for the current orientation
     int _currentOrientation;
-    NSString* name;
-    NSString* _orientation;
+    NSString *name;
+    NSString *_orientation;
     //index for the current deflector type,
     //2 stands for two-way
     //3 stands for three-way
@@ -27,8 +27,8 @@
     int _row;
     int _col;
     
-    UIImageView* _deflector;
-    DirectionController* control;
+    UIImageView *_deflector;
+    DirectionController *control;
     NSString* previousDir;
 }
 
@@ -43,11 +43,11 @@
     _row = row;
     _col = col;
     
-    _twoWays = [[NSArray alloc] initWithObjects:@"XRTX",@"XRXB",@"LXXB",@"LXTX",nil];
+    _twoWays   = [[NSArray alloc] initWithObjects:@"XRTX",@"XRXB",@"LXXB",@"LXTX",nil];
     _threeWays = [[NSArray alloc] initWithObjects:@"LRTX",@"XRTB",@"LRXB",@"LXTB", nil];
-    _fourWays = [[NSArray alloc] initWithObjects:@"LRTB", nil];
+    _fourWays  = [[NSArray alloc] initWithObjects:@"LRTB", nil];
     _possibleOrientations = _twoWays;
-    _currentTypeIndex = 2;
+    _currentTypeIndex   = 2;
     _currentOrientation = 0;
     _orientation = _possibleOrientations[_currentOrientation];
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
@@ -82,7 +82,7 @@
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
     _deflector.image = [UIImage imageNamed:name];
     _orientation = _possibleOrientations[_currentOrientation];
-    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     previousDir = @"X";
     [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
     
@@ -179,7 +179,7 @@
 
 - (void) turnOn
 {
-    NSString* onName = [name stringByAppendingString:@"on"];
+    NSString *onName = [name stringByAppendingString:@"on"];
     
     _deflector.image = [UIImage imageNamed:onName];
     

@@ -20,27 +20,27 @@
 @interface GameViewController () <GridDelegate>
 {
     // general variables
-    GameModel* _model;
-    Grid* _grid;
+    GameModel *_model;
+    Grid *_grid;
     int _numRows;
     int _numCols;
-    UIButton* _backToLevel;
-    UIButton* _test;
+    UIButton *_backToLevel;
+    UIButton *_test;
     
     // message title variables
-    NSString* _titleWin;
-    NSString* _next;
-    NSString* _all;
-    NSString* _okay;
-    NSString* _titleLose;
-    NSString* _restartBomb;
-    NSString* _restart;
+    NSString *_titleWin;
+    NSString *_next;
+    NSString *_all;
+    NSString *_okay;
+    NSString *_titleLose;
+    NSString *_restartBomb;
+    NSString *_restart;
     
     // sound effect variables
-    AVAudioPlayer* _audioPlayerWin;
-    AVAudioPlayer* _audioPlayerNo;
-    AVAudioPlayer* _audioPlayerExplosion;
-    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerWin;
+    AVAudioPlayer *_audioPlayerNo;
+    AVAudioPlayer *_audioPlayerExplosion;
+    AVAudioPlayer *_audioPlayerLevelPressed;
     
     // position variables
     float framePortion;
@@ -48,11 +48,13 @@
     CGFloat yGrid;
     
     // explosion effect variables
-    SKView* _background;
-    ExplosionScene* _explosion;
+    SKView *_background;
+    ExplosionScene *_explosion;
     
     // other variables
-    BOOL masterPowerOn;
+    BOOL _masterPowerOn;
+    
+    NSDictionary *gameText;
 }
 
 @end
@@ -75,11 +77,34 @@
     // generate a grid
     [_model generateGrid:(int)self.gameLevel];
 
+    [self setUpDictionary];
     [self setUpSound];
     [self initializeGrid];
     [self setUpDisplay];
     [self setUpBackButton];
     [self setLanguage];
+}
+
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    gameText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
 - (void) setUpBackButton
@@ -94,7 +119,7 @@
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
     [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
     
@@ -125,7 +150,7 @@
 - (void) initializeGrid
 {
     // reset master power off
-    masterPowerOn = NO;
+    _masterPowerOn = NO;
     
     CGRect frame = self.view.frame;
 
@@ -147,39 +172,15 @@
  */
 - (void) setLanguage
 {
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            _titleWin = @"You win";
-            _next = @"Current level is unlocked. Let's try next level!";
-            _all = @"All levels are unlocked. Congratulation!";
-            _okay = @"OK";
-            _titleLose = @"You lose";
-            _restart = @"The circuit is shorted. Let's give it another try!";
-            _restartBomb = @"The bomb is activated. Let's give it another try!";
-            break;
-        case SPANISH:
-            [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganaste!";
-            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
-            _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
-            _okay = @"OK";
-            _titleLose = @"Pierdes";
-            _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
-            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
-            break;
-        case CHINESE:
-            [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            _titleWin = @"成功过关！";
-            _next = @"下关已解锁！";
-            _all = @"所有关卡已解锁！";
-            _okay = @"进入下一关";
-            _titleLose = @"你没有过关";
-            _restart = @"再试一次吧！";
-            break;
-        default:
-            break;
-    }
+    
+    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
+    _titleWin = [gameText objectForKey:@"WinTitle"];
+    _next = [gameText objectForKey:@"NextMessage"];
+    _all = [gameText objectForKey:@"AllUnlocked"];
+    _okay = [gameText objectForKey:@"OkayTitle"];
+    _titleLose = [gameText objectForKey:@"LoseTitle"];
+    _restart = [gameText objectForKey:@"ShortMessage"];
+    _restartBomb = [gameText objectForKey:@"BombMessage"];
 }
 
 /*
@@ -201,10 +202,11 @@
     NSAssert(self.gameLevel < self.totalLevel, @"Level out of bound");
 
     ++self.gameLevel;
+    [_explosion deleteExplosion];
     [_model generateGrid:(int)self.gameLevel];
 
     // reset master power off
-    masterPowerOn = NO;
+    _masterPowerOn = NO;
     
     [self setUpDisplay];
 }
@@ -230,15 +232,15 @@
     int rowSelected = [position[0] intValue];
     int colSelected = [position[1] intValue];
     
-    NSString* selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
+    NSString *selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
     
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
     
     if ([selectedCompType isEqual:@"switch"]) {
-        masterPowerOn = NO;
+        _masterPowerOn = NO;
         [self powerOff];
     } else if ([selectedCompType isEqual:@"deflector"]) {
-        if (masterPowerOn) {
+        if (_masterPowerOn) {
             [self powerOn];
         }
     }
@@ -270,9 +272,9 @@
  */
 -(void) masterPowerSelected
 {
-    masterPowerOn = !masterPowerOn;
+    _masterPowerOn = !_masterPowerOn;
     
-    if (masterPowerOn) {
+    if (_masterPowerOn) {
         [self powerOn];
     } else {
         [self powerOff];
@@ -281,12 +283,13 @@
 
 - (void) updateGrid
 {
-    NSArray* lasers = [_model getLasers];
-    NSArray* emitters = [_model getConnectedEmitters];
-    NSArray* deflectors = [_model getConnectedDeflectors];
-    NSArray* receivers = [_model getConnectedReceivers];
-    NSArray* bulbs = [_model getConnectedBulbs];
-    NSArray* bombs = [_model getConnectedBombs];
+    NSArray *lasers = [_model getLasers];
+    NSArray *emitters = [_model getConnectedEmitters];
+    NSArray *deflectors = [_model getConnectedDeflectors];
+    NSArray *receivers = [_model getConnectedReceivers];
+    NSArray *bulbs = [_model getConnectedBulbs];
+    NSArray *bombs = [_model getConnectedBombs];
+    NSArray* batteries  = [_model getBatteries];
     
     [_grid resetLasers];
     [self updateComponents:lasers];
@@ -307,7 +310,7 @@
         [_audioPlayerExplosion play];
         
         [self setUpExplosionScene];
-        [self explodeBombs:bombs];
+        [self explodeComponents:bombs];
         
         [self displayMessageFor:@"Bomb"];
         
@@ -318,7 +321,7 @@
         [_audioPlayerExplosion play];
         
         [self setUpExplosionScene];
-        [self explodeBattery];
+        [self explodeComponents:batteries];
         
         [_grid shorted];
         
@@ -341,11 +344,11 @@
 /*
  * Display alert view
  */
-- (void) displayMessageFor:(NSString*)win
+- (void) displayMessageFor:(NSString*)event
 {
     NSString* title;
     NSString* message;
-    if ([win isEqual:@"Win"]) {
+    if ([event isEqual:@"Win"]) {
         title = _titleWin;
         
         if (self.gameLevel < self.totalLevel) {
@@ -356,7 +359,7 @@
                 _okay = @"退出游戏";
             }
         }
-    } else if ([win isEqual:@"Lose"]){
+    } else if ([event isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
         if (self.mainLanguage == 2) {
@@ -370,15 +373,15 @@
         }
     }
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
     
-    if ([win isEqual:@"Win"]) {
-        alert.tag = 1;
+    if ([event isEqual:@"Win"]) {
+        alertView.tag = 1;
     } else {
-        alert.tag = 0;
+        alertView.tag = 0;
     }
     
-    [alert show];
+    [alertView show];
     
 }
 
@@ -387,11 +390,11 @@
  */
 - (void) updateComponents:(NSArray*)components
 {
-    NSArray* rows = components[0];
-    NSArray* cols = components[1];
+    NSArray *rows = components[0];
+    NSArray *cols = components[1];
     
     for (int i = 0; i < rows.count; ++i) {
-        NSString* compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
+        NSString *compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
         [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
     }
 }
@@ -402,9 +405,9 @@
 - (void) updateStates:(NSArray*)components
 {
     if (components.count > 0) {
-        NSArray* rows = components[0];
-        NSArray* cols = components[1];
-        NSArray* states = components[2];
+        NSArray *rows = components[0];
+        NSArray *cols = components[1];
+        NSArray *states = components[2];
         
         for (int i = 0; i < rows.count; ++i) {
             [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
@@ -429,34 +432,24 @@
 }
 
 /*
- * explode battery
+ * explode connected components
  */
--(void) explodeBattery
-{
-    int xPos = [_grid getBatteryX] + xGrid;
-    int yPos = [_grid getBatteryY] + yGrid;
-    int frameY = self.view.frame.size.height;
-    int xPoint = xPos + 50;
-    int yPoint = frameY - yPos - 10;
-    [_explosion createExplosionAtX:xPoint AndY:yPoint];
-}
-
-/*
- * explode connected bombs
- */
--(void) explodeBombs:(NSArray*)bombs
+-(void) explodeComponents:(NSArray*)components
 {
     int frameY = self.view.frame.size.height;
     
-    NSArray* bombsRow = bombs[1];
-    NSArray* bombsCol = bombs[0];
+    NSArray* compRow = components[0];
+    NSArray* compCol = components[1];
+    CGFloat cellSize = [_grid getCellSize];
     
-    for (int i = 0; i < bombsRow.count; ++i) {
-        int xPos = [_grid getBombXAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + xGrid;
-        int yPos = [_grid getBombYAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + yGrid;
+    int xPos, yPos, xPoint, yPoint;
+    
+    for (int i = 0; i < compRow.count; ++i) {
+        xPos = [compCol[i] integerValue] * cellSize + xGrid;
+        yPos = [compRow[i] integerValue] * cellSize + yGrid;
         
-        int xPoint = xPos + 25;
-        int yPoint = frameY - yPos - 10;
+        xPoint = xPos + 25;
+        yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }

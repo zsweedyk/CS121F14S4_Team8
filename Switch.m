@@ -9,9 +9,9 @@
 #import "Switch.h"
 
 @implementation Switch {
-    UIImageView* _switch;
-    NSString* _orientation;
-    NSString* _imageOrientation;
+    UIImageView *_switch;
+    NSString *_orientation;
+    NSString *_imageOrientation;
     int _row;
     int _col;
 }
@@ -50,7 +50,7 @@
 - (void) addDirection: (NSString*) dir
 {
     _orientation = [self addOrientation:dir to:_orientation];
-    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
     
     //These lines may not be necesarry
@@ -62,16 +62,16 @@
 {
     _orientation = @"XXXX";
     _imageOrientation = @"XXXX";
-    NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
     _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@on", _imageOrientation]];
 }
 
 - (NSString*) addOrientation: (NSString*) dir to: (NSString*) currOrientation
 {
-    NSString* newOrientation;
-    NSString* start;
-    NSString* end;
+    NSString *newOrientation;
+    NSString *start;
+    NSString *end;
     if ([dir isEqual:@"L"]) {
         start = @"";
         end = [currOrientation substringFromIndex:1];

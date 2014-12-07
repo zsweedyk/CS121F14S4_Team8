@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>levelTitle</key>
+	<string>Iniciar Juego</string>
+	<key>aboutTitle</key>
+	<string>Instrucción</string>
+	<key>helpTitle</key>
+	<string>Instrucción</string>
+	<key>helpMessage</key>
+	<string>En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas</string>
+</dict>
+</plist>

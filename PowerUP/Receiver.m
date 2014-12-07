@@ -15,15 +15,15 @@
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
 {
-    self = [super initWithFrame:frame];
-    name = imageName;
+    self       = [super initWithFrame:frame];
+    name       = imageName;
     self.image = [UIImage imageNamed:name];
     return self;
 }
 
 - (void) turnOn
 {
-    NSString* onName = [name stringByAppendingString:@"on"];
+    NSString *onName = [name stringByAppendingString:@"on"];
     
     [self setImage:[UIImage imageNamed:onName]];
 }

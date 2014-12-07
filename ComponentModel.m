@@ -9,9 +9,9 @@
 {
     int _row;
     int _col;
-    NSString* _type;
+    NSString *_type;
     BOOL _state;
-    NSString* _direction;
+    NSString *_direction;
     BOOL _connectedTop;
     BOOL _connectedBottom;
     BOOL _connectedRight;
@@ -35,9 +35,9 @@
 - (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(BOOL)state
 {
     if (self = [super init]) {
-        _row = row;
-        _col = col;
-        _type = type;
+        _row   = row;
+        _col   = col;
+        _type  = type;
         _state = state;
     }
 
