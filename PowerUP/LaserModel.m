@@ -9,14 +9,14 @@
 #import "LaserModel.h"
 
 @implementation LaserModel{
-    NSArray* _grid;
+    NSArray *_grid;
     int _numRows;
     int _numCols;
     //the arrays holding the laser components for keeping track of their states
-    NSMutableArray* _lasers;
-    NSMutableArray* _emitters;
-    NSMutableArray* _deflectors;
-    NSMutableArray* _receivers;
+    NSMutableArray *_lasers;
+    NSMutableArray *_emitters;
+    NSMutableArray *_deflectors;
+    NSMutableArray *_receivers;
 }
 
 /*
@@ -155,7 +155,7 @@
         int laserRow = [_lasers[i] getRow];
         int laserCol = [_lasers[i] getCol];
         
-        ComponentModel* component = [[ComponentModel alloc] initOfType:@"empty" AtRow:laserRow AndCol:laserCol AndState:NO];
+        ComponentModel *component = [[ComponentModel alloc] initOfType:@"empty" AtRow:laserRow AndCol:laserCol AndState:NO];
         _grid[laserRow][laserCol] = component;
     }
 
@@ -175,7 +175,7 @@
     }
     
     if([emitter getState]){
-        NSString* dir = [emitter getDirection];
+        NSString *dir = [emitter getDirection];
         
         if([dir isEqual:@"Top"]) {
             [self laserTopAtRow:emRow Col:emCol];

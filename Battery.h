@@ -21,10 +21,12 @@
 
 @property (nonatomic, strong) id delegate;
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name;
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name AtRow:(int)row AndCol:(int)col;
 - (void) turnedOff;
 - (void) turnedOn;
 - (void) exploded;
+- (int) getRow;
+- (int) getCol;
 
 @end
 

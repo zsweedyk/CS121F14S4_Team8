@@ -23,6 +23,7 @@
 - (NSArray*) getConnectedEmitters;
 - (NSArray*) getConnectedDeflectors;
 - (NSArray*) getConnectedReceivers;
+- (NSArray*) getBatteries;
 
 - (BOOL) isConnected;
 - (BOOL) isShorted;
@@ -33,6 +34,6 @@
 - (int) getNumRows;
 - (int) getNumCols;
 
-@property (strong,nonatomic) LaserModel* laserModel;
+@property (strong,nonatomic) LaserModel *laserModel;
 
 @end

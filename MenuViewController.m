@@ -16,9 +16,9 @@
 
 @interface MenuViewController (){
     // sounds
-    AVAudioPlayer* _audioPlayerLanguagePressed;
-    AVAudioPlayer* _audioPlayerAboutPressed;
-    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerLanguagePressed;
+    AVAudioPlayer *_audioPlayerAboutPressed;
+    AVAudioPlayer *_audioPlayerLevelPressed;
     
     // language control and buttons
     UISegmentedControl* _segmentControl;

@@ -28,23 +28,19 @@
     int _numCols;
     
     // components
-    NSMutableArray* _bulbs;
-    NSMutableArray* _bombs;
-    NSMutableArray* _batteries;
-    NSMutableArray* _cells;
+    NSMutableArray *_bulbs;
+    NSMutableArray *_bombs;
+    NSMutableArray *_batteries;
+    NSMutableArray *_cells;
     //Lasers
-    NSMutableArray* _lasers;
-    NSMutableArray* _emitters;
-    NSMutableArray* _deflectors;
-    NSMutableArray* _receivers;
+    NSMutableArray *_lasers;
+    NSMutableArray *_emitters;
+    NSMutableArray *_deflectors;
+    NSMutableArray *_receivers;
     
-    // batteries
-    NSMutableArray* _battRows;
-    NSMutableArray* _battCols;
+    CGFloat _cellSize;
     
-    CGFloat cellSize;
-    
-    AVAudioPlayer* _audioPlayerPressed;
+    AVAudioPlayer *_audioPlayerPressed;
 }
 @end
 
@@ -69,7 +65,7 @@
     //initialize _cells 2-D array
     _cells = [[NSMutableArray alloc] init];
     for (int i = 0; i < _numRows; ++i) {
-        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        NSMutableArray *rowCells = [[NSMutableArray alloc] init];
         [_cells addObject:rowCells];
     }
 
@@ -96,24 +92,21 @@
     _deflectors = [[NSMutableArray alloc] init];
     _receivers = [[NSMutableArray alloc] init];
     
-    _battRows = [[NSMutableArray alloc] init];
-    _battCols = [[NSMutableArray alloc] init];
-   
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
-    cellSize = MIN(cellHeight, cellWidth);
+    _cellSize = MIN(cellHeight, cellWidth);
     
     // Set each cell on the grid
     for (int row = 0; row < _numRows; ++row){
         for (int col = 0; col < _numCols; ++col){
             // location of cell
-            CGFloat xLabel = col * cellSize;
-            CGFloat yLabel = row * cellSize;
+            CGFloat xLabel = col * _cellSize;
+            CGFloat yLabel = row * _cellSize;
             
             // initially set all cells to a clear label. Initialized to proper component later
-            CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
-            UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
+            CGRect labelFrame = CGRectMake(xLabel, yLabel, _cellSize, _cellSize);
+            UILabel *blankTile = [[UILabel alloc] initWithFrame:labelFrame];
             [blankTile setBackgroundColor:[UIColor clearColor]];
             
             [self addSubview:blankTile];
@@ -133,13 +126,13 @@
 - (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType
 {
     // white label to replace
-    UIView* label = [[_cells objectAtIndex:row] objectAtIndex:col];
+    UIView *label = [[_cells objectAtIndex:row] objectAtIndex:col];
 
     // new component to replace with
-    UIView* newComponent;
+    UIView *newComponent;
     
     // check component type and use the appropriate object
-    NSString* typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
+    NSString *typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
     
     if ([typeIndicator isEqual: @"wi"]) {
         // wire case
@@ -147,13 +140,10 @@
         
     } else if ([typeIndicator isEqual:@"ba"]) {
         // battery case
-        newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
-        ((Battery*)newComponent).delegate = self;
+        newComponent = [[Battery alloc]initWithFrame:label.frame andOrientation:componentType AtRow:row AndCol:col];
+        ((Battery *)newComponent).delegate = self;
         
         [_batteries addObject:newComponent];
-        [_battRows addObject:[NSNumber numberWithInt:row]];
-        [_battCols addObject:[NSNumber numberWithInt:col]];
-        
     } else if ([typeIndicator isEqual:@"bu"]) {
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
         [_bulbs addObject:newComponent];
@@ -161,7 +151,7 @@
     } else if ([typeIndicator isEqual:@"sw"]) {
         // switch case
         newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
-        ((Switch*)newComponent).delegate = self;
+        ((Switch *)newComponent).delegate = self;
         newComponent.tag = 70;
         
     } else if ([typeIndicator isEqual:@"em"]) {//emitter case
@@ -192,6 +182,11 @@
     [label removeFromSuperview];
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
+}
+
+- (CGFloat) getCellSize
+{
+    return _cellSize;
 }
 
 - (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
@@ -268,27 +263,6 @@
     }
 }
 
-- (int) getBatteryX
-{
-    return (cellSize * [_battCols[0] intValue]);
-}
-
-- (int) getBatteryY
-{
-    return (cellSize * [_battRows[0] intValue]);
-}
-
-- (int) getBombXAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * row);
-}
-
-- (int) getBombYAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * col);
-}
-
-
 //Tags: Switches are 70-74
 // -0 means that normal/ has not been touched yet
 // -1 means touch started outside of view and is now inside of view
@@ -298,7 +272,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInView:self];
-    for(Switch* view in self.subviews){
+    for(Switch *view in self.subviews){
         // touch begins inside a switch
         if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
             view.tag = 73;
@@ -311,7 +285,7 @@
     CGPoint location = [[touches anyObject] locationInView:self];
     CGPoint prevLocation = [[touches anyObject] previousLocationInView:self];
     
-    for(Switch* view in self.subviews){
+    for(Switch *view in self.subviews){
         
         // touch has entered a switch
         if(view.tag == 70 && CGRectContainsPoint(view.frame, location)){
@@ -379,8 +353,8 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch* touch = [touches anyObject];
-    for(Switch* view in self.subviews){
+    UITouch *touch = [touches anyObject];
+    for(Switch *view in self.subviews){
         if(view.tag == 71){
             [view addDirection:view._enteredDir];
             view._enteredDir = @"X";

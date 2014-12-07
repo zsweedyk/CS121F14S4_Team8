@@ -13,14 +13,10 @@
 
 @interface SettingsViewController (){
     // sounds
-    AVAudioPlayer* _audioPlayerLanguagePressed;
-    AVAudioPlayer* _audioPlayerAboutPressed;
-    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerLanguagePressed;
     
     // language control and buttons
-    UISegmentedControl* _segmentControl;
-    UIButton* _level;
-    UIButton* _about;
+    UISegmentedControl *_segmentControl;
 }
 
 @end
@@ -43,10 +39,6 @@
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
-    
-    _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
-    
-    _audioPlayerLevelPressed = _audioPlayerAboutPressed;
 }
 
 - (void) setUpSegControl

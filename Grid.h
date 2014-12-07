@@ -29,10 +29,7 @@
 - (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
 - (void) shorted;
-- (int) getBatteryX;
-- (int) getBatteryY;
-- (int) getBombXAtRow:(int)row AndCol:(int)col;
-- (int) getBombYAtRow:(int)row AndCol:(int)col;
+- (CGFloat) getCellSize;
 - (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
 - (void) resetLasers;
 - (void)componentsTurnedOff;
