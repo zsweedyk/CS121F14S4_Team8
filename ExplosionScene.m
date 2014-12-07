@@ -25,9 +25,9 @@
     self.backgroundColor = [SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     
-    NSString* explosionPath = [[NSBundle mainBundle] pathForResource:@"Explosion" ofType:@"sks"];
+    NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"Explosion" ofType:@"sks"];
     
-    SKEmitterNode* explosionNode = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+    SKEmitterNode *explosionNode = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
     [explosionNode setNumParticlesToEmit:1000];
     [explosionNode setParticleBirthRate:450];
     [explosionNode setParticleLifetime:2];

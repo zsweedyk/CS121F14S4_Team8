@@ -23,7 +23,7 @@
 
 - (void) turnOn
 {
-    NSString* onName = [name stringByAppendingString:@"on"];
+    NSString *onName = [name stringByAppendingString:@"on"];
     
     [self setImage:[UIImage imageNamed:onName]];
 }

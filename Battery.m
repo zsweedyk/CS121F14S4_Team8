@@ -10,8 +10,8 @@
 #import "ExplosionScene.h"
 
 @implementation Battery{
-    NSString* _name;
-    UIButton* _battery;
+    NSString *_name;
+    UIButton *_battery;
 }
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
@@ -42,7 +42,7 @@
 
 - (void) exploded
 {
-    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    NSString *newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
     [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 

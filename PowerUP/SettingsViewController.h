@@ -11,6 +11,6 @@
 @interface SettingsViewController : UIViewController
 
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
-@property (nonatomic, strong) NSMutableArray*  locks;
+@property (nonatomic, strong) NSMutableArray *locks;
 
 @end

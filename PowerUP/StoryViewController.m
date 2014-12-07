@@ -153,8 +153,8 @@
  */
 - (void) setUpText {
     
-    NSString* textToDisplay = [self getProperText];
-    NSAttributedString* displayReadyString = [self makeAttributedString:textToDisplay];
+    NSString *textToDisplay = [self getProperText];
+    NSAttributedString *displayReadyString = [self makeAttributedString:textToDisplay];
     
     textView.attributedText = displayReadyString;
 }
@@ -164,7 +164,7 @@
  */
 - (NSString*)getProperText {
     
-    NSString* text = [currentStateText objectForKey:[NSString stringWithFormat:@"top%d",currentPage]];
+    NSString *text = [currentStateText objectForKey:[NSString stringWithFormat:@"top%d",currentPage]];
     text = [text stringByAppendingString:@"\n"];
     text = [text stringByAppendingString:[currentStateText objectForKey:[NSString stringWithFormat:@"middle%d",currentPage]]];
     text = [text stringByAppendingString:@"\n"];
@@ -181,12 +181,12 @@
     
     NSRange fullRange = NSMakeRange(0, stringToFormat.length);
     
-    UIFont* font = [UIFont fontWithName:@"Helvetica Neue" size:36.0];
+    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:36.0];
     [displayReadyString addAttribute:NSFontAttributeName value:font range:fullRange];
     
     [displayReadyString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:fullRange];
     
-    NSMutableParagraphStyle* paraStyle = [[NSMutableParagraphStyle alloc] init];
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.alignment = NSTextAlignmentCenter;
     [displayReadyString addAttribute:NSParagraphStyleAttributeName value:paraStyle range:fullRange];
     
@@ -205,13 +205,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"StoryToLevel"]) {
-        LevelViewController* destViewController = [segue destinationViewController];
+        LevelViewController *destViewController = [segue destinationViewController];
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
     }
     
     if ([segue.identifier isEqualToString:@"FinishedLearning"]) {
-        GameViewController* destViewController = [segue destinationViewController];
+        GameViewController *destViewController = [segue destinationViewController];
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;

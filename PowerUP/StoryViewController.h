@@ -15,7 +15,7 @@
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
 @property (nonatomic, assign) NSInteger gameLevel;
 @property (nonatomic, assign) NSInteger totalLevel;
-@property (nonatomic, strong) NSMutableArray* locks;
+@property (nonatomic, strong) NSMutableArray *locks;
 
 + (BOOL) needToDisplayStoryAtLevel:(int)level andState:(int)state;
 

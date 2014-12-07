@@ -11,14 +11,14 @@
 
 @interface GameModel()
 {
-    NSMutableArray* _grid;
-    NSMutableArray* _bulbs;
-    NSMutableArray* _bombs;
+    NSMutableArray *_grid;
+    NSMutableArray *_bulbs;
+    NSMutableArray *_bombs;
     
     int _numRows;
     int _numCols;
-    ComponentModel* _batteryPos;
-    ComponentModel* _batteryNeg;
+    ComponentModel *_batteryPos;
+    ComponentModel *_batteryNeg;
 
     int _numLevels; // total number of levels
 }
@@ -76,9 +76,9 @@
     NSAssert((level >= -5), @"Invalid level argument"); // <--Adjust this when testing to allow for test grids.
     
     // get the grid data from the txt file
-    NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
-    NSError* error;
-    NSString* data = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level%d",level] ofType:@""];
+    NSError *error;
+    NSString *data = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     
     // set the grid and component arrays
     [self setComponentsWithData:data];
@@ -127,7 +127,7 @@
     for (int r = 0; r < _numRows; ++r) {
         
         NSRange range = NSMakeRange(2*r*(2*_numCols+1), 2*_numCols-1); // the range for a row worth of data
-        NSString* rowData = [data substringWithRange:range];
+        NSString *rowData = [data substringWithRange:range];
 
         for (int c = 0; c < _numCols; ++c) {
 
@@ -182,7 +182,7 @@
     for (int r = 0; r < 2*_numRows-2; ++r) {
         
         NSRange range = NSMakeRange(r*(2*_numCols+1), 2*_numCols-1); // range for a rows worth of data
-        NSString* rowData = [data substringWithRange:range];
+        NSString *rowData = [data substringWithRange:range];
 
         for (int c = 0; c < 2*_numCols-2; ++c) {
             
@@ -248,8 +248,8 @@
     NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument");
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument");
     
-    ComponentModel* component = [[_grid objectAtIndex:row] objectAtIndex:col];
-    NSString* compWithConn = [self getComponentWithConnectionsFor:component];
+    ComponentModel *component = [[_grid objectAtIndex:row] objectAtIndex:col];
+    NSString *compWithConn = [self getComponentWithConnectionsFor:component];
     
     return compWithConn;
 }
@@ -270,7 +270,7 @@
     NSAssert((row <= _numRows) && (row >= 0), @"Invalid row argument");
     NSAssert((col >= 0) && (col <= _numCols), @"Invalid col argument");
     
-    ComponentModel* component = _grid[row][col];
+    ComponentModel *component = _grid[row][col];
     NSAssert([[component getType] isEqual:@"switch"]||[[component getType] isEqual:@"deflector"], @"Input location does not correspond to switch or deflector");
     
     // Adjust the connections in all 4 directions, keeping in mind the edge components
@@ -388,8 +388,8 @@
  */
 -(BOOL) isConnected
 {
-    NSArray* connectedBulbLoc = [self getConnectedLocations:_bulbs withState:NO];
-    NSArray* connectedBulbs = connectedBulbLoc[0];
+    NSArray *connectedBulbLoc = [self getConnectedLocations:_bulbs withState:NO];
+    NSArray *connectedBulbs = connectedBulbLoc[0];
     
     if (connectedBulbs.count == _bulbs.count) {
         return true;
@@ -417,8 +417,8 @@
  */
 -(BOOL) isBombConnected
 {
-    NSArray* connectedBombLoc = [self getConnectedBombs];
-    NSArray* connectedBombs = connectedBombLoc[0];
+    NSArray *connectedBombLoc = [self getConnectedBombs];
+    NSArray *connectedBombs = connectedBombLoc[0];
     return (connectedBombs.count > 0);
 }
 
@@ -478,14 +478,14 @@
  */
 - (NSString*) getComponentWithConnectionsFor:(ComponentModel*)component
 {
-    NSString* type = [component getType];
+    NSString *type = [component getType];
     
     // get the conenction suffix
-    NSString* connections;
+    NSString *connections;
     connections = [self getConnectionsFor:component];
 
     // Based on component type either append or don't append the connections
-    NSString* compWithConn;
+    NSString *compWithConn;
     if ( [type isEqual:@"wire"] || [type isEqual:@"batteryNeg"] || [type isEqual:@"batteryPos"] || [type isEqual:@"emitter"] || [type isEqual:@"receiver"] || [type isEqual:@"bomb"] || [type isEqual:@"laser"] ) {
         compWithConn = [type stringByAppendingString:connections];
     } else {
@@ -503,9 +503,9 @@
  */
 -(NSString*) getConnectionsFor:(ComponentModel*)component
 {
-    NSString* type = [component getType];
+    NSString *type = [component getType];
     
-    NSString* connections = [[NSString alloc] init];
+    NSString *connections = [[NSString alloc] init];
     // If it's a laser type component we need to add direction information
     if([type isEqual:@"emitter"] || [type isEqual:@"receiver"]){
         connections = [connections stringByAppendingString:[component getDirection]];
@@ -556,7 +556,7 @@
             return false;
         }
         
-        ComponentModel* leftComp = _grid[row][col-1];
+        ComponentModel *leftComp = _grid[row][col-1];
         return [[leftComp getType] isEqual:@"switch"];
 
     } else if ( [direction isEqual:@"Right"] ) {
@@ -564,14 +564,14 @@
             return false;
         }
         
-        ComponentModel* rightComp = _grid[row][col+1];
+        ComponentModel *rightComp = _grid[row][col+1];
         return [[rightComp getType] isEqual:@"switch"];
 
     } else if ( [direction isEqual:@"Top"] ) {
         if ( row == 0 ) {
             return false;
         }
-        ComponentModel* topComp = _grid[row-1][col];
+        ComponentModel *topComp = _grid[row-1][col];
         return [[topComp getType] isEqual:@"switch"];
 
     } else if ( [direction isEqual:@"Bottom"] ) {
@@ -579,7 +579,7 @@
             return false;
         }
         
-        ComponentModel* bottomComp = _grid[row+1][col];
+        ComponentModel *bottomComp = _grid[row+1][col];
         return [[bottomComp getType] isEqual:@"switch"];
 
     } else {
@@ -597,9 +597,9 @@
  */
 - (NSArray*) getConnectedLocations:(NSArray*)components withState:(BOOL)needState
 {
-    NSMutableArray* compLocs = [[NSMutableArray alloc] init];
-    NSMutableArray* compRows = [[NSMutableArray alloc] init];
-    NSMutableArray* compCols = [[NSMutableArray alloc] init];
+    NSMutableArray *compLocs = [[NSMutableArray alloc] init];
+    NSMutableArray *compRows = [[NSMutableArray alloc] init];
+    NSMutableArray *compCols = [[NSMutableArray alloc] init];
     
     [compLocs addObject:compRows];
     [compLocs addObject:compCols];
@@ -610,7 +610,7 @@
         [compLocs addObject:compStates];
     }
     
-    for (ComponentModel* comp in components) {
+    for (ComponentModel *comp in components) {
         if (needState || [comp getState]) {
             [compLocs[0] addObject:[NSNumber numberWithInt:[comp getRow]]];
             [compLocs[1] addObject:[NSNumber numberWithInt:[comp getCol]]];
@@ -632,7 +632,7 @@
 -(BOOL) breadthSearchFrom:(ComponentModel*)startComp To:(ComponentModel*)targetComp inDirection:(NSString*)direction CheckingForShort:(BOOL)checkForShort
 {
     // Keep track of which locations we've already visited
-    NSMutableArray* visited = [[NSMutableArray alloc] initWithCapacity:_numRows];
+    NSMutableArray *visited = [[NSMutableArray alloc] initWithCapacity:_numRows];
     
     for (int i = 0; i < _numRows; ++i) {
         NSMutableArray *visColumn = [[NSMutableArray alloc] initWithCapacity:_numCols];
@@ -643,10 +643,10 @@
     }
     
     // set up our queue
-    NSMutableArray* connectionQueue = [[NSMutableArray alloc] init];
+    NSMutableArray *connectionQueue = [[NSMutableArray alloc] init];
     
     // Add the first element given the direction of travel from light bulb
-    ComponentModel* firstObject;
+    ComponentModel *firstObject;
     if ([direction isEqual:@"Left"]) {
         firstObject = _grid[[startComp getRow]][[startComp getCol] - 1];
     } else if ([direction isEqual:@"Right"]) {
@@ -665,7 +665,7 @@
     // search for target
     while ([connectionQueue count] > 0) {
         
-        ComponentModel* element = connectionQueue[0];
+        ComponentModel *element = connectionQueue[0];
         int row = [element getRow];
         int col = [element getCol];
         
@@ -731,10 +731,10 @@
 
 - (void) updateStateOfComponents:(NSArray*)components
 {
-    for (ComponentModel* comp in components) {
+    for (ComponentModel *comp in components) {
         
         // Make sure the component is valid
-        NSArray* connections = [self getAllConnectionsTo:comp];
+        NSArray *connections = [self getAllConnectionsTo:comp];
         if (connections.count < 2) {
             if (![[comp getType] isEqual:@"bomb"]){
                 [comp setState:NO];
@@ -756,7 +756,7 @@
         
         // Now check if the component is connected by a receiver that is on
         if (![[comp getType] isEqual:@"receiver"]) {
-            NSArray* receivers = [_laserModel getReceivers];
+            NSArray *receivers = [_laserModel getReceivers];
             for (int j = 0; j < receivers.count; ++j){
                     
                 BOOL path1 = [self breadthSearchFrom:comp To:receivers[j] inDirection:connections[0] CheckingForShort:NO];
@@ -781,7 +781,7 @@
  */
 - (NSArray*) getAllConnectionsTo:(ComponentModel*)component
 {
-    NSMutableArray* connections = [[NSMutableArray alloc] init];
+    NSMutableArray *connections = [[NSMutableArray alloc] init];
 
     if ( [component isConnectedLeft] ) {
         [connections addObject:@"Left"];
@@ -807,27 +807,12 @@
  */
 - (NSArray*) stateOf:(NSArray*)components
 {
-    NSMutableArray* states = [[NSMutableArray alloc] init];
-    for (ComponentModel* comp in components) {
+    NSMutableArray *states = [[NSMutableArray alloc] init];
+    for (ComponentModel *comp in components) {
         [states addObject:[NSNumber numberWithBool:[comp getState]]];
     }
     
     return states;
 }
-
-/**
--(void) printGrid
-{
-    for(int r = 0;r<29;r++)
-    {
-        printf("{");
-        for(int c=0;c<29;c++)
-        {
-            printf([_grid[r][c] UTF8String]);
-        }
-        printf("},\n");
-    }
-}**/
-
 
 @end

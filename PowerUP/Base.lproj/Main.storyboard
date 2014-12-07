@@ -269,14 +269,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rza-1s-ZaB"/>
-<<<<<<< Updated upstream
         <segue reference="T7D-BC-g5P"/>
         <segue reference="MkF-r8-bsk"/>
         <segue reference="RRq-Ep-Gb3"/>
-=======
-        <segue reference="rLW-Kz-L9i"/>
-        <segue reference="PvW-I8-hBT"/>
-        <segue reference="ez8-GL-iAw"/>
->>>>>>> Stashed changes
     </inferredMetricsTieBreakers>
 </document>

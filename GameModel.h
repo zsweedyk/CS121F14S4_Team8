@@ -33,6 +33,6 @@
 - (int) getNumRows;
 - (int) getNumCols;
 
-@property (strong,nonatomic) LaserModel* laserModel;
+@property (strong,nonatomic) LaserModel *laserModel;
 
 @end
