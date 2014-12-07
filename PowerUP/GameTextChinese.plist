@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackToLevel</key>
+	<string>回到主菜单</string>
+	<key>WinTitle</key>
+	<string>成功过关！</string>
+	<key>NextMessage</key>
+	<string>下关已解锁！</string>
+	<key>AllUnlocked</key>
+	<string>所有关卡已解锁！</string>
+	<key>OkayTitle</key>
+	<string>进入下一关</string>
+	<key>LoseTitle</key>
+	<string>你没有过关</string>
+	<key>ShortMessage</key>
+	<string>再试一次吧！</string>
+	<key>BombMessage</key>
+	<string>Make Chinese</string>
+</dict>
+</plist>

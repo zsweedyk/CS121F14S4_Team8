@@ -101,6 +101,7 @@
         MenuViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.locks        = self.locks;
+        destViewController.currentState = self.currentState;
     }
 }
 
