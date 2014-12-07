@@ -37,6 +37,13 @@
     explosionNode.position = CGPointMake(x,y);
     
     [self addChild:explosionNode];
+    [explosionNode runAction:[SKAction sequence:@[[SKAction fadeAlphaTo:0 duration:1], [SKAction removeFromParent]]]];
+}
+
+- (void) deleteExplosion{
+    [self removeAllChildren];
+    [self removeAllActions];
+    [self removeFromParent];
 }
 
 @end

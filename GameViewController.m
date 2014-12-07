@@ -52,7 +52,7 @@
     ExplosionScene *_explosion;
     
     // other variables
-    BOOL masterPowerOn;
+    BOOL _masterPowerOn;
 }
 
 @end
@@ -125,7 +125,7 @@
 - (void) initializeGrid
 {
     // reset master power off
-    masterPowerOn = NO;
+    _masterPowerOn = NO;
     
     CGRect frame = self.view.frame;
 
@@ -201,10 +201,11 @@
     NSAssert(self.gameLevel < self.totalLevel, @"Level out of bound");
 
     ++self.gameLevel;
+    [_explosion deleteExplosion];
     [_model generateGrid:(int)self.gameLevel];
 
     // reset master power off
-    masterPowerOn = NO;
+    _masterPowerOn = NO;
     
     [self setUpDisplay];
 }
@@ -235,10 +236,10 @@
     [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
     
     if ([selectedCompType isEqual:@"switch"]) {
-        masterPowerOn = NO;
+        _masterPowerOn = NO;
         [self powerOff];
     } else if ([selectedCompType isEqual:@"deflector"]) {
-        if (masterPowerOn) {
+        if (_masterPowerOn) {
             [self powerOn];
         }
     }
@@ -270,9 +271,9 @@
  */
 -(void) masterPowerSelected
 {
-    masterPowerOn = !masterPowerOn;
+    _masterPowerOn = !_masterPowerOn;
     
-    if (masterPowerOn) {
+    if (_masterPowerOn) {
         [self powerOn];
     } else {
         [self powerOff];
@@ -287,6 +288,7 @@
     NSArray *receivers = [_model getConnectedReceivers];
     NSArray *bulbs = [_model getConnectedBulbs];
     NSArray *bombs = [_model getConnectedBombs];
+    NSArray* batteries  = [_model getBatteries];
     
     [_grid resetLasers];
     [self updateComponents:lasers];
@@ -307,7 +309,7 @@
         [_audioPlayerExplosion play];
         
         [self setUpExplosionScene];
-        [self explodeBombs:bombs];
+        [self explodeComponents:bombs];
         
         [self displayMessageFor:@"Bomb"];
         
@@ -318,7 +320,7 @@
         [_audioPlayerExplosion play];
         
         [self setUpExplosionScene];
-        [self explodeBattery];
+        [self explodeComponents:batteries];
         
         [_grid shorted];
         
@@ -429,34 +431,24 @@
 }
 
 /*
- * explode battery
+ * explode connected components
  */
--(void) explodeBattery
-{
-    int xPos = [_grid getBatteryX] + xGrid;
-    int yPos = [_grid getBatteryY] + yGrid;
-    int frameY = self.view.frame.size.height;
-    int xPoint = xPos + 20;
-    int yPoint = frameY - yPos - 11;
-    [_explosion createExplosionAtX:xPoint AndY:yPoint];
-}
-
-/*
- * explode connected bombs
- */
--(void) explodeBombs:(NSArray*)bombs
+-(void) explodeComponents:(NSArray*)components
 {
     int frameY = self.view.frame.size.height;
     
-    NSArray *bombsRow = bombs[1];
-    NSArray *bombsCol = bombs[0];
+    NSArray* compRow = components[0];
+    NSArray* compCol = components[1];
+    CGFloat cellSize = [_grid getCellSize];
     
-    for (int i = 0; i < bombsRow.count; ++i) {
-        int xPos = [_grid getBombXAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + xGrid;
-        int yPos = [_grid getBombYAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + yGrid;
+    int xPos, yPos, xPoint, yPoint;
+    
+    for (int i = 0; i < compRow.count; ++i) {
+        xPos = [compCol[i] integerValue] * cellSize + xGrid;
+        yPos = [compRow[i] integerValue] * cellSize + yGrid;
         
-        int xPoint = xPos + 25;
-        int yPoint = frameY - yPos - 10;
+        xPoint = xPos + 25;
+        yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }

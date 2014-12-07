@@ -38,11 +38,7 @@
     NSMutableArray *_deflectors;
     NSMutableArray *_receivers;
     
-    // batteries
-    NSMutableArray *_battRows;
-    NSMutableArray *_battCols;
-    
-    CGFloat cellSize;
+    CGFloat _cellSize;
     
     AVAudioPlayer *_audioPlayerPressed;
 }
@@ -96,23 +92,20 @@
     _deflectors = [[NSMutableArray alloc] init];
     _receivers = [[NSMutableArray alloc] init];
     
-    _battRows = [[NSMutableArray alloc] init];
-    _battCols = [[NSMutableArray alloc] init];
-   
     // calculate dimension of the cell that makes it fit in the frame
     CGFloat cellHeight = self.frame.size.height/_numRows;
     CGFloat cellWidth = self.frame.size.width/_numCols;
-    cellSize = MIN(cellHeight, cellWidth);
+    _cellSize = MIN(cellHeight, cellWidth);
     
     // Set each cell on the grid
     for (int row = 0; row < _numRows; ++row){
         for (int col = 0; col < _numCols; ++col){
             // location of cell
-            CGFloat xLabel = col * cellSize;
-            CGFloat yLabel = row * cellSize;
+            CGFloat xLabel = col * _cellSize;
+            CGFloat yLabel = row * _cellSize;
             
             // initially set all cells to a clear label. Initialized to proper component later
-            CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
+            CGRect labelFrame = CGRectMake(xLabel, yLabel, _cellSize, _cellSize);
             UILabel *blankTile = [[UILabel alloc] initWithFrame:labelFrame];
             [blankTile setBackgroundColor:[UIColor clearColor]];
             
@@ -147,13 +140,10 @@
         
     } else if ([typeIndicator isEqual:@"ba"]) {
         // battery case
-        newComponent = [[Battery alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Battery alloc]initWithFrame:label.frame andOrientation:componentType AtRow:row AndCol:col];
         ((Battery *)newComponent).delegate = self;
         
         [_batteries addObject:newComponent];
-        [_battRows addObject:[NSNumber numberWithInt:row]];
-        [_battCols addObject:[NSNumber numberWithInt:col]];
-        
     } else if ([typeIndicator isEqual:@"bu"]) {
         newComponent = [[Bulb alloc] initWithFrame:label.frame];
         [_bulbs addObject:newComponent];
@@ -192,6 +182,11 @@
     [label removeFromSuperview];
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
+}
+
+- (CGFloat) getCellSize
+{
+    return _cellSize;
 }
 
 - (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation
@@ -267,27 +262,6 @@
         [_batteries[i] exploded];
     }
 }
-
-- (int) getBatteryX
-{
-    return (cellSize * [_battCols[0] intValue]);
-}
-
-- (int) getBatteryY
-{
-    return (cellSize * [_battRows[0] intValue]);
-}
-
-- (int) getBombXAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * row);
-}
-
-- (int) getBombYAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * col);
-}
-
 
 //Tags: Switches are 70-74
 // -0 means that normal/ has not been touched yet

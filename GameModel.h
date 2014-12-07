@@ -23,6 +23,7 @@
 - (NSArray*) getConnectedEmitters;
 - (NSArray*) getConnectedDeflectors;
 - (NSArray*) getConnectedReceivers;
+- (NSArray*) getBatteries;
 
 - (BOOL) isConnected;
 - (BOOL) isShorted;

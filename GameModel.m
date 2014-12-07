@@ -380,6 +380,18 @@
     return [self getConnectedLocations:[_laserModel getLasers] withState:NO];
 }
 
+/*
+ * Gets batteries
+ * Input: N/A
+ * Output: An array of batteries
+ */
+-(NSArray*) getBatteries
+{
+    NSMutableArray* batteries = [[NSMutableArray alloc] init];
+    [batteries addObject:_batteryNeg];
+    [batteries addObject:_batteryPos];
+    return [self getConnectedLocations:batteries withState:NO];
+}
 
 /*
  * Checks to see if the grid is fully connected
