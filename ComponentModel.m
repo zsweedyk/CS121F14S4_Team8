@@ -35,9 +35,9 @@
 - (id) initOfType:(NSString*)type AtRow:(int)row AndCol:(int)col AndState:(BOOL)state
 {
     if (self = [super init]) {
-        _row = row;
-        _col = col;
-        _type = type;
+        _row   = row;
+        _col   = col;
+        _type  = type;
         _state = state;
     }
 

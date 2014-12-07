@@ -37,15 +37,15 @@
 - (void) setUpSounds
 {
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
-    NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
+    NSURL *languagePathURL  = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
 }
 
 - (void) setUpSegControl
 {
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat frameWidth   = self.view.frame.size.width;
+    CGFloat frameHeight  = self.view.frame.size.height;
+    CGFloat buttonWidth  = frameWidth / 2;
     CGFloat buttonHeight = buttonWidth / 3;
     
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];

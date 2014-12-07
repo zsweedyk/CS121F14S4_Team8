@@ -15,8 +15,8 @@
 
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
 {
-    self = [super initWithFrame:frame];
-    name = imageName;
+    self       = [super initWithFrame:frame];
+    name       = imageName;
     self.image = [UIImage imageNamed:name];
     return self;
 }

@@ -43,11 +43,11 @@
     _row = row;
     _col = col;
     
-    _twoWays = [[NSArray alloc] initWithObjects:@"XRTX",@"XRXB",@"LXXB",@"LXTX",nil];
+    _twoWays   = [[NSArray alloc] initWithObjects:@"XRTX",@"XRXB",@"LXXB",@"LXTX",nil];
     _threeWays = [[NSArray alloc] initWithObjects:@"LRTX",@"XRTB",@"LRXB",@"LXTB", nil];
-    _fourWays = [[NSArray alloc] initWithObjects:@"LRTB", nil];
+    _fourWays  = [[NSArray alloc] initWithObjects:@"LRTB", nil];
     _possibleOrientations = _twoWays;
-    _currentTypeIndex = 2;
+    _currentTypeIndex   = 2;
     _currentOrientation = 0;
     _orientation = _possibleOrientations[_currentOrientation];
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];

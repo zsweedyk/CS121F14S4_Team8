@@ -15,8 +15,8 @@
 	<key>LoseTitle</key>
 	<string>你没有过关</string>
 	<key>ShortMessage</key>
-	<string>再试一次吧！</string>
+	<string>电源短路了，再试一次吧！</string>
 	<key>BombMessage</key>
-	<string>Make Chinese</string>
+	<string>你引爆了实验室的炸弹，再试一次吧！</string>
 </dict>
 </plist>
