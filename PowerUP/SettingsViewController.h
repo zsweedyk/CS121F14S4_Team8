@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
 @property (nonatomic, strong) NSMutableArray*  locks;
+@property (nonatomic, assign) enum GAME_STATES currentState;
 
 @end

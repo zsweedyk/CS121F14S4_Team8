@@ -53,6 +53,8 @@
     
     // other variables
     BOOL masterPowerOn;
+    
+    NSDictionary *gameText;
 }
 
 @end
@@ -75,11 +77,34 @@
     // generate a grid
     [_model generateGrid:(int)self.gameLevel];
 
+    [self setUpDictionary];
     [self setUpSound];
     [self initializeGrid];
     [self setUpDisplay];
     [self setUpBackButton];
     [self setLanguage];
+}
+
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    gameText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
 - (void) setUpBackButton
@@ -94,7 +119,7 @@
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
     [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
+    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
     [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
     
@@ -147,39 +172,15 @@
  */
 - (void) setLanguage
 {
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            _titleWin = @"You win";
-            _next = @"Current level is unlocked. Let's try next level!";
-            _all = @"All levels are unlocked. Congratulation!";
-            _okay = @"OK";
-            _titleLose = @"You lose";
-            _restart = @"The circuit is shorted. Let's give it another try!";
-            _restartBomb = @"The bomb is activated. Let's give it another try!";
-            break;
-        case SPANISH:
-            [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganaste!";
-            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
-            _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
-            _okay = @"OK";
-            _titleLose = @"Pierdes";
-            _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
-            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
-            break;
-        case CHINESE:
-            [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            _titleWin = @"成功过关！";
-            _next = @"下关已解锁！";
-            _all = @"所有关卡已解锁！";
-            _okay = @"进入下一关";
-            _titleLose = @"你没有过关";
-            _restart = @"再试一次吧！";
-            break;
-        default:
-            break;
-    }
+    
+    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
+    _titleWin = [gameText objectForKey:@"WinTitle"];
+    _next = [gameText objectForKey:@"NextMessage"];
+    _all = [gameText objectForKey:@"AllUnlocked"];
+    _okay = [gameText objectForKey:@"OkayTitle"];
+    _titleLose = [gameText objectForKey:@"LoseTitle"];
+    _restart = [gameText objectForKey:@"ShortMessage"];
+    _restartBomb = [gameText objectForKey:@"BombMessage"];
 }
 
 /*
@@ -341,11 +342,11 @@
 /*
  * Display alert view
  */
-- (void) displayMessageFor:(NSString*)win
+- (void) displayMessageFor:(NSString*)event
 {
     NSString* title;
     NSString* message;
-    if ([win isEqual:@"Win"]) {
+    if ([event isEqual:@"Win"]) {
         title = _titleWin;
         
         if (self.gameLevel < self.totalLevel) {
@@ -356,7 +357,7 @@
                 _okay = @"退出游戏";
             }
         }
-    } else if ([win isEqual:@"Lose"]){
+    } else if ([event isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
         if (self.mainLanguage == 2) {
@@ -372,7 +373,7 @@
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
     
-    if ([win isEqual:@"Win"]) {
+    if ([event isEqual:@"Win"]) {
         alert.tag = 1;
     } else {
         alert.tag = 0;

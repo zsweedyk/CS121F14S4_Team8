@@ -24,6 +24,8 @@
     UISegmentedControl* _segmentControl;
     UIButton* _level;
     UIButton* _about;
+    
+    NSDictionary* menuText;
 }
 
 @end
@@ -36,6 +38,7 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    [self setUpDictionary];
     // set up sounds, segmented control, and buttons
     [self setUpSounds];
 }
@@ -51,19 +54,26 @@
     _audioPlayerLevelPressed = _audioPlayerAboutPressed;
 }
 
-- (void) setUpSegControl
-{
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 3;
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"MenuText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"MenuTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"MenuTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
     
-    _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
-    
-    _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4) / 2, buttonWidth, buttonHeight / 2);
-    [_segmentControl setSelectedSegmentIndex:self.mainLanguage];
-    [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:_segmentControl];
+    menuText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
 /*
@@ -106,74 +116,14 @@
 }
 
 /*
- *  Set the language based on the value of segcontrol
- *  Note that english - 0, spanish - 1, chinese -2
- */
--(void)segmentedControlValueDidChange:(UISegmentedControl *)segment
-{
-    [_audioPlayerLanguagePressed prepareToPlay];
-    [_audioPlayerLanguagePressed play];
-    
-    // change the language and title of the buttons
-    [self changeButtonLanguage:segment.selectedSegmentIndex];
-}
-
-/*
- *  Change the display title of buttons according to different language
- */
-- (void) changeButtonLanguage: (NSInteger) choice
-{
-    switch (choice) {
-        case ENGLISH:
-            self.mainLanguage = ENGLISH;
-            [_level setTitle:@"Start new game" forState:UIControlStateNormal];
-            [_about setTitle:@"How to play" forState:UIControlStateNormal];
-            break;
-            
-        case SPANISH:
-            [_level setTitle:@"Iniciar Juego" forState:UIControlStateNormal];
-            [_about setTitle:@"Instrucción" forState:UIControlStateNormal];
-            self.mainLanguage = SPANISH;
-            break;
-            
-        case CHINESE:
-            [_level setTitle:@"开始新游戏" forState:UIControlStateNormal];
-            [_about setTitle:@"游戏指南" forState:UIControlStateNormal];
-            self.mainLanguage = CHINESE;
-            break;
-            
-        default:
-            break;
-    }
-}
-
-/*
  *  Display help message according to the language selected
  */
 - (void)displayHelpMessage:(id) sender{
     [_audioPlayerAboutPressed prepareToPlay];
     [_audioPlayerAboutPressed play];
     
-    NSString *title;
-    NSString *message;
-    
-    // change the language of help message based on language choice
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            title = @"How to Play";
-            message = @"In this game, you want to connect the circuit and power up the bulb by clicking on switches to correct positions.";
-            break;
-        case SPANISH:
-            title = @"Instrucción";
-            message = @"En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas";
-            break;
-        case CHINESE:
-            title = @"游戏指南";
-            message = @"在这个游戏中，你需要通过变换开关的位置使灯泡发亮。";
-            break;
-        default:
-            break;
-    }
+    NSString *title = [menuText objectForKey:@"helpTitle"];
+    NSString *message = [menuText objectForKey:@"helpMessage"];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
@@ -184,7 +134,7 @@
 }
 
 /*
- *  Pass data to level viewcontroller
+ *  Pass data to viewcontrollers
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -199,11 +149,13 @@
         StoryViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
     }
     
     if ([segue.identifier isEqualToString:@"PresentSettings"]) {
         SettingsViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;
     }
     

@@ -28,6 +28,8 @@
     
     int selectedLevel;        // current selected level
     BOOL test;                // if test is on, all levels are unlocked
+    
+    NSDictionary* levelMenuText;
 }
 
 @end
@@ -49,11 +51,35 @@
     if ([self.locks count] == 0)
         [self setUpLocks];
     
+    [self setUpDictionary];
     [self setUpSounds];
     [self setUpButtons];
     
     // Do any additional setup after loading the view.
 }
+
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    levelMenuText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+}
+
 
 - (void)setUpSounds
 {
@@ -138,13 +164,7 @@
     
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
-    NSString* backtoMenu;
-    if (self.mainLanguage == CHINESE)
-        backtoMenu = @"回到主菜单";
-    else if (self.mainLanguage == SPANISH)
-        backtoMenu = @"Volver al menú principal";
-    else
-        backtoMenu = @"Back to main menu";
+    NSString* backtoMenu = [levelMenuText objectForKey:@"backToMenuTitle"];
     
     [menuButton setTitle:backtoMenu forState:UIControlStateNormal];
     [menuButton setTitleColor:tintColor forState:UIControlStateNormal];
@@ -231,26 +251,9 @@
  *  Display message when user selects a locked level
  */
 - (void)displayLockedMessage{
-    NSString *title;
-    NSString *message;
     
-    // change the language of help message based on language choice
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            title = @"Current level is locked";
-            message = @"Please unlock all previous levels to play current level.";
-            break;
-        case SPANISH:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case CHINESE:
-            title = @"当前关卡未解锁";
-            message = @"只有解锁之前的所有关卡才可以开始这关";
-            break;
-        default:
-            break;
-    }
+    NSString *title = [levelMenuText objectForKey:@"lockTitle"];
+    NSString *message = [levelMenuText objectForKey:@"lockMessage"];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
@@ -264,26 +267,9 @@
  *  Display message when user selects an unavailable level
  */
 - (void)displayUnavailableMessage{
-    NSString *title;
-    NSString *message;
     
-    // change the language of help message based on language choice
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            title = @"Current level is unavailable";
-            message = @"Please play available levels for now.";
-            break;
-        case SPANISH:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case CHINESE:
-            title = @"当前关卡正在开发";
-            message = @"先试试别的关卡吧！";
-            break;
-        default:
-            break;
-    }
+    NSString *title = [levelMenuText objectForKey:@"unavailableTitle"];
+    NSString *message = [levelMenuText objectForKey:@"unavailableMessage"];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
