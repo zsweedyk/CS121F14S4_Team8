@@ -436,8 +436,8 @@
     int xPos = [_grid getBatteryX] + xGrid;
     int yPos = [_grid getBatteryY] + yGrid;
     int frameY = self.view.frame.size.height;
-    int xPoint = xPos + 50;
-    int yPoint = frameY - yPos - 10;
+    int xPoint = xPos + 20;
+    int yPoint = frameY - yPos - 11;
     [_explosion createExplosionAtX:xPoint AndY:yPoint];
 }
 

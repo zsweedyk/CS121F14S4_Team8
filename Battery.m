@@ -12,12 +12,16 @@
 @implementation Battery{
     NSString *_name;
     UIButton *_battery;
+    int _row;
+    int _col;
 }
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name AtRow:(int)row AndCol:(int)col
 {
     self = [super initWithFrame:frame];
     _name = name;
+    _row = row;
+    _col = col;
 
     CGRect battFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _battery = [[UIButton alloc] initWithFrame:battFrame];
@@ -44,6 +48,16 @@
 {
     NSString *newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
     [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+}
+
+- (int) getRow
+{
+    return _row;
+}
+
+- (int) getCol
+{
+    return _col;
 }
 
 @end
