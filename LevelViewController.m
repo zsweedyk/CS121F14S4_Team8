@@ -14,7 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface LevelViewController () {
-    NSMutableArray* _buttons; // buttons for different levels
+    NSMutableArray *_buttons; // buttons for different levels
     
     int _numLevels;           // total levels the game has
     int _possibleLevels;
@@ -22,9 +22,9 @@
     int rows;
     int cols;
     
-    AVAudioPlayer* _audioPlayerLevelPressed;
-    AVAudioPlayer* _audioPlayerMenuPressed;
-    AVAudioPlayer* _audioPlayerNo;
+    AVAudioPlayer *_audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerMenuPressed;
+    AVAudioPlayer *_audioPlayerNo;
     
     int selectedLevel;        // current selected level
     BOOL test;                // if test is on, all levels are unlocked
@@ -44,7 +44,7 @@
 
     rows = 5;
     cols = 4;
-    test = NO;        // turn on test for debugging
+    test = YES;        // turn on test for debugging
     
     if ([self.locks count] == 0)
         [self setUpLocks];
@@ -95,18 +95,13 @@
             
             CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
             
-            UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
+            UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
             
             int i = k * cols + p;
             button.tag = i;
             
-            NSString* titleStr;
-            if (self.mainLanguage == 2)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else if (self.mainLanguage == 1)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else
-                titleStr = [NSString stringWithFormat:@"%d", i];
+            NSString *titleStr;
+            titleStr = [NSString stringWithFormat:@"%d", i];
             
             [button setTitle:titleStr forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -134,11 +129,11 @@
     
     CGRect menuButtonFrame = CGRectMake(xMain, yMain, buttonWidth, buttonHeight);
     
-    UIButton* menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
     
     [menuButton setBackgroundColor:[UIColor clearColor]];
     
-    NSString* backtoMenu;
+    NSString *backtoMenu;
     if (self.mainLanguage == CHINESE)
         backtoMenu = @"回到主菜单";
     else if (self.mainLanguage == SPANISH)
@@ -200,7 +195,7 @@
  */
 - (void)cellSelected:(id)sender
 {
-    UIButton* button = (UIButton*) sender;
+    UIButton *button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     
     if (self.locks[buttonTag] == [NSNumber numberWithInt:1])

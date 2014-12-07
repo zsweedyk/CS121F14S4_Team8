@@ -9,9 +9,9 @@
 {
     int _row;
     int _col;
-    NSString* _type;
+    NSString *_type;
     BOOL _state;
-    NSString* _direction;
+    NSString *_direction;
     BOOL _connectedTop;
     BOOL _connectedBottom;
     BOOL _connectedRight;

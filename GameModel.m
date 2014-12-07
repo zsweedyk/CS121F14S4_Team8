@@ -19,7 +19,7 @@
     int _numCols;
     ComponentModel* _batteryPos;
     ComponentModel* _batteryNeg;
-
+    
     int _numLevels; // total number of levels
 }
 
@@ -44,10 +44,10 @@
         
         _numRows = 15;
         _numCols = 15;
-
+        
         _bulbs = [[NSMutableArray alloc] init];
         _bombs = [[NSMutableArray alloc] init];
-
+        
         _grid = [[NSMutableArray alloc] init];
         
         _laserModel = [[LaserModel alloc] initWithGrid:_grid numRow:_numRows numCol:_numCols];
@@ -128,9 +128,9 @@
         
         NSRange range = NSMakeRange(2*r*(2*_numCols+1), 2*_numCols-1); // the range for a row worth of data
         NSString* rowData = [data substringWithRange:range];
-
+        
         for (int c = 0; c < _numCols; ++c) {
-
+            
             NSString* datum = [rowData substringWithRange:NSMakeRange(2*c, 1)]; // The component enum type for one grid location
             
             // set the types as appropriate
@@ -165,7 +165,7 @@
             } else {
                 component = [[ComponentModel alloc] initOfType:@"empty" AtRow:r AndCol:c AndState:NO];
             }
-
+            
             [[_grid objectAtIndex:r] addObject:component];
         }
     }
@@ -183,11 +183,11 @@
         
         NSRange range = NSMakeRange(r*(2*_numCols+1), 2*_numCols-1); // range for a rows worth of data
         NSString* rowData = [data substringWithRange:range];
-
+        
         for (int c = 0; c < 2*_numCols-2; ++c) {
             
             NSString* datum = [rowData substringWithRange:NSMakeRange(c, 1)]; // One conenction type
-
+            
             // Set the connections as appropriate
             if ([datum isEqual:@"-"]) {
                 [[[_grid objectAtIndex:r/2] objectAtIndex:(c - 1)/2] connectedRight:true];
@@ -380,6 +380,18 @@
     return [self getConnectedLocations:[_laserModel getLasers] withState:NO];
 }
 
+/*
+ * Gets batteries
+ * Input: N/A
+ * Output: An array of batteries
+ */
+-(NSArray*) getBatteries
+{
+    NSMutableArray* batteries = [[NSMutableArray alloc] init];
+    [batteries addObject:_batteryNeg];
+    [batteries addObject:_batteryPos];
+    return [self getConnectedLocations:batteries withState:NO];
+}
 
 /*
  * Checks to see if the grid is fully connected
@@ -483,7 +495,7 @@
     // get the conenction suffix
     NSString* connections;
     connections = [self getConnectionsFor:component];
-
+    
     // Based on component type either append or don't append the connections
     NSString* compWithConn;
     if ( [type isEqual:@"wire"] || [type isEqual:@"batteryNeg"] || [type isEqual:@"batteryPos"] || [type isEqual:@"emitter"] || [type isEqual:@"receiver"] || [type isEqual:@"bomb"] || [type isEqual:@"laser"] ) {
@@ -517,19 +529,19 @@
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
-
+    
     if ( [component isConnectedRight] || [self hasSwitchTo:@"Right" OfComponent:component]) {
         connections = [connections stringByAppendingString:@"R"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
-
+    
     if ( [component isConnectedTop] || [self hasSwitchTo:@"Top" OfComponent:component]) {
         connections = [connections stringByAppendingString:@"T"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
-
+    
     if ( [component isConnectedBottom] || [self hasSwitchTo:@"Bottom" OfComponent:component]) {
         connections = [connections stringByAppendingString:@"B"];
     } else {
@@ -549,7 +561,7 @@
 {
     int row = [component getRow];
     int col = [component getCol];
-
+    
     // A case for each direction. For each direction check for bound case.
     if ( [direction isEqual:@"Left"] ) {
         if ( col == 0 ) {
@@ -558,7 +570,7 @@
         
         ComponentModel* leftComp = _grid[row][col-1];
         return [[leftComp getType] isEqual:@"switch"];
-
+        
     } else if ( [direction isEqual:@"Right"] ) {
         if ( col == _numCols - 1 ) {
             return false;
@@ -566,14 +578,14 @@
         
         ComponentModel* rightComp = _grid[row][col+1];
         return [[rightComp getType] isEqual:@"switch"];
-
+        
     } else if ( [direction isEqual:@"Top"] ) {
         if ( row == 0 ) {
             return false;
         }
         ComponentModel* topComp = _grid[row-1][col];
         return [[topComp getType] isEqual:@"switch"];
-
+        
     } else if ( [direction isEqual:@"Bottom"] ) {
         if ( row == _numRows - 1 ) {
             return false;
@@ -581,7 +593,7 @@
         
         ComponentModel* bottomComp = _grid[row+1][col];
         return [[bottomComp getType] isEqual:@"switch"];
-
+        
     } else {
         // Invalid direction input, throw exception
         [NSException raise:@"Invalid direction input" format:@"Direction Input:%@ is invalid", direction];
@@ -758,7 +770,7 @@
         if (![[comp getType] isEqual:@"receiver"]) {
             NSArray* receivers = [_laserModel getReceivers];
             for (int j = 0; j < receivers.count; ++j){
-                    
+                
                 BOOL path1 = [self breadthSearchFrom:comp To:receivers[j] inDirection:connections[0] CheckingForShort:NO];
                 BOOL path2 = [self breadthSearchFrom:comp To:receivers[j] inDirection:connections[1] CheckingForShort:NO];
                 
@@ -782,7 +794,7 @@
 - (NSArray*) getAllConnectionsTo:(ComponentModel*)component
 {
     NSMutableArray* connections = [[NSMutableArray alloc] init];
-
+    
     if ( [component isConnectedLeft] ) {
         [connections addObject:@"Left"];
     }
@@ -795,7 +807,7 @@
     if ( [component isConnectedBottom] ) {
         [connections addObject:@"Bottom"];
     }
-
+    
     return connections;
 }
 
@@ -816,18 +828,18 @@
 }
 
 /**
--(void) printGrid
-{
-    for(int r = 0;r<29;r++)
-    {
-        printf("{");
-        for(int c=0;c<29;c++)
-        {
-            printf([_grid[r][c] UTF8String]);
-        }
-        printf("},\n");
-    }
-}**/
+ -(void) printGrid
+ {
+ for(int r = 0;r<29;r++)
+ {
+ printf("{");
+ for(int c=0;c<29;c++)
+ {
+ printf([_grid[r][c] UTF8String]);
+ }
+ printf("},\n");
+ }
+ }**/
 
 
 @end
