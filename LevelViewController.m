@@ -41,10 +41,10 @@
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGplain.png"]]];
     
-    _numLevels = 20;
-    _possibleLevels = 20;
+    _numLevels = 28;
+    _possibleLevels = 28;
 
-    rows = 5;
+    rows = 7;
     cols = 4;
     test = YES;        // turn on test for debugging
     
@@ -98,9 +98,6 @@
 
 - (void)setUpButtons
 {
-    // set up tint color
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    
     // level buttons set up
     _buttons = [[NSMutableArray alloc] init];
     
@@ -108,12 +105,12 @@
     CGFloat frameHeight = self.view.frame.size.height;
     CGFloat buttonWidth = frameWidth / 10;
     CGFloat buttonHeight = buttonWidth;
-    CGFloat buttonHeightSpace = (frameHeight - buttonHeight * 5) / 6;
-    CGFloat buttonWidthSpace = (frameWidth -buttonWidth * 4) / 5;
+    CGFloat buttonHeightSpace = (frameHeight - buttonHeight * rows) / (rows + 1);
+    CGFloat buttonWidthSpace = (frameWidth -buttonWidth * cols) / (cols + 1);
     
     for (int k = 0; k < rows; ++k){
         
-        CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k;
+        CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k + 25;
         
         for (int p = 0 ; p < cols; ++p)
         {
@@ -149,7 +146,7 @@
     // back to main menu button set up
     CGFloat buttonSize = frameWidth /16;
     CGFloat x = (frameWidth - buttonSize) / 2;
-    CGFloat y = 50;
+    CGFloat y = 25;
     CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:buttonFrame];
