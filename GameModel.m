@@ -524,25 +524,25 @@
     }
     
     // Check all 4 directions for conenctions
-    if ( [component isConnectedLeft] || [self hasSwitchTo:@"Left" OfComponent:component]) {
+    if ( [component isConnectedLeft] || ([self hasSwitchTo:@"Left" OfComponent:component]&&![type isEqual:@"empty"]&&![type isEqual:@"laser"])) {
         connections = [connections stringByAppendingString:@"L"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
     
-    if ( [component isConnectedRight] || [self hasSwitchTo:@"Right" OfComponent:component]) {
+    if ( [component isConnectedRight] || ([self hasSwitchTo:@"Right" OfComponent:component]&&![type isEqual:@"empty"]&&![type isEqual:@"laser"])) {
         connections = [connections stringByAppendingString:@"R"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
     
-    if ( [component isConnectedTop] || [self hasSwitchTo:@"Top" OfComponent:component]) {
+    if ( [component isConnectedTop] || ([self hasSwitchTo:@"Top" OfComponent:component]&&![type isEqual:@"empty"]&&![type isEqual:@"laser"])) {
         connections = [connections stringByAppendingString:@"T"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
     }
     
-    if ( [component isConnectedBottom] || [self hasSwitchTo:@"Bottom" OfComponent:component]) {
+    if ( [component isConnectedBottom] || ([self hasSwitchTo:@"Bottom" OfComponent:component]&&![type isEqual:@"empty"]&&![type isEqual:@"laser"])) {
         connections = [connections stringByAppendingString:@"B"];
     } else {
         connections = [connections stringByAppendingString:@"X"];
