@@ -110,22 +110,19 @@
 - (void) setUpBackButton
 {
     CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 6;
+    CGFloat buttonSize = frameWidth /16;
+
     
-    CGFloat x = (frameWidth - buttonWidth) / 2;
-    CGFloat y = buttonHeight / 2;
-    CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+    CGFloat x = (frameWidth - buttonSize) / 2;
+    CGFloat y = 50;
+    CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
-    [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+    [_backToLevel setBackgroundImage:[UIImage imageNamed:@"backButton.png"] forState:UIControlStateNormal];
+    [_backToLevel setBackgroundImage:[UIImage imageNamed:@"backButtonOn.png"] forState:UIControlStateHighlighted];
+    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_backToLevel];
-    
-    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) setUpSound

@@ -147,25 +147,19 @@
     }
     
     // back to main menu button set up
-    buttonWidth = frameWidth / 2;
-    buttonHeight = buttonWidth / 6;
-
-    CGFloat xMain = (frameWidth - buttonWidth) / 2;
-    CGFloat yMain = buttonHeight / 2;
+    CGFloat buttonSize = frameWidth /16;
+    CGFloat x = (frameWidth - buttonSize) / 2;
+    CGFloat y = 50;
+    CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
-    CGRect menuButtonFrame = CGRectMake(xMain, yMain, buttonWidth, buttonHeight);
-    
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
-    
-    [menuButton setBackgroundColor:[UIColor clearColor]];
-    
-    NSString* backtoMenu = [levelMenuText objectForKey:@"backToMenuTitle"];
-    
-    [menuButton setTitle:backtoMenu forState:UIControlStateNormal];
-    [menuButton setTitleColor:tintColor forState:UIControlStateNormal];
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:buttonFrame];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"backButton.png"] forState:UIControlStateNormal];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"backButtonOn.png"] forState:UIControlStateHighlighted];
     [menuButton addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:menuButton];
+    
+
 }
 
 /*
