@@ -378,14 +378,12 @@
         alertView.tag = 0;
     }
     
+    // If the circuit is short or the bomb is exploded,
+    // delay the alertview pop-up for 2.5s
     if (![event isEqual:@"Win"])
-        [self performSelector:@selector(test:) withObject:alertView afterDelay:2.5];
+        [self performSelector:@selector(alertViewShow:) withObject:alertView afterDelay:2.5];
     else
         [alertView show];
-}
-
--(void)test:(UIAlertView*)x{
-    [x show];
 }
 
 /*
@@ -455,6 +453,15 @@
         yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
+}
+
+
+/*
+ * show alertView
+ */
+-(void)alertViewShow:(UIAlertView*) alertView
+{
+    [alertView show];
 }
 
 /*
