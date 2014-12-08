@@ -378,8 +378,14 @@
         alertView.tag = 0;
     }
     
-    [alertView show];
-    
+    if (![event isEqual:@"Win"])
+        [self performSelector:@selector(test:) withObject:alertView afterDelay:2.5];
+    else
+        [alertView show];
+}
+
+-(void)test:(UIAlertView*)x{
+    [x show];
 }
 
 /*
