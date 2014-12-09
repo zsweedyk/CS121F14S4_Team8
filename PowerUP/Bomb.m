@@ -10,20 +10,26 @@
 
 @implementation Bomb
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
-{
+#pragma mark - Initialization
+
+- (id) initWithFrame:(CGRect)frame WithConnections:(NSString*)connections {
+    
     self = [super initWithFrame:frame];
-    self.image = [UIImage imageNamed:imageName];
+    
+    [self setUpImageNameWithConnections:connections];
+    
+    [self displayImage];
     
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Public Methods
+
+#pragma mark - Private Methods
+
+- (void) setUpImageNameWithConnections:(NSString*)connections {
+    self.imageName = [NSString stringWithFormat:@"bomb%@", connections];
 }
-*/
+
 
 @end

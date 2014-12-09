@@ -6,26 +6,33 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+#import "Enums.h"
+#import "Component.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @protocol SwitchDelegate
 @required
 
-- (void) switchSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation;
+- (void) switchChangedAtPosition:(NSNumber*)position WithConnections:(NSString*)connections;
 
 @end
 
-@interface Switch : UIView
+@interface Switch : Component
 
 @property (nonatomic, strong) id delegate;
-@property NSString* _enteredDir;
-@property NSString* _exitedDir;
+@property enum TOUCH_STATE touchState;
+@property enum DIRECTION touchEnteredDir;
+@property enum DIRECTION touchExitedDir;
 
-- (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
-- (void) addImageDirection: (NSString*) dir;
-- (void) removeImageDirection: (NSString*) dir;
-- (void) addDirection: (NSString*) dir;
+- (id) initWithFrame:(CGRect)frame AtRow:(int)initRow AndCol:(int)initCol WithConnections:(NSString*)connections;
+- (void) addEnteredDirection;
+- (void) addExitedDirection;
+- (void) tempAddEnteredDirection;
+- (void) tempAddExitedDirection;
+- (void) tempRemoveEnteredDirection;
+- (void) tempRemoveExitedDirection;
 - (void) resetDirection;
+- (int) getPosition;
 
 @end

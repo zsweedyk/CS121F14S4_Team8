@@ -15,7 +15,8 @@
 
 @required
 
-- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation;
+- (void) componentSelectedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection;
+- (void) componentAdjustedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection;
 - (void) masterPowerSelected;
 
 @end
@@ -26,15 +27,20 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
+
+- (void) clearGrid;
 - (void) setUpGrid;
-- (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) shorted;
+- (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections;
+
+- (void) turnOnAtRow:(int)row AndCol:(int)col;
+
+//- (void) shorted;
 - (int) getBatteryX;
 - (int) getBatteryY;
 - (int) getBombXAtRow:(int)row AndCol:(int)col;
 - (int) getBombYAtRow:(int)row AndCol:(int)col;
-- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
+//- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
 - (void) resetLasers;
-- (void)componentsTurnedOff;
+//- (void) componentsTurnedOff;
 
 @end

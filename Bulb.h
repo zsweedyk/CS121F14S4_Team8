@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+#import "Component.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface Bulb : UIImageView
+@interface Bulb : Component
 
 - (id) initWithFrame:(CGRect)frame;
-- (void) turnOff;
-- (void) turnOn;
 
 @end

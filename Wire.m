@@ -9,13 +9,20 @@
 #import "Wire.h"
 #import <UIKit/UIKit.h>
 
+@interface Wire () {
+
+}
+
+@end
+
 @implementation Wire
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
+-(id) initWithFrame:(CGRect)frame andConnections:(NSString*)connections
 {
     self = [super initWithFrame:frame];
-    NSString* newName = [NSString stringWithFormat:@"%@%@", imageName, @"on"];
-    self.image = [UIImage imageNamed:newName];
+    self.imageName = [NSString stringWithFormat:@"wire%@", connections];
+    
+    [self displayImage];
     
     return self;
 }

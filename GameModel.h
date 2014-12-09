@@ -7,32 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LaserModel.h"
+#import "GameLaserModel.h"
 
 @interface GameModel : NSObject
 
 - (id) initWithTotalLevels: (int) levels;
 - (void) generateGrid: (int) level;
 
-- (NSString*) getTypeAtRow: (int) row andCol: (int) col;
-- (void) componentSelectedAtRow:(int)row andCol:(int)col withOrientation:(NSString*)newOrientation;
+- (enum COMPONENTS) getTypeAtRow: (int) row andCol: (int) col;
+- (enum DIRECTION) getDirectionAtRow:(int)row andCol:(int)col;
+- (NSString*) getConnectionAtRow:(int)row andCol:(int)col;
+- (BOOL) getStateAtRow:(int)row andCol:(int)col;
+- (void) componentSelectedAtRow:(int)row andCol:(int)col WithConnections:(NSString*)newConnections;
 
-- (NSArray*) getConnectedBombs;
-- (NSArray*) getConnectedBulbs;
 - (NSArray*) getLasers;
-- (NSArray*) getConnectedEmitters;
-- (NSArray*) getConnectedDeflectors;
-- (NSArray*) getConnectedReceivers;
+- (NSArray*) getConnectedBombs;
+- (void) updateGameStatus;
 
-- (BOOL) isConnected;
-- (BOOL) isShorted;
-- (BOOL) isBombConnected;
-- (void) powerOn;
-- (void) powerOff;
-
-- (int) getNumRows;
-- (int) getNumCols;
-
-@property (strong,nonatomic) LaserModel* laserModel;
+@property BOOL complete;
+@property BOOL shorted;
+@property BOOL exploded;
+@property int rows;
+@property int cols;
 
 @end

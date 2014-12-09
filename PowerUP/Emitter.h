@@ -6,12 +6,11 @@
 //  Copyright (c) 2014 CS121F14S4_Team8. All rights reserved.
 //
 
+#import "Component.h"
 #import <UIKit/UIKit.h>
 
-@interface Emitter : UIImageView
+@interface Emitter : Component
 
--(id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName;
--(void) turnOn;
-- (void) turnOff;
+- (id) initWithFrame:(CGRect)frame Direction:(enum DIRECTION)dir andConnections:(NSString*)connections;
 
 @end

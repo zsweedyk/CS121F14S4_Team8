@@ -21,9 +21,9 @@
 
 @implementation BatteryModel
 
-- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state Positive:(BOOL)pos {
+- (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state Positive:(BOOL)pos {
     
-    self = [super initAtRow:row AndCol:col WithState:state];
+    self = [super initType:newType AtRow:row AndCol:col WithState:state];
     
     if (pos) {
         polarity = POSITIVE;

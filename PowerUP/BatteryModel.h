@@ -10,6 +10,6 @@
 
 @interface BatteryModel : ComponentModel
 
-- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state Positive:(BOOL)pos;
+- (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state Positive:(BOOL)pos;
 
 @end

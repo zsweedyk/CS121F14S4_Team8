@@ -12,7 +12,7 @@
 
 @interface LaserTest : XCTestCase{
     GameModel* _model;
-    LaserModel* _laserModel;
+    GameLaserModel* _laserModel;
 }
 
 

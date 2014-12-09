@@ -21,7 +21,7 @@
 {
     // general variables
     GameModel* _model;
-    Grid* _grid;
+    Grid* grid;
     int _numRows;
     int _numCols;
     UIButton* _backToLevel;
@@ -59,6 +59,10 @@
 
 @implementation GameViewController
 
+const int POSITION_DECODER = 100;
+
+#pragma mark - Initialization
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -69,18 +73,20 @@
     _model = [[GameModel alloc] initWithTotalLevels:(int)self.totalLevel];
 
     // with the generated grid we know the number of rows and cols so we can set the variables
-    _numRows = [_model getNumRows];
-    _numCols = [_model getNumCols];
+    _numRows = [_model rows];
+    _numCols = [_model cols];
     
     // generate a grid
     [_model generateGrid:(int)self.gameLevel];
 
     [self setUpSound];
     [self initializeGrid];
-    [self setUpDisplay];
+    [self setUpDisplayWithPower:NO];
     [self setUpBackButton];
     [self setLanguage];
 }
+
+#pragma mark - Private Methods
 
 - (void) setUpBackButton
 {
@@ -136,10 +142,10 @@
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
 
     // initialize the grid
-    _grid = [[Grid alloc] initWithFrame:gridFrame andNumRows:_numRows andCols:_numCols];
-    _grid.delegate = self;
+    grid = [[Grid alloc] initWithFrame:gridFrame andNumRows:_numRows andCols:_numCols];
+    grid.delegate = self;
 
-    [self.view addSubview:_grid];
+    [self.view addSubview:grid];
 }
 
 /*
@@ -203,67 +209,93 @@
     ++self.gameLevel;
     [_model generateGrid:(int)self.gameLevel];
 
-    // reset master power off
+    // reset all game parameters
     masterPowerOn = NO;
     
-    [self setUpDisplay];
+    [self setUpDisplayWithPower:NO];
 }
 
 /*
  * set up display on the grid
  */
-- (void) setUpDisplay{
+- (void) setUpDisplayWithPower:(BOOL)power{
     // reset all grids
-    [_grid setUpGrid];
+    [grid clearGrid];
+    [grid setUpGrid];
     
     // read values from gameModel and set them to grid
     for (int row = 0; row < _numRows; ++row){
         for (int col = 0; col < _numCols; ++col){
-            NSString* componentType = [_model getTypeAtRow:row andCol:col];
-            [_grid setValueAtRow:row col:col to:componentType];
+            [self updateDisplayAtRow:row AndCol:col WithPower:power];
         }
     }
 }
 
-- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
-{
-    int rowSelected = [position[0] intValue];
-    int colSelected = [position[1] intValue];
+- (void) componentSelectedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection {
+
+    int rowSelected = [position intValue] / POSITION_DECODER;
+    int colSelected = [position intValue] % POSITION_DECODER;
     
-    NSString* selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
+    [_model componentSelectedAtRow:rowSelected andCol:colSelected WithConnections:newConnection];
+
+    [self setUpDisplayWithPower:masterPowerOn];
+}
+
+- (void) componentAdjustedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection {
+    NSLog(@"Parameters in view controller. Position:%@, and connection:%@",position, newConnection);
+    int row = [position intValue] / POSITION_DECODER;
+    int col = [position intValue] % POSITION_DECODER;
     
-    [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    [_model componentSelectedAtRow:row andCol:col WithConnections:newConnection];
     
-    if ([selectedCompType isEqual:@"switch"]) {
-        masterPowerOn = NO;
-        [self powerOff];
-    } else if ([selectedCompType isEqual:@"deflector"]) {
-        if (masterPowerOn) {
-            [self powerOn];
-        }
+    NSArray* updatedComponents = [_model getLasers];
+    NSLog(@"%lu Lasers that need to be updated:%@",(unsigned long)updatedComponents.count , updatedComponents);
+    [self updateDisplayFor:updatedComponents];
+}
+
+- (void) updateDisplayFor:(NSArray*)components {
+    for (NSNumber *component in components) {
+        int row = [component intValue] / POSITION_DECODER;
+        int col = [component intValue] % POSITION_DECODER;
+        
+        [self updateDisplayAtRow:row AndCol:col WithPower:YES];
     }
-
-
 }
 
-/*
- * If the battery was turned on, power on and update
- */
--(void) powerOn
-{
-    [_model powerOn];
-    [self updateGrid];
+- (void) updateDisplayAtRow:(int)row AndCol:(int)col WithPower:(BOOL)power {
+
+    enum COMPONENTS componentType = [_model getTypeAtRow:row andCol:col];
+    enum DIRECTION direction = [_model getDirectionAtRow:row andCol:col];
+    NSString *connections = [_model getConnectionAtRow:row andCol:col];
+    BOOL state = [_model getStateAtRow:row andCol:col];
+    
+    if (componentType != LASER || power) {
+        [grid setValueAtRow:row Col:col To:componentType WithDirection:direction AndConnections:connections];
+    }
+    
+    if (power && state) {
+        [grid turnOnAtRow:row AndCol:col];
+    }
 }
 
-/*
- * If the battery was turned off, reset components
- */
-- (void) powerOff
-{
-    [_model powerOff];
-    [_grid resetLasers];
-    [_grid componentsTurnedOff];
-}
+///*
+// * If the battery was turned on, power on and update
+// */
+//-(void) powerOn
+//{
+//    [_model powerOn];
+//    [self updateGrid];
+//}
+
+///*
+// * If the battery was turned off, reset components
+// */
+//- (void) powerOff
+//{
+//    [_model powerOff];
+//    [_grid resetLasers];
+//    [_grid componentsTurnedOff];
+//}
 
 /*
  * Switch the power on choice
@@ -272,71 +304,92 @@
 {
     masterPowerOn = !masterPowerOn;
     
+    [self setUpDisplayWithPower:masterPowerOn];
+    
+    [_model updateGameStatus];
+    
     if (masterPowerOn) {
-        [self powerOn];
-    } else {
-        [self powerOff];
+        if ([_model shorted]) {
+            [_audioPlayerExplosion prepareToPlay];
+            [_audioPlayerExplosion play];
+            [self setUpExplosionScene];
+            [self explodeBattery];
+            [self displayMessageFor:@"Lose"];
+            
+        } else if ([_model exploded]) {
+            [_audioPlayerExplosion prepareToPlay];
+            [_audioPlayerExplosion play];
+            [self setUpExplosionScene];
+            [self explodeBombs:[_model getConnectedBombs]];
+            [self displayMessageFor:@"Bombs"];
+            
+        } else if ([_model complete]) {
+            [_audioPlayerWin prepareToPlay];
+            [_audioPlayerWin play];
+            [self displayMessageFor:@"Win"];
+        }
     }
 }
 
-- (void) updateGrid
-{
-    NSArray* lasers = [_model getLasers];
-    NSArray* emitters = [_model getConnectedEmitters];
-    NSArray* deflectors = [_model getConnectedDeflectors];
-    NSArray* receivers = [_model getConnectedReceivers];
-    NSArray* bulbs = [_model getConnectedBulbs];
-    NSArray* bombs = [_model getConnectedBombs];
-    
-    [_grid resetLasers];
-    [self updateComponents:lasers];
-    [self updateStates:emitters];
-    [self updateStates:deflectors];
-    [self updateStates:receivers];
-    [self updateStates:bulbs];
-    
-    BOOL shorted = [_model isShorted];
-    BOOL connected = [_model isConnected];
-    BOOL bombConnected = [_model isBombConnected];
-    
-    // first check bomb connection, then short circuit, and finally connected circuit
-    if (bombConnected) {
-        // if the bomb is connected, explode that bomb, and display lose message
-        // the message will ask the user to restart the game
-        [_audioPlayerExplosion prepareToPlay];
-        [_audioPlayerExplosion play];
-        
-        [self setUpExplosionScene];
-        [self explodeBombs:bombs];
-        
-        [self displayMessageFor:@"Bomb"];
-        
-    } else if (shorted) {
-        // if the circuit is shorted, explode the battery, and display lose message
-        // the message will ask the user to restart the game
-        [_audioPlayerExplosion prepareToPlay];
-        [_audioPlayerExplosion play];
-        
-        [self setUpExplosionScene];
-        [self explodeBattery];
-        
-        [_grid shorted];
-        
-        [self displayMessageFor:@"Lose"];
-        
-    } else if (connected){
-        // if the circuit is connected, display win message
-        // the message will ask the user to go to the next level
-        [_audioPlayerWin prepareToPlay];
-        [_audioPlayerWin play];
-        
-        [self displayMessageFor:@"Win"];
-    } else {
-        // if neither shorted or connected, do nothing but play sound that indicates a bad move
-        [_audioPlayerNo prepareToPlay];
-        [_audioPlayerNo play];
-    }
-}
+//
+//- (void) updateGrid
+//{
+//    NSArray* lasers = [_model getLasers];
+//    NSArray* emitters = [_model getConnectedEmitters];
+//    NSArray* deflectors = [_model getConnectedDeflectors];
+//    NSArray* receivers = [_model getConnectedReceivers];
+//    NSArray* bulbs = [_model getConnectedBulbs];
+//    NSArray* bombs = [_model getConnectedBombs];
+//    
+//    [_grid resetLasers];
+//    [self updateComponents:lasers];
+//    [self updateStates:emitters];
+//    [self updateStates:deflectors];
+//    [self updateStates:receivers];
+//    [self updateStates:bulbs];
+//    
+//    BOOL shorted = [_model isShorted];
+//    BOOL connected = [_model isConnected];
+//    BOOL bombConnected = [_model isBombConnected];
+//    
+//    // first check bomb connection, then short circuit, and finally connected circuit
+//    if (bombConnected) {
+//        // if the bomb is connected, explode that bomb, and display lose message
+//        // the message will ask the user to restart the game
+//        [_audioPlayerExplosion prepareToPlay];
+//        [_audioPlayerExplosion play];
+//        
+//        [self setUpExplosionScene];
+//        [self explodeBombs:bombs];
+//        
+//        [self displayMessageFor:@"Bomb"];
+//        
+//    } else if (shorted) {
+//        // if the circuit is shorted, explode the battery, and display lose message
+//        // the message will ask the user to restart the game
+//        [_audioPlayerExplosion prepareToPlay];
+//        [_audioPlayerExplosion play];
+//        
+//        [self setUpExplosionScene];
+//        [self explodeBattery];
+//        
+//        [_grid shorted];
+//        
+//        [self displayMessageFor:@"Lose"];
+//        
+//    } else if (connected){
+//        // if the circuit is connected, display win message
+//        // the message will ask the user to go to the next level
+//        [_audioPlayerWin prepareToPlay];
+//        [_audioPlayerWin play];
+//        
+//        [self displayMessageFor:@"Win"];
+//    } else {
+//        // if neither shorted or connected, do nothing but play sound that indicates a bad move
+//        [_audioPlayerNo prepareToPlay];
+//        [_audioPlayerNo play];
+//    }
+//}
 
 /*
  * Display alert view
@@ -382,35 +435,35 @@
     
 }
 
-/*
- * change component type on grid
- */
-- (void) updateComponents:(NSArray*)components
-{
-    NSArray* rows = components[0];
-    NSArray* cols = components[1];
-    
-    for (int i = 0; i < rows.count; ++i) {
-        NSString* compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
-        [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
-    }
-}
+///*
+// * change component type on grid
+// */
+//- (void) updateComponents:(NSArray*)components
+//{
+//    NSArray* rows = components[0];
+//    NSArray* cols = components[1];
+//    
+//    for (int i = 0; i < rows.count; ++i) {
+//        NSString* compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
+//        [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
+//    }
+//}
 
-/*
- * update a component state on grid if they have been pressed
- */
-- (void) updateStates:(NSArray*)components
-{
-    if (components.count > 0) {
-        NSArray* rows = components[0];
-        NSArray* cols = components[1];
-        NSArray* states = components[2];
-        
-        for (int i = 0; i < rows.count; ++i) {
-            [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
-        }
-    }
-}
+///*
+// * update a component state on grid if they have been pressed
+// */
+//- (void) updateStates:(NSArray*)components
+//{
+//    if (components.count > 0) {
+//        NSArray* rows = components[0];
+//        NSArray* cols = components[1];
+//        NSArray* states = components[2];
+//        
+//        for (int i = 0; i < rows.count; ++i) {
+//            [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
+//        }
+//    }
+//}
 
 /*
  * prepare for explosion effect
@@ -433,8 +486,9 @@
  */
 -(void) explodeBattery
 {
-    int xPos = [_grid getBatteryX] + xGrid;
-    int yPos = [_grid getBatteryY] + yGrid;
+    int xPos = [grid getBatteryX] + xGrid;
+    int yPos = [grid getBatteryY] + yGrid;
+    NSLog(@"Battery Explosion At x:%d and y:%d", xPos, yPos);
     int frameY = self.view.frame.size.height;
     int xPoint = xPos + 50;
     int yPoint = frameY - yPos - 10;
@@ -448,12 +502,12 @@
 {
     int frameY = self.view.frame.size.height;
     
-    NSArray* bombsRow = bombs[1];
-    NSArray* bombsCol = bombs[0];
-    
-    for (int i = 0; i < bombsRow.count; ++i) {
-        int xPos = [_grid getBombXAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + xGrid;
-        int yPos = [_grid getBombYAtRow:[bombsRow[i] intValue] AndCol:[bombsCol[i] intValue]] + yGrid;
+    for (int i = 0; i < bombs.count; ++i) {
+        int row = [bombs[i] intValue] / POSITION_DECODER;
+        int col = [bombs[i] intValue] % POSITION_DECODER;
+        
+        int xPos = [grid getBombXAtRow:row AndCol:col] + xGrid;
+        int yPos = [grid getBombYAtRow:row AndCol:col] + yGrid;
         
         int xPoint = xPos + 25;
         int yPoint = frameY - yPos - 10;
@@ -485,6 +539,8 @@
         }
     }
 }
+
+#pragma mark - Navigation
 
 /*
  * pass data to level viewcontroller

@@ -11,8 +11,6 @@
 
 @interface EmitterModel : ComponentModel
 
-@property(nonatomic, readwrite) enum DIRECTION direction;
-
-- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state;
+- (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state AndDirection:(enum DIRECTION)direction;
 
 @end

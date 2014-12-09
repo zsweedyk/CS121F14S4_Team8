@@ -10,40 +10,54 @@
 #import "ExplosionScene.h"
 
 @implementation Battery{
-    NSString* _name;
+
     UIButton* _battery;
+    int row;
+    int col;
 }
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
-{
+#pragma mark - Initialization
+
+- (id) initWithFrame:(CGRect)frame AtRow:(int)initRow AndCol:(int)initCol AndPolarity:(BOOL)pos WithConnections:(NSString*)connections {
+    
     self = [super initWithFrame:frame];
-    _name = name;
-
-    CGRect battFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    _battery = [[UIButton alloc] initWithFrame:battFrame];
-    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
-    [_battery addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self addSubview:_battery];
+    
+    row = initRow;
+    col = initCol;
+    
+    [self setUpNameWithPolarity:pos AndConnections:connections];
+    [self setUpButton];
     
     return self;
 }
 
-- (void) turnedOff
-{
-    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+#pragma mark - Public Methods
+
+- (int) getPosition {
+    return 100  *row + col;
 }
 
-- (void) turnedOn
-{
-    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"on"];
-    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+#pragma mark - Private Methods
+
+- (void) setUpNameWithPolarity:(BOOL)pos AndConnections:(NSString*)connections {
+    NSString *polarity;
+    if (pos) {
+        polarity = @"Pos";
+    } else {
+        polarity = @"Neg";
+    }
+    self.imageName = [NSString stringWithFormat:@"battery%@%@", polarity, connections];
 }
 
-- (void) exploded
-{
-    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
-    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+- (void) setUpButton {
+    
+    CGRect battFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _battery = [[UIButton alloc] initWithFrame:battFrame];
+    [_battery setBackgroundImage:[UIImage imageNamed:self.imageName] forState:UIControlStateNormal];
+    
+    [_battery addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:_battery];
 }
 
 @end

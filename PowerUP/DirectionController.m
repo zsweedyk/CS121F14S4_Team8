@@ -10,26 +10,21 @@
 
 @implementation DirectionController
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
 CGPoint start;
 CGPoint curr;
 CGPoint end;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *aTouch = [touches anyObject];
+    
     start = [aTouch locationInView:self.superview];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *aTouch = [touches anyObject];
-    curr = [aTouch locationInView:self.superview];
     
+    UITouch *aTouch = [touches anyObject];
+    
+    curr = [aTouch locationInView:self.superview];
     int dx = start.x-curr.x;
     int dy = start.y-curr.y;
     

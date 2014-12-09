@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5B4BC8B81A210AD8004FD8AD /* LaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4BC8B71A210AD8004FD8AD /* LaserModel.m */; };
+		5B4BC8B81A210AD8004FD8AD /* GameLaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4BC8B71A210AD8004FD8AD /* GameLaserModel.m */; };
 		5B4BC8BA1A2116B0004FD8AD /* LaserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4BC8B91A2116B0004FD8AD /* LaserTest.m */; };
 		5B4BC8BC1A250881004FD8AD /* level-5 in Resources */ = {isa = PBXBuildFile; fileRef = 5B4BC8BB1A250881004FD8AD /* level-5 */; };
 		5B8EF3511A1AE30800DF2B7D /* DirectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EF3501A1AE30800DF2B7D /* DirectionController.m */; };
@@ -30,6 +30,7 @@
 		5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17371A0EC1E500354C84 /* Deflector.m */; };
 		5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF173A1A0EC79600354C84 /* Receiver.m */; };
 		6512169E1A19AECD0014436C /* Components.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6512169D1A19AECD0014436C /* Components.xcassets */; };
+		741A64D51A35AA4C004168AD /* LaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A64D41A35AA4C004168AD /* LaserModel.m */; };
 		7439AA261A1E1D56004AD639 /* ComponentModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7439AA251A1E1D56004AD639 /* ComponentModelTests.m */; };
 		74695C6B1A1B3C2800289E08 /* level-4 in Resources */ = {isa = PBXBuildFile; fileRef = 74695C6A1A1B3C2800289E08 /* level-4 */; };
 		7479E1FC1A2D8D4700CA8F20 /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */; };
@@ -42,6 +43,7 @@
 		74996BD91A1B40E500D48CAA /* level15 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD11A1B40E500D48CAA /* level15 */; };
 		74996BDA1A1B40E500D48CAA /* level18 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level18 */; };
 		74996BDB1A1B40E500D48CAA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD31A1B40E500D48CAA /* spark.png */; };
+		74CB700C1A35305100711774 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CB700B1A35305100711774 /* Component.m */; };
 		74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712871A33BEBB00BF4A51 /* WireModel.m */; };
 		74F7128B1A33C56A00BF4A51 /* BatteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128A1A33C56A00BF4A51 /* BatteryModel.m */; };
 		74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128D1A33C98800BF4A51 /* BulbModel.m */; };
@@ -109,8 +111,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5B4BC8B61A210AD8004FD8AD /* LaserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserModel.h; sourceTree = "<group>"; };
-		5B4BC8B71A210AD8004FD8AD /* LaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserModel.m; sourceTree = "<group>"; };
+		5B4BC8B61A210AD8004FD8AD /* GameLaserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLaserModel.h; sourceTree = "<group>"; };
+		5B4BC8B71A210AD8004FD8AD /* GameLaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLaserModel.m; sourceTree = "<group>"; };
 		5B4BC8B91A2116B0004FD8AD /* LaserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserTest.m; sourceTree = "<group>"; };
 		5B4BC8BB1A250881004FD8AD /* level-5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-5"; sourceTree = "<group>"; };
 		5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionController.h; sourceTree = "<group>"; };
@@ -124,6 +126,8 @@
 		5BEF17391A0EC79600354C84 /* Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receiver.h; sourceTree = "<group>"; };
 		5BEF173A1A0EC79600354C84 /* Receiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Receiver.m; sourceTree = "<group>"; };
 		6512169D1A19AECD0014436C /* Components.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Components.xcassets; path = ../Components.xcassets; sourceTree = "<group>"; };
+		741A64D31A35AA4C004168AD /* LaserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserModel.h; sourceTree = "<group>"; };
+		741A64D41A35AA4C004168AD /* LaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserModel.m; sourceTree = "<group>"; };
 		7439AA251A1E1D56004AD639 /* ComponentModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModelTests.m; sourceTree = "<group>"; };
 		74695C6A1A1B3C2800289E08 /* level-4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-4"; sourceTree = "<group>"; };
 		7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewController.h; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		74996BD11A1B40E500D48CAA /* level15 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level15; path = ../level15; sourceTree = "<group>"; };
 		74996BD21A1B40E500D48CAA /* level18 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level18; path = ../level18; sourceTree = "<group>"; };
 		74996BD31A1B40E500D48CAA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
+		74CB700A1A35305100711774 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		74CB700B1A35305100711774 /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
 		74F712861A33BEBB00BF4A51 /* WireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WireModel.h; sourceTree = "<group>"; };
 		74F712871A33BEBB00BF4A51 /* WireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WireModel.m; sourceTree = "<group>"; };
 		74F712891A33C56A00BF4A51 /* BatteryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryModel.h; sourceTree = "<group>"; };
@@ -239,6 +245,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74CB70071A352FCA00711774 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				931666E61A321CBE00C6D700 /* SettingsViewController.h */,
+				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
+				5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */,
+				5B8EF3501A1AE30800DF2B7D /* DirectionController.m */,
+				7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */,
+				7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */,
+				A86E10C51A005B1E0029011B /* MenuViewController.h */,
+				A86E10C61A005B1E0029011B /* MenuViewController.m */,
+				A86E10C31A005B1E0029011B /* LevelViewController.h */,
+				A86E10C41A005B1E0029011B /* LevelViewController.m */,
+				A86E10BF1A005B1E0029011B /* GameViewController.h */,
+				A86E10C01A005B1E0029011B /* GameViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		74CB70081A352FDF00711774 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C08E3346B0B9BA5F2F430755 /* ComponentModel.h */,
+				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
+				74F712861A33BEBB00BF4A51 /* WireModel.h */,
+				74F712871A33BEBB00BF4A51 /* WireModel.m */,
+				74F712891A33C56A00BF4A51 /* BatteryModel.h */,
+				74F7128A1A33C56A00BF4A51 /* BatteryModel.m */,
+				74F7128C1A33C98800BF4A51 /* BulbModel.h */,
+				74F7128D1A33C98800BF4A51 /* BulbModel.m */,
+				74F7128F1A33CA1000BF4A51 /* SwitchModel.h */,
+				74F712901A33CA1000BF4A51 /* SwitchModel.m */,
+				74F712921A33CA7800BF4A51 /* EmitterModel.h */,
+				74F712931A33CA7800BF4A51 /* EmitterModel.m */,
+				74F712951A33CB7600BF4A51 /* ReceiverModel.h */,
+				74F712961A33CB7600BF4A51 /* ReceiverModel.m */,
+				74F712981A33CD9500BF4A51 /* DeflectorModel.h */,
+				74F712991A33CD9500BF4A51 /* DeflectorModel.m */,
+				74F7129B1A33CE1300BF4A51 /* BombModel.h */,
+				74F7129C1A33CE1300BF4A51 /* BombModel.m */,
+				A86E10BD1A005B1E0029011B /* GameModel.h */,
+				A86E10BE1A005B1E0029011B /* GameModel.m */,
+				741A64D31A35AA4C004168AD /* LaserModel.h */,
+				741A64D41A35AA4C004168AD /* LaserModel.m */,
+				5B4BC8B61A210AD8004FD8AD /* GameLaserModel.h */,
+				5B4BC8B71A210AD8004FD8AD /* GameLaserModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		74CB70091A352FEF00711774 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF17391A0EC79600354C84 /* Receiver.h */,
+				5BEF173A1A0EC79600354C84 /* Receiver.m */,
+				A86E10DA1A0073C80029011B /* Bomb.h */,
+				A86E10DB1A0073C80029011B /* Bomb.m */,
+				5BEF17301A0EC1AB00354C84 /* Laser.h */,
+				5BEF17311A0EC1AB00354C84 /* Laser.m */,
+				5BEF17331A0EC1C800354C84 /* Emitter.h */,
+				5BEF17341A0EC1C800354C84 /* Emitter.m */,
+				5BEF17361A0EC1E500354C84 /* Deflector.h */,
+				5BEF17371A0EC1E500354C84 /* Deflector.m */,
+				A86E10C11A005B1E0029011B /* Grid.h */,
+				A86E10C21A005B1E0029011B /* Grid.m */,
+				74CB700A1A35305100711774 /* Component.h */,
+				74CB700B1A35305100711774 /* Component.m */,
+				A86E10B91A005B1E0029011B /* Battery.h */,
+				A86E10BA1A005B1E0029011B /* Battery.m */,
+				A86E10BB1A005B1E0029011B /* Bulb.h */,
+				A86E10BC1A005B1E0029011B /* Bulb.m */,
+				A86E10C71A005B1E0029011B /* Switch.h */,
+				A86E10C81A005B1E0029011B /* Switch.m */,
+				A86E10C91A005B1E0029011B /* Wire.h */,
+				A86E10CA1A005B1E0029011B /* Wire.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		A84F7EF719FDC1C6001AEC0D = {
 			isa = PBXGroup;
 			children = (
@@ -267,68 +352,17 @@
 				7479E1FE1A2D8FDE00CA8F20 /* Enums.h */,
 				A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */,
 				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
-				7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */,
-				7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */,
-				A86E10C51A005B1E0029011B /* MenuViewController.h */,
-				A86E10C61A005B1E0029011B /* MenuViewController.m */,
-				A86E10C31A005B1E0029011B /* LevelViewController.h */,
-				A86E10C41A005B1E0029011B /* LevelViewController.m */,
-				A86E10BF1A005B1E0029011B /* GameViewController.h */,
-				A86E10C01A005B1E0029011B /* GameViewController.m */,
-				A86E10BD1A005B1E0029011B /* GameModel.h */,
-				A86E10BE1A005B1E0029011B /* GameModel.m */,
-				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
-				5B4BC8B71A210AD8004FD8AD /* LaserModel.m */,
-				A86E10C11A005B1E0029011B /* Grid.h */,
-				A86E10C21A005B1E0029011B /* Grid.m */,
-				A86E10B91A005B1E0029011B /* Battery.h */,
-				A86E10BA1A005B1E0029011B /* Battery.m */,
-				A86E10BB1A005B1E0029011B /* Bulb.h */,
-				A86E10BC1A005B1E0029011B /* Bulb.m */,
-				A86E10C71A005B1E0029011B /* Switch.h */,
-				A86E10C81A005B1E0029011B /* Switch.m */,
-				A86E10C91A005B1E0029011B /* Wire.h */,
-				A86E10CA1A005B1E0029011B /* Wire.m */,
+				74CB70071A352FCA00711774 /* Controllers */,
+				74CB70081A352FDF00711774 /* Models */,
+				74CB70091A352FEF00711774 /* Views */,
 				A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */,
 				A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */,
 				A84F7F0A19FDC1C6001AEC0D /* ViewController.h */,
 				A84F7F0B19FDC1C6001AEC0D /* ViewController.m */,
-				A86E10DA1A0073C80029011B /* Bomb.h */,
-				A86E10DB1A0073C80029011B /* Bomb.m */,
-				5BEF17301A0EC1AB00354C84 /* Laser.h */,
-				5BEF17311A0EC1AB00354C84 /* Laser.m */,
-				5BEF17331A0EC1C800354C84 /* Emitter.h */,
-				5BEF17341A0EC1C800354C84 /* Emitter.m */,
-				5BEF17361A0EC1E500354C84 /* Deflector.h */,
-				5BEF17371A0EC1E500354C84 /* Deflector.m */,
-				5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */,
-				5B8EF3501A1AE30800DF2B7D /* DirectionController.m */,
-				5BEF17391A0EC79600354C84 /* Receiver.h */,
-				5BEF173A1A0EC79600354C84 /* Receiver.m */,
-				C08E3346B0B9BA5F2F430755 /* ComponentModel.h */,
-				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
-				74F712861A33BEBB00BF4A51 /* WireModel.h */,
-				74F712871A33BEBB00BF4A51 /* WireModel.m */,
-				74F712891A33C56A00BF4A51 /* BatteryModel.h */,
-				74F7128A1A33C56A00BF4A51 /* BatteryModel.m */,
-				74F7128C1A33C98800BF4A51 /* BulbModel.h */,
-				74F7128D1A33C98800BF4A51 /* BulbModel.m */,
-				74F7128F1A33CA1000BF4A51 /* SwitchModel.h */,
-				74F712901A33CA1000BF4A51 /* SwitchModel.m */,
-				74F712921A33CA7800BF4A51 /* EmitterModel.h */,
-				74F712931A33CA7800BF4A51 /* EmitterModel.m */,
-				74F712951A33CB7600BF4A51 /* ReceiverModel.h */,
-				74F712961A33CB7600BF4A51 /* ReceiverModel.m */,
-				74F712981A33CD9500BF4A51 /* DeflectorModel.h */,
-				74F712991A33CD9500BF4A51 /* DeflectorModel.m */,
-				74F7129B1A33CE1300BF4A51 /* BombModel.h */,
-				74F7129C1A33CE1300BF4A51 /* BombModel.m */,
 				74996BCB1A1B40E500D48CAA /* Explosion.sks */,
 				74996BCC1A1B40E500D48CAA /* ExplosionScene.h */,
 				74996BCD1A1B40E500D48CAA /* ExplosionScene.m */,
 				74996BD31A1B40E500D48CAA /* spark.png */,
-				931666E61A321CBE00C6D700 /* SettingsViewController.h */,
-				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
 			);
 			path = PowerUP;
 			sourceTree = "<group>";
@@ -561,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741A64D51A35AA4C004168AD /* LaserModel.m in Sources */,
 				7479E1FC1A2D8D4700CA8F20 /* StoryViewController.m in Sources */,
 				A86E10DC1A0073C80029011B /* Bomb.m in Sources */,
 				A86E10CC1A005B1E0029011B /* Bulb.m in Sources */,
@@ -586,7 +621,8 @@
 				5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */,
 				A86E10D11A005B1E0029011B /* MenuViewController.m in Sources */,
 				74F712971A33CB7600BF4A51 /* ReceiverModel.m in Sources */,
-				5B4BC8B81A210AD8004FD8AD /* LaserModel.m in Sources */,
+				74CB700C1A35305100711774 /* Component.m in Sources */,
+				5B4BC8B81A210AD8004FD8AD /* GameLaserModel.m in Sources */,
 				74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */,
 				5BEF17351A0EC1C800354C84 /* Emitter.m in Sources */,
 				74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */,

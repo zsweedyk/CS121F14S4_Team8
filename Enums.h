@@ -29,6 +29,7 @@ enum TYPE_OF_STORYVIEW {
 };
 
 enum COMPONENTS {
+    EMPTY = 0,
     WIRE,
     EMITTER,
     BATTERY_NEG,
@@ -37,14 +38,24 @@ enum COMPONENTS {
     BATTERY_POS,
     SWITCH,
     DEFLECTOR,
-    BOMB
+    BOMB,
+    LASER
 };
 
 enum DIRECTION {
     LEFT,
     RIGHT,
     BOTTOM,
-    TOP
+    TOP,
+    NONE
+};
+
+enum TOUCH_STATE {
+    UNTOUCHED,
+    STARTED_OUT_NOW_IN,
+    STARTED_OUT_WAS_IN_NOW_OUT,
+    STARTED_IN_NOW_IN,
+    STARTED_IN_NOW_OUT
 };
 
 #endif

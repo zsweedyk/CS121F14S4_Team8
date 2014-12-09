@@ -10,29 +10,28 @@
 
 @implementation Emitter
 {
-    NSString *name;
 }
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
+#pragma mark - Initialization
+- (id) initWithFrame:(CGRect)frame Direction:(enum DIRECTION)dir andConnections:(NSString*)connections
 {
     self = [super initWithFrame:frame];
     //keeps two names for the component, one for On state, one for Off state
-    name = imageName;
-    self.image = [UIImage imageNamed:name];
+    
+    [self setUpImageNameWithDirection:dir AndConnections:connections];
+    
+    [self displayImage];
+    
     return self;
 }
 
-//with turnOn and turnOff, simply reset the names
-- (void) turnOn
-{
-    NSString* onName = [name stringByAppendingString:@"on"];
-    
-    [self setImage:[UIImage imageNamed:onName]];
-}
+#pragma mark - Private Methods
 
-- (void) turnOff
-{
-    [self setImage:[UIImage imageNamed:name]];
+- (void) setUpImageNameWithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
+    
+    NSString* direction = [self getDirectionString:dir];
+    
+    self.imageName = [NSString stringWithFormat:@"emitter%@%@", direction, connections];
 }
 
 

@@ -7,23 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Component.h"
 #import "DirectionController.h"
 
 @protocol DeflectorDelegate
 @required
-- (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation;
+
+- (void) deflectorSelectedAtPosition:(NSNumber*)position WithConnections:(NSString*)connections;
+- (void) deflectorAdjustedAtPosition:(NSNumber*)position ToConnection:(NSString*)connections;
+
 @end
-@interface Deflector : UIView
+@interface Deflector : Component
 
 @property (nonatomic, strong) id delegate;
 
-- (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
-- (void) rotateDeflector:(int)dir;
-- (void) turnOn;
-- (void) turnOff;
-
-//direction control
-- (void) changeImage: (NSString*) dir;
-- (void) onTap;
+- (id) initWithFrame:(CGRect)frame AtRow:(int)initRow AndCol:(int)initCol WithConnections:(NSString*)connections;
 
 @end

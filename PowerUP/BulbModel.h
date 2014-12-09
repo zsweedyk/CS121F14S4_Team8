@@ -10,6 +10,6 @@
 
 @interface BulbModel : ComponentModel
 
-- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state;
+- (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state;
 
 @end

@@ -10,8 +10,11 @@
 
 @implementation ReceiverModel
 
-- (id) initAtRow:(int)row AndCol:(int)col WithState:(BOOL)state {
-    self = [super initAtRow:row AndCol:col WithState:state];
+- (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state AndDirection:(enum DIRECTION)direction {
+    
+    self = [super initType:newType AtRow:row AndCol:col WithState:state];
+    
+    self.direction = direction;
     
     return self;
 }

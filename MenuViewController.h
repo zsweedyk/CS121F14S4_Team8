@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableArray* locks;
 
 @property (weak, nonatomic) IBOutlet UIImageView *background;
-@property (nonatomic, strong) NSMutableArray*  locks;
 
 @end
 

@@ -10,11 +10,23 @@
 
 @implementation Laser
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
-{
+#pragma mark - Initialization
+
+-(id) initWithFrame:(CGRect)frame WithConnections:(NSString*)connections {
     self = [super initWithFrame:frame];
-    self.image = [UIImage imageNamed:imageName];
+    
+    [self setUpImageNameWithConnections:connections];
+    
+    [self displayImage];
     return self;
+}
+
+#pragma mark - Public Methods
+
+#pragma mark - Private Methods
+
+- (void) setUpImageNameWithConnections:(NSString*)connections {
+    self.imageName = [NSString stringWithFormat:@"laser%@",connections];
 }
 
 @end

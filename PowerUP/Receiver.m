@@ -9,28 +9,27 @@
 #import "Receiver.h"
 
 @implementation Receiver
-{
-    NSString *name;
-}
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
-{
+#pragma mark - Initialization
+
+- (id) initWithFrame:(CGRect)frame Direction:(enum DIRECTION)dir andConnections:(NSString*)connections {
+    
     self = [super initWithFrame:frame];
-    name = imageName;
-    self.image = [UIImage imageNamed:name];
+    
+    [self setUpImageNameWithDirection:dir AndConnections:connections];
+    
+    [self displayImage];
     return self;
 }
 
-- (void) turnOn
-{
-    NSString* onName = [name stringByAppendingString:@"on"];
+#pragma mark - Private Methods
+
+- (void) setUpImageNameWithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
     
-    [self setImage:[UIImage imageNamed:onName]];
+    NSString* direction = [self getDirectionString:dir];
+    
+    self.imageName = [NSString stringWithFormat:@"receiver%@%@", direction, connections];
 }
 
-- (void) turnOff
-{
-    [self setImage:[UIImage imageNamed:name]];
-}
 
 @end
