@@ -31,7 +31,7 @@
 - (void) clearGrid;
 - (void) clearGridExceptAtRow:(int)row andCol:(int)col;
 - (void) setUpGrid;
-<<<<<<< HEAD
+
 - (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections;
 
 - (void) turnOnAtRow:(int)row AndCol:(int)col;
@@ -42,12 +42,7 @@
 - (int) getBombXAtRow:(int)row AndCol:(int)col;
 - (int) getBombYAtRow:(int)row AndCol:(int)col;
 //- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
-=======
-- (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
-- (void) shorted;
-- (CGFloat) getCellSize;
-- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
->>>>>>> PowerUP
+
 - (void) resetLasers;
 //- (void) componentsTurnedOff;
 

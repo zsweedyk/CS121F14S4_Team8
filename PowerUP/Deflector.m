@@ -8,7 +8,6 @@
 
 #import "Deflector.h"
 
-<<<<<<< HEAD
 @interface Deflector () {
     NSArray* possibleConnections;
     
@@ -19,30 +18,7 @@
     
 //    DirectionController* control;
     enum DIRECTION previousDir;
-=======
-@implementation Deflector
-{
-    NSArray *_possibleOrientations;
-    NSArray *_twoWays;
-    NSArray *_threeWays;
-    NSArray *_fourWays;
-    //the index for the current orientation
-    int _currentOrientation;
-    NSString *name;
-    NSString *_orientation;
-    //index for the current deflector type,
-    //2 stands for two-way
-    //3 stands for three-way
-    //4 stands for four-way
-    int _currentTypeIndex;
-    
-    int _row;
-    int _col;
-    
-    UIImageView *_deflector;
-    DirectionController *control;
-    NSString* previousDir;
->>>>>>> PowerUP
+
 }
 
 @end
@@ -71,19 +47,8 @@ enum ROTATIONS {
     row = initRow;
     col = initCol;
     
-<<<<<<< HEAD
     [self setUpConnectionData];
     [self initialConnectionSetUp:connections];
-=======
-    _twoWays   = [[NSArray alloc] initWithObjects:@"XRTX",@"XRXB",@"LXXB",@"LXTX",nil];
-    _threeWays = [[NSArray alloc] initWithObjects:@"LRTX",@"XRTB",@"LRXB",@"LXTB", nil];
-    _fourWays  = [[NSArray alloc] initWithObjects:@"LRTB", nil];
-    _possibleOrientations = _twoWays;
-    _currentTypeIndex   = 2;
-    _currentOrientation = 0;
-    _orientation = _possibleOrientations[_currentOrientation];
-    name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
->>>>>>> PowerUP
     
     [self setUpImageNameWithConnections:possibleConnections[numConnectionIndex][currentConnection]];
     [self displayImage];
@@ -117,16 +82,6 @@ enum ROTATIONS {
         currentConnection = 0;
         return;
     }
-<<<<<<< HEAD
-=======
-    _currentOrientation = 0;
-    name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
-    _deflector.image = [UIImage imageNamed:name];
-    _orientation = _possibleOrientations[_currentOrientation];
-    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
-    previousDir = @"X";
-    [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
->>>>>>> PowerUP
     
     NSInteger connectionIndex = [possibleConnections[numConnectionIndex] indexOfObject:initialConnection];
     currentConnection = [[NSNumber numberWithInteger:connectionIndex] intValue];
@@ -261,17 +216,6 @@ CGPoint current;
         }
     }
 }
-
-<<<<<<< HEAD
-=======
-- (void) turnOn
-{
-    NSString *onName = [name stringByAppendingString:@"on"];
-    
-    _deflector.image = [UIImage imageNamed:onName];
-    
-}
->>>>>>> PowerUP
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];

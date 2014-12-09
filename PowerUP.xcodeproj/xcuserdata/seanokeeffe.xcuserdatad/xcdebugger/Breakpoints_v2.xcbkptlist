@@ -26,12 +26,21 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameViewController.m"
+<<<<<<< HEAD
             timestampString = "439799330.165293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
             landmarkName = "-setUpDisplayWithPower:"
+=======
+            timestampString = "439617329.090612"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "-setUpDisplay"
+>>>>>>> PowerUP
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,6 +50,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "ComponentModel.m"
             timestampString = "437888463.611063"
             startingColumnNumber = "9223372036854775807"
@@ -48,6 +58,15 @@
             startingLineNumber = "26"
             endingLineNumber = "26"
             landmarkName = "-initType:AtRow:AndCol:WithState:"
+=======
+            filePath = "GameViewController.m"
+            timestampString = "439617329.090612"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "-setUpDisplay"
+>>>>>>> PowerUP
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -279,6 +298,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Grid.m"
             timestampString = "439835006.07122"
             startingColumnNumber = "9223372036854775807"
@@ -286,6 +306,15 @@
             startingLineNumber = "347"
             endingLineNumber = "347"
             landmarkName = "-touchesMoved:withEvent:"
+=======
+            filePath = "GameViewController.m"
+            timestampString = "439617329.090612"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "-newLevel"
+>>>>>>> PowerUP
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -536,6 +565,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameViewController.m"
+<<<<<<< HEAD
             timestampString = "439834621.429987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -543,6 +573,15 @@
             endingLineNumber = "267"
             landmarkName = "-componentAdjustedAtPosition:WithConnections:"
             landmarkType = "5">
+=======
+            timestampString = "439617329.090612"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "@implementation GameViewController"
+            landmarkType = "3">
+>>>>>>> PowerUP
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -555,9 +594,15 @@
             timestampString = "439814129.161724"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "-laserTopAtRow:Col:"
+=======
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-getProperText"
+>>>>>>> PowerUP
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -571,9 +616,15 @@
             timestampString = "439814886.648039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "198"
             endingLineNumber = "198"
             landmarkName = "-touchesMoved:withEvent:"
+=======
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-getProperText"
+>>>>>>> PowerUP
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

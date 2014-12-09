@@ -7,19 +7,6 @@
 
 @interface ComponentModel()
 {
-<<<<<<< HEAD
-=======
-    int _row;
-    int _col;
-    NSString *_type;
-    BOOL _state;
-    NSString *_direction;
-    BOOL _connectedTop;
-    BOOL _connectedBottom;
-    BOOL _connectedRight;
-    BOOL _connectedLeft;
-    
->>>>>>> PowerUP
 }
 
 @end
@@ -36,18 +23,11 @@
  */
 - (id) initType:(enum COMPONENTS)newType AtRow:(int)row AndCol:(int)col WithState:(BOOL)state {
     if (self = [super init]) {
-<<<<<<< HEAD
         self.row = row;
         self.col = col;
         self.state = state;
         self.type = newType;
         self.direction = NONE;
-=======
-        _row   = row;
-        _col   = col;
-        _type  = type;
-        _state = state;
->>>>>>> PowerUP
     }
 
     return self;

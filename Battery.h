@@ -22,18 +22,9 @@
 
 @property (nonatomic, strong) id delegate;
 
-<<<<<<< HEAD
 - (id) initWithFrame:(CGRect)frame AtRow:(int)initRow AndCol:(int)initCol AndPolarity:(BOOL)pos WithConnections:(NSString*)connections;
 
 - (int) getPosition;
-=======
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name AtRow:(int)row AndCol:(int)col;
-- (void) turnedOff;
-- (void) turnedOn;
-- (void) exploded;
-- (int) getRow;
-- (int) getCol;
->>>>>>> PowerUP
 
 @end
 

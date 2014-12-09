@@ -21,7 +21,6 @@
 @interface Switch : Component
 
 @property (nonatomic, strong) id delegate;
-<<<<<<< HEAD
 @property enum TOUCH_STATE touchState;
 @property enum DIRECTION touchEnteredDir;
 @property enum DIRECTION touchExitedDir;
@@ -33,15 +32,7 @@
 - (void) tempAddExitedDirection;
 - (void) tempRemoveEnteredDirection;
 - (void) tempRemoveExitedDirection;
-=======
-@property NSString *_enteredDir;
-@property NSString *_exitedDir;
 
-- (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
-- (void) addImageDirection: (NSString*) dir;
-- (void) removeImageDirection: (NSString*) dir;
-- (void) addDirection: (NSString*) dir;
->>>>>>> PowerUP
 - (void) resetDirection;
 - (int) getPosition;
 

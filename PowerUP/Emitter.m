@@ -25,17 +25,7 @@
     return self;
 }
 
-<<<<<<< HEAD
 #pragma mark - Private Methods
-=======
-//with turnOn and turnOff, simply reset the names
-- (void) turnOn
-{
-    NSString *onName = [name stringByAppendingString:@"on"];
-    
-    [self setImage:[UIImage imageNamed:onName]];
-}
->>>>>>> PowerUP
 
 - (void) setUpImageNameWithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
     
