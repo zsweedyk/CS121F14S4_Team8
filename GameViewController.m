@@ -294,25 +294,6 @@ const int POSITION_DECODER = 100;
     }
 }
 
-///*
-// * If the battery was turned on, power on and update
-// */
-//-(void) powerOn
-//{
-//    [_model powerOn];
-//    [self updateGrid];
-//}
-
-///*
-// * If the battery was turned off, reset components
-// */
-//- (void) powerOff
-//{
-//    [_model powerOff];
-//    [_grid resetLasers];
-//    [_grid componentsTurnedOff];
-//}
-
 /*
  * Switch the power on choice
  */
@@ -351,65 +332,6 @@ const int POSITION_DECODER = 100;
     }
 }
 
-//
-//- (void) updateGrid
-//{
-//    NSArray* lasers = [_model getLasers];
-//    NSArray* emitters = [_model getConnectedEmitters];
-//    NSArray* deflectors = [_model getConnectedDeflectors];
-//    NSArray* receivers = [_model getConnectedReceivers];
-//    NSArray* bulbs = [_model getConnectedBulbs];
-//    NSArray* bombs = [_model getConnectedBombs];
-//    
-//    [_grid resetLasers];
-//    [self updateComponents:lasers];
-//    [self updateStates:emitters];
-//    [self updateStates:deflectors];
-//    [self updateStates:receivers];
-//    [self updateStates:bulbs];
-//    
-//    BOOL shorted = [_model isShorted];
-//    BOOL connected = [_model isConnected];
-//    BOOL bombConnected = [_model isBombConnected];
-//    
-//    // first check bomb connection, then short circuit, and finally connected circuit
-//    if (bombConnected) {
-//        // if the bomb is connected, explode that bomb, and display lose message
-//        // the message will ask the user to restart the game
-//        [_audioPlayerExplosion prepareToPlay];
-//        [_audioPlayerExplosion play];
-//        
-//        [self setUpExplosionScene];
-//        [self explodeBombs:bombs];
-//        
-//        [self displayMessageFor:@"Bomb"];
-//        
-//    } else if (shorted) {
-//        // if the circuit is shorted, explode the battery, and display lose message
-//        // the message will ask the user to restart the game
-//        [_audioPlayerExplosion prepareToPlay];
-//        [_audioPlayerExplosion play];
-//        
-//        [self setUpExplosionScene];
-//        [self explodeBattery];
-//        
-//        [_grid shorted];
-//        
-//        [self displayMessageFor:@"Lose"];
-//        
-//    } else if (connected){
-//        // if the circuit is connected, display win message
-//        // the message will ask the user to go to the next level
-//        [_audioPlayerWin prepareToPlay];
-//        [_audioPlayerWin play];
-//        
-//        [self displayMessageFor:@"Win"];
-//    } else {
-//        // if neither shorted or connected, do nothing but play sound that indicates a bad move
-//        [_audioPlayerNo prepareToPlay];
-//        [_audioPlayerNo play];
-//    }
-//}
 
 /*
  * Display alert view
@@ -458,36 +380,6 @@ const int POSITION_DECODER = 100;
     else
         [alertView show];
 }
-
-///*
-// * change component type on grid
-// */
-//- (void) updateComponents:(NSArray*)components
-//{
-//    NSArray* rows = components[0];
-//    NSArray* cols = components[1];
-//    
-//    for (int i = 0; i < rows.count; ++i) {
-//        NSString* compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
-//        [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
-//    }
-//}
-
-///*
-// * update a component state on grid if they have been pressed
-// */
-//- (void) updateStates:(NSArray*)components
-//{
-//    if (components.count > 0) {
-//        NSArray* rows = components[0];
-//        NSArray* cols = components[1];
-//        NSArray* states = components[2];
-//        
-//        for (int i = 0; i < rows.count; ++i) {
-//            [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
-//        }
-//    }
-//}
 
 /*
  * prepare for explosion effect

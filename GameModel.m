@@ -564,59 +564,6 @@ const int numCols = 15;
 }
 
 
-
-
-
-
-
-
-
-
-
-///*
-// * Gets a list of all emitters with the information about their connected state
-// * Input: N/A
-// * Output: An array of emitters
-// */
-//-(NSArray*) getConnectedEmitters
-//{
-//    return [self getConnectedLocations:[_laserModel getEmitters] withState:YES];
-//}
-//
-//
-///*
-// * Gets a list of all deflectors with the information about their connected state
-// * Input: N/A
-// * Output: An array of deflectors
-// */
-//-(NSArray*) getConnectedDeflectors
-//{
-//    return [self getConnectedLocations:[_laserModel getDeflectors] withState:YES];
-//}
-//
-///*
-// * Gets a list of all receivers with the information about their connected state
-// * Input: N/A
-// * Output: An array of receivers
-// */
-//-(NSArray*) getConnectedReceivers
-//{
-//    return [self getConnectedLocations:[_laserModel getReceivers] withState:YES];
-//}
-//
-//
-///*
-// * Gets a list of all bulbs with the information about their connected state
-// * Input: N/A
-// * Output: An array of bulbs
-// */
-//- (NSArray*) getConnectedBulbs
-//{
-//    return [self getConnectedLocations:_bulbs withState:YES];
-//}
-//
-//
-
 /*
  * Gets a list of bombs that should be detonated
  * Input: N/A
@@ -627,8 +574,7 @@ const int numCols = 15;
     return [self getConnectedLocations:bombs];
 }
 
-//
-//
+
 /*
  * Gets a list of lasers that should be present on the grid
  * Input: N/A
@@ -644,96 +590,7 @@ const int numCols = 15;
     
     return laserPositions;
 }
-//
-//
-///*
-// * Checks to see if the grid is fully connected
-// * Input: N/A
-// * Output: A boolean, true if the grid is fully connected
-// */
-//-(BOOL) isConnected
-//{
-//    NSArray* connectedBulbLoc = [self getConnectedLocations:_bulbs withState:NO];
-//    NSArray* connectedBulbs = connectedBulbLoc[0];
-//    
-//    if (connectedBulbs.count == _bulbs.count) {
-//        return true;
-//    } else {
-//        return false;
-//    }
-//}
-//
-//
-///*
-// * Checks to see if there is a short in the grid
-// * Input: N/A
-// * Output: A boolean, true if the grid is shorted
-// */
-//-(BOOL) isShorted
-//{
-//    return [self breadthSearchFrom:_batteryNeg To:_batteryPos inDirection:@"Right" CheckingForShort:true];
-//}
-//
-//
-///*
-// * Checks to see if any bombs are connected
-// * Input: N/A
-// * Output: A boolean, true if atleast one bomb is connected
-// */
-//-(BOOL) isBombConnected
-//{
-//    NSArray* connectedBombLoc = [self getConnectedBombs];
-//    NSArray* connectedBombs = connectedBombLoc[0];
-//    return (connectedBombs.count > 0);
-//}
-//
-//
-///*
-// * When the circuit is powered on, we update the states of all the components
-// * Input: N/A
-// * Output: N/A
-// */
-//- (void) powerOn
-//{
-//    [_batteryPos setState:YES];
-//    [_batteryNeg setState:YES];
-//    
-//    [self resetComponents];
-//    
-//    [self updateStateOfComponents:[_laserModel getEmitters]];
-//    
-//    // With the laser components theres a possibility that certain updates can induce changes in more components
-//    // Therefore we loop until there are no more differences.
-//    while (true) {
-//        [_laserModel updateLasers];
-//        
-//        [self updateStateOfComponents:_bulbs];
-//        [self updateStateOfComponents:_bombs];
-//        
-//        NSArray* emitterStates = [self stateOf:[_laserModel getEmitters]];
-//        [self updateStateOfComponents:[_laserModel getEmitters]];
-//        if (![_laserModel didEmitterStateChange:emitterStates]) {
-//            break;
-//        }
-//    }
-//}
-//
-//
-///*
-// * When the circuit is powered off we reset the components
-// * Input: N/A
-// * Output: N/A
-// */
-//- (void) powerOff
-//{
-//    [_batteryPos setState:NO];
-//    [_batteryNeg setState:NO];
-//    [self resetComponents];
-//}
-//
-//
-//# pragma mark Private Methods
-//
+
 /*
  * Tells you a component has a switch to a specified direction of a specified component
  * Input: The component and direction to look

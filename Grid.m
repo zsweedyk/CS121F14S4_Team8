@@ -238,33 +238,9 @@
     [self.delegate performSelector:@selector(componentAdjustedAtPosition:WithConnections:) withObject:position withObject:connections];
 }
 
-//- (void) bulbConnectedWithIndices: (NSArray*) bulbs{
-//    // turn off all bulbs first
-//    for (int i = 0; i < bulbs.count; ++i)
-//    {
-//        [bulbs[i] turnOff];
-//    }
-//    
-//    // turn on all connected bulbs
-//    for (int j = 0; j < bulbs.count; ++j)
-//    {
-//        int index = [bulbs[j] intValue];
-//        [bulbs[index] turnOn];
-//    }
-//}
-
 - (void) powerUp:(id)sender {
     [self.delegate performSelector:@selector(masterPowerSelected)];
 }
-
-//- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state
-//{
-//    if (state) {
-//        [cells[row][col] turnOn];
-//    } else {
-//        [cells[row][col] turnOff];
-//    }
-//}
 
 - (void) resetLasers
 {
@@ -274,14 +250,6 @@
     
     [_lasers removeAllObjects];
 }
-
-//- (void) shorted {
-//    // explode all battery components
-//    for (int i = 0; i < batteries.count; ++i)
-//    {
-//        [batteries[i] exploded];
-//    }
-//}
 
 
 - (int) getBatteryX
@@ -304,35 +272,6 @@
 {
     return (cellSize * col);
 }
-
-//-(void)componentsTurnedOff
-//{
-//    for (int i = 0; i < _receivers.count; ++i)
-//    {
-//        [_receivers[i] turnOff];
-//    }
-//    
-//    for (int i = 0; i < _emitters.count; ++i)
-//    {
-//        [_emitters[i] turnOff];
-//    }
-//    
-//    for (int i = 0; i < _deflectors.count; ++i)
-//    {
-//        [_deflectors[i] turnOff];
-//    }
-//    
-//    for (int i = 0; i < bulbs.count; ++i)
-//    {
-//        [bulbs[i] turnOff];
-//    }
-//    
-//    // turn off all battery components
-//    for (int i = 0; i < batteries.count; ++i)
-//    {
-//        [batteries[i] turnedOff];
-//    }
-//}
 
 #pragma mark - Touch Handling
 
