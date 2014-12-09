@@ -253,6 +253,9 @@ const int POSITION_DECODER = 100;
     
     [_model componentSelectedAtRow:rowSelected andCol:colSelected WithConnections:newConnection];
 
+    if ([_model getTypeAtRow:rowSelected andCol:colSelected] == SWITCH) {
+        masterPowerOn = NO;
+    }
     [self setUpDisplayWithPower:masterPowerOn];
     
     [self circuitOn];
