@@ -107,7 +107,6 @@
             // initially set all cells to a clear label. Initialized to proper component later
             CGRect labelFrame = CGRectMake(xLabel, yLabel, _cellSize, _cellSize);
             UILabel *blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            [blankTile setBackgroundColor:[UIColor clearColor]];
             
             [self addSubview:blankTile];
             [_cells[row] addObject:blankTile];
