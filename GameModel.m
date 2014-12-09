@@ -485,11 +485,9 @@ const int numCols = 15;
                 
                 if (path1 && path2 && [(ReceiverModel*)receivers[j] state] ) {
                     [comp setState:YES];
-                    break;
                 }
             }
         }
-        [comp setState:NO];
     }
 }
 
@@ -631,7 +629,13 @@ const int numCols = 15;
  */
 -(NSArray*) getLasers
 {
-    return [self getConnectedLocations:[laserModel lasers]];
+    NSMutableArray *laserPositions = [[NSMutableArray alloc] init];
+    
+    for (ComponentModel *laser in [laserModel lasers]) {
+        [laserPositions addObject:[NSNumber numberWithInt:100*[laser row] + [laser col]]];
+    }
+    
+    return laserPositions;
 }
 //
 //

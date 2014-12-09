@@ -239,6 +239,8 @@ const int POSITION_DECODER = 100;
     [_model componentSelectedAtRow:rowSelected andCol:colSelected WithConnections:newConnection];
 
     [self setUpDisplayWithPower:masterPowerOn];
+    
+    [self circuitOn];
 }
 
 - (void) componentAdjustedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection {
@@ -251,6 +253,7 @@ const int POSITION_DECODER = 100;
     NSArray* updatedComponents = [_model getLasers];
     NSLog(@"%lu Lasers that need to be updated:%@",(unsigned long)updatedComponents.count , updatedComponents);
     [self updateDisplayFor:updatedComponents];
+    [self circuitOn];
 }
 
 - (void) updateDisplayFor:(NSArray*)components {
@@ -308,6 +311,10 @@ const int POSITION_DECODER = 100;
     
     [_model updateGameStatus];
     
+    [self circuitOn];
+}
+
+- (void) circuitOn {
     if (masterPowerOn) {
         if ([_model shorted]) {
             [_audioPlayerExplosion prepareToPlay];
