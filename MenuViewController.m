@@ -11,6 +11,7 @@
 #import "LevelViewController.h"
 #import "StoryViewController.h"
 #import "SettingsViewController.h"
+#import "InstructionsViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -154,6 +155,13 @@
     
     if ([segue.identifier isEqualToString:@"PresentSettings"]) {
         SettingsViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
+    }
+    
+    if ([segue.identifier isEqualToString:@"PresentInstructions"]) {
+        InstructionsViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;
