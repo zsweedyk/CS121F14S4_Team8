@@ -348,7 +348,7 @@
     if ([event isEqual:@"Win"]) {
         title = _titleWin;
         
-        if (self.gameLevel < self.totalLevel) {
+        if (self.gameLevel < self.totalLevel - 1) {
             message = _next;
         } else {
             message = _all;
