@@ -169,8 +169,6 @@
  */
 - (void) setLanguage
 {
-    
-    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     _titleWin = [gameText objectForKey:@"WinTitle"];
     _next = [gameText objectForKey:@"NextMessage"];
     _all = [gameText objectForKey:@"AllUnlocked"];

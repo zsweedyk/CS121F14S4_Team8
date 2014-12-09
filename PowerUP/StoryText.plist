@@ -110,7 +110,7 @@
 		<key>bottom1</key>
 		<string> </string>
 		<key>top2</key>
-		<string>I thing you should avoid connecting the bombs at all costs!</string>
+		<string>I think you should avoid connecting the bombs at all costs!</string>
 		<key>middle2</key>
 		<string>Who knows what could happen if you set one off...</string>
 		<key>bottom2</key>
@@ -129,13 +129,13 @@
 		<key>top1</key>
 		<string>I almost forgot to tell you!</string>
 		<key>middle1</key>
-		<string>Some of the circuits in my labratory use lasers!</string>
+		<string>Some of the circuits in my laboratory use lasers!</string>
 		<key>bottom1</key>
 		<string>I&apos;ll explain how they work.</string>
 		<key>top2</key>
 		<string>If you connect an emitter to a battery it will shoot out a laser.</string>
 		<key>middle2</key>
-		<string>If you get a laser to hit an receiver, it will act like a new battery.</string>
+		<string>If you get a laser to hit a receiver, it will act like a new battery.</string>
 		<key>bottom2</key>
 		<string> </string>
 		<key>top3</key>
@@ -143,7 +143,7 @@
 		<key>middle3</key>
 		<string>an emitter so that it hits a receiver.</string>
 		<key>bottom3</key>
-		<string>You can aim the lasers using the defelctors that are all around my lab.</string>
+		<string>You can aim the lasers using the deflectors that are all around my lab.</string>
 		<key>top4</key>
 		<string> </string>
 		<key>middle4</key>
@@ -157,7 +157,7 @@
 		<key>bottom5</key>
 		<string> </string>
 		<key>top6</key>
-		<string>Tap on the deflector to change its type.</string>
+		<string>Tap on the deflector to change its openings.</string>
 		<key>middle6</key>
 		<string>Put your finger on the deflector and then drag your finger around</string>
 		<key>bottom6</key>
@@ -169,5 +169,7 @@
 		<key>bottom7</key>
 		<string>it will most likely detonate it!</string>
 	</dict>
+	<key>Next</key>
+	<string>Next</string>
 </dict>
 </plist>

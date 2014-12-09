@@ -4,6 +4,8 @@
 <dict>
 	<key>numPages</key>
 	<string>10</string>
+	<key>Next</key>
+	<string>Next(C)</string>
 	<key>top1</key>
 	<string>这个游戏的目的，</string>
 	<key>middle1</key>
@@ -64,5 +66,53 @@
 	<string>我们还要确保电池的两端互相连接。</string>
 	<key>bottom10</key>
 	<string></string>
+	<key>top11</key>
+	<string>Here we have a circuit</string>
+	<key>middle11</key>
+	<string>that looks a little bit different</string>
+	<key>bottom11</key>
+	<string></string>
+	<key>top12</key>
+	<string>Lets try to connect the switch</string>
+	<key>middle12</key>
+	<string>and see what happens</string>
+	<key>bottom12</key>
+	<string></string>
+	<key>top13</key>
+	<string>Tap the battery to turn it on</string>
+	<key>middle13</key>
+	<string></string>
+	<key>bottom13</key>
+	<string></string>
+	<key>top14</key>
+	<string>And it explodes! Notice that the light </string>
+	<key>middle14</key>
+	<string>turned on because there is a path of </string>
+	<key>bottom14</key>
+	<string>wires connecting it to the battery. So what happened?</string>
+	<key>top15</key>
+	<string>There is also a connection path in the circuit</string>
+	<key>middle15</key>
+	<string>with no lightbulb. When the battery is</string>
+	<key>bottom15</key>
+	<string>connected to itself without anything to power up, BOOM!</string>
+	<key>top16</key>
+	<string>Let&apos;s connect the circuit like this so that</string>
+	<key>middle16</key>
+	<string>there are noempty paths to the battery.</string>
+	<key>bottom16</key>
+	<string>Here we see the bulb lights up fine and we have completed the circuit!</string>
+	<key>top17</key>
+	<string>The path through the</string>
+	<key>middle17</key>
+	<string>light bulb is connected</string>
+	<key>bottom17</key>
+	<string></string>
+	<key>top18</key>
+	<string>And the path without a lightbulb</string>
+	<key>middle18</key>
+	<string>is not connected and</string>
+	<key>bottom18</key>
+	<string>there is no &apos;short&apos; circuit</string>
 </dict>
 </plist>

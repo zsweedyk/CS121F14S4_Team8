@@ -4,65 +4,115 @@
 <dict>
 	<key>numPages</key>
 	<string>10</string>
+	<key>Next</key>
+	<string>Próximo</string>
 	<key>top1</key>
-	<string>The goal of the game</string>
+	<string>El objetivo del juego</string>
 	<key>middle1</key>
-	<string>is to light up all the bulbs </string>
+	<string>es para encender todas las bombillas</string>
 	<key>bottom1</key>
-	<string>in the circuit</string>
+	<string>en el circuito</string>
 	<key>top2</key>
-	<string>to test to see if</string>
+	<string>Para poner a prueba para ver si</string>
 	<key>middle2</key>
-	<string>your circuit is correct, </string>
+	<string>el circuito es correcto,</string>
 	<key>bottom2</key>
-	<string>tap the battery</string>
+	<string>toque la batería</string>
 	<key>top3</key>
-	<string>If the circuit is not connected, </string>
+	<string>Si el circuito no está conectado,</string>
 	<key>middle3</key>
-	<string>the bulb will not turn on</string>
+	<string>la bombilla no se enciende</string>
 	<key>bottom3</key>
 	<string></string>
 	<key>top4</key>
-	<string>To complete the circuit,</string>
+	<string>Para completar el circuito,</string>
 	<key>middle4</key>
-	<string>we need to connect </string>
+	<string>necesitamos conectar</string>
 	<key>bottom4</key>
-	<string>the switches</string>
+	<string>los conmutadores</string>
 	<key>top5</key>
-	<string>drag across the orange</string>
+	<string>Arrastre a través de las líneas de color</string>
 	<key>middle5</key>
-	<string>lines to connect the </string>
+	<string>naranja para conectar </string>
 	<key>bottom5</key>
-	<string>battery with the switch</string>
+	<string>la batería con el interruptor</string>
 	<key>top6</key>
-	<string>If we tap the battery again, </string>
+	<string>Si nos conectamos la batería de nuevo,</string>
 	<key>middle6</key>
-	<string>we see that the light buld is only</string>
+	<string>vemos que la bombilla sólo está</string>
 	<key>bottom6</key>
-	<string>connected to one side of the battery</string>
+	<string>conectadoa un lado de la batería</string>
 	<key>top7</key>
-	<string>for the bulb to turn on,</string>
+	<string>Para que la bombilla se enciende,</string>
 	<key>middle7</key>
-	<string>we need to also connect</string>
+	<string>necesitamos conectar también</string>
 	<key>bottom7</key>
-	<string>the other side</string>
+	<string>el otro lado</string>
 	<key>top8</key>
-	<string>We can connect it</string>
+	<string>Podemos conectarlo arrastrando</string>
 	<key>middle8</key>
-	<string>by dragging across the</string>
+	<string>a través del otro interruptor</string>
 	<key>bottom8</key>
-	<string>other switch</string>
+	<string></string>
 	<key>top9</key>
-	<string>Now we see that with</string>
+	<string>Ahora vemos que con ambos lados</string>
 	<key>middle9</key>
-	<string>both sides of the bulb connected,</string>
+	<string>de la bombilla conectados,</string>
 	<key>bottom9</key>
-	<string>the bulb is powered up</string>
+	<string>la bombilla se enciende</string>
 	<key>top10</key>
-	<string>For power to be flowing</string>
+	<string>Para poder para fluir en cualquier lugar,</string>
 	<key>middle10</key>
-	<string>anywhere, there must be a</string>
+	<string>debe haber un camino de conexión</string>
 	<key>bottom10</key>
-	<string>path of connection through the battery</string>
+	<string>a través de la batería</string>
+	<key>top11</key>
+	<string>Aquí tenemos un circuito</string>
+	<key>middle11</key>
+	<string>que se ve un poco diferente</string>
+	<key>bottom11</key>
+	<string></string>
+	<key>top12</key>
+	<string>Vamos a tratar de conectar</string>
+	<key>middle12</key>
+	<string>el interruptor y ver qué pasa</string>
+	<key>bottom12</key>
+	<string></string>
+	<key>top13</key>
+	<string>Toca la batería para encenderlo</string>
+	<key>middle13</key>
+	<string></string>
+	<key>bottom13</key>
+	<string></string>
+	<key>top14</key>
+	<string>¡Y se explote! Observe que la luz </string>
+	<key>middle14</key>
+	<string>encendida porque  no hay un camino</string>
+	<key>bottom14</key>
+	<string>de cables de conexión a la batería. Entonces, ¿Qué pasó?</string>
+	<key>top15</key>
+	<string>También hay una ruta de conexión en el </string>
+	<key>middle15</key>
+	<string>circuito sin bombilla. Cuando la batería</string>
+	<key>bottom15</key>
+	<string>se conecta a sí misma sin nada para encender, BOOM!</string>
+	<key>top16</key>
+	<string>Vamos a conectar el circuito como éste,</string>
+	<key>middle16</key>
+	<string>así que no hay caminos vacíos a la batería.</string>
+	<key>bottom16</key>
+	<string>Aquí vemos la bombilla se enciende bien y hemos completado el circuito!</string>
+	<key>top17</key>
+	<string>El camino a través de</string>
+	<key>middle17</key>
+	<string>la bombilla está conectado</string>
+	<key>bottom17</key>
+	<string></string>
+	<key>top18</key>
+	<string>Y el camino sin una bombilla de luz </string>
+	<key>middle18</key>
+	<string>no está conectado </string>
+	<key>bottom18</key>
+	<string>y no hay &quot;cortocircuito.&quot;</string>
 </dict>
 </plist>

@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>levelTitle</key>
-	<string>Iniciar Juego</string>
+	<string>Jugar</string>
 	<key>aboutTitle</key>
-	<string>Instrucción</string>
+	<string>Creditos</string>
 	<key>helpTitle</key>
-	<string>Instrucción</string>
-	<key>helpMessage</key>
-	<string>En este juego, estás tratando de conectar el circuito y encender la bombilla haciendo clic en los interruptores a las posiciones correctas</string>
+	<string>Ayuda</string>
+	<key>settingsTitle</key>
+	<string>Ajustes</string>
 </dict>
 </plist>

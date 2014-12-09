@@ -26,6 +26,11 @@
     UIButton* _level;
     UIButton* _about;
     
+    IBOutlet UILabel* _playLabel;
+    IBOutlet UILabel* _helpLabel;
+    IBOutlet UILabel* _aboutLabel;
+    IBOutlet UILabel* _settingsLabel;
+    
     NSDictionary* menuText;
 }
 
@@ -40,8 +45,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setUpDictionary];
-    // set up sounds, segmented control, and buttons
+    // set up sounds and labels
     [self setUpSounds];
+    [self setUpLabels];
 }
 
 - (void) setUpSounds
@@ -77,28 +83,44 @@
     menuText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
+
+-(void) setUpLabels {
+    _playLabel.text = [menuText objectForKey:@"levelTitle"];
+    _helpLabel.text = [menuText objectForKey:@"helpTitle"];
+    _aboutLabel.text = [menuText objectForKey:@"aboutTitle"];
+    _settingsLabel.text = [menuText objectForKey:@"settingsTitle"];
+}
+
 /*
  *  change the background if button is pressed
  */
 - (IBAction) setBG0
 {
     self.background.image = [UIImage imageNamed:@"BGmain.png"];
+    _playLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _helpLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _aboutLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _settingsLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
 }
 - (IBAction) setBG1
 {
     self.background.image = [UIImage imageNamed:@"BGmain1.png"];
+    _playLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG2
 {
     self.background.image = [UIImage imageNamed:@"BGmain2.png"];
+    _helpLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG3
 {
     self.background.image = [UIImage imageNamed:@"BGmain3.png"];
+    _aboutLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG4
 {
     self.background.image = [UIImage imageNamed:@"BGmain4.png"];
+    _settingsLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 
 /*
@@ -114,24 +136,6 @@
     } else {
         [self performSegueWithIdentifier:@"PresentLevels" sender:self];
     }
-}
-
-/*
- *  Display help message according to the language selected
- */
-- (void)displayHelpMessage:(id) sender{
-    [_audioPlayerAboutPressed prepareToPlay];
-    [_audioPlayerAboutPressed play];
-    
-    NSString *title = [menuText objectForKey:@"helpTitle"];
-    NSString *message = [menuText objectForKey:@"helpMessage"];
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alertView show];
 }
 
 /*
