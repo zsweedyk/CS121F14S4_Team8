@@ -29,6 +29,7 @@
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
 
 - (void) clearGrid;
+- (void) clearGridExceptAtRow:(int)row andCol:(int)col;
 - (void) setUpGrid;
 - (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections;
 

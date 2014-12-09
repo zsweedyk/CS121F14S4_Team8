@@ -88,6 +88,16 @@
     }
 }
 
+- (void) clearGridExceptAtRow:(int)row andCol:(int)col {
+    for (int r = 0; r < _numRows; ++r) {
+        for(int c= 0; c < _numCols; ++c) {
+            if (row != r || col != c) {
+                [cells[r][c] removeFromSuperview];
+            }
+        }
+    }
+}
+
 - (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
     UIView* prevComp = [[cells objectAtIndex:row] objectAtIndex:col];
     UIView* newComponent;

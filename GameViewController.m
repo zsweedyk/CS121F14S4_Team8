@@ -231,6 +231,21 @@ const int POSITION_DECODER = 100;
     }
 }
 
+- (void) setUpDisplayWithComponentAdjustingAtRow:(int)row andCol:(int)col WithPower:(BOOL)power {
+    // reset all grids
+    [grid clearGridExceptAtRow:row andCol:col];
+    [grid setUpGrid];
+    
+    // read values from gameModel and set them to grid
+    for (int r = 0; r < _numRows; ++r){
+        for (int c = 0; c < _numCols; ++c){
+            if (row != r || col != c) {
+                [self updateDisplayAtRow:r AndCol:c WithPower:power];
+            }
+        }
+    }
+}
+
 - (void) componentSelectedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection {
 
     int rowSelected = [position intValue] / POSITION_DECODER;
@@ -249,10 +264,8 @@ const int POSITION_DECODER = 100;
     int col = [position intValue] % POSITION_DECODER;
     
     [_model componentSelectedAtRow:row andCol:col WithConnections:newConnection];
-    
-    NSArray* updatedComponents = [_model getLasers];
-    NSLog(@"%lu Lasers that need to be updated:%@",(unsigned long)updatedComponents.count , updatedComponents);
-    [self updateDisplayFor:updatedComponents];
+
+    [self setUpDisplayWithComponentAdjustingAtRow:row andCol:col WithPower:masterPowerOn];
     [self circuitOn];
 }
 
