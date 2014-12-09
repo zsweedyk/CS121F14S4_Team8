@@ -109,6 +109,7 @@
                                     <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="GrS-cV-gyE"/>
                                     <action selector="setBG2" destination="BYZ-38-t0r" eventType="touchDown" id="bWY-P8-nr6"/>
                                     <action selector="setBG2" destination="BYZ-38-t0r" eventType="touchDragEnter" id="eDS-Xa-mdd"/>
+                                    <segue destination="a6J-iG-YiE" kind="show" identifier="PresentInstructions" id="j9b-Zj-2WU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-Py-rMG" userLabel="About">
@@ -195,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sga-7k-Ouk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="1739"/>
+            <point key="canvasLocation" x="1009" y="1831"/>
         </scene>
         <!--Level View Controller-->
         <scene sceneID="01F-KR-fIk">
@@ -229,7 +230,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6xw-Zd-hvZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mDY-YI-k6R">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -241,6 +242,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEj-BW-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2312" y="1399"/>
+        </scene>
+        <!--Instructions View Controller-->
+        <scene sceneID="kgn-KO-cbi">
+            <objects>
+                <viewController id="a6J-iG-YiE" customClass="InstructionsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ThY-nO-f1Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="xwT-gp-heN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qAJ-bf-qqT">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mI-BQ-Ka7">
+                                <rect key="frame" x="16" y="760" width="736" height="244"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfJ-Aj-GFW">
+                                <rect key="frame" x="612" y="955" width="110" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextTouched:" destination="a6J-iG-YiE" eventType="touchUpInside" id="Oj5-bk-LHo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="next" destination="jfJ-Aj-GFW" id="GLU-yb-wJd"/>
+                        <outlet property="textView" destination="1mI-BQ-Ka7" id="uPH-e3-dWN"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="InstructionsToMenu" id="RwZ-KJ-u2L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x6a-od-LTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="39" y="-801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hFf-FL-agw">
@@ -271,9 +314,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="RwZ-KJ-u2L"/>
         <segue reference="PvW-I8-hBT"/>
         <segue reference="rLW-Kz-L9i"/>
         <segue reference="rza-1s-ZaB"/>
-        <segue reference="sq2-dP-Tbt"/>
     </inferredMetricsTieBreakers>
 </document>
