@@ -5,7 +5,7 @@
 	<key>numPages</key>
 	<string>10</string>
 	<key>Next</key>
-	<string>Next(C)</string>
+	<string>下一步</string>
 	<key>top1</key>
 	<string>这个游戏的目的，</string>
 	<key>middle1</key>
@@ -67,52 +67,52 @@
 	<key>bottom10</key>
 	<string></string>
 	<key>top11</key>
-	<string>Here we have a circuit</string>
+	<string>这里是一个不同的电路。</string>
 	<key>middle11</key>
-	<string>that looks a little bit different</string>
+	<string></string>
 	<key>bottom11</key>
 	<string></string>
 	<key>top12</key>
-	<string>Lets try to connect the switch</string>
+	<string>让我们连接一下开关，看看发生了什么。</string>
 	<key>middle12</key>
-	<string>and see what happens</string>
+	<string></string>
 	<key>bottom12</key>
 	<string></string>
 	<key>top13</key>
-	<string>Tap the battery to turn it on</string>
+	<string>点一下电源给电路通电。</string>
 	<key>middle13</key>
 	<string></string>
 	<key>bottom13</key>
 	<string></string>
 	<key>top14</key>
-	<string>And it explodes! Notice that the light </string>
+	<string>电池爆炸了！</string>
 	<key>middle14</key>
-	<string>turned on because there is a path of </string>
+	<string>因为电路短路了，到底发生了什么？</string>
 	<key>bottom14</key>
-	<string>wires connecting it to the battery. So what happened?</string>
+	<string></string>
 	<key>top15</key>
-	<string>There is also a connection path in the circuit</string>
+	<string>因为有一条线可以从电池的一端直接连接到</string>
 	<key>middle15</key>
-	<string>with no lightbulb. When the battery is</string>
+	<string>另外一端。</string>
 	<key>bottom15</key>
-	<string>connected to itself without anything to power up, BOOM!</string>
+	<string>这条线上没有一个灯泡。</string>
 	<key>top16</key>
-	<string>Let&apos;s connect the circuit like this so that</string>
+	<string>让我们试试连接电路，</string>
 	<key>middle16</key>
-	<string>there are noempty paths to the battery.</string>
+	<string>没有一条这样的线。</string>
 	<key>bottom16</key>
-	<string>Here we see the bulb lights up fine and we have completed the circuit!</string>
+	<string>现在所有的小灯泡都连接了！</string>
 	<key>top17</key>
-	<string>The path through the</string>
+	<string>我们成功通关了！</string>
 	<key>middle17</key>
-	<string>light bulb is connected</string>
+	<string></string>
 	<key>bottom17</key>
 	<string></string>
 	<key>top18</key>
-	<string>And the path without a lightbulb</string>
+	<string>记住，当所有的线上都有灯泡时，</string>
 	<key>middle18</key>
-	<string>is not connected and</string>
+	<string>电池就不会爆炸。</string>
 	<key>bottom18</key>
-	<string>there is no &apos;short&apos; circuit</string>
+	<string></string>
 </dict>
 </plist>

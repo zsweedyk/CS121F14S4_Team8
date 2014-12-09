@@ -11,6 +11,7 @@
 #import "GameViewController.h"
 #import "LevelViewController.h"
 #import "StoryViewController.h"
+#import "CreditViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
 #import "ExplosionScene.h"
@@ -500,6 +501,15 @@
     
     if ([segue.identifier isEqualToString:@"GameToStory"]) {
         StoryViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
+        destViewController.gameLevel = self.gameLevel;
+        destViewController.totalLevel = self.totalLevel;
+    }
+    
+    if ([segue.identifier isEqualToString:@"GameToCredit"]) {
+        CreditViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;

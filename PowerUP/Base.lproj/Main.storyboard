@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Settings View Controller-->
@@ -42,7 +41,7 @@
         <!--About View Controller-->
         <scene sceneID="3cZ-qT-x3z">
             <objects>
-                <viewController title="About View Controller" id="O2A-Rs-g4Z" sceneMemberID="viewController">
+                <viewController title="About View Controller" id="O2A-Rs-g4Z" customClass="CreditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V1Q-ie-bmx"/>
                         <viewControllerLayoutGuide type="bottom" id="WMg-sQ-5ci"/>
@@ -61,7 +60,7 @@
                                 </state>
                                 <state key="highlighted" image="backButtonOn"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="sq2-dP-Tbt"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="CreditToMenu" id="sq2-dP-Tbt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -139,7 +138,7 @@
                                     <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="mfe-a1-hDp"/>
                                     <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDragEnter" id="ZHT-SS-m60"/>
                                     <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDown" id="k0o-Nu-JAM"/>
-                                    <segue destination="O2A-Rs-g4Z" kind="show" id="7VB-Wq-Rw7"/>
+                                    <segue destination="O2A-Rs-g4Z" kind="show" identifier="GameToCredit" id="7VB-Wq-Rw7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-bU-Kxh" userLabel="Settings">
@@ -342,9 +341,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RwZ-KJ-u2L"/>
+        <segue reference="sq2-dP-Tbt"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="rza-1s-ZaB"/>
         <segue reference="PvW-I8-hBT"/>
+        <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>
