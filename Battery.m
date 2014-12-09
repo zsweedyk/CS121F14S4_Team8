@@ -7,27 +7,57 @@
 //
 
 #import "Battery.h"
+#import "ExplosionScene.h"
 
-@implementation Battery
+@implementation Battery{
+    NSString *_name;
+    UIButton *_battery;
+    int _row;
+    int _col;
+}
 
-- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name AtRow:(int)row AndCol:(int)col
 {
     self = [super initWithFrame:frame];
-    
-    [self setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
-    [self addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
+    _name = name;
+    _row = row;
+    _col = col;
+
+    CGRect battFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _battery = [[UIButton alloc] initWithFrame:battFrame];
+    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
+    [_battery addTarget:self.delegate action:@selector(powerUp:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addSubview:_battery];
     
     return self;
 }
 
-- (void) other
+- (void) turnedOff
 {
-    
+    [_battery setBackgroundImage:[UIImage imageNamed:_name] forState:UIControlStateNormal];
 }
 
-- (void) turnOnPower
+- (void) turnedOn
 {
-    // TODO: change background image
+    NSString* newName = [NSString stringWithFormat:@"%@%@", _name, @"on"];
+    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+}
+
+- (void) exploded
+{
+    NSString *newName = [NSString stringWithFormat:@"%@%@", _name, @"short"];
+    [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
+}
+
+- (int) getRow
+{
+    return _row;
+}
+
+- (int) getCol
+{
+    return _col;
 }
 
 @end

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>0</key>
+	<dict>
+		<key>state</key>
+		<string>FIRST_TIME</string>
+		<key>type</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>4</integer>
+		<key>top1</key>
+		<string>Oh dear...</string>
+		<key>middle1</key>
+		<string>I don&apos;t know what just happened...</string>
+		<key>bottom1</key>
+		<string>I was working on my top secret invention when all of a sudden...</string>
+		<key>top2</key>
+		<string>BOOM!</string>
+		<key>middle2</key>
+		<string>All the lights just turned off!</string>
+		<key>bottom2</key>
+		<string>I don&apos;t know what I&apos;m going to do.</string>
+		<key>top3</key>
+		<string>Hey!</string>
+		<key>middle3</key>
+		<string>Do you think you could help me get all the lights back on?</string>
+		<key>bottom3</key>
+		<string>  </string>
+		<key>top4</key>
+		<string>Great!</string>
+		<key>middle4</key>
+		<string> </string>
+		<key>bottom4</key>
+		<string>Let&apos;s get started!</string>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SWITCH</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>So it seems like a lot of the circuits are disconnected.</string>
+		<key>middle1</key>
+		<string>I think if you reconnect the circuit and restart the power the lights will turn back on.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>Drag your finger over the orange switches to draw wires</string>
+		<key>middle2</key>
+		<string>Use these wires to try and connect the circuit and all the lightbulbs.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>When you&apos;re done</string>
+		<key>middle3</key>
+		<string>tap the battery to see if it works!</string>
+		<key>bottom3</key>
+		<string>Good Luck!</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SHORT</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>4</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>You&apos;re doing a great job with</string>
+		<key>middle1</key>
+		<string>these lights but there is something you should watch for out.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>One thing that could go wrong is you can &quot;short&quot; the circuit.</string>
+		<key>middle2</key>
+		<string>This happens if you connect the battery to itself without a lightbulb in the path of electricity.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>I don&apos;t even know what will happen if you start the power with a short circuit...</string>
+		<key>middle3</key>
+		<string> </string>
+		<key>bottom3</key>
+		<string>Keep it up!</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_BOMB</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>11</integer>
+		<key>numPages</key>
+		<integer>2</integer>
+		<key>top1</key>
+		<string>Oh my...</string>
+		<key>middle1</key>
+		<string>It looks like some of my bombs accidently fell on to the circuit.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>I thing you should avoid connecting the bombs at all costs!</string>
+		<key>middle2</key>
+		<string>Who knows what could happen if you set one off...</string>
+		<key>bottom2</key>
+		<string></string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_LASER</string>
+		<key>type</key>
+		<string>1</string>
+		<key>levelToDisplay</key>
+		<string>17</string>
+		<key>numPages</key>
+		<string>7</string>
+		<key>top1</key>
+		<string>I almost forgot to tell you!</string>
+		<key>middle1</key>
+		<string>Some of the circuits in my labratory use lasers!</string>
+		<key>bottom1</key>
+		<string>I&apos;ll explain how they work.</string>
+		<key>top2</key>
+		<string>If you connect an emitter to a battery it will shoot out a laser.</string>
+		<key>middle2</key>
+		<string>If you get a laser to hit an receiver, it will act like a new battery.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>In order to complete some circuits you will have to aim the lasers from</string>
+		<key>middle3</key>
+		<string>an emitter so that it hits a receiver.</string>
+		<key>bottom3</key>
+		<string>You can aim the lasers using the defelctors that are all around my lab.</string>
+		<key>top4</key>
+		<string> </string>
+		<key>middle4</key>
+		<string>The deflector takes a laser beam and redirects it to another direction.</string>
+		<key>bottom4</key>
+		<string> </string>
+		<key>top5</key>
+		<string>If you shoot a laser at a deflector,</string>
+		<key>middle5</key>
+		<string>it will deflect the laser through all of its openings</string>
+		<key>bottom5</key>
+		<string> </string>
+		<key>top6</key>
+		<string>Tap on the deflector to change its type.</string>
+		<key>middle6</key>
+		<string>Put your finger on the deflector and then drag your finger around</string>
+		<key>bottom6</key>
+		<string>in a circle to orient the deflector in any way you want.</string>
+		<key>top7</key>
+		<string>Be careful!</string>
+		<key>middle7</key>
+		<string>The lasers are very high intensity and if a laser hits a bomb,</string>
+		<key>bottom7</key>
+		<string>it will most likely detonate it!</string>
+	</dict>
+</dict>
+</plist>

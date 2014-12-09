@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>levelTitle</key>
+	<string>开始新游戏</string>
+	<key>aboutTitle</key>
+	<string>游戏指南</string>
+	<key>helpTitle</key>
+	<string>游戏指南</string>
+	<key>helpMessage</key>
+	<string>在这个游戏中，你需要通过变换开关的位置使灯泡发亮。</string>
+</dict>
+</plist>
