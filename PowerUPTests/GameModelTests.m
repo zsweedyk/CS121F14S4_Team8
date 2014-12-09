@@ -123,6 +123,8 @@
     XCTAssert([[_model getTypeAtRow:10 andCol:3] isEqualToString:@"bombXXTB"], @"Failure reading in wire with above and below connections");
 }
 
+
+
 - (void) testGetTypeAtInvalidRowandCol
 {
 
@@ -188,16 +190,16 @@
     [_model powerOn];
     XCTAssertFalse([_model isConnected]); // still unconnected
     bulbs = [_model getConnectedBulbs];
-    XCTAssertTrue([bulbs[2][0] integerValue] == 0,@"First bulb is not connected");
-    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is not connected");
+    XCTAssertTrue([bulbs[2][0] integerValue] == 0,@"First bulb is connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is connected");
     [_model powerOff];
 
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XXTB"];
     [_model powerOn];
     XCTAssertFalse([_model isConnected]); // only one bulb is connected
     bulbs = [_model getConnectedBulbs];
-    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is connected");
-    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is not connected");
+    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is not connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 0,@"Second bulb is connected");
     [_model powerOff];
 
     [_model componentSelectedAtRow:12 andCol:2 withOrientation:@"XRXB"];
@@ -209,8 +211,8 @@
     [_model powerOn];
     XCTAssertTrue([_model isConnected]);
     bulbs = [_model getConnectedBulbs];
-    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is connected");
-    XCTAssertTrue([bulbs[2][1] integerValue] == 1,@"Second bulb is connected");
+    XCTAssertTrue([bulbs[2][0] integerValue] == 1,@"First bulb is not connected");
+    XCTAssertTrue([bulbs[2][1] integerValue] == 1,@"Second bulb is not connected");
     [_model powerOff];
 
 }
@@ -239,23 +241,85 @@
     [_model powerOn];
     XCTAssertFalse([_model isBombConnected]); // still no bomb is connected
     bombs = [_model getConnectedBombs];
-    XCTAssertTrue([bombs[0] count] == 0,@"Two bombs are not connected");
+    XCTAssertTrue([bombs[0] count] == 0,@"Two bombs are connected");
     [_model powerOff];
     
     [_model componentSelectedAtRow:4 andCol:7 withOrientation:@"LRXX"];
     [_model powerOn];
     XCTAssertTrue([_model isBombConnected]); // first bomb is connected
     bombs = [_model getConnectedBombs];
-    XCTAssertTrue([bombs[0] count] == 1,@"One bomb is connected");
+    XCTAssertTrue([bombs[0] count] == 1,@"One bomb is not connected");
     [_model powerOff];
     
     [_model componentSelectedAtRow:6 andCol:7 withOrientation:@"LRXX"];
     [_model powerOn];
     XCTAssertTrue([_model isBombConnected]); // first bomb is connected
     bombs = [_model getConnectedBombs];
-    XCTAssertTrue([bombs[0] count] == 2,@"One bomb is connected");
+    XCTAssertTrue([bombs[0] count] == 2,@"Two bombs are not connected");
     [_model powerOff];
 }
+
+- (void) testLaserComponentsConnection
+{
+    [_model generateGrid:-4];
+    NSArray* emitters;
+    NSArray* deflectors;
+    NSArray* receivers;
+    NSArray* lasers;
+    
+    [_model powerOn];
+    emitters   = [_model getConnectedEmitters];
+    deflectors = [_model getConnectedDeflectors];
+    receivers  = [_model getConnectedReceivers];
+    lasers     = [_model getLasers];
+    XCTAssertTrue([emitters[2][0] integerValue]   == 0,@"The emitter is connected");
+    XCTAssertTrue([deflectors[2][0] integerValue] == 0,@"The deflector is connected");
+    XCTAssertTrue([receivers[2][0] integerValue]  == 0,@"The receiver is connected");
+    XCTAssertTrue([lasers[0] count] == 0,@"Lasers are connected");
+    [_model powerOff];
+    
+    [_model componentSelectedAtRow:9 andCol:9 withOrientation:@"LRXX"];
+    [_model powerOn];
+    // the components are still unconnected
+    emitters   = [_model getConnectedEmitters];
+    deflectors = [_model getConnectedDeflectors];
+    receivers  = [_model getConnectedReceivers];
+    lasers     = [_model getLasers];
+    XCTAssertTrue([emitters[2][0] integerValue]   == 0,@"The emitter is connected");
+    XCTAssertTrue([deflectors[2][0] integerValue] == 0,@"The deflector is connected");
+    XCTAssertTrue([receivers[2][0] integerValue]  == 0,@"The receiver is connected");
+    XCTAssertTrue([lasers[0] count] == 0,@"Lasers are connected");
+    [_model powerOff];
+    
+    
+    [_model componentSelectedAtRow:10 andCol:9 withOrientation:@"LRXX"];
+    [_model powerOn];
+    // the components are connected
+    emitters   = [_model getConnectedEmitters];
+    deflectors = [_model getConnectedDeflectors];
+    receivers  = [_model getConnectedReceivers];
+    lasers     = [_model getLasers];
+    XCTAssertTrue([emitters[2][0] integerValue]   == 1,@"The emitter is connected");
+    XCTAssertTrue([deflectors[2][0] integerValue] == 1,@"The deflector is connected");
+    XCTAssertTrue([receivers[2][0] integerValue]  == 1,@"The receiver is connected");
+    XCTAssertTrue([lasers[0] count] == 4,@"Lasers are not connected");
+    [_model powerOff];
+}
+
+- (void) testGetBatterys
+{
+    NSArray* batteries;
+    [_model generateGrid:-4];
+    [_model powerOn];
+    batteries = [_model getBatteries];
+    XCTAssertTrue([batteries[0][0] integerValue]   == 9,@"Failure to read the row of pos bat");
+    XCTAssertTrue([batteries[0][1] integerValue]   == 9,@"Failure to read the row of neg bat");
+    XCTAssertTrue([batteries[1][0] integerValue]   == 7,@"Failure to read the col of pos bat");
+    XCTAssertTrue([batteries[1][1] integerValue]   == 6,@"Failure to read the col of neg bat");
+    [_model powerOff];
+}
+
+
 
 
 @end

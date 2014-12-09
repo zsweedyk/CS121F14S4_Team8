@@ -13,8 +13,7 @@
 
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
 @property (nonatomic, assign) enum GAME_STATES currentState;
-@property (nonatomic, strong) NSMutableArray* locks;
-
+@property (nonatomic, strong) NSMutableArray *locks;
 @property (weak, nonatomic) IBOutlet UIImageView *background;
 
 @end

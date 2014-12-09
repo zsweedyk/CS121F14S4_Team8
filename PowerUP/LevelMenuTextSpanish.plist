@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backToMenuTitle</key>
+	<string>Volver al menú principal</string>
+	<key>lockTitle</key>
+	<string>Nivel actual está bloqueado</string>
+	<key>lockMessage</key>
+	<string>Para jugar a este nivel, desbloquear todos los niveles anteriores</string>
+	<key>unavailableTitle</key>
+	<string>Nivel actual está bloqueado</string>
+	<key>unavailableMessage</key>
+	<string>Para jugar a este nivel, desbloquear todos los niveles anteriores</string>
+</dict>
+</plist>

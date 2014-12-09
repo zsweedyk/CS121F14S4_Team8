@@ -14,7 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface LevelViewController () {
-    NSMutableArray* _buttons; // buttons for different levels
+    NSMutableArray *_buttons; // buttons for different levels
     
     int _numLevels;           // total levels the game has
     int _possibleLevels;
@@ -22,12 +22,14 @@
     int rows;
     int cols;
     
-    AVAudioPlayer* _audioPlayerLevelPressed;
-    AVAudioPlayer* _audioPlayerMenuPressed;
-    AVAudioPlayer* _audioPlayerNo;
+    AVAudioPlayer *_audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerMenuPressed;
+    AVAudioPlayer *_audioPlayerNo;
     
     int selectedLevel;        // current selected level
     BOOL test;                // if test is on, all levels are unlocked
+    
+    NSDictionary* levelMenuText;
 }
 
 @end
@@ -39,21 +41,45 @@
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BGplain.png"]]];
     
-    _numLevels = 20;
-    _possibleLevels = 20;
+    _numLevels = 28;
+    _possibleLevels = 28;
 
-    rows = 5;
+    rows = 7;
     cols = 4;
     test = YES;        // turn on test for debugging
     
     if ([self.locks count] == 0)
         [self setUpLocks];
     
+    [self setUpDictionary];
     [self setUpSounds];
     [self setUpButtons];
     
     // Do any additional setup after loading the view.
 }
+
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"LevelMenuTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    levelMenuText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+}
+
 
 - (void)setUpSounds
 {
@@ -72,9 +98,6 @@
 
 - (void)setUpButtons
 {
-    // set up tint color
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    
     // level buttons set up
     _buttons = [[NSMutableArray alloc] init];
     
@@ -82,12 +105,12 @@
     CGFloat frameHeight = self.view.frame.size.height;
     CGFloat buttonWidth = frameWidth / 10;
     CGFloat buttonHeight = buttonWidth;
-    CGFloat buttonHeightSpace = (frameHeight - buttonHeight * 5) / 6;
-    CGFloat buttonWidthSpace = (frameWidth -buttonWidth * 4) / 5;
+    CGFloat buttonHeightSpace = (frameHeight - buttonHeight * rows) / (rows + 1);
+    CGFloat buttonWidthSpace = (frameWidth -buttonWidth * cols) / (cols + 1);
     
     for (int k = 0; k < rows; ++k){
         
-        CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k;
+        CGFloat y = buttonHeightSpace * (k + 1) + buttonHeight* k + 25;
         
         for (int p = 0 ; p < cols; ++p)
         {
@@ -95,18 +118,13 @@
             
             CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
             
-            UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
+            UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
             
             int i = k * cols + p;
             button.tag = i;
             
-            NSString* titleStr;
-            if (self.mainLanguage == 2)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else if (self.mainLanguage == 1)
-                titleStr = [NSString stringWithFormat:@"%d", i];
-            else
-                titleStr = [NSString stringWithFormat:@"%d", i];
+            NSString *titleStr;
+            titleStr = [NSString stringWithFormat:@"%d", i];
             
             [button setTitle:titleStr forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -126,31 +144,19 @@
     }
     
     // back to main menu button set up
-    buttonWidth = frameWidth / 2;
-    buttonHeight = buttonWidth / 6;
-
-    CGFloat xMain = (frameWidth - buttonWidth) / 2;
-    CGFloat yMain = buttonHeight / 2;
+    CGFloat buttonSize = frameWidth /16;
+    CGFloat x = (frameWidth - buttonSize) / 2;
+    CGFloat y = 25;
+    CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
-    CGRect menuButtonFrame = CGRectMake(xMain, yMain, buttonWidth, buttonHeight);
-    
-    UIButton* menuButton = [[UIButton alloc] initWithFrame:menuButtonFrame];
-    
-    [menuButton setBackgroundColor:[UIColor clearColor]];
-    
-    NSString* backtoMenu;
-    if (self.mainLanguage == CHINESE)
-        backtoMenu = @"回到主菜单";
-    else if (self.mainLanguage == SPANISH)
-        backtoMenu = @"Volver al menú principal";
-    else
-        backtoMenu = @"Back to main menu";
-    
-    [menuButton setTitle:backtoMenu forState:UIControlStateNormal];
-    [menuButton setTitleColor:tintColor forState:UIControlStateNormal];
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:buttonFrame];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"backButton.png"] forState:UIControlStateNormal];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"backButtonOn.png"] forState:UIControlStateHighlighted];
     [menuButton addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:menuButton];
+    
+
 }
 
 /*
@@ -200,7 +206,7 @@
  */
 - (void)cellSelected:(id)sender
 {
-    UIButton* button = (UIButton*) sender;
+    UIButton *button = (UIButton*) sender;
     int buttonTag = (int) button.tag;
     
     if (self.locks[buttonTag] == [NSNumber numberWithInt:1])
@@ -231,26 +237,9 @@
  *  Display message when user selects a locked level
  */
 - (void)displayLockedMessage{
-    NSString *title;
-    NSString *message;
     
-    // change the language of help message based on language choice
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            title = @"Current level is locked";
-            message = @"Please unlock all previous levels to play current level.";
-            break;
-        case SPANISH:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case CHINESE:
-            title = @"当前关卡未解锁";
-            message = @"只有解锁之前的所有关卡才可以开始这关";
-            break;
-        default:
-            break;
-    }
+    NSString *title = [levelMenuText objectForKey:@"lockTitle"];
+    NSString *message = [levelMenuText objectForKey:@"lockMessage"];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
@@ -264,26 +253,9 @@
  *  Display message when user selects an unavailable level
  */
 - (void)displayUnavailableMessage{
-    NSString *title;
-    NSString *message;
     
-    // change the language of help message based on language choice
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            title = @"Current level is unavailable";
-            message = @"Please play available levels for now.";
-            break;
-        case SPANISH:
-            title = @"Nivel actual está bloqueado";
-            message = @"Para jugar a este nivel, desbloquear todos los niveles anteriores";
-            break;
-        case CHINESE:
-            title = @"当前关卡正在开发";
-            message = @"先试试别的关卡吧！";
-            break;
-        default:
-            break;
-    }
+    NSString *title = [levelMenuText objectForKey:@"unavailableTitle"];
+    NSString *message = [levelMenuText objectForKey:@"unavailableMessage"];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message

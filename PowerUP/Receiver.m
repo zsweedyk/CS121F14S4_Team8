@@ -10,6 +10,7 @@
 
 @implementation Receiver
 
+<<<<<<< HEAD
 #pragma mark - Initialization
 
 - (id) initWithFrame:(CGRect)frame Direction:(enum DIRECTION)dir andConnections:(NSString*)connections {
@@ -25,6 +26,19 @@
 #pragma mark - Private Methods
 
 - (void) setUpImageNameWithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
+=======
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
+{
+    self       = [super initWithFrame:frame];
+    name       = imageName;
+    self.image = [UIImage imageNamed:name];
+    return self;
+}
+
+- (void) turnOn
+{
+    NSString *onName = [name stringByAppendingString:@"on"];
+>>>>>>> PowerUP
     
     NSString* direction = [self getDirectionString:dir];
     

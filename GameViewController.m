@@ -20,27 +20,32 @@
 @interface GameViewController () <GridDelegate>
 {
     // general variables
+<<<<<<< HEAD
     GameModel* _model;
     Grid* grid;
+=======
+    GameModel *_model;
+    Grid *_grid;
+>>>>>>> PowerUP
     int _numRows;
     int _numCols;
-    UIButton* _backToLevel;
-    UIButton* _test;
+    UIButton *_backToLevel;
+    UIButton *_test;
     
     // message title variables
-    NSString* _titleWin;
-    NSString* _next;
-    NSString* _all;
-    NSString* _okay;
-    NSString* _titleLose;
-    NSString* _restartBomb;
-    NSString* _restart;
+    NSString *_titleWin;
+    NSString *_next;
+    NSString *_all;
+    NSString *_okay;
+    NSString *_titleLose;
+    NSString *_restartBomb;
+    NSString *_restart;
     
     // sound effect variables
-    AVAudioPlayer* _audioPlayerWin;
-    AVAudioPlayer* _audioPlayerNo;
-    AVAudioPlayer* _audioPlayerExplosion;
-    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerWin;
+    AVAudioPlayer *_audioPlayerNo;
+    AVAudioPlayer *_audioPlayerExplosion;
+    AVAudioPlayer *_audioPlayerLevelPressed;
     
     // position variables
     float framePortion;
@@ -48,11 +53,13 @@
     CGFloat yGrid;
     
     // explosion effect variables
-    SKView* _background;
-    ExplosionScene* _explosion;
+    SKView *_background;
+    ExplosionScene *_explosion;
     
     // other variables
-    BOOL masterPowerOn;
+    BOOL _masterPowerOn;
+    
+    NSDictionary *gameText;
 }
 
 @end
@@ -79,6 +86,7 @@ const int POSITION_DECODER = 100;
     // generate a grid
     [_model generateGrid:(int)self.gameLevel];
 
+    [self setUpDictionary];
     [self setUpSound];
     [self initializeGrid];
     [self setUpDisplayWithPower:NO];
@@ -86,27 +94,48 @@ const int POSITION_DECODER = 100;
     [self setLanguage];
 }
 
+<<<<<<< HEAD
 #pragma mark - Private Methods
+=======
+- (void) setUpDictionary {
+    NSString *plistPath;
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameText" ofType:@"plist"];
+            break;
+            
+        case SPANISH:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextSpanish" ofType:@"plist"];
+            break;
+            
+        case CHINESE:
+            plistPath  = [[NSBundle mainBundle] pathForResource:@"GameTextChinese" ofType:@"plist"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    gameText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+}
+>>>>>>> PowerUP
 
 - (void) setUpBackButton
 {
     CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat buttonWidth = frameWidth / 2;
-    CGFloat buttonHeight = buttonWidth / 6;
+    CGFloat buttonSize = frameWidth /16;
+
     
-    CGFloat x = (frameWidth - buttonWidth) / 2;
-    CGFloat y = buttonHeight / 2;
-    CGRect buttonFrame = CGRectMake(x, y, buttonWidth, buttonHeight);
+    CGFloat x = (frameWidth - buttonSize) / 2;
+    CGFloat y = 50;
+    CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
-    [_backToLevel setBackgroundColor:[UIColor clearColor]];
-    [_backToLevel setTitle:@"Back to level menu" forState:UIControlStateNormal];
-    UIColor* tintColor = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:1.0 alpha:1.0];
-    [_backToLevel setTitleColor:tintColor forState:UIControlStateNormal];
+    [_backToLevel setBackgroundImage:[UIImage imageNamed:@"backButton.png"] forState:UIControlStateNormal];
+    [_backToLevel setBackgroundImage:[UIImage imageNamed:@"backButtonOn.png"] forState:UIControlStateHighlighted];
+    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_backToLevel];
-    
-    [_backToLevel addTarget:self action:@selector(backToLevel:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) setUpSound
@@ -131,7 +160,7 @@ const int POSITION_DECODER = 100;
 - (void) initializeGrid
 {
     // reset master power off
-    masterPowerOn = NO;
+    _masterPowerOn = NO;
     
     CGRect frame = self.view.frame;
 
@@ -153,39 +182,15 @@ const int POSITION_DECODER = 100;
  */
 - (void) setLanguage
 {
-    switch (self.mainLanguage) {
-        case ENGLISH:
-            [_backToLevel setTitle:@"Back to Menu" forState:UIControlStateNormal];
-            _titleWin = @"You win";
-            _next = @"Current level is unlocked. Let's try next level!";
-            _all = @"All levels are unlocked. Congratulation!";
-            _okay = @"OK";
-            _titleLose = @"You lose";
-            _restart = @"The circuit is shorted. Let's give it another try!";
-            _restartBomb = @"The bomb is activated. Let's give it another try!";
-            break;
-        case SPANISH:
-            [_backToLevel setTitle:@"Volver al menú" forState:UIControlStateNormal];
-            _titleWin = @"Ganaste!";
-            _next = @"El proximo Nivel está desbloqueado. Vamos a intentar siguiente nivel!";
-            _all = @"Todos los niveles están desbloqueados. ¡Enhorabuena!";
-            _okay = @"OK";
-            _titleLose = @"Pierdes";
-            _restart = @"El circuito está en cortocircuito. Vamos a intentar otra vez!";
-            _restartBomb = @"The circuit is shorted. Let's give it another try! (spanish)";
-            break;
-        case CHINESE:
-            [_backToLevel setTitle:@"回到主菜单" forState:UIControlStateNormal];
-            _titleWin = @"成功过关！";
-            _next = @"下关已解锁！";
-            _all = @"所有关卡已解锁！";
-            _okay = @"进入下一关";
-            _titleLose = @"你没有过关";
-            _restart = @"再试一次吧！";
-            break;
-        default:
-            break;
-    }
+    
+    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
+    _titleWin = [gameText objectForKey:@"WinTitle"];
+    _next = [gameText objectForKey:@"NextMessage"];
+    _all = [gameText objectForKey:@"AllUnlocked"];
+    _okay = [gameText objectForKey:@"OkayTitle"];
+    _titleLose = [gameText objectForKey:@"LoseTitle"];
+    _restart = [gameText objectForKey:@"ShortMessage"];
+    _restartBomb = [gameText objectForKey:@"BombMessage"];
 }
 
 /*
@@ -207,10 +212,16 @@ const int POSITION_DECODER = 100;
     NSAssert(self.gameLevel < self.totalLevel, @"Level out of bound");
 
     ++self.gameLevel;
+    [_explosion deleteExplosion];
     [_model generateGrid:(int)self.gameLevel];
 
+<<<<<<< HEAD
     // reset all game parameters
     masterPowerOn = NO;
+=======
+    // reset master power off
+    _masterPowerOn = NO;
+>>>>>>> PowerUP
     
     [self setUpDisplayWithPower:NO];
 }
@@ -231,6 +242,7 @@ const int POSITION_DECODER = 100;
     }
 }
 
+<<<<<<< HEAD
 - (void) setUpDisplayWithComponentAdjustingAtRow:(int)row andCol:(int)col WithPower:(BOOL)power {
     // reset all grids
     [grid clearGridExceptAtRow:row andCol:col];
@@ -242,6 +254,23 @@ const int POSITION_DECODER = 100;
             if (row != r || col != c) {
                 [self updateDisplayAtRow:r AndCol:c WithPower:power];
             }
+=======
+- (void) componentSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)newOrientation
+{
+    int rowSelected = [position[0] intValue];
+    int colSelected = [position[1] intValue];
+    
+    NSString *selectedCompType = [_model getTypeAtRow:rowSelected andCol:colSelected];
+    
+    [_model componentSelectedAtRow:rowSelected andCol:colSelected withOrientation:newOrientation];
+    
+    if ([selectedCompType isEqual:@"switch"]) {
+        _masterPowerOn = NO;
+        [self powerOff];
+    } else if ([selectedCompType isEqual:@"deflector"]) {
+        if (_masterPowerOn) {
+            [self powerOn];
+>>>>>>> PowerUP
         }
     }
 }
@@ -318,8 +347,9 @@ const int POSITION_DECODER = 100;
  */
 -(void) masterPowerSelected
 {
-    masterPowerOn = !masterPowerOn;
+    _masterPowerOn = !_masterPowerOn;
     
+<<<<<<< HEAD
     [self setUpDisplayWithPower:masterPowerOn];
     
     [_model updateGameStatus];
@@ -348,6 +378,72 @@ const int POSITION_DECODER = 100;
             [_audioPlayerWin play];
             [self displayMessageFor:@"Win"];
         }
+=======
+    if (_masterPowerOn) {
+        [self powerOn];
+    } else {
+        [self powerOff];
+    }
+}
+
+- (void) updateGrid
+{
+    NSArray *lasers = [_model getLasers];
+    NSArray *emitters = [_model getConnectedEmitters];
+    NSArray *deflectors = [_model getConnectedDeflectors];
+    NSArray *receivers = [_model getConnectedReceivers];
+    NSArray *bulbs = [_model getConnectedBulbs];
+    NSArray *bombs = [_model getConnectedBombs];
+    NSArray* batteries  = [_model getBatteries];
+    
+    [_grid resetLasers];
+    [self updateComponents:lasers];
+    [self updateStates:emitters];
+    [self updateStates:deflectors];
+    [self updateStates:receivers];
+    [self updateStates:bulbs];
+    
+    BOOL shorted = [_model isShorted];
+    BOOL connected = [_model isConnected];
+    BOOL bombConnected = [_model isBombConnected];
+    
+    // first check bomb connection, then short circuit, and finally connected circuit
+    if (bombConnected) {
+        // if the bomb is connected, explode that bomb, and display lose message
+        // the message will ask the user to restart the game
+        [_audioPlayerExplosion prepareToPlay];
+        [_audioPlayerExplosion play];
+        
+        [self setUpExplosionScene];
+        [self explodeComponents:bombs];
+        
+        [self displayMessageFor:@"Bomb"];
+        
+    } else if (shorted) {
+        // if the circuit is shorted, explode the battery, and display lose message
+        // the message will ask the user to restart the game
+        [_audioPlayerExplosion prepareToPlay];
+        [_audioPlayerExplosion play];
+        
+        [self setUpExplosionScene];
+        [self explodeComponents:batteries];
+        
+        [_grid shorted];
+        
+        [self displayMessageFor:@"Lose"];
+        
+    } else if (connected){
+        // if the circuit is connected, display win message
+        // the message will ask the user to go to the next level
+        [_audioPlayerWin prepareToPlay];
+        [_audioPlayerWin play];
+        
+        [self displayMessageFor:@"Win"];
+    } else {
+        // if neither shorted or connected, do nothing but play sound that indicates a bad move
+        [_audioPlayerNo prepareToPlay];
+        [_audioPlayerNo play];
+>>>>>>> PowerUP
     }
 }
 
@@ -414,14 +510,14 @@ const int POSITION_DECODER = 100;
 /*
  * Display alert view
  */
-- (void) displayMessageFor:(NSString*)win
+- (void) displayMessageFor:(NSString*)event
 {
     NSString* title;
     NSString* message;
-    if ([win isEqual:@"Win"]) {
+    if ([event isEqual:@"Win"]) {
         title = _titleWin;
         
-        if (self.gameLevel < self.totalLevel) {
+        if (self.gameLevel < self.totalLevel - 1) {
             message = _next;
         } else {
             message = _all;
@@ -429,7 +525,7 @@ const int POSITION_DECODER = 100;
                 _okay = @"退出游戏";
             }
         }
-    } else if ([win isEqual:@"Lose"]){
+    } else if ([event isEqual:@"Lose"]){
         title = _titleLose;
         message = _restart;
         if (self.mainLanguage == 2) {
@@ -443,18 +539,23 @@ const int POSITION_DECODER = 100;
         }
     }
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:_okay otherButtonTitles:nil, nil];
     
-    if ([win isEqual:@"Win"]) {
-        alert.tag = 1;
+    if ([event isEqual:@"Win"]) {
+        alertView.tag = 1;
     } else {
-        alert.tag = 0;
+        alertView.tag = 0;
     }
     
-    [alert show];
-    
+    // If the circuit is short or the bomb is exploded,
+    // delay the alertview pop-up for 2.5s
+    if (![event isEqual:@"Win"])
+        [self performSelector:@selector(alertViewShow:) withObject:alertView afterDelay:2.5];
+    else
+        [alertView show];
 }
 
+<<<<<<< HEAD
 ///*
 // * change component type on grid
 // */
@@ -484,6 +585,37 @@ const int POSITION_DECODER = 100;
 //        }
 //    }
 //}
+=======
+/*
+ * change component type on grid
+ */
+- (void) updateComponents:(NSArray*)components
+{
+    NSArray *rows = components[0];
+    NSArray *cols = components[1];
+    
+    for (int i = 0; i < rows.count; ++i) {
+        NSString *compName = [_model getTypeAtRow:[rows[i] intValue] andCol:[cols[i] intValue]];
+        [_grid setValueAtRow:[rows[i] intValue] col:[cols[i] intValue] to:compName];
+    }
+}
+
+/*
+ * update a component state on grid if they have been pressed
+ */
+- (void) updateStates:(NSArray*)components
+{
+    if (components.count > 0) {
+        NSArray *rows = components[0];
+        NSArray *cols = components[1];
+        NSArray *states = components[2];
+        
+        for (int i = 0; i < rows.count; ++i) {
+            [_grid setStateAtRow:[rows[i] intValue] AndCol:[cols[i] intValue] to:[states[i] boolValue]];
+        }
+    }
+}
+>>>>>>> PowerUP
 
 /*
  * prepare for explosion effect
@@ -502,8 +634,9 @@ const int POSITION_DECODER = 100;
 }
 
 /*
- * explode battery
+ * explode connected components
  */
+<<<<<<< HEAD
 -(void) explodeBattery
 {
     int xPos = [grid getBatteryX] + xGrid;
@@ -528,11 +661,35 @@ const int POSITION_DECODER = 100;
         
         int xPos = [grid getBombXAtRow:row AndCol:col] + xGrid;
         int yPos = [grid getBombYAtRow:row AndCol:col] + yGrid;
+=======
+-(void) explodeComponents:(NSArray*)components
+{
+    int frameY = self.view.frame.size.height;
+    
+    NSArray* compRow = components[0];
+    NSArray* compCol = components[1];
+    CGFloat cellSize = [_grid getCellSize];
+    
+    int xPos, yPos, xPoint, yPoint;
+    
+    for (int i = 0; i < compRow.count; ++i) {
+        xPos = [compCol[i] integerValue] * cellSize + xGrid;
+        yPos = [compRow[i] integerValue] * cellSize + yGrid;
+>>>>>>> PowerUP
         
-        int xPoint = xPos + 25;
-        int yPoint = frameY - yPos - 10;
+        xPoint = xPos + 25;
+        yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
+}
+
+
+/*
+ * show alertView
+ */
+-(void)alertViewShow:(UIAlertView*) alertView
+{
+    [alertView show];
 }
 
 /*

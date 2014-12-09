@@ -13,14 +13,10 @@
 
 @interface SettingsViewController (){
     // sounds
-    AVAudioPlayer* _audioPlayerLanguagePressed;
-    AVAudioPlayer* _audioPlayerAboutPressed;
-    AVAudioPlayer* _audioPlayerLevelPressed;
+    AVAudioPlayer *_audioPlayerLanguagePressed;
     
     // language control and buttons
-    UISegmentedControl* _segmentControl;
-    UIButton* _level;
-    UIButton* _about;
+    UISegmentedControl *_segmentControl;
 }
 
 @end
@@ -41,19 +37,15 @@
 - (void) setUpSounds
 {
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
-    NSURL *languagePathURL = [NSURL fileURLWithPath : languagePath];
+    NSURL *languagePathURL  = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
-    
-    _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
-    
-    _audioPlayerLevelPressed = _audioPlayerAboutPressed;
 }
 
 - (void) setUpSegControl
 {
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat frameHeight = self.view.frame.size.height;
-    CGFloat buttonWidth = frameWidth / 2;
+    CGFloat frameWidth   = self.view.frame.size.width;
+    CGFloat frameHeight  = self.view.frame.size.height;
+    CGFloat buttonWidth  = frameWidth / 2;
     CGFloat buttonHeight = buttonWidth / 3;
     
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
@@ -109,6 +101,7 @@
         MenuViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.locks        = self.locks;
+        destViewController.currentState = self.currentState;
     }
 }
 

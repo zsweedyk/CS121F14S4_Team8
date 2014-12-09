@@ -21,6 +21,7 @@
 - (void) componentSelectedAtRow:(int)row andCol:(int)col WithConnections:(NSString*)newConnections;
 
 - (NSArray*) getLasers;
+<<<<<<< HEAD
 - (NSArray*) getConnectedBombs;
 - (void) updateGameStatus;
 
@@ -29,5 +30,22 @@
 @property BOOL exploded;
 @property int rows;
 @property int cols;
+=======
+- (NSArray*) getConnectedEmitters;
+- (NSArray*) getConnectedDeflectors;
+- (NSArray*) getConnectedReceivers;
+- (NSArray*) getBatteries;
+
+- (BOOL) isConnected;
+- (BOOL) isShorted;
+- (BOOL) isBombConnected;
+- (void) powerOn;
+- (void) powerOff;
+
+- (int) getNumRows;
+- (int) getNumCols;
+
+@property (strong,nonatomic) LaserModel *laserModel;
+>>>>>>> PowerUP
 
 @end

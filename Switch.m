@@ -9,12 +9,20 @@
 #import "Switch.h"
 
 @implementation Switch {
+<<<<<<< HEAD
 
     int row;
     int col;
     UIImageView* tempImage;
     NSString *tempConnections;
     
+=======
+    UIImageView *_switch;
+    NSString *_orientation;
+    NSString *_imageOrientation;
+    int _row;
+    int _col;
+>>>>>>> PowerUP
 }
 
 #pragma mark - Intialization
@@ -58,7 +66,15 @@
     [self resetTemp];
 }
 
+<<<<<<< HEAD
 - (void) tempAddEnteredDirection {
+=======
+- (void) addDirection: (NSString*) dir
+{
+    _orientation = [self addOrientation:dir to:_orientation];
+    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
+>>>>>>> PowerUP
     
     tempConnections = [self addDirection:self.touchEnteredDir toOrientation:tempConnections];
     [self displayTempImage];
@@ -84,6 +100,7 @@
 
 - (void) resetDirection
 {
+<<<<<<< HEAD
     [self setUpImageNameWithConnection:@"XXXX"];
 
     [self switchChanged];
@@ -136,6 +153,32 @@
             break;
         default:
             break;
+=======
+    _orientation = @"XXXX";
+    _imageOrientation = @"XXXX";
+    NSArray *position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
+    [self.delegate performSelector:@selector(switchSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
+    _switch.image = [UIImage imageNamed:[NSString stringWithFormat: @"switch%@on", _imageOrientation]];
+}
+
+- (NSString*) addOrientation: (NSString*) dir to: (NSString*) currOrientation
+{
+    NSString *newOrientation;
+    NSString *start;
+    NSString *end;
+    if ([dir isEqual:@"L"]) {
+        start = @"";
+        end = [currOrientation substringFromIndex:1];
+    } else if ([dir isEqual:@"R"]) {
+        start = [currOrientation substringToIndex:1];
+        end = [currOrientation substringFromIndex:2];
+    } else if ([dir isEqual:@"T"]) {
+        start = [currOrientation substringToIndex:2];
+        end = [currOrientation substringFromIndex:3];
+    } else if ([dir isEqual:@"B"]) {
+        start = [currOrientation substringToIndex:3];
+        end = @"";
+>>>>>>> PowerUP
     }
     
     return [NSString stringWithFormat:@"%@%@%@", start, mid, end];

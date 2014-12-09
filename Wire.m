@@ -20,9 +20,14 @@
 -(id) initWithFrame:(CGRect)frame andConnections:(NSString*)connections
 {
     self = [super initWithFrame:frame];
+<<<<<<< HEAD
     self.imageName = [NSString stringWithFormat:@"wire%@", connections];
     
     [self displayImage];
+=======
+    NSString *newName = [NSString stringWithFormat:@"%@%@", imageName, @"on"];
+    self.image = [UIImage imageNamed:newName];
+>>>>>>> PowerUP
     
     return self;
 }
