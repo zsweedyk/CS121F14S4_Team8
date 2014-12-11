@@ -19,7 +19,7 @@
 @end
 
 @implementation GameModelTests
-
+/**
 - (void)setUp {
     [super setUp];
     _model = [[GameModel alloc] initWithTotalLevels:6];
@@ -319,7 +319,7 @@
     [_model powerOff];
 }
 
-
+**/
 
 
 @end
