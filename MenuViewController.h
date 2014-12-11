@@ -11,6 +11,8 @@
 
 @interface MenuViewController : UIViewController
 
+extern int POSITION_DECODER = 100;
+
 @property (nonatomic, assign) enum LANGUAGES mainLanguage;
 @property (nonatomic, assign) enum GAME_STATES currentState;
 @property (nonatomic, strong) NSMutableArray *locks;

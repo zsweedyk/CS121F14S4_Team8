@@ -207,7 +207,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hmV-ea-zGI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cBM-6D-Jxi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -314,16 +314,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rza-1s-ZaB"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="MkF-r8-bsk"/>
-        <segue reference="RRq-Ep-Gb3"/>
-        <segue reference="rLW-Kz-L9i"/>
-        <segue reference="PvW-I8-hBT"/>
-        <segue reference="ez8-GL-iAw"/>
         <segue reference="RwZ-KJ-u2L"/>
-        <segue reference="PvW-I8-hBT"/>
-        <segue reference="rLW-Kz-L9i"/>
+        <segue reference="RRq-Ep-Gb3"/>
         <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>

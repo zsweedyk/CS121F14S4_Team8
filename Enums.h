@@ -7,6 +7,7 @@
 //
 
 #ifndef PowerUP_Enums_h
+
 #define PowerUP_Enums_h
 
 enum GAME_STATES {

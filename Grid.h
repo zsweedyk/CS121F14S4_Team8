@@ -24,6 +24,8 @@
 
 @interface Grid : UIView <SwitchDelegate,BatteryDelegate>
 
+extern const int POSITION_DECODER = 100;
+
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;

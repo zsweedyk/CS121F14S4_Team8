@@ -30,12 +30,12 @@
 		5BEF17381A0EC1E500354C84 /* Deflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF17371A0EC1E500354C84 /* Deflector.m */; };
 		5BEF173B1A0EC79600354C84 /* Receiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF173A1A0EC79600354C84 /* Receiver.m */; };
 		6512169E1A19AECD0014436C /* Components.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6512169D1A19AECD0014436C /* Components.xcassets */; };
-		741A64D51A35AA4C004168AD /* LaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A64D41A35AA4C004168AD /* LaserModel.m */; };
 		65A052331A36D6C5007690FC /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A052321A36D6C5007690FC /* InstructionsViewController.m */; };
 		65A052371A36DC2C007690FC /* InstructionsText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A052341A36DC2C007690FC /* InstructionsText.plist */; };
 		65A0523F1A36F420007690FC /* InstructionsTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A0523E1A36F420007690FC /* InstructionsTextChinese.plist */; };
 		65A052411A36F431007690FC /* InstructionsTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A052401A36F431007690FC /* InstructionsTextSpanish.plist */; };
 		65AEB2241A3537CD00FB2E2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AEB2231A3537CD00FB2E2B /* Images.xcassets */; };
+		741A64D51A35AA4C004168AD /* LaserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A64D41A35AA4C004168AD /* LaserModel.m */; };
 		7439AA261A1E1D56004AD639 /* ComponentModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7439AA251A1E1D56004AD639 /* ComponentModelTests.m */; };
 		74695C6B1A1B3C2800289E08 /* level-4 in Resources */ = {isa = PBXBuildFile; fileRef = 74695C6A1A1B3C2800289E08 /* level-4 */; };
 		7479E1FC1A2D8D4700CA8F20 /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */; };
@@ -49,24 +49,6 @@
 		74996BDA1A1B40E500D48CAA /* level26 in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD21A1B40E500D48CAA /* level26 */; };
 		74996BDB1A1B40E500D48CAA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 74996BD31A1B40E500D48CAA /* spark.png */; };
 		74CB700C1A35305100711774 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CB700B1A35305100711774 /* Component.m */; };
-		74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712871A33BEBB00BF4A51 /* WireModel.m */; };
-		74F7128B1A33C56A00BF4A51 /* BatteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128A1A33C56A00BF4A51 /* BatteryModel.m */; };
-		74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128D1A33C98800BF4A51 /* BulbModel.m */; };
-		74F712911A33CA1000BF4A51 /* SwitchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712901A33CA1000BF4A51 /* SwitchModel.m */; };
-		74F712941A33CA7800BF4A51 /* EmitterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712931A33CA7800BF4A51 /* EmitterModel.m */; };
-		74F712971A33CB7600BF4A51 /* ReceiverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712961A33CB7600BF4A51 /* ReceiverModel.m */; };
-		74F7129A1A33CD9500BF4A51 /* DeflectorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712991A33CD9500BF4A51 /* DeflectorModel.m */; };
-		74F7129D1A33CE1300BF4A51 /* BombModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7129C1A33CE1300BF4A51 /* BombModel.m */; };
-		931666BF1A319A2500C6D700 /* level2 in Resources */ = {isa = PBXBuildFile; fileRef = 931666BE1A319A2500C6D700 /* level2 */; };
-		931666C11A319D1800C6D700 /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C01A319D1800C6D700 /* level3 */; };
-		931666C31A319F3E00C6D700 /* level5 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C21A319F3E00C6D700 /* level5 */; };
-		931666C51A31A09A00C6D700 /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C41A31A09A00C6D700 /* level7 */; };
-		931666C71A31A1C000C6D700 /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C61A31A1C000C6D700 /* level8 */; };
-		931666C91A31AA3B00C6D700 /* level11 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C81A31AA3B00C6D700 /* level11 */; };
-		931666CB1A31AC4800C6D700 /* level13 in Resources */ = {isa = PBXBuildFile; fileRef = 931666CA1A31AC4800C6D700 /* level13 */; };
-		931666E11A31BA6900C6D700 /* level16 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E01A31BA6900C6D700 /* level16 */; };
-		931666E31A31BA7900C6D700 /* level17 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E21A31BA7900C6D700 /* level17 */; };
-		931666E51A31BA8200C6D700 /* level19 in Resources */ = {isa = PBXBuildFile; fileRef = 931666E41A31BA8200C6D700 /* level19 */; };
 		74F2A9971A33EFC40084640F /* MenuText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9961A33EFC40084640F /* MenuText.plist */; };
 		74F2A9991A33F3D30084640F /* MenuTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */; };
 		74F2A99B1A33F4D00084640F /* MenuTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */; };
@@ -76,6 +58,14 @@
 		74F2A9A31A33FEC30084640F /* GameText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A21A33FEC30084640F /* GameText.plist */; };
 		74F2A9A51A3401DC0084640F /* GameTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */; };
 		74F2A9A71A3402CC0084640F /* GameTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74F2A9A61A3402CC0084640F /* GameTextChinese.plist */; };
+		74F712881A33BEBB00BF4A51 /* WireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712871A33BEBB00BF4A51 /* WireModel.m */; };
+		74F7128B1A33C56A00BF4A51 /* BatteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128A1A33C56A00BF4A51 /* BatteryModel.m */; };
+		74F7128E1A33C98800BF4A51 /* BulbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7128D1A33C98800BF4A51 /* BulbModel.m */; };
+		74F712911A33CA1000BF4A51 /* SwitchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712901A33CA1000BF4A51 /* SwitchModel.m */; };
+		74F712941A33CA7800BF4A51 /* EmitterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712931A33CA7800BF4A51 /* EmitterModel.m */; };
+		74F712971A33CB7600BF4A51 /* ReceiverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712961A33CB7600BF4A51 /* ReceiverModel.m */; };
+		74F7129A1A33CD9500BF4A51 /* DeflectorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F712991A33CD9500BF4A51 /* DeflectorModel.m */; };
+		74F7129D1A33CE1300BF4A51 /* BombModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7129C1A33CE1300BF4A51 /* BombModel.m */; };
 		931666BF1A319A2500C6D700 /* level3 in Resources */ = {isa = PBXBuildFile; fileRef = 931666BE1A319A2500C6D700 /* level3 */; };
 		931666C11A319D1800C6D700 /* level7 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C01A319D1800C6D700 /* level7 */; };
 		931666C31A319F3E00C6D700 /* level8 in Resources */ = {isa = PBXBuildFile; fileRef = 931666C21A319F3E00C6D700 /* level8 */; };
@@ -157,14 +147,14 @@
 		5BEF17391A0EC79600354C84 /* Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receiver.h; sourceTree = "<group>"; };
 		5BEF173A1A0EC79600354C84 /* Receiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Receiver.m; sourceTree = "<group>"; };
 		6512169D1A19AECD0014436C /* Components.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Components.xcassets; path = ../Components.xcassets; sourceTree = "<group>"; };
-		741A64D31A35AA4C004168AD /* LaserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserModel.h; sourceTree = "<group>"; };
-		741A64D41A35AA4C004168AD /* LaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserModel.m; sourceTree = "<group>"; };
 		65A052311A36D6C5007690FC /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
 		65A052321A36D6C5007690FC /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
 		65A052341A36DC2C007690FC /* InstructionsText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstructionsText.plist; sourceTree = "<group>"; };
 		65A0523E1A36F420007690FC /* InstructionsTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstructionsTextChinese.plist; sourceTree = "<group>"; };
 		65A052401A36F431007690FC /* InstructionsTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstructionsTextSpanish.plist; sourceTree = "<group>"; };
 		65AEB2231A3537CD00FB2E2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		741A64D31A35AA4C004168AD /* LaserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserModel.h; sourceTree = "<group>"; };
+		741A64D41A35AA4C004168AD /* LaserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserModel.m; sourceTree = "<group>"; };
 		7439AA251A1E1D56004AD639 /* ComponentModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModelTests.m; sourceTree = "<group>"; };
 		74695C6A1A1B3C2800289E08 /* level-4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level-4"; sourceTree = "<group>"; };
 		7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewController.h; sourceTree = "<group>"; };
@@ -180,9 +170,17 @@
 		74996BD11A1B40E500D48CAA /* level23 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level23; path = ../level23; sourceTree = "<group>"; };
 		74996BD21A1B40E500D48CAA /* level26 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level26; path = ../level26; sourceTree = "<group>"; };
 		74996BD31A1B40E500D48CAA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
-
 		74CB700A1A35305100711774 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		74CB700B1A35305100711774 /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
+		74F2A9961A33EFC40084640F /* MenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuText.plist; sourceTree = "<group>"; };
+		74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextChinese.plist; sourceTree = "<group>"; };
+		74F2A99C1A33F5EE0084640F /* LevelMenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuText.plist; sourceTree = "<group>"; };
+		74F2A99E1A33F7FD0084640F /* LevelMenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A9A01A33F8FC0084640F /* LevelMenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextChinese.plist; sourceTree = "<group>"; };
+		74F2A9A21A33FEC30084640F /* GameText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameText.plist; sourceTree = "<group>"; };
+		74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextSpanish.plist; sourceTree = "<group>"; };
+		74F2A9A61A3402CC0084640F /* GameTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextChinese.plist; sourceTree = "<group>"; };
 		74F712861A33BEBB00BF4A51 /* WireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WireModel.h; sourceTree = "<group>"; };
 		74F712871A33BEBB00BF4A51 /* WireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WireModel.m; sourceTree = "<group>"; };
 		74F712891A33C56A00BF4A51 /* BatteryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryModel.h; sourceTree = "<group>"; };
@@ -199,26 +197,6 @@
 		74F712991A33CD9500BF4A51 /* DeflectorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeflectorModel.m; sourceTree = "<group>"; };
 		74F7129B1A33CE1300BF4A51 /* BombModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombModel.h; sourceTree = "<group>"; };
 		74F7129C1A33CE1300BF4A51 /* BombModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombModel.m; sourceTree = "<group>"; };
-		931666BE1A319A2500C6D700 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2; sourceTree = "<group>"; };
-		931666C01A319D1800C6D700 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
-		931666C21A319F3E00C6D700 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level5; sourceTree = SOURCE_ROOT; };
-		931666C41A31A09A00C6D700 /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level7; sourceTree = "<group>"; };
-		931666C61A31A1C000C6D700 /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level8; sourceTree = "<group>"; };
-		931666C81A31AA3B00C6D700 /* level11 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level11; sourceTree = "<group>"; };
-		931666CA1A31AC4800C6D700 /* level13 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level13; sourceTree = "<group>"; };
-		931666E01A31BA6900C6D700 /* level16 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level16; sourceTree = SOURCE_ROOT; };
-		931666E21A31BA7900C6D700 /* level17 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level17; sourceTree = SOURCE_ROOT; };
-		931666E41A31BA8200C6D700 /* level19 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level19; sourceTree = SOURCE_ROOT; };
-
-		74F2A9961A33EFC40084640F /* MenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuText.plist; sourceTree = "<group>"; };
-		74F2A9981A33F3D30084640F /* MenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextSpanish.plist; sourceTree = "<group>"; };
-		74F2A99A1A33F4D00084640F /* MenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTextChinese.plist; sourceTree = "<group>"; };
-		74F2A99C1A33F5EE0084640F /* LevelMenuText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuText.plist; sourceTree = "<group>"; };
-		74F2A99E1A33F7FD0084640F /* LevelMenuTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextSpanish.plist; sourceTree = "<group>"; };
-		74F2A9A01A33F8FC0084640F /* LevelMenuTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelMenuTextChinese.plist; sourceTree = "<group>"; };
-		74F2A9A21A33FEC30084640F /* GameText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameText.plist; sourceTree = "<group>"; };
-		74F2A9A41A3401DC0084640F /* GameTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextSpanish.plist; sourceTree = "<group>"; };
-		74F2A9A61A3402CC0084640F /* GameTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameTextChinese.plist; sourceTree = "<group>"; };
 		931666BE1A319A2500C6D700 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level3; sourceTree = "<group>"; };
 		931666C01A319D1800C6D700 /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level7; sourceTree = "<group>"; };
 		931666C21A319F3E00C6D700 /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level8; sourceTree = SOURCE_ROOT; };
@@ -229,7 +207,6 @@
 		931666E01A31BA6900C6D700 /* level24 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level24; sourceTree = SOURCE_ROOT; };
 		931666E21A31BA7900C6D700 /* level25 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level25; sourceTree = SOURCE_ROOT; };
 		931666E41A31BA8200C6D700 /* level27 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level27; sourceTree = SOURCE_ROOT; };
-
 		931666E61A321CBE00C6D700 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		931666E71A321CBE00C6D700 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		931666E91A32202100C6D700 /* StoryTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextChinese.plist; sourceTree = "<group>"; };
@@ -314,18 +291,8 @@
 		74CB70071A352FCA00711774 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				931666E61A321CBE00C6D700 /* SettingsViewController.h */,
-				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
 				5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */,
 				5B8EF3501A1AE30800DF2B7D /* DirectionController.m */,
-				7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */,
-				7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */,
-				A86E10C51A005B1E0029011B /* MenuViewController.h */,
-				A86E10C61A005B1E0029011B /* MenuViewController.m */,
-				A86E10C31A005B1E0029011B /* LevelViewController.h */,
-				A86E10C41A005B1E0029011B /* LevelViewController.m */,
-				A86E10BF1A005B1E0029011B /* GameViewController.h */,
-				A86E10C01A005B1E0029011B /* GameViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -351,12 +318,8 @@
 				74F712991A33CD9500BF4A51 /* DeflectorModel.m */,
 				74F7129B1A33CE1300BF4A51 /* BombModel.h */,
 				74F7129C1A33CE1300BF4A51 /* BombModel.m */,
-				A86E10BD1A005B1E0029011B /* GameModel.h */,
-				A86E10BE1A005B1E0029011B /* GameModel.m */,
 				741A64D31A35AA4C004168AD /* LaserModel.h */,
 				741A64D41A35AA4C004168AD /* LaserModel.m */,
-				5B4BC8B61A210AD8004FD8AD /* GameLaserModel.h */,
-				5B4BC8B71A210AD8004FD8AD /* GameLaserModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -374,18 +337,8 @@
 				5BEF17341A0EC1C800354C84 /* Emitter.m */,
 				5BEF17361A0EC1E500354C84 /* Deflector.h */,
 				5BEF17371A0EC1E500354C84 /* Deflector.m */,
-				A86E10C11A005B1E0029011B /* Grid.h */,
-				A86E10C21A005B1E0029011B /* Grid.m */,
 				74CB700A1A35305100711774 /* Component.h */,
 				74CB700B1A35305100711774 /* Component.m */,
-				A86E10B91A005B1E0029011B /* Battery.h */,
-				A86E10BA1A005B1E0029011B /* Battery.m */,
-				A86E10BB1A005B1E0029011B /* Bulb.h */,
-				A86E10BC1A005B1E0029011B /* Bulb.m */,
-				A86E10C71A005B1E0029011B /* Switch.h */,
-				A86E10C81A005B1E0029011B /* Switch.m */,
-				A86E10C91A005B1E0029011B /* Wire.h */,
-				A86E10CA1A005B1E0029011B /* Wire.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -418,11 +371,9 @@
 				7479E1FE1A2D8FDE00CA8F20 /* Enums.h */,
 				A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */,
 				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
-
 				74CB70071A352FCA00711774 /* Controllers */,
 				74CB70081A352FDF00711774 /* Models */,
 				74CB70091A352FEF00711774 /* Views */,
-
 				7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */,
 				7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */,
 				A86E10C51A005B1E0029011B /* MenuViewController.h */,
@@ -437,8 +388,8 @@
 				65A052321A36D6C5007690FC /* InstructionsViewController.m */,
 				A86E10BD1A005B1E0029011B /* GameModel.h */,
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
-				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
-				5B4BC8B71A210AD8004FD8AD /* LaserModel.m */,
+				5B4BC8B61A210AD8004FD8AD /* GameLaserModel.h */,
+				5B4BC8B71A210AD8004FD8AD /* GameLaserModel.m */,
 				A86E10C11A005B1E0029011B /* Grid.h */,
 				A86E10C21A005B1E0029011B /* Grid.m */,
 				A86E10B91A005B1E0029011B /* Battery.h */,
@@ -449,7 +400,6 @@
 				A86E10C81A005B1E0029011B /* Switch.m */,
 				A86E10C91A005B1E0029011B /* Wire.h */,
 				A86E10CA1A005B1E0029011B /* Wire.m */,
-
 				A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */,
 				A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */,
 				A84F7F0A19FDC1C6001AEC0D /* ViewController.h */,
@@ -897,6 +847,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -909,6 +860,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

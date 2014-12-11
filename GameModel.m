@@ -556,11 +556,17 @@ const int numCols = 15;
 - (void) checkComplete {
     for (BulbModel *bulb in bulbs) {
         if (![bulb state]) {
+            
             self.complete = NO;
+            [batteryPos setState:NO];
+            [batteryPos setState:NO];
             return;
         }
     }
+    
     self.complete = YES;
+    [batteryNeg setState:YES];
+    [batteryPos setState:YES];
 }
 
 

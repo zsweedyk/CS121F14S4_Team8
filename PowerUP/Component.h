@@ -17,7 +17,6 @@
 
 - (id) initWithFrame:(CGRect)frame;
 - (void) turnOn;
-- (void) turnOff;
 
 - (void) displayImage;
 - (NSString*) getDirectionString:(enum DIRECTION)dir;

@@ -50,6 +50,8 @@
 
 @implementation Grid
 
+const int EMPTYCELL = 0;
+
 #pragma mark - Initialization
 
 
@@ -61,6 +63,10 @@
     _numRows = rows;
     _numCols = cols;
 
+    CGFloat cellHeight = self.frame.size.height/_numRows;
+    CGFloat cellWidth = self.frame.size.width/_numCols;
+    cellSize = MIN(cellHeight, cellWidth);
+    
     [self setUpGrid];
     
     // sound set up
@@ -74,109 +80,13 @@
 # pragma mark - Public Methods
 
 - (void) setUpGrid {
-    
-    [self initializeAllArrays];
-    
-    [self populateGrid];
-}
-
-- (void) clearGrid {
-    
-    for (NSArray *row in cells) {
-        for(Component *component in row) {
-            [component removeFromSuperview];
-        }
-    }
-}
-
-- (void) clearGridExceptAtRow:(int)row andCol:(int)col {
-    for (int r = 0; r < _numRows; ++r) {
-        for(int c= 0; c < _numCols; ++c) {
-            if (row != r || col != c) {
-                [cells[r][c] removeFromSuperview];
-            }
-        }
-    }
-}
-
-- (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
-    UIView* prevComp = [[cells objectAtIndex:row] objectAtIndex:col];
-    UIView* newComponent;
-    
-    switch (componentType) {
-        case WIRE:
-            newComponent = [[Wire alloc] initWithFrame:prevComp.frame andConnections:connections];
-            break;
-            
-        case BATTERY_NEG:
-            newComponent = [[Battery alloc] initWithFrame:prevComp.frame AtRow:row AndCol:col AndPolarity:NO WithConnections:connections];
-            ((Battery*)newComponent).delegate = self;
-            battery = (Battery*)newComponent;
-            break;
-            
-        case BATTERY_POS:
-            newComponent = [[Battery alloc] initWithFrame:prevComp.frame AtRow:row AndCol:col AndPolarity:YES WithConnections:connections];
-            ((Battery*)newComponent).delegate = self;
-            break;
-            
-        case BULB:
-            newComponent = [[Bulb alloc] initWithFrame:prevComp.frame];
-            [bulbs addObject:newComponent];
-            break;
-            
-        case SWITCH:
-            newComponent = [[Switch alloc] initWithFrame:prevComp.frame AtRow:row AndCol:col WithConnections:connections];
-            ((Switch*)newComponent).delegate = self;
-            [switches addObject:newComponent];
-            break;
-            
-        case EMITTER:
-            newComponent = [[Emitter alloc] initWithFrame:prevComp.frame Direction:dir andConnections:connections];
-            [_emitters addObject:newComponent];
-            break;
-            
-        case DEFLECTOR:
-            newComponent = [[Deflector alloc] initWithFrame:prevComp.frame AtRow:row AndCol:col WithConnections:connections];
-            ((Deflector *)newComponent).delegate = self;
-            [_deflectors addObject:newComponent];
-            break;
-            
-        case RECEIVER:
-            newComponent = [[Receiver alloc] initWithFrame:prevComp.frame Direction:dir andConnections:connections];
-            [_receivers addObject:newComponent];
-            break;
-            
-        case BOMB:
-            newComponent = [[Bomb alloc] initWithFrame:prevComp.frame WithConnections:connections];
-            [bombs addObject:newComponent];
-            break;
-            
-        case LASER:
-            newComponent = [[Laser alloc] initWithFrame:prevComp.frame WithConnections:connections];
-            [_lasers addObject:newComponent];
-            break;
-            
-        default:
-            return;
-    }
-    
-    [prevComp removeFromSuperview];
-    [self addSubview:newComponent];
-    [[cells objectAtIndex:row] setObject:newComponent atIndex:col];
-}
-
-- (void) turnOnAtRow:(int)row AndCol:(int)col {
-    Component* component = cells[row][col];
-    [component turnOn];
-}
-
-# pragma mark - Private Methods
-
-- (void) initializeAllArrays {
     //initialize _cells 2-D array
     cells = [[NSMutableArray alloc] init];
     for (int i = 0; i < _numRows; ++i) {
         NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        for (int j = 0; j < _numCols; ++j) {
+            [rowCells addObject:[NSNumber numberWithInt:EMPTYCELL]];
+        }
         [cells addObject:rowCells];
     }
     
@@ -191,30 +101,103 @@
     _receivers = [[NSMutableArray alloc] init];
 }
 
-- (void) populateGrid {
+- (void) clearGrid {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
 
-    // calculate dimension of the cell that makes it fit in the frame
-    CGFloat cellHeight = self.frame.size.height/_numRows;
-    CGFloat cellWidth = self.frame.size.width/_numCols;
-    cellSize = MIN(cellHeight, cellWidth);
-    
-    // Set each cell on the grid
-    for (int row = 0; row < _numRows; ++row){
-        for (int col = 0; col < _numCols; ++col){
+- (void) clearGridExceptAtRow:(int)row andCol:(int)col {
+    for (int r = 0; r < _numRows; ++r) {
+        for(int c= 0; c < _numCols; ++c) {
             
-            // location of cell
-            CGFloat xLabel = col * cellSize;
-            CGFloat yLabel = row * cellSize;
-            
-            // initially set all cells to a clear label. Initialized to proper component later
-            CGRect labelFrame = CGRectMake(xLabel, yLabel, cellSize, cellSize);
-            UILabel* blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            
-            [self addSubview:blankTile];
-            [cells[row] addObject:blankTile];
+            if ((row != r || col != c) && cells[r][c] != [NSNumber numberWithInt:EMPTYCELL]) {
+                
+                [cells[r][c] removeFromSuperview];
+                cells[r][c] = [NSNumber numberWithInt:EMPTYCELL];
+            }
         }
     }
 }
+
+- (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
+    UIView* newComponent;
+    
+    CGFloat xPos = col * cellSize;
+    CGFloat yPos = row * cellSize;
+    CGRect labelFrame = CGRectMake(xPos, yPos, cellSize, cellSize);
+    
+    switch (componentType) {
+        case WIRE:
+            newComponent = [[Wire alloc] initWithFrame:labelFrame andConnections:connections];
+            break;
+            
+        case BATTERY_NEG:
+            newComponent = [[Battery alloc] initWithFrame:labelFrame AtRow:row AndCol:col AndPolarity:NO WithConnections:connections];
+            ((Battery*)newComponent).delegate = self;
+            battery = (Battery*)newComponent;
+            break;
+            
+        case BATTERY_POS:
+            newComponent = [[Battery alloc] initWithFrame:labelFrame AtRow:row AndCol:col AndPolarity:YES WithConnections:connections];
+            ((Battery*)newComponent).delegate = self;
+            break;
+            
+        case BULB:
+            newComponent = [[Bulb alloc] initWithFrame:labelFrame];
+            [bulbs addObject:newComponent];
+            break;
+            
+        case SWITCH:
+            newComponent = [[Switch alloc] initWithFrame:labelFrame AtRow:row AndCol:col WithConnections:connections];
+            ((Switch*)newComponent).delegate = self;
+            [switches addObject:newComponent];
+            break;
+            
+        case EMITTER:
+            newComponent = [[Emitter alloc] initWithFrame:labelFrame Direction:dir andConnections:connections];
+            [_emitters addObject:newComponent];
+            break;
+            
+        case DEFLECTOR:
+            newComponent = [[Deflector alloc] initWithFrame:labelFrame AtRow:row AndCol:col WithConnections:connections];
+            ((Deflector *)newComponent).delegate = self;
+            [_deflectors addObject:newComponent];
+            break;
+            
+        case RECEIVER:
+            newComponent = [[Receiver alloc] initWithFrame:labelFrame Direction:dir andConnections:connections];
+            [_receivers addObject:newComponent];
+            break;
+            
+        case BOMB:
+            newComponent = [[Bomb alloc] initWithFrame:labelFrame WithConnections:connections];
+            [bombs addObject:newComponent];
+            break;
+            
+        case LASER:
+            newComponent = [[Laser alloc] initWithFrame:labelFrame WithConnections:connections];
+            [_lasers addObject:newComponent];
+            break;
+            
+        default:
+            return;
+    }
+    
+    if (cells[row][col] != [NSNumber numberWithInt:EMPTYCELL]) {
+        [cells[row][col] removeFromSuperview];
+    }
+
+    [self addSubview:newComponent];
+    [[cells objectAtIndex:row] setObject:newComponent atIndex:col];
+}
+
+- (void) turnOnAtRow:(int)row AndCol:(int)col {
+    Component* component = cells[row][col];
+    [component turnOn];
+}
+
+# pragma mark - Private Methods
 
 - (void) switchChangedAtPosition:(NSNumber*)position WithConnections:(NSString*)connections {
     [_audioPlayerPressed prepareToPlay];
@@ -234,7 +217,6 @@
     [_audioPlayerPressed prepareToPlay];
     [_audioPlayerPressed play];
     
-    NSLog(@"Parameters in grid. Position:%@, and connection:%@",position, connections);
     [self.delegate performSelector:@selector(componentAdjustedAtPosition:WithConnections:) withObject:position withObject:connections];
 }
 
@@ -255,12 +237,12 @@
 - (int) getBatteryX
 {
     int pos = [battery getPosition];
-    return (cellSize * (pos%100));
+    return (cellSize * (pos%POSITION_DECODER));
 }
 
 - (int) getBatteryY {
     int pos = [battery getPosition];
-    return (cellSize * (pos/100));
+    return (cellSize * (pos/POSITION_DECODER));
 }
 
 - (int) getBombXAtRow:(int)row AndCol:(int)col
