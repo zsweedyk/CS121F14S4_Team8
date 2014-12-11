@@ -507,15 +507,6 @@
         destViewController.gameLevel = self.gameLevel;
         destViewController.totalLevel = self.totalLevel;
     }
-    
-    if ([segue.identifier isEqualToString:@"GameToCredit"]) {
-        CreditViewController *destViewController = segue.destinationViewController;
-        destViewController.mainLanguage = self.mainLanguage;
-        destViewController.currentState = self.currentState;
-        destViewController.locks = self.locks;
-        destViewController.gameLevel = self.gameLevel;
-        destViewController.totalLevel = self.totalLevel;
-    }
 }
 
 

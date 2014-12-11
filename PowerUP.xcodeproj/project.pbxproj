@@ -301,6 +301,8 @@
 				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
 				65A052311A36D6C5007690FC /* InstructionsViewController.h */,
 				65A052321A36D6C5007690FC /* InstructionsViewController.m */,
+				A8337A061A37BCCF0083E052 /* CreditViewController.h */,
+				A8337A071A37BCCF0083E052 /* CreditViewController.m */,
 				A86E10BD1A005B1E0029011B /* GameModel.h */,
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
 				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
@@ -337,8 +339,6 @@
 				74996BCC1A1B40E500D48CAA /* ExplosionScene.h */,
 				74996BCD1A1B40E500D48CAA /* ExplosionScene.m */,
 				74996BD31A1B40E500D48CAA /* spark.png */,
-				A8337A061A37BCCF0083E052 /* CreditViewController.h */,
-				A8337A071A37BCCF0083E052 /* CreditViewController.m */,
 			);
 			path = PowerUP;
 			sourceTree = "<group>";
