@@ -46,7 +46,7 @@
 
     rows = 7;
     cols = 4;
-    test = YES;        // turn on test for debugging
+    test = NO;        // turn on test for debugging
     
     if ([self.locks count] == 0)
         [self setUpLocks];
