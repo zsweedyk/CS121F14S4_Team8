@@ -20,7 +20,6 @@
 @interface GameViewController () <GridDelegate>
 {
     // general variables
-
     GameModel* _model;
     Grid* grid;
     int _numRows;
@@ -44,7 +43,6 @@
     AVAudioPlayer *_audioPlayerLevelPressed;
     
     // position variables
-    float framePortion;
     CGFloat xGrid;
     CGFloat yGrid;
     
@@ -62,7 +60,10 @@
 
 @implementation GameViewController
 
-const int POSITION_DECODER = 100;
+const float FRAME_PORTION = 0.9;
+const float BORDER_WIDTH = 0.05;
+const float BORDER_HEIGHT = 0.2;
+const float BACK_BUTTON_PORTION = 0.0625;
 
 #pragma mark - Initialization
 
@@ -90,8 +91,6 @@ const int POSITION_DECODER = 100;
     [self setLanguage];
 }
 
-#pragma mark - Private Methods
-
 - (void) setUpDictionary {
     NSString *plistPath;
     switch (self.mainLanguage) {
@@ -114,14 +113,12 @@ const int POSITION_DECODER = 100;
     gameText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
-- (void) setUpBackButton
-{
-    CGFloat frameWidth = self.view.frame.size.width;
-    CGFloat buttonSize = frameWidth /16;
+- (void) setUpBackButton {
 
+    CGFloat buttonSize = self.view.frame.size.width * BACK_BUTTON_PORTION;
     
-    CGFloat x = (frameWidth - buttonSize) / 2;
-    CGFloat y = 50;
+    CGFloat x = (self.view.frame.size.width - buttonSize) * 0.5;
+    CGFloat y = self.view.frame.size.width * BORDER_WIDTH;
     CGRect buttonFrame = CGRectMake(x, y, buttonSize, buttonSize);
     
     _backToLevel = [[UIButton alloc] initWithFrame:buttonFrame];
@@ -132,8 +129,7 @@ const int POSITION_DECODER = 100;
     [self.view addSubview:_backToLevel];
 }
 
-- (void) setUpSound
-{
+- (void) setUpSound {
     NSString *winPath  = [[NSBundle mainBundle] pathForResource:@"slide-magic" ofType:@"aif"];
     NSURL *winPathURL = [NSURL fileURLWithPath : winPath];
     _audioPlayerWin = [[AVAudioPlayer alloc] initWithContentsOfURL:winPathURL error:nil];
@@ -158,10 +154,9 @@ const int POSITION_DECODER = 100;
     
     CGRect frame = self.view.frame;
 
-    framePortion = 0.9;
-    xGrid    = CGRectGetWidth(frame) * (1 - framePortion) / 2;
-    yGrid    = CGRectGetHeight(frame) * (1 - framePortion) * 2;
-    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
+    xGrid    = CGRectGetWidth(frame) * BORDER_WIDTH;
+    yGrid    = CGRectGetHeight(frame) * BORDER_HEIGHT;
+    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * FRAME_PORTION;
     CGRect gridFrame = CGRectMake(xGrid, yGrid, size, size);
 
     // initialize the grid
@@ -186,6 +181,8 @@ const int POSITION_DECODER = 100;
     _restart = [gameText objectForKey:@"ShortMessage"];
     _restartBomb = [gameText objectForKey:@"BombMessage"];
 }
+
+#pragma mark - Private Methods
 
 /*
  * segue back to level viewcontroller
@@ -262,7 +259,6 @@ const int POSITION_DECODER = 100;
 }
 
 - (void) componentAdjustedAtPosition:(NSNumber*)position WithConnections:(NSString*)newConnection {
-    NSLog(@"Parameters in view controller. Position:%@, and connection:%@",position, newConnection);
     int row = [position intValue] / POSITION_DECODER;
     int col = [position intValue] % POSITION_DECODER;
     
@@ -384,6 +380,8 @@ const int POSITION_DECODER = 100;
         [alertView show];
 }
 
+#pragma mark - Explosion
+
 /*
  * prepare for explosion effect
  */
@@ -407,7 +405,7 @@ const int POSITION_DECODER = 100;
 {
     int xPos = [grid getBatteryX] + xGrid;
     int yPos = [grid getBatteryY] + yGrid;
-    NSLog(@"Battery Explosion At x:%d and y:%d", xPos, yPos);
+    
     int frameY = self.view.frame.size.height;
     int xPoint = xPos + 50;
     int yPoint = frameY - yPos - 10;
@@ -428,12 +426,13 @@ const int POSITION_DECODER = 100;
         int xPos = [grid getBombXAtRow:row AndCol:col] + xGrid;
         int yPos = [grid getBombYAtRow:row AndCol:col] + yGrid;
         
-        int xPoint = xPos + 25;
+        int xPoint = xPos + 50;
         int yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }
 
+#pragma mark - Alert
 
 /*
  * show alertView
@@ -455,9 +454,7 @@ const int POSITION_DECODER = 100;
     if (alertView.tag == 0){
         --self.gameLevel;
         [self newLevel];
-    }
-    else if (self.gameLevel < self.totalLevel - 1)
-    {
+    } else if (self.gameLevel < self.totalLevel - 1) {
         if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
             ++self.gameLevel;
             [self performSegueWithIdentifier:@"GameToStory" sender:self];

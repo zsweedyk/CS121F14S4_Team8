@@ -9,7 +9,6 @@
 #import "Component.h"
 
 @interface Component () {
-    BOOL on;
 }
 
 @end
@@ -24,7 +23,6 @@ const int STATE_STRING_LENGTH = 2;
 - (id) initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
-    on = NO;
     
     return self;
 }
@@ -63,7 +61,7 @@ const int STATE_STRING_LENGTH = 2;
 }
 
 - (NSString*) getConnections {
-    if (on) {
+    if ([[self.imageName substringFromIndex:self.imageName.length - STATE_STRING_LENGTH] isEqualToString:@"on"]) {
         return [self.imageName substringWithRange:NSMakeRange(self.imageName.length - CONNECTION_STRING_LENGTH - STATE_STRING_LENGTH, CONNECTION_STRING_LENGTH)];
     } else {
         return [self.imageName substringFromIndex:(self.imageName.length - CONNECTION_STRING_LENGTH)];
@@ -73,14 +71,6 @@ const int STATE_STRING_LENGTH = 2;
 - (void) turnOn {
     self.imageName = [self.imageName stringByAppendingString:@"on"];
     [self displayImage];
-    on = YES;
-}
-
-- (void) turnOff {
-    if (on) {
-        self.imageName = [self.imageName substringToIndex:(self.imageName.length-2)];
-        on = NO;
-    }
 }
 
 @end

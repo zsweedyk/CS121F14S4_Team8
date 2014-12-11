@@ -95,7 +95,7 @@
 #pragma mark - Private Methods
 
 - (void) setUpImageNameWithConnection:(NSString*)connections {
-    self.imageName = [NSString stringWithFormat:@"switch%@",connections];
+    self.imageName = [NSString stringWithFormat:@"switch%@on",connections];
 }
 
 - (void) switchChanged {
@@ -168,7 +168,7 @@
     
     NSString *connections = [self getCombinedConnections];
     
-    NSString* tempImageName = [NSString stringWithFormat:@"switch%@",connections];
+    NSString* tempImageName = [NSString stringWithFormat:@"switch%@on",connections];
     CGRect viewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     tempImage = [[UIImageView alloc] initWithFrame:viewFrame];
     tempImage.image = [UIImage imageNamed:tempImageName];
@@ -209,7 +209,7 @@
 
 - (void) resetTemp {
     [tempImage removeFromSuperview];
-    tempConnections = @"XXXX";
+    tempConnections = @"XXXXon";
 }
 
 @end

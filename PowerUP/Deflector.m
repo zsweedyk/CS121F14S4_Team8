@@ -101,7 +101,7 @@ enum ROTATIONS {
 - (void) deflectorChanged {
     NSString *connections = possibleConnections[numConnectionIndex][currentConnection];
     
-    int position = 100*row + col;
+    int position = POSITION_ENCODER*row + col;
     
     [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithConnections:) withObject:[NSNumber numberWithInt:position] withObject:connections];
 }

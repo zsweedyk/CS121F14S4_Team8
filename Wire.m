@@ -21,7 +21,7 @@
 {
     self = [super initWithFrame:frame];
     
-    self.imageName = [NSString stringWithFormat:@"wire%@", connections];
+    self.imageName = [NSString stringWithFormat:@"wire%@on", connections];
     
     [self displayImage];
     
