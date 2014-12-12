@@ -69,6 +69,7 @@
 		931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931666E71A321CBE00C6D700 /* SettingsViewController.m */; };
 		931666EA1A32202100C6D700 /* StoryTextChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666E91A32202100C6D700 /* StoryTextChinese.plist */; };
 		931666EE1A32204800C6D700 /* StoryTextSpanish.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931666ED1A32204800C6D700 /* StoryTextSpanish.plist */; };
+		A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8337A071A37BCCF0083E052 /* CreditViewController.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
 		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
@@ -181,6 +182,8 @@
 		931666E71A321CBE00C6D700 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		931666E91A32202100C6D700 /* StoryTextChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextChinese.plist; sourceTree = "<group>"; };
 		931666ED1A32204800C6D700 /* StoryTextSpanish.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StoryTextSpanish.plist; sourceTree = "<group>"; };
+		A8337A061A37BCCF0083E052 /* CreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditViewController.h; sourceTree = "<group>"; };
+		A8337A071A37BCCF0083E052 /* CreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditViewController.m; sourceTree = "<group>"; };
 		A84F7F0019FDC1C6001AEC0D /* PowerUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84F7F0419FDC1C6001AEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				931666E71A321CBE00C6D700 /* SettingsViewController.m */,
 				65A052311A36D6C5007690FC /* InstructionsViewController.h */,
 				65A052321A36D6C5007690FC /* InstructionsViewController.m */,
+				A8337A061A37BCCF0083E052 /* CreditViewController.h */,
+				A8337A071A37BCCF0083E052 /* CreditViewController.m */,
 				A86E10BD1A005B1E0029011B /* GameModel.h */,
 				A86E10BE1A005B1E0029011B /* GameModel.m */,
 				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
@@ -616,6 +621,7 @@
 				5BEF17321A0EC1AB00354C84 /* Laser.m in Sources */,
 				A86E10D31A005B1E0029011B /* Wire.m in Sources */,
 				A86E10CE1A005B1E0029011B /* GameViewController.m in Sources */,
+				A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */,
 				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
 				65A052331A36D6C5007690FC /* InstructionsViewController.m in Sources */,
 				931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */,
@@ -763,6 +769,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -775,6 +782,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

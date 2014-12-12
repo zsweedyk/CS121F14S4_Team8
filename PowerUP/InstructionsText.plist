@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>numPages</key>
-	<string>10</string>
+	<string>18</string>
+	<key>Next</key>
+	<string>Next</string>
 	<key>top1</key>
 	<string>The goal of the game</string>
 	<key>middle1</key>
@@ -11,7 +13,7 @@
 	<key>bottom1</key>
 	<string>in the circuit</string>
 	<key>top2</key>
-	<string>to test to see if</string>
+	<string>To test to see if</string>
 	<key>middle2</key>
 	<string>your circuit is correct, </string>
 	<key>bottom2</key>
@@ -29,7 +31,7 @@
 	<key>bottom4</key>
 	<string>the switches</string>
 	<key>top5</key>
-	<string>drag across the orange</string>
+	<string>Drag across the orange</string>
 	<key>middle5</key>
 	<string>lines to connect the </string>
 	<key>bottom5</key>
@@ -37,11 +39,11 @@
 	<key>top6</key>
 	<string>If we tap the battery again, </string>
 	<key>middle6</key>
-	<string>we see that the light buld is only</string>
+	<string>we see that the light bulb is only</string>
 	<key>bottom6</key>
 	<string>connected to one side of the battery</string>
 	<key>top7</key>
-	<string>for the bulb to turn on,</string>
+	<string>For the bulb to turn on,</string>
 	<key>middle7</key>
 	<string>we need to also connect</string>
 	<key>bottom7</key>
@@ -64,5 +66,53 @@
 	<string>anywhere, there must be a</string>
 	<key>bottom10</key>
 	<string>path of connection through the battery</string>
+	<key>top11</key>
+	<string>Here we have a circuit</string>
+	<key>middle11</key>
+	<string>that looks a little bit different</string>
+	<key>bottom11</key>
+	<string></string>
+	<key>top12</key>
+	<string>Let&apos;s try to connect the switch</string>
+	<key>middle12</key>
+	<string>and see what happens</string>
+	<key>bottom12</key>
+	<string></string>
+	<key>top13</key>
+	<string>Tap the battery to turn it on</string>
+	<key>middle13</key>
+	<string></string>
+	<key>bottom13</key>
+	<string></string>
+	<key>top14</key>
+	<string>And it explodes! Notice that the light </string>
+	<key>middle14</key>
+	<string>turned on because there is a path of </string>
+	<key>bottom14</key>
+	<string>wires connecting it to the battery. So what happened?</string>
+	<key>top15</key>
+	<string>There is also a connection path in the circuit</string>
+	<key>middle15</key>
+	<string>with no light bulb. When the battery is</string>
+	<key>bottom15</key>
+	<string>connected to itself without anything to power up, BOOM!</string>
+	<key>top16</key>
+	<string>Let&apos;s connect the circuit like this so that</string>
+	<key>middle16</key>
+	<string>there are noempty paths to the battery.</string>
+	<key>bottom16</key>
+	<string>Here we see the bulb lights up fine and we have completed the circuit!</string>
+	<key>top17</key>
+	<string>The path through the</string>
+	<key>middle17</key>
+	<string>light bulb is connected</string>
+	<key>bottom17</key>
+	<string></string>
+	<key>top18</key>
+	<string>And the path without a light bulb</string>
+	<key>middle18</key>
+	<string>is not connected and</string>
+	<key>bottom18</key>
+	<string>there is no &apos;short&apos; circuit</string>
 </dict>
 </plist>

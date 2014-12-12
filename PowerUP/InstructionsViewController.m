@@ -69,6 +69,7 @@
     next.layer.borderColor = [UIColor grayColor].CGColor;
     next.layer.borderWidth = 2.0f;
     next.layer.cornerRadius = 10;
+    [next setTitle:[allText objectForKey:@"Next"] forState:UIControlStateNormal];
     
     textView.layer.borderColor = [UIColor yellowColor].CGColor;
     textView.layer.borderWidth = 5.0f;

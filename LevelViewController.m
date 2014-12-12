@@ -46,7 +46,7 @@
 
     rows = 7;
     cols = 4;
-    test = YES;        // turn on test for debugging
+    test = NO;        // turn on test for debugging
     
     if ([self.locks count] == 0)
         [self setUpLocks];
@@ -172,7 +172,7 @@
     self.locks = [[NSMutableArray alloc] init];
     
     // first two levels are always unlocked
-    int unlockLevels = 2;
+    int unlockLevels = 1;
     
     for (int i = 0; i < unlockLevels; ++i)
         [self.locks addObject: [NSNumber numberWithInt:0]];

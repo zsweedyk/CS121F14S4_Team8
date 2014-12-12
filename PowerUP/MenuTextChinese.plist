@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>levelTitle</key>
-	<string>开始新游戏</string>
+	<string>游戏</string>
 	<key>aboutTitle</key>
-	<string>游戏指南</string>
+	<string>关于</string>
 	<key>helpTitle</key>
-	<string>游戏指南</string>
-	<key>helpMessage</key>
-	<string>在这个游戏中，你需要通过变换开关的位置使灯泡发亮。</string>
+	<string>帮助</string>
+	<key>settingsTitle</key>
+	<string>设置</string>
 </dict>
 </plist>

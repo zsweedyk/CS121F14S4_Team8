@@ -11,6 +11,7 @@
 #import "GameViewController.h"
 #import "LevelViewController.h"
 #import "StoryViewController.h"
+#import "CreditViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
 #import "ExplosionScene.h"
@@ -169,8 +170,6 @@
  */
 - (void) setLanguage
 {
-    
-    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     _titleWin = [gameText objectForKey:@"WinTitle"];
     _next = [gameText objectForKey:@"NextMessage"];
     _all = [gameText objectForKey:@"AllUnlocked"];
@@ -481,6 +480,7 @@
     {
         if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
             ++self.gameLevel;
+            self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
             [self performSegueWithIdentifier:@"GameToStory" sender:self];
         } else {
             [self newLevel];
