@@ -37,6 +37,5 @@ extern const int POSITION_DECODER = 100;
 - (void) turnOnAtRow:(int)row AndCol:(int)col;
 - (CGFloat) getCellSize;
 - (void) resetLasers;
-//- (void) componentsTurnedOff;
 
 @end

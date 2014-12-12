@@ -21,7 +21,7 @@
 - (void) componentSelectedAtRow:(int)row andCol:(int)col WithConnections:(NSString*)newConnections;
 
 - (NSArray*) getLasers;
-
+- (NSArray*) getBatteries;
 - (NSArray*) getConnectedBombs;
 - (void) updateGameStatus;
 

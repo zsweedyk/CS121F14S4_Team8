@@ -465,6 +465,14 @@ const int numCols = 15;
         // Reset all the components
         NSArray* connections = [self getAllConnectionsTo:comp];
         
+        // Bomb can have connections less than 2
+        if (connections.count < 2) {
+            if ([comp type] != BOMB){
+                [comp setState:NO];
+            }
+            continue;
+        }
+        
         NSAssert(connections.count == 2, @"Invalid connection count");
         
         // Check if the component is connected by battery following the two possible paths
@@ -577,9 +585,22 @@ const int numCols = 15;
  */
 - (NSArray*) getConnectedBombs
 {
-    return [self getConnectedLocations:bombs];
+    return [self getConnectedLocations:bombs withState:NO];
 }
 
+
+/*
+ * Gets batteries
+ * Input: N/A
+ * Output: An array of batteries
+ */
+-(NSArray*) getBatteries
+{
+    NSMutableArray *batteries = [[NSMutableArray alloc] init];
+    [batteries addObject:batteryNeg];
+    [batteries addObject:batteryPos];
+    return [self getConnectedLocations:batteries withState:YES];
+}
 
 /*
  * Gets a list of lasers that should be present on the grid
@@ -638,22 +659,37 @@ const int numCols = 15;
     }
 }
 
-
 /*
  * Get row, col, and possibly state information about a certain array of components
  * Input: The components to get the location and state information about and a boolean specifying if we need the state information
  * Ouput: An Array that contains the row, col, and possibly the state information in the 0,1,2 indices
  */
-- (NSArray*) getConnectedLocations:(NSArray*)components {
-    NSMutableArray* compPos = [[NSMutableArray alloc] init];
+- (NSArray*) getConnectedLocations:(NSArray*)components withState:(BOOL)needState
+{
+    NSMutableArray *compLocs = [[NSMutableArray alloc] init];
+    NSMutableArray *compRows = [[NSMutableArray alloc] init];
+    NSMutableArray *compCols = [[NSMutableArray alloc] init];
+    
+    [compLocs addObject:compRows];
+    [compLocs addObject:compCols];
+    
+    // Add the state array if needed
+    if (needState) {
+        NSMutableArray* compStates = [[NSMutableArray alloc] init];
+        [compLocs addObject:compStates];
+    }
     
     for (ComponentModel* comp in components) {
-        if ([comp state]) {
-            [compPos addObject:[NSNumber numberWithInt:100*[comp row]+[comp col]]];
+        if (needState || [comp state]) {
+            [compLocs[0] addObject:[NSNumber numberWithInt:[comp row]]];
+            [compLocs[1] addObject:[NSNumber numberWithInt:[comp col]]];
+        }
+        if (needState) {
+            [compLocs[2] addObject:[NSNumber numberWithBool:[comp state]]];
         }
     }
     
-    return compPos;
+    return compLocs;
 }
 
 
