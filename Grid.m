@@ -28,7 +28,6 @@
     int _numCols;
     
     // components
-
     NSMutableArray *bulbs;
     NSMutableArray *bombs;
     NSMutableArray *cells;
@@ -44,7 +43,7 @@
     
     Battery *battery;
     
-    AVAudioPlayer* _audioPlayerPressed;
+    AVAudioPlayer *_audioPlayerPressed;
 }
 @end
 
@@ -197,6 +196,12 @@ const int EMPTYCELL = 0;
     [component turnOn];
 }
 
+- (CGFloat) getCellSize
+{
+    return cellSize;
+}
+
+
 # pragma mark - Private Methods
 
 - (void) switchChangedAtPosition:(NSNumber*)position WithConnections:(NSString*)connections {
@@ -234,32 +239,11 @@ const int EMPTYCELL = 0;
 }
 
 
-- (int) getBatteryX
-{
-    int pos = [battery getPosition];
-    return (cellSize * (pos%POSITION_DECODER));
-}
-
-- (int) getBatteryY {
-    int pos = [battery getPosition];
-    return (cellSize * (pos/POSITION_DECODER));
-}
-
-- (int) getBombXAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * row);
-}
-
-- (int) getBombYAtRow:(int)row AndCol:(int)col
-{
-    return (cellSize * col);
-}
-
 #pragma mark - Touch Handling
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInView:self];
     for(Switch *view in switches){
+
         // touch begins inside a switch
         if([view touchState] == UNTOUCHED && CGRectContainsPoint(view.frame, location)){
             [view setTouchState:STARTED_IN_NOW_IN];
@@ -273,6 +257,7 @@ const int EMPTYCELL = 0;
     CGPoint prevLocation = [[touches anyObject] previousLocationInView:self];
     
     for(Switch *view in switches){
+
         // touch has entered a switch
         if([view touchState] == UNTOUCHED && CGRectContainsPoint(view.frame, location)){
             

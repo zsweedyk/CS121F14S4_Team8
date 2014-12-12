@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Settings View Controller-->
@@ -42,7 +41,7 @@
         <!--About View Controller-->
         <scene sceneID="3cZ-qT-x3z">
             <objects>
-                <viewController title="About View Controller" id="O2A-Rs-g4Z" sceneMemberID="viewController">
+                <viewController title="About View Controller" id="O2A-Rs-g4Z" customClass="CreditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V1Q-ie-bmx"/>
                         <viewControllerLayoutGuide type="bottom" id="WMg-sQ-5ci"/>
@@ -61,7 +60,7 @@
                                 </state>
                                 <state key="highlighted" image="backButtonOn"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="sq2-dP-Tbt"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="CreditToMenu" id="sq2-dP-Tbt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -88,6 +87,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BGmain" translatesAutoresizingMaskIntoConstraints="NO" id="GbG-Pr-HFb">
                                 <rect key="frame" x="-2" y="0.0" width="770" height="1027"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y71-IK-YUV">
+                                <rect key="frame" x="562" y="288" width="95" height="28"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="0.12095136195421219" green="0.94919085502624512" blue="0.99896520376205444" alpha="0.40000000596046448" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2j-uj-f77">
+                                <rect key="frame" x="481" y="431" width="95" height="28"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="0.12095136200000001" green="0.949190855" blue="0.99896520379999998" alpha="0.40000000600000002" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-2H-iCB">
+                                <rect key="frame" x="85" y="239" width="95" height="28"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="0.12095136200000001" green="0.949190855" blue="0.99896520379999998" alpha="0.40000000600000002" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-qp-et3" userLabel="Play">
                                 <rect key="frame" x="101" y="239" width="62" height="97"/>
                                 <state key="normal">
@@ -121,11 +138,11 @@
                                     <action selector="setBG0" destination="BYZ-38-t0r" eventType="touchDragExit" id="mfe-a1-hDp"/>
                                     <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDragEnter" id="ZHT-SS-m60"/>
                                     <action selector="setBG3" destination="BYZ-38-t0r" eventType="touchDown" id="k0o-Nu-JAM"/>
-                                    <segue destination="O2A-Rs-g4Z" kind="show" id="7VB-Wq-Rw7"/>
+                                    <segue destination="O2A-Rs-g4Z" kind="show" identifier="GameToCredit" id="7VB-Wq-Rw7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-bU-Kxh" userLabel="Settings">
-                                <rect key="frame" x="578" y="288" width="62" height="97"/>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-bU-Kxh" userLabel="Settings">
+                                <rect key="frame" x="578" y="288" width="768" height="1024"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -136,6 +153,12 @@
                                     <segue destination="qGO-gp-b0T" kind="show" identifier="PresentSettings" id="exW-Hx-MTv"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceT-q0-1LP">
+                                <rect key="frame" x="163" y="330" width="141" height="28"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="0.12095136200000001" green="0.949190855" blue="0.99896520379999998" alpha="0.40000000600000002" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -143,6 +166,10 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="_aboutLabel" destination="M2j-uj-f77" id="Buj-8s-R0i"/>
+                        <outlet property="_helpLabel" destination="ceT-q0-1LP" id="XdH-yn-Uuv"/>
+                        <outlet property="_playLabel" destination="7sa-2H-iCB" id="GJr-G1-DcI"/>
+                        <outlet property="_settingsLabel" destination="Y71-IK-YUV" id="xL4-lj-NqL"/>
                         <outlet property="background" destination="GbG-Pr-HFb" id="boL-fU-aJW"/>
                         <segue destination="Ty6-Eu-zgt" kind="show" identifier="PresentLevels" id="RRq-Ep-Gb3"/>
                         <segue destination="kKY-G3-VII" kind="presentation" identifier="PresentStoryView" id="T7D-BC-g5P"/>
@@ -314,9 +341,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="sq2-dP-Tbt"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="RwZ-KJ-u2L"/>
-        <segue reference="RRq-Ep-Gb3"/>
+        <segue reference="PvW-I8-hBT"/>
         <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>

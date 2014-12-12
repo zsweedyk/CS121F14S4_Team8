@@ -9,7 +9,6 @@
 #import "Switch.h"
 
 @implementation Switch {
-
     int row;
     int col;
     UIImageView* tempImage;

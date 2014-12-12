@@ -20,7 +20,6 @@
 -(id) initWithFrame:(CGRect)frame andConnections:(NSString*)connections
 {
     self = [super initWithFrame:frame];
-    
     self.imageName = [NSString stringWithFormat:@"wire%@on", connections];
     
     [self displayImage];

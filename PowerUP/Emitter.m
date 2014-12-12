@@ -26,7 +26,6 @@
 }
 
 #pragma mark - Private Methods
-
 - (void) setUpImageNameWithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections {
     
     NSString* direction = [self getDirectionString:dir];

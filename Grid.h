@@ -33,18 +33,9 @@ extern const int POSITION_DECODER = 100;
 - (void) clearGrid;
 - (void) clearGridExceptAtRow:(int)row andCol:(int)col;
 - (void) setUpGrid;
-
 - (void)setValueAtRow:(int)row Col:(int)col To:(enum COMPONENTS)componentType WithDirection:(enum DIRECTION)dir AndConnections:(NSString*)connections;
-
 - (void) turnOnAtRow:(int)row AndCol:(int)col;
-
-//- (void) shorted;
-- (int) getBatteryX;
-- (int) getBatteryY;
-- (int) getBombXAtRow:(int)row AndCol:(int)col;
-- (int) getBombYAtRow:(int)row AndCol:(int)col;
-//- (void) setStateAtRow:(int)row AndCol:(int)col to:(BOOL)state;
-
+- (CGFloat) getCellSize;
 - (void) resetLasers;
 //- (void) componentsTurnedOff;
 

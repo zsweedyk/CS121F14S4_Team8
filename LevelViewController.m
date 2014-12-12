@@ -172,7 +172,7 @@
     self.locks = [[NSMutableArray alloc] init];
     
     // first two levels are always unlocked
-    int unlockLevels = 2;
+    int unlockLevels = 1;
     
     for (int i = 0; i < unlockLevels; ++i)
         [self.locks addObject: [NSNumber numberWithInt:0]];

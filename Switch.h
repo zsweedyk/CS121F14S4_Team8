@@ -32,7 +32,6 @@
 - (void) tempAddExitedDirection;
 - (void) tempRemoveEnteredDirection;
 - (void) tempRemoveExitedDirection;
-
 - (void) resetDirection;
 - (int) getPosition;
 

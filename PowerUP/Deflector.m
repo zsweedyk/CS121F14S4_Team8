@@ -16,9 +16,7 @@
     int row;
     int col;
     
-//    DirectionController* control;
     enum DIRECTION previousDir;
-
 }
 
 @end
@@ -49,7 +47,6 @@ enum ROTATIONS {
     
     [self setUpConnectionData];
     [self initialConnectionSetUp:connections];
-    
     [self setUpImageNameWithConnections:possibleConnections[numConnectionIndex][currentConnection]];
     [self displayImage];
     
@@ -86,13 +83,6 @@ enum ROTATIONS {
     NSInteger connectionIndex = [possibleConnections[numConnectionIndex] indexOfObject:initialConnection];
     currentConnection = [[NSNumber numberWithInteger:connectionIndex] intValue];
 }
-
-//- (void) setUpDirectionController {
-//    control = [[DirectionController alloc] initWithFrame:self.frame];
-//    control.delegate = self;
-//    
-//    [self addSubview:control];
-//}
 
 - (void) setUpImageNameWithConnections:(NSString*)connections {
     self.imageName = [NSString stringWithFormat:@"deflector%@",connections];

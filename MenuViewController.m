@@ -11,6 +11,7 @@
 #import "LevelViewController.h"
 #import "StoryViewController.h"
 #import "SettingsViewController.h"
+#import "CreditViewController.h"
 #import "InstructionsViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
@@ -26,6 +27,11 @@
     UIButton* _level;
     UIButton* _about;
     
+    IBOutlet UILabel* _playLabel;
+    IBOutlet UILabel* _helpLabel;
+    IBOutlet UILabel* _aboutLabel;
+    IBOutlet UILabel* _settingsLabel;
+    
     NSDictionary* menuText;
 }
 
@@ -40,8 +46,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setUpDictionary];
-    // set up sounds, segmented control, and buttons
+
     [self setUpSounds];
+    [self setUpLabels];
 }
 
 - (void) setUpSounds
@@ -77,28 +84,44 @@
     menuText = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 }
 
+
+-(void) setUpLabels {
+    _playLabel.text = [menuText objectForKey:@"levelTitle"];
+    _helpLabel.text = [menuText objectForKey:@"helpTitle"];
+    _aboutLabel.text = [menuText objectForKey:@"aboutTitle"];
+    _settingsLabel.text = [menuText objectForKey:@"settingsTitle"];
+}
+
 /*
  *  change the background if button is pressed
  */
 - (IBAction) setBG0
 {
     self.background.image = [UIImage imageNamed:@"BGmain.png"];
+    _playLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _helpLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _aboutLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
+    _settingsLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:0.4];
 }
 - (IBAction) setBG1
 {
     self.background.image = [UIImage imageNamed:@"BGmain1.png"];
+    _playLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG2
 {
     self.background.image = [UIImage imageNamed:@"BGmain2.png"];
+    _helpLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG3
 {
     self.background.image = [UIImage imageNamed:@"BGmain3.png"];
+    _aboutLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 - (IBAction) setBG4
 {
     self.background.image = [UIImage imageNamed:@"BGmain4.png"];
+    _settingsLabel.textColor = [UIColor colorWithRed:(2/255.0) green:(243/255.0) blue:1 alpha:1];
 }
 
 /*
@@ -162,6 +185,13 @@
     
     if ([segue.identifier isEqualToString:@"PresentInstructions"]) {
         InstructionsViewController *destViewController = segue.destinationViewController;
+        destViewController.mainLanguage = self.mainLanguage;
+        destViewController.currentState = self.currentState;
+        destViewController.locks = self.locks;
+    }
+    
+    if ([segue.identifier isEqualToString:@"GameToCredit"]) {
+        CreditViewController *destViewController = segue.destinationViewController;
         destViewController.mainLanguage = self.mainLanguage;
         destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;

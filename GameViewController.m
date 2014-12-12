@@ -11,6 +11,7 @@
 #import "GameViewController.h"
 #import "LevelViewController.h"
 #import "StoryViewController.h"
+#import "CreditViewController.h"
 #import "GameModel.h"
 #import "Grid.h"
 #import "ExplosionScene.h"
@@ -26,7 +27,7 @@
     int _numCols;
     UIButton *_backToLevel;
     UIButton *_test;
-    
+
     // message title variables
     NSString *_titleWin;
     NSString *_next;
@@ -171,7 +172,6 @@ const float BACK_BUTTON_PORTION = 0.0625;
  */
 - (void) setLanguage
 {
-    
     [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     _titleWin = [gameText objectForKey:@"WinTitle"];
     _next = [gameText objectForKey:@"NextMessage"];
@@ -313,14 +313,14 @@ const float BACK_BUTTON_PORTION = 0.0625;
             [_audioPlayerExplosion prepareToPlay];
             [_audioPlayerExplosion play];
             [self setUpExplosionScene];
-            [self explodeBattery];
+            [self explodeComponents:[_model getBatteries]];
             [self displayMessageFor:@"Lose"];
             
         } else if ([_model exploded]) {
             [_audioPlayerExplosion prepareToPlay];
             [_audioPlayerExplosion play];
             [self setUpExplosionScene];
-            [self explodeBombs:[_model getConnectedBombs]];
+            [self explodeComponents:[_model getConnectedBombs]];
             [self displayMessageFor:@"Bombs"];
             
         } else if ([_model complete]) {
@@ -381,7 +381,6 @@ const float BACK_BUTTON_PORTION = 0.0625;
 }
 
 #pragma mark - Explosion
-
 /*
  * prepare for explosion effect
  */
@@ -401,33 +400,22 @@ const float BACK_BUTTON_PORTION = 0.0625;
 /*
  * explode connected components
  */
--(void) explodeBattery
-{
-    int xPos = [grid getBatteryX] + xGrid;
-    int yPos = [grid getBatteryY] + yGrid;
-    
-    int frameY = self.view.frame.size.height;
-    int xPoint = xPos + 50;
-    int yPoint = frameY - yPos - 10;
-    [_explosion createExplosionAtX:xPoint AndY:yPoint];
-}
-
-/*
- * explode connected bombs
- */
--(void) explodeBombs:(NSArray*)bombs
+-(void) explodeComponents:(NSArray*)components
 {
     int frameY = self.view.frame.size.height;
     
-    for (int i = 0; i < bombs.count; ++i) {
-        int row = [bombs[i] intValue] / POSITION_DECODER;
-        int col = [bombs[i] intValue] % POSITION_DECODER;
+    NSArray* compRow = components[0];
+    NSArray* compCol = components[1];
+    CGFloat cellSize = [grid getCellSize];
+    
+    int xPos, yPos, xPoint, yPoint;
+    
+    for (int i = 0; i < compRow.count; ++i) {
+        xPos = [compCol[i] integerValue] * cellSize + xGrid;
+        yPos = [compRow[i] integerValue] * cellSize + yGrid;
         
-        int xPos = [grid getBombXAtRow:row AndCol:col] + xGrid;
-        int yPos = [grid getBombYAtRow:row AndCol:col] + yGrid;
-        
-        int xPoint = xPos + 50;
-        int yPoint = frameY - yPos - 10;
+        xPoint = xPos + 25;
+        yPoint = frameY - yPos - 10;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }

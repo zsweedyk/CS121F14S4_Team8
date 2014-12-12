@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>levelTitle</key>
-	<string>Start New Game</string>
+	<string>Play</string>
 	<key>aboutTitle</key>
-	<string>How To Play</string>
+	<string>About</string>
 	<key>helpTitle</key>
-	<string>How To Play</string>
-	<key>helpMessage</key>
-	<string>Connect the circuit and power up all the light bulbs! Drag your finger over the switches to make connections and touch the battery to turn the power on.</string>
+	<string>Help</string>
+	<key>settingsTitle</key>
+	<string>Settings</string>
 </dict>
 </plist>

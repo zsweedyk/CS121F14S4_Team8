@@ -169,5 +169,7 @@
 		<key>bottom7</key>
 		<string>炸弹立刻会引爆！</string>
 	</dict>
+	<key>Next</key>
+	<string>Next(C)</string>
 </dict>
 </plist>

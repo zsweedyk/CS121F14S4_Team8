@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>numPages</key>
-	<string>10</string>
+	<string>18</string>
+	<key>Next</key>
+	<string>下一步</string>
 	<key>top1</key>
 	<string>这个游戏的目的，</string>
 	<key>middle1</key>
@@ -63,6 +65,54 @@
 	<key>middle10</key>
 	<string>我们还要确保电池的两端互相连接。</string>
 	<key>bottom10</key>
+	<string></string>
+	<key>top11</key>
+	<string>这里是一个不同的电路。</string>
+	<key>middle11</key>
+	<string></string>
+	<key>bottom11</key>
+	<string></string>
+	<key>top12</key>
+	<string>让我们连接一下开关，看看发生了什么。</string>
+	<key>middle12</key>
+	<string></string>
+	<key>bottom12</key>
+	<string></string>
+	<key>top13</key>
+	<string>点一下电源给电路通电。</string>
+	<key>middle13</key>
+	<string></string>
+	<key>bottom13</key>
+	<string></string>
+	<key>top14</key>
+	<string>电池爆炸了！</string>
+	<key>middle14</key>
+	<string>因为电路短路了，到底发生了什么？</string>
+	<key>bottom14</key>
+	<string></string>
+	<key>top15</key>
+	<string>因为有一条线可以从电池的一端直接连接到</string>
+	<key>middle15</key>
+	<string>另外一端。</string>
+	<key>bottom15</key>
+	<string>这条线上没有一个灯泡。</string>
+	<key>top16</key>
+	<string>让我们试试连接电路，</string>
+	<key>middle16</key>
+	<string>没有一条这样的线。</string>
+	<key>bottom16</key>
+	<string>现在所有的小灯泡都连接了！</string>
+	<key>top17</key>
+	<string>我们成功通关了！</string>
+	<key>middle17</key>
+	<string></string>
+	<key>bottom17</key>
+	<string></string>
+	<key>top18</key>
+	<string>记住，当所有的线上都有灯泡时，</string>
+	<key>middle18</key>
+	<string>电池就不会爆炸。</string>
+	<key>bottom18</key>
 	<string></string>
 </dict>
 </plist>
