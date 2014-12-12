@@ -445,6 +445,7 @@ const float BACK_BUTTON_PORTION = 0.0625;
     } else if (self.gameLevel < self.totalLevel - 1) {
         if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
             ++self.gameLevel;
+            self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
             [self performSegueWithIdentifier:@"GameToStory" sender:self];
         } else {
             [self newLevel];

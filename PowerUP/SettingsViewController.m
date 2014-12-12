@@ -17,6 +17,7 @@
     
     // language control and buttons
     UISegmentedControl *_segmentControl;
+    IBOutlet UIImageView *background;
 }
 
 @end
@@ -32,6 +33,7 @@
     // set up sounds, segmented control, and buttons
     [self setUpSounds];
     [self setUpSegControl];
+    [self setBackground];
 }
 
 - (void) setUpSounds
@@ -56,6 +58,26 @@
     [self.view addSubview:_segmentControl];
 }
 
+- (void) setBackground
+{
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            [background setImage:[UIImage imageNamed:@"BGsettings.png"]];
+            break;
+            
+        case SPANISH:
+            [background setImage:[UIImage imageNamed:@"BGsettingsSP.png"]];
+            break;
+            
+        case CHINESE:
+            [background setImage:[UIImage imageNamed:@"BGsettingsCH.png"]];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 /*
  *  Set the language based on the value of segcontrol
  *  Note that english - 0, spanish - 1, chinese -2
@@ -77,14 +99,17 @@
     switch (choice) {
         case ENGLISH:
             self.mainLanguage = ENGLISH;
+            [self setBackground];
             break;
             
         case SPANISH:
             self.mainLanguage = SPANISH;
+            [self setBackground];
             break;
             
         case CHINESE:
             self.mainLanguage = CHINESE;
+            [self setBackground];
             break;
             
         default:
