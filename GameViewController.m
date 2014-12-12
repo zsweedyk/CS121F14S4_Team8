@@ -480,6 +480,7 @@
     {
         if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
             ++self.gameLevel;
+            self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
             [self performSegueWithIdentifier:@"GameToStory" sender:self];
         } else {
             [self newLevel];
