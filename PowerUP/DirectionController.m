@@ -9,17 +9,11 @@
 #import "DirectionController.h"
 
 @implementation DirectionController
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
-CGPoint start;
-CGPoint curr;
-CGPoint end;
+{
+    CGPoint start;
+    CGPoint curr;
+    CGPoint end;
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *aTouch = [touches anyObject];
@@ -30,17 +24,19 @@ CGPoint end;
     UITouch *aTouch = [touches anyObject];
     curr = [aTouch locationInView:self.superview];
     
-    int dx = start.x-curr.x;
-    int dy = start.y-curr.y;
+    int dx = start.x - curr.x;
+    int dy = start.y - curr.y;
     
-    if (abs(dx)>abs(dy)) {
-        if (dx>0) {
+    if (abs(dx) > abs(dy)) {
+        
+        if (dx > 0) {
             [self.delegate performSelector:@selector(changeImage:) withObject:@"L"];
         }else{
             [self.delegate performSelector:@selector(changeImage:) withObject:@"R"];
         }
     }else{
-        if (dy>0) {
+        
+        if (dy > 0) {
             [self.delegate performSelector:@selector(changeImage:) withObject:@"T"];
         }else{
             [self.delegate performSelector:@selector(changeImage:) withObject:@"B"];
@@ -51,14 +47,13 @@ CGPoint end;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *aTouch = [touches anyObject];
     end = [aTouch locationInView:self.superview];
+    
     //if user taps the component, do onTap
     if(aTouch.tapCount == 1){
         [self.delegate performSelector:@selector(onTap)];
     }
+    
     [self.delegate performSelector:@selector(touchEnd)];
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 }
 
 @end

@@ -58,7 +58,6 @@
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
     
     _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
-    
     _audioPlayerLevelPressed = _audioPlayerAboutPressed;
 }
 

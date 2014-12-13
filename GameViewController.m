@@ -449,7 +449,7 @@
         yPos = [compRow[i] integerValue] * cellSize + yGrid;
         
         xPoint = xPos + 25;
-        yPoint = frameY - yPos - 10;
+        yPoint = frameY - yPos - 20;
         [_explosion createExplosionAtX:xPoint AndY:yPoint];
     }
 }

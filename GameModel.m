@@ -51,6 +51,7 @@
         _grid = [[NSMutableArray alloc] init];
         
         _laserModel = [[LaserModel alloc] initWithGrid:_grid numRow:_numRows numCol:_numCols];
+        
         // in each row spot add another array for the columns in the grid
         for (int r = 0; r < _numRows; ++r) {
             NSMutableArray *column = [[NSMutableArray alloc] init];

@@ -16,6 +16,11 @@
     int _col;
 }
 
+/*
+ * Initialize battery
+ * Input: frame, name, row, and col info
+ * Output: The initialized object
+ */
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*) name AtRow:(int)row AndCol:(int)col
 {
     self = [super initWithFrame:frame];
@@ -50,11 +55,21 @@
     [_battery setBackgroundImage:[UIImage imageNamed:newName] forState:UIControlStateNormal];
 }
 
+/*
+ * Get the row of a battery
+ * Input: N/A
+ * Output: the row of the battery
+ */
 - (int) getRow
 {
     return _row;
 }
 
+/*
+ * Get the col of a battery
+ * Input: N/A
+ * Output: the col of the battery
+ */
 - (int) getCol
 {
     return _col;

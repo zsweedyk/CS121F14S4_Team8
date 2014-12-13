@@ -159,7 +159,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"InstructionsToMenu"]) {
@@ -168,8 +167,6 @@
         destViewController.currentState = self.currentState;
         destViewController.locks = self.locks;
     }
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 

@@ -12,6 +12,7 @@
     NSArray *_grid;
     int _numRows;
     int _numCols;
+    
     //the arrays holding the laser components for keeping track of their states
     NSMutableArray *_lasers;
     NSMutableArray *_emitters;
@@ -25,6 +26,7 @@
 - (id) initWithGrid:(NSArray *)grid numRow:(int)row numCol:(int)col
 {
     _grid = grid;
+    
     if (self = [super init]) {
         _numRows = row;
         _numCols = col;
@@ -33,12 +35,13 @@
         _deflectors = [[NSMutableArray alloc] init];
         _receivers = [[NSMutableArray alloc] init];
     }
+    
     return self;
 }
 
 /*
- *adds a component to one of the component arrays
- *throws an exception if an invalid component is sent to this model
+ * Adds a component to one of the component arrays
+ * throws an exception if an invalid component is sent to this model
  */
 - (void) addComponent:(ComponentModel*)component
 {
@@ -84,9 +87,9 @@
 }
 
 /*
- *Reset the states of all components to be NO
- *Input: N/A
- *OutPut: N/A
+ * Reset the states of all components to be NO
+ * Input: N/A
+ * OutPut: N/A
  */
 - (void) resetComponents
 {
@@ -102,7 +105,7 @@
 }
 
 /*
- *Clear the component arrays
+ * Clear the component arrays
  */
 - (void) clearLaserComponents
 {
@@ -113,7 +116,7 @@
 }
 
 /*
- *returns the emitter array
+ * Returns the emitter array
  */
 - (NSArray*) getEmitters
 {
@@ -121,7 +124,7 @@
 }
 
 /*
- *returns the deflector array
+ * Returns the deflector array
  */
 - (NSArray*) getDeflectors
 {
@@ -129,7 +132,7 @@
 }
 
 /*
- *returns the receiver array
+ * Returns the receiver array
  */
 - (NSArray*) getReceivers
 {
@@ -137,7 +140,7 @@
 }
 
 /*
- *returns the laser array
+ * Returns the laser array
  */
 - (NSArray*) getLasers
 {
@@ -164,7 +167,7 @@
 }
 
 /*
- *gets a path for the laser emitted from a specific emitter with the specified direction
+ * Gets a path for the laser emitted from a specific emitter with the specified direction
  */
 - (void) createLaserPathFrom:(ComponentModel *)emitter
 {
@@ -191,6 +194,11 @@
     }
 }
 
+/*
+ * Continuously draw a laser path upward from a specified location until you hit an obstacle
+ * Input: Row and Col info
+ * Output: N/A
+ */
 - (void) laserTopAtRow:(int)row Col:(int)col
 {
     // draw the laser
@@ -298,7 +306,6 @@
     
     ComponentModel *obstacle = _grid[row][col];
     
-    // Handle the deflector case
     if ([[obstacle getType] isEqual:@"deflector"]) {
         
         // If the deflector is a state to continue the laser turn it on
@@ -328,18 +335,15 @@
             [self laserRightAtRow:row Col:col];
         }
         
-        // Handle the receiver case
     } else if ([[obstacle getType] isEqual:@"receiver"]) {
         
         if ([[obstacle getDirection] isEqual:dir]) {
             [obstacle setState:YES];
         }
         
-        // Handle the bomb case
     } else if ([[obstacle getType] isEqual:@"bomb"]) {
         [obstacle setState:YES];
         
-        // Other case
     } else {
         return;
     }
