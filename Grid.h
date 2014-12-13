@@ -26,6 +26,7 @@
 @property (nonatomic, strong) id delegate;
 
 - (id) initWithFrame:(CGRect)frame andNumRows:(int)rows andCols:(int)cols;
+- (void) clearGrid;
 - (void) setUpGrid;
 - (void) setValueAtRow:(int) row col:(int)col to:(NSString*) value;
 - (void) shorted;

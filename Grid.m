@@ -46,6 +46,8 @@
 
 @implementation Grid
 
+const int EMPTYCELL = 0;
+
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.
@@ -62,12 +64,9 @@
     _numRows = rows;
     _numCols = cols;
     
-    //initialize _cells 2-D array
-    _cells = [[NSMutableArray alloc] init];
-    for (int i = 0; i < _numRows; ++i) {
-        NSMutableArray *rowCells = [[NSMutableArray alloc] init];
-        [_cells addObject:rowCells];
-    }
+    CGFloat cellHeight = self.frame.size.height/_numRows;
+    CGFloat cellWidth = self.frame.size.width/_numCols;
+    _cellSize = MIN(cellHeight, cellWidth);
 
     [self setUpGrid];
     
@@ -92,25 +91,21 @@
     _deflectors = [[NSMutableArray alloc] init];
     _receivers = [[NSMutableArray alloc] init];
     
-    // calculate dimension of the cell that makes it fit in the frame
-    CGFloat cellHeight = self.frame.size.height/_numRows;
-    CGFloat cellWidth = self.frame.size.width/_numCols;
-    _cellSize = MIN(cellHeight, cellWidth);
-    
-    // Set each cell on the grid
-    for (int row = 0; row < _numRows; ++row){
-        for (int col = 0; col < _numCols; ++col){
-            // location of cell
-            CGFloat xLabel = col * _cellSize;
-            CGFloat yLabel = row * _cellSize;
-            
-            // initially set all cells to a clear label. Initialized to proper component later
-            CGRect labelFrame = CGRectMake(xLabel, yLabel, _cellSize, _cellSize);
-            UILabel *blankTile = [[UILabel alloc] initWithFrame:labelFrame];
-            
-            [self addSubview:blankTile];
-            [_cells[row] addObject:blankTile];
+    //initialize _cells 2-D array
+    _cells = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _numRows; ++i) {
+        NSMutableArray* rowCells = [[NSMutableArray alloc] init];
+        for (int j = 0; j < _numCols; ++j) {
+            [rowCells addObject:[NSNumber numberWithInt:EMPTYCELL]];
         }
+        [_cells addObject:rowCells];
+    }
+    
+}
+
+- (void) clearGrid {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
     }
 }
 
@@ -124,66 +119,70 @@
 // 9: bomb
 - (void)setValueAtRow:(int)row col:(int)col to:(NSString*)componentType
 {
-    // white label to replace
-    UIView *label = [[_cells objectAtIndex:row] objectAtIndex:col];
-
     // new component to replace with
-    UIView *newComponent;
+    UIView* newComponent;
+    
+    CGFloat xPos = col * _cellSize;
+    CGFloat yPos = row * _cellSize;
+    CGRect labelFrame = CGRectMake(xPos, yPos, _cellSize, _cellSize);
     
     // check component type and use the appropriate object
     NSString *typeIndicator = [componentType substringWithRange:NSMakeRange(0, 2)];
     
     if ([typeIndicator isEqual: @"wi"]) {
         // wire case
-        newComponent = [[Wire alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Wire alloc] initWithFrame:labelFrame andOrientation:componentType];
         
     } else if ([typeIndicator isEqual:@"ba"]) {
         // battery case
-        newComponent = [[Battery alloc]initWithFrame:label.frame andOrientation:componentType AtRow:row AndCol:col];
+        newComponent = [[Battery alloc]initWithFrame:labelFrame andOrientation:componentType AtRow:row AndCol:col];
         ((Battery *)newComponent).delegate = self;
         
         [_batteries addObject:newComponent];
     } else if ([typeIndicator isEqual:@"bu"]) {
-        newComponent = [[Bulb alloc] initWithFrame:label.frame];
+        newComponent = [[Bulb alloc] initWithFrame:labelFrame];
         [_bulbs addObject:newComponent];
         
     } else if ([typeIndicator isEqual:@"sw"]) {
         // switch case
-        newComponent = [[Switch alloc] initWithFrame:label.frame AtRow:row AndCol:col];
+        newComponent = [[Switch alloc] initWithFrame:labelFrame AtRow:row AndCol:col];
         ((Switch *)newComponent).delegate = self;
         newComponent.tag = 70;
         
     } else if ([typeIndicator isEqual:@"em"]) {
         // emitter case
-        newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Emitter alloc] initWithFrame:labelFrame andOrientation:componentType];
         [_emitters addObject:newComponent];
         
     } else if ([typeIndicator isEqual:@"de"]) {
         // deflector case
-        newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
+        newComponent = [[Deflector alloc] initWithFrame:labelFrame AtRow:row AndCol:col];
         ((Deflector *)newComponent).delegate = self;
         [_deflectors addObject:newComponent];
         
     } else if ([typeIndicator isEqual:@"re"]) {
         // receiver case
-        newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Receiver alloc] initWithFrame:labelFrame andOrientation:componentType];
         [_receivers addObject:newComponent];
     
     } else if ([typeIndicator isEqual:@"bo"]) {
         // bomb case
-        newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Bomb alloc] initWithFrame:labelFrame andOrientation:componentType];
         [_bombs addObject:newComponent];
         
     } else if ([typeIndicator isEqual:@"la"]) {
         // laser case
-        newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
+        newComponent = [[Laser alloc] initWithFrame:labelFrame andOrientation:componentType];
         [_lasers addObject:newComponent];
         
     } else {
         return;
     }
 
-    [label removeFromSuperview];
+    if (_cells[row][col] != [NSNumber numberWithInt:EMPTYCELL]) {
+        [_cells[row][col] removeFromSuperview];
+    }
+    
     [self addSubview:newComponent];
     [[_cells objectAtIndex:row] setObject:newComponent atIndex:col];
 }
