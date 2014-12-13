@@ -478,13 +478,22 @@
     }
     else if (self.gameLevel < self.totalLevel - 1)
     {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
         if ([StoryViewController needToDisplayStoryAtLevel:(int)self.gameLevel+1 andState:self.currentState]) {
             ++self.gameLevel;
             self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
+            
+            [defaults setObject:self.locks forKey:@"Locks"];
+            [defaults synchronize];
+            
             [self performSegueWithIdentifier:@"GameToStory" sender:self];
         } else {
             [self newLevel];
             self.locks[self.gameLevel] = [NSNumber numberWithInt:0];
+            
+            [defaults setObject:self.locks forKey:@"Locks"];
+            [defaults synchronize];
         }
     }
 }

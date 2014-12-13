@@ -48,8 +48,13 @@
     cols = 4;
     test = NO;        // turn on test for debugging
     
-    if ([self.locks count] == 0)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray* defaultLock = [defaults arrayForKey:@"Locks"];
+    
+    if (defaultLock == nil)
         [self setUpLocks];
+    else
+        self.locks = (NSMutableArray*) defaultLock;
     
     [self setUpDictionary];
     [self setUpSounds];
@@ -187,6 +192,10 @@
     for (int i = _numLevels; i < _possibleLevels; ++i){
         [self.locks addObject: [NSNumber numberWithInt:2]];
     }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.locks forKey:@"Locks"];
+    [defaults synchronize];
 }
 
 /*
@@ -225,6 +234,10 @@
         [_audioPlayerLevelPressed play];
         
         selectedLevel = buttonTag;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        self.currentState = (enum GAME_STATES)[defaults integerForKey:@"CurrentState"];
+        
         if ([StoryViewController needToDisplayStoryAtLevel:selectedLevel andState:self.currentState]) {
             [self performSegueWithIdentifier:@"Instructions" sender:self];
         } else {

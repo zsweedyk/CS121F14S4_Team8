@@ -96,6 +96,8 @@
  */
 - (void) changeButtonLanguage: (NSInteger) choice
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     switch (choice) {
         case ENGLISH:
             self.mainLanguage = ENGLISH;
@@ -115,6 +117,9 @@
         default:
             break;
     }
+    
+    [defaults setInteger:self.mainLanguage forKey:@"Language"];
+    [defaults synchronize];
 }
 
 /*

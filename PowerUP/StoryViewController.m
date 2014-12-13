@@ -57,6 +57,10 @@
         
         ++self.currentState;
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:self.currentState forKey:@"CurrentState"];
+        [defaults synchronize];
+        
         if (type == STORY) {
             [self performSegueWithIdentifier:@"StoryToLevel" sender:self];
         } else if (type == INSTRUCTION) {
