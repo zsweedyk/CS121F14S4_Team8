@@ -10,8 +10,8 @@
 
 @interface Emitter : UIImageView
 
--(id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName;
--(void) turnOn;
+- (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName;
+- (void) turnOn;
 - (void) turnOff;
 
 @end

@@ -14,6 +14,7 @@
 @interface SettingsViewController (){
     // sounds
     AVAudioPlayer *_audioPlayerLanguagePressed;
+    AVAudioPlayer *_audioPlayerBackPressed;
     
     // language control and buttons
     UISegmentedControl *_segmentControl;
@@ -39,6 +40,7 @@
     NSString *languagePath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
     NSURL *languagePathURL  = [NSURL fileURLWithPath : languagePath];
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
+    _audioPlayerBackPressed = _audioPlayerLanguagePressed;
 }
 
 - (void) setUpSegControl
@@ -94,6 +96,8 @@
  */
 - (void) changeButtonLanguage: (NSInteger) choice
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     switch (choice) {
         case ENGLISH:
             self.mainLanguage = ENGLISH;
@@ -113,12 +117,17 @@
         default:
             break;
     }
+    
+    [defaults setInteger:self.mainLanguage forKey:@"Language"];
+    [defaults synchronize];
 }
 
 /*
  *  Pass data to main viewcontroller or game viewcontroller
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [_audioPlayerBackPressed prepareToPlay];
+    [_audioPlayerBackPressed play];
     
     if ([segue.identifier isEqualToString:@"settingToMain"]) {
         MenuViewController *destViewController = segue.destinationViewController;

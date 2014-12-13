@@ -73,6 +73,9 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="_background" destination="Gbq-Zq-aYl" id="wnN-bw-4XP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoj-XB-HpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

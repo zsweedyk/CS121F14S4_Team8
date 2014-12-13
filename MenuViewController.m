@@ -58,12 +58,15 @@
     _audioPlayerLanguagePressed = [[AVAudioPlayer alloc] initWithContentsOfURL:languagePathURL error:nil];
     
     _audioPlayerAboutPressed = _audioPlayerLanguagePressed;
-    
     _audioPlayerLevelPressed = _audioPlayerAboutPressed;
 }
 
 - (void) setUpDictionary {
     NSString *plistPath;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.mainLanguage = (enum LANGUAGES)[defaults integerForKey:@"Language"];
+    
     switch (self.mainLanguage) {
         case ENGLISH:
             plistPath  = [[NSBundle mainBundle] pathForResource:@"MenuText" ofType:@"plist"];
@@ -129,8 +132,8 @@
  */
 - (IBAction) chooseLevel:(id)sender
 {
-    [_audioPlayerLevelPressed prepareToPlay];
-    [_audioPlayerLevelPressed play];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.currentState = (enum GAME_STATES)[defaults integerForKey:@"CurrentState"];
     
     if (self.currentState == FIRST_TIME) {
         [self performSegueWithIdentifier:@"PresentStoryView" sender:self];
@@ -143,6 +146,8 @@
  *  Pass data to viewcontrollers
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [_audioPlayerLevelPressed prepareToPlay];
+    [_audioPlayerLevelPressed play];
     
     if ([segue.identifier isEqualToString:@"PresentLevels"]) {
         LevelViewController *destViewController = segue.destinationViewController;

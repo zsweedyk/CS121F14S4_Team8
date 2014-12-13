@@ -16,13 +16,14 @@
 - (id) initWithFrame:(CGRect)frame andOrientation:(NSString*)imageName
 {
     self = [super initWithFrame:frame];
+    
     //keeps two names for the component, one for On state, one for Off state
     name = imageName;
+    
     self.image = [UIImage imageNamed:name];
     return self;
 }
 
-//with turnOn and turnOff, simply reset the names
 - (void) turnOn
 {
     NSString *onName = [name stringByAppendingString:@"on"];

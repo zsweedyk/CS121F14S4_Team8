@@ -16,10 +16,6 @@
     [self setBackgroundColor:[UIColor blackColor]];
 }
 
--(void)dealloc {
-    NSLog(@"Dealloc ExplosionScene");
-}
-
 - (void)createExplosionAtX:(int) x AndY: (int) y
 {
     self.backgroundColor = [SKColor blackColor];
@@ -28,6 +24,8 @@
     NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"Explosion" ofType:@"sks"];
     
     SKEmitterNode *explosionNode = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+    
+    // set up details for explosion node
     [explosionNode setNumParticlesToEmit:1000];
     [explosionNode setParticleBirthRate:450];
     [explosionNode setParticleLifetime:2];

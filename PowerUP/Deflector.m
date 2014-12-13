@@ -14,10 +14,13 @@
     NSArray *_twoWays;
     NSArray *_threeWays;
     NSArray *_fourWays;
+    
     //the index for the current orientation
     int _currentOrientation;
+    
     NSString *name;
     NSString *_orientation;
+    
     //index for the current deflector type,
     //2 stands for two-way
     //3 stands for three-way
@@ -32,7 +35,11 @@
     NSString* previousDir;
 }
 
-
+/*
+ * Initialize Deflector
+ * Input: frame, row, and col info
+ * Output: The initialized object
+ */
 - (id) initWithFrame:(CGRect)frame AtRow:(int)row AndCol:(int) col;
 {
     self = [super initWithFrame:frame];
@@ -65,7 +72,11 @@
     return self;
 }
 
-//switch to other deflector types on tap
+/*
+ * Switch to other deflector types on tap
+ * Input: N/A
+ * Output: N/A
+ */
 - (void) onTap
 {
     if(_currentTypeIndex == 2){
@@ -78,6 +89,7 @@
         _possibleOrientations = _twoWays;
         _currentTypeIndex = 2;
     }
+    
     _currentOrientation = 0;
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
     _deflector.image = [UIImage imageNamed:name];
@@ -88,23 +100,32 @@
     
 }
 
-//0 for clockwise, 1 for counterclockwise, 2 for oppositeDirection
+/*
+ * Rotate the deflector
+ * Input: direction to be rotated
+ * Output: N/A
+ * Note: 0 for clockwise, 1 for counterclockwise, 2 for oppositeDirection
+ */
 - (void) rotateDeflector:(int)dir
 {
     if(_currentTypeIndex != 4){
+        
         if(dir == 0){
+            
             if (_currentOrientation == [_possibleOrientations count]-1) {
                 _currentOrientation = 0;
             } else {
                 ++_currentOrientation;
             }
         }else if(dir == 1){
+            
             if (_currentOrientation == 0){
                 _currentOrientation = (int)([_possibleOrientations count] - 1);
             } else {
                 --_currentOrientation;
             }
         }else{
+            
             if (_currentOrientation == [_possibleOrientations count]-2) {
                 _currentOrientation = 0;
             } else if(_currentOrientation == [_possibleOrientations count]-1){
@@ -115,18 +136,15 @@
         }
     }
     
-    
     name = [NSString stringWithFormat: @"deflector%@", _possibleOrientations[_currentOrientation]];
     
-    //[_deflector setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal]
     _deflector.image = [UIImage imageNamed:name];
     _orientation = _possibleOrientations[_currentOrientation];
     
     NSArray* position = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:_row], [NSNumber numberWithInt:_col], nil];
     previousDir = @"X";
     [self.delegate performSelector:@selector(deflectorSelectedAtPosition:WithOrientation:) withObject:position withObject:_orientation];
-    
-    //return _possibleOrientations[_currentOrientation];
+
 }
 
 - (void) touchEnd
@@ -182,7 +200,6 @@
     NSString *onName = [name stringByAppendingString:@"on"];
     
     _deflector.image = [UIImage imageNamed:onName];
-    
 }
 
 - (void) turnOff

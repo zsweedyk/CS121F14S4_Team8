@@ -153,24 +153,29 @@
         ((Switch *)newComponent).delegate = self;
         newComponent.tag = 70;
         
-    } else if ([typeIndicator isEqual:@"em"]) {//emitter case
+    } else if ([typeIndicator isEqual:@"em"]) {
+        // emitter case
         newComponent = [[Emitter alloc] initWithFrame:label.frame andOrientation:componentType];
         [_emitters addObject:newComponent];
         
-    } else if ([typeIndicator isEqual:@"de"]) {//deflector case
+    } else if ([typeIndicator isEqual:@"de"]) {
+        // deflector case
         newComponent = [[Deflector alloc] initWithFrame:label.frame AtRow:row AndCol:col];
         ((Deflector *)newComponent).delegate = self;
         [_deflectors addObject:newComponent];
         
-    } else if ([typeIndicator isEqual:@"re"]) {//receiver case
+    } else if ([typeIndicator isEqual:@"re"]) {
+        // receiver case
         newComponent = [[Receiver alloc] initWithFrame:label.frame andOrientation:componentType];
         [_receivers addObject:newComponent];
     
-    } else if ([typeIndicator isEqual:@"bo"]) {//bomb case
+    } else if ([typeIndicator isEqual:@"bo"]) {
+        // bomb case
         newComponent = [[Bomb alloc] initWithFrame:label.frame andOrientation:componentType];
         [_bombs addObject:newComponent];
         
-    } else if ([typeIndicator isEqual:@"la"]) { // laser case
+    } else if ([typeIndicator isEqual:@"la"]) {
+        // laser case
         newComponent = [[Laser alloc] initWithFrame:label.frame andOrientation:componentType];
         [_lasers addObject:newComponent];
         
@@ -268,7 +273,6 @@
 // -2 means that touch started outside of view, went inside of view and has now exited view
 // -3 means that touch started inside of view and is still inside of view
 // -4 means that touch started inside of view and has now exited view
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint location = [[touches anyObject] locationInView:self];
     for(Switch *view in self.subviews){

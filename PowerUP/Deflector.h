@@ -11,7 +11,9 @@
 
 @protocol DeflectorDelegate
 @required
+
 - (void) deflectorSelectedAtPosition:(NSArray*)position WithOrientation:(NSString*)orientation;
+
 @end
 @interface Deflector : UIView
 
@@ -22,7 +24,6 @@
 - (void) turnOn;
 - (void) turnOff;
 
-//direction control
 - (void) changeImage: (NSString*) dir;
 - (void) onTap;
 
