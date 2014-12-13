@@ -39,8 +39,7 @@
     ComponentModel* invalid = [[ComponentModel alloc]initOfType:@"wire" AtRow:1 AndCol:1 AndState:NO];
     //test for adding valid component
     [_laserModel addComponent:valid];
-    int size = [_laserModel getEmitters].count;
-    XCTAssert(([_laserModel getEmitters][size -1]) == valid);
+    XCTAssert(([_laserModel getEmitters][0]) == valid);
     
     //test for handling invalid cases
     XCTAssertThrowsSpecific([_laserModel addComponent:invalid], NSException);
@@ -215,20 +214,6 @@
     //test for reset
     [_laserModel resetComponents];
     XCTAssert([([_laserModel getReceivers][0]) getState]==NO);
-}
-
-
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
 }
 
 @end

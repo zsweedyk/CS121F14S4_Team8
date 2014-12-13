@@ -22,7 +22,7 @@
     
     int _numLevels; // total number of levels
     
-    //for 
+    //for actual releasing
     //LaserModel* _laserModel
 }
 

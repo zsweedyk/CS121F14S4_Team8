@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jFp-4C-7jH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Settings View Controller-->
@@ -352,9 +353,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sq2-dP-Tbt"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="PvW-I8-hBT"/>
+        <segue reference="sq2-dP-Tbt"/>
+        <segue reference="RRq-Ep-Gb3"/>
         <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>
