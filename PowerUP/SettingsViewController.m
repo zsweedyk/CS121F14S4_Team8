@@ -51,8 +51,8 @@
     CGFloat buttonHeight = buttonWidth / 3;
     
     _segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"English",@"español",@"中文"]];
-    
-    _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 4), buttonWidth, buttonHeight / 2);
+    [_segmentControl setTintColor:[UIColor colorWithRed:0 green:251/255.0 blue:175/255.0 alpha:1]];
+    _segmentControl.frame = CGRectMake((frameWidth - buttonWidth) / 2, (frameHeight - buttonHeight * 6), buttonWidth, buttonHeight / 2);
     [_segmentControl setSelectedSegmentIndex:self.mainLanguage];
     [_segmentControl addTarget:self action:@selector(segmentedControlValueDidChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentControl];

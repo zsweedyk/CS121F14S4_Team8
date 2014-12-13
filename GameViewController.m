@@ -172,7 +172,6 @@ const float BACK_BUTTON_PORTION = 0.0625;
  */
 - (void) setLanguage
 {
-    [_backToLevel setTitle:[gameText objectForKey:@"BackToLevel"] forState:UIControlStateNormal];
     _titleWin = [gameText objectForKey:@"WinTitle"];
     _next = [gameText objectForKey:@"NextMessage"];
     _all = [gameText objectForKey:@"AllUnlocked"];

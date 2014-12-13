@@ -145,8 +145,14 @@
                                     <segue destination="O2A-Rs-g4Z" kind="show" identifier="GameToCredit" id="7VB-Wq-Rw7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceT-q0-1LP">
+                                <rect key="frame" x="163" y="330" width="141" height="28"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
+                                <color key="textColor" red="0.12095136200000001" green="0.949190855" blue="0.99896520379999998" alpha="0.40000000600000002" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-bU-Kxh" userLabel="Settings">
-                                <rect key="frame" x="578" y="288" width="768" height="1024"/>
+                                <rect key="frame" x="577" y="293" width="65" height="82"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -157,12 +163,6 @@
                                     <segue destination="qGO-gp-b0T" kind="show" identifier="PresentSettings" id="exW-Hx-MTv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceT-q0-1LP">
-                                <rect key="frame" x="163" y="330" width="141" height="28"/>
-                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="23"/>
-                                <color key="textColor" red="0.12095136200000001" green="0.949190855" blue="0.99896520379999998" alpha="0.40000000600000002" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -345,9 +345,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sq2-dP-Tbt"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="PvW-I8-hBT"/>
+        <segue reference="sq2-dP-Tbt"/>
+        <segue reference="RRq-Ep-Gb3"/>
         <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>
