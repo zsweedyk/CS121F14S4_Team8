@@ -350,9 +350,9 @@
         <image name="backButtonOn" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hGd-X4-vmS"/>
+        <segue reference="sq2-dP-Tbt"/>
         <segue reference="T7D-BC-g5P"/>
-        <segue reference="RRq-Ep-Gb3"/>
-        <segue reference="o2h-rW-Ejm"/>
+        <segue reference="PvW-I8-hBT"/>
+        <segue reference="rza-1s-ZaB"/>
     </inferredMetricsTieBreakers>
 </document>

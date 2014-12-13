@@ -21,6 +21,9 @@
     ComponentModel *_batteryNeg;
     
     int _numLevels; // total number of levels
+    
+    //for 
+    //LaserModel* _laserModel
 }
 
 @end

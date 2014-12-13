@@ -34,6 +34,7 @@
 - (int) getNumRows;
 - (int) getNumCols;
 
+//for testing purposes only
 @property (strong,nonatomic) LaserModel *laserModel;
 
 @end
