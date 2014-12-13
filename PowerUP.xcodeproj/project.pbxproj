@@ -72,7 +72,6 @@
 		A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8337A071A37BCCF0083E052 /* CreditViewController.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
-		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
 		A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */; };
 		A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */; };
 		A84F7F2019FDC1C6001AEC0D /* GameModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */; };
@@ -189,8 +188,6 @@
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A84F7F0A19FDC1C6001AEC0D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A84F7F0B19FDC1C6001AEC0D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A84F7F0E19FDC1C6001AEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A84F7F1319FDC1C6001AEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A84F7F1919FDC1C6001AEC0D /* PowerUPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,8 +332,6 @@
 				A84F7F0319FDC1C6001AEC0D /* Supporting Files */,
 				A86E10C71A005B1E0029011B /* Switch.h */,
 				A86E10C81A005B1E0029011B /* Switch.m */,
-				A84F7F0A19FDC1C6001AEC0D /* ViewController.h */,
-				A84F7F0B19FDC1C6001AEC0D /* ViewController.m */,
 				A86E10C91A005B1E0029011B /* Wire.h */,
 				A86E10CA1A005B1E0029011B /* Wire.m */,
 			);
@@ -622,7 +617,6 @@
 				A86E10D31A005B1E0029011B /* Wire.m in Sources */,
 				A86E10CE1A005B1E0029011B /* GameViewController.m in Sources */,
 				A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */,
-				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
 				65A052331A36D6C5007690FC /* InstructionsViewController.m in Sources */,
 				931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */,
 				74996BD51A1B40E500D48CAA /* ExplosionScene.m in Sources */,
