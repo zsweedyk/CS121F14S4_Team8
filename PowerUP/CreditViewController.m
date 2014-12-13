@@ -9,7 +9,9 @@
 #import "CreditViewController.h"
 #import "MenuViewController.h"
 
-@interface CreditViewController ()
+@interface CreditViewController (){
+    IBOutlet UIImageView* _background;
+}
 
 @end
 
@@ -17,13 +19,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBackground];
     // Do any additional setup after loading the view.
+}
+
+- (void) setBackground
+{
+    switch (self.mainLanguage) {
+        case ENGLISH:
+            [_background setImage:[UIImage imageNamed:@"BGabout.png"]];
+            break;
+            
+        case SPANISH:
+            [_background setImage:[UIImage imageNamed:@"BGaboutSP.png"]];
+            break;
+            
+        case CHINESE:
+            [_background setImage:[UIImage imageNamed:@"BGaboutCH.png"]];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -71,6 +71,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="_background" destination="Gbq-Zq-aYl" id="wnN-bw-4XP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoj-XB-HpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
