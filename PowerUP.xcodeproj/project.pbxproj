@@ -72,7 +72,6 @@
 		A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8337A071A37BCCF0083E052 /* CreditViewController.m */; };
 		A84F7F0619FDC1C6001AEC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0519FDC1C6001AEC0D /* main.m */; };
 		A84F7F0919FDC1C6001AEC0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */; };
-		A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F0B19FDC1C6001AEC0D /* ViewController.m */; };
 		A84F7F0F19FDC1C6001AEC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */; };
 		A84F7F1419FDC1C6001AEC0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */; };
 		A84F7F2019FDC1C6001AEC0D /* GameModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A84F7F1F19FDC1C6001AEC0D /* GameModelTests.m */; };
@@ -189,8 +188,6 @@
 		A84F7F0519FDC1C6001AEC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A84F7F0A19FDC1C6001AEC0D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A84F7F0B19FDC1C6001AEC0D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A84F7F0E19FDC1C6001AEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A84F7F1319FDC1C6001AEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A84F7F1919FDC1C6001AEC0D /* PowerUPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerUPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +279,9 @@
 		A84F7F0219FDC1C6001AEC0D /* PowerUP */ = {
 			isa = PBXGroup;
 			children = (
+				6512169D1A19AECD0014436C /* Components.xcassets */,
+				65AEB2231A3537CD00FB2E2B /* Images.xcassets */,
+				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
 				A84F7F0719FDC1C6001AEC0D /* AppDelegate.h */,
 				A84F7F0819FDC1C6001AEC0D /* AppDelegate.m */,
 				A86E10B91A005B1E0029011B /* Battery.h */,
@@ -292,11 +292,11 @@
 				A86E10BC1A005B1E0029011B /* Bulb.m */,
 				C08E3346B0B9BA5F2F430755 /* ComponentModel.h */,
 				C08E333456A9EA36EE6BDD8B /* ComponentModel.m */,
-				6512169D1A19AECD0014436C /* Components.xcassets */,
 				A8337A061A37BCCF0083E052 /* CreditViewController.h */,
 				A8337A071A37BCCF0083E052 /* CreditViewController.m */,
 				5BEF17361A0EC1E500354C84 /* Deflector.h */,
 				5BEF17371A0EC1E500354C84 /* Deflector.m */,
+				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
 				5B8EF34F1A1AE30800DF2B7D /* DirectionController.h */,
 				5B8EF3501A1AE30800DF2B7D /* DirectionController.m */,
 				5BEF17331A0EC1C800354C84 /* Emitter.h */,
@@ -311,20 +311,20 @@
 				A86E10C01A005B1E0029011B /* GameViewController.m */,
 				A86E10C11A005B1E0029011B /* Grid.h */,
 				A86E10C21A005B1E0029011B /* Grid.m */,
-				65AEB2231A3537CD00FB2E2B /* Images.xcassets */,
 				65A052311A36D6C5007690FC /* InstructionsViewController.h */,
 				65A052321A36D6C5007690FC /* InstructionsViewController.m */,
 				5BEF17301A0EC1AB00354C84 /* Laser.h */,
 				5BEF17311A0EC1AB00354C84 /* Laser.m */,
-				5B4BC8B61A210AD8004FD8AD /* LaserModel.h */,
+				A86E10C71A005B1E0029011B /* Switch.h */,
+				A86E10C81A005B1E0029011B /* Switch.m */,
+				A86E10C91A005B1E0029011B /* Wire.h */,
+				A86E10CA1A005B1E0029011B /* Wire.m */,
 				5B4BC8B71A210AD8004FD8AD /* LaserModel.m */,
-				A84F7F1219FDC1C6001AEC0D /* LaunchScreen.xib */,
 				A86E10C31A005B1E0029011B /* LevelViewController.h */,
 				A86E10C41A005B1E0029011B /* LevelViewController.m */,
 				A84F7F0D19FDC1C6001AEC0D /* Main.storyboard */,
 				A86E10C51A005B1E0029011B /* MenuViewController.h */,
 				A86E10C61A005B1E0029011B /* MenuViewController.m */,
-				A8B618611A0D702800541E43 /* PowerUPSounds */,
 				5BEF17391A0EC79600354C84 /* Receiver.h */,
 				5BEF173A1A0EC79600354C84 /* Receiver.m */,
 				931666E61A321CBE00C6D700 /* SettingsViewController.h */,
@@ -332,13 +332,8 @@
 				74996BD31A1B40E500D48CAA /* spark.png */,
 				7479E1FA1A2D8D4700CA8F20 /* StoryViewController.h */,
 				7479E1FB1A2D8D4700CA8F20 /* StoryViewController.m */,
+				A8B618611A0D702800541E43 /* PowerUPSounds */,
 				A84F7F0319FDC1C6001AEC0D /* Supporting Files */,
-				A86E10C71A005B1E0029011B /* Switch.h */,
-				A86E10C81A005B1E0029011B /* Switch.m */,
-				A84F7F0A19FDC1C6001AEC0D /* ViewController.h */,
-				A84F7F0B19FDC1C6001AEC0D /* ViewController.m */,
-				A86E10C91A005B1E0029011B /* Wire.h */,
-				A86E10CA1A005B1E0029011B /* Wire.m */,
 			);
 			path = PowerUP;
 			sourceTree = "<group>";
@@ -622,7 +617,6 @@
 				A86E10D31A005B1E0029011B /* Wire.m in Sources */,
 				A86E10CE1A005B1E0029011B /* GameViewController.m in Sources */,
 				A8337A081A37BCCF0083E052 /* CreditViewController.m in Sources */,
-				A84F7F0C19FDC1C6001AEC0D /* ViewController.m in Sources */,
 				65A052331A36D6C5007690FC /* InstructionsViewController.m in Sources */,
 				931666E81A321CBE00C6D700 /* SettingsViewController.m in Sources */,
 				74996BD51A1B40E500D48CAA /* ExplosionScene.m in Sources */,
@@ -764,6 +758,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PowerUP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -777,6 +772,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PowerUP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
