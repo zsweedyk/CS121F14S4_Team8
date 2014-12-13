@@ -129,9 +129,6 @@
  */
 - (IBAction) chooseLevel:(id)sender
 {
-    [_audioPlayerLevelPressed prepareToPlay];
-    [_audioPlayerLevelPressed play];
-    
     if (self.currentState == FIRST_TIME) {
         [self performSegueWithIdentifier:@"PresentStoryView" sender:self];
     } else {
@@ -143,6 +140,8 @@
  *  Pass data to viewcontrollers
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [_audioPlayerLevelPressed prepareToPlay];
+    [_audioPlayerLevelPressed play];
     
     if ([segue.identifier isEqualToString:@"PresentLevels"]) {
         LevelViewController *destViewController = segue.destinationViewController;

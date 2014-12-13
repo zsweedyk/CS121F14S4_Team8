@@ -8,9 +8,11 @@
 
 #import "CreditViewController.h"
 #import "MenuViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CreditViewController (){
     IBOutlet UIImageView* _background;
+    AVAudioPlayer *_audioPlayerBackPressed;
 }
 
 @end
@@ -19,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpSounds];
     [self setBackground];
     // Do any additional setup after loading the view.
 }
@@ -43,6 +46,14 @@
     }
 }
 
+- (void) setUpSounds
+{
+    NSString *backPath  = [[NSBundle mainBundle] pathForResource:@"beep-attention" ofType:@"aif"];
+    NSURL *backPathURL  = [NSURL fileURLWithPath : backPath];
+    _audioPlayerBackPressed = [[AVAudioPlayer alloc] initWithContentsOfURL:backPathURL error:nil];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -51,6 +62,8 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [_audioPlayerBackPressed prepareToPlay];
+    [_audioPlayerBackPressed play];
     
     if ([segue.identifier isEqualToString:@"CreditToMenu"]) {
         MenuViewController *destViewController = [segue destinationViewController];
