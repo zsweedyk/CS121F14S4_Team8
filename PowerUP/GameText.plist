@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backToLevel</key>
+	<string>Back to menu</string>
+	<key>WinTitle</key>
+	<string>You Win!</string>
+	<key>NextMessage</key>
+	<string>New level unlocked! Let&apos;s try it!</string>
+	<key>AllUnlocked</key>
+	<string>You unlocked all the levels! Congratulations!</string>
+	<key>OkayTitle</key>
+	<string>OK</string>
+	<key>LoseTitle</key>
+	<string>You lose</string>
+	<key>ShortMessage</key>
+	<string>The circuit is shorted. Let&apos;s give it another try.</string>
+	<key>BombMessage</key>
+	<string>The bomb is activated. Let&apos;s give it another try.</string>
+</dict>
+</plist>

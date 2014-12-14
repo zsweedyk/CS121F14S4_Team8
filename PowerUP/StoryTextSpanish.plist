@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>0</key>
+	<dict>
+		<key>state</key>
+		<string>FIRST_TIME</string>
+		<key>type</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>4</integer>
+		<key>top1</key>
+		<string>¡Qué lástima!</string>
+		<key>middle1</key>
+		<string>No se lo que pasó</string>
+		<key>bottom1</key>
+		<string>Estaba trabajando en mi invención ultrasecreto cuando de repente</string>
+		<key>top2</key>
+		<string>¡¡BOOM!!</string>
+		<key>middle2</key>
+		<string>Todo los luces se apagó</string>
+		<key>bottom2</key>
+		<string>No se lo que voy a hacer</string>
+		<key>top3</key>
+		<string>Oye!</string>
+		<key>middle3</key>
+		<string>Crees que puedes ayudarme para encender todos los luces?</string>
+		<key>bottom3</key>
+		<string>  </string>
+		<key>top4</key>
+		<string>¡Excelente!</string>
+		<key>middle4</key>
+		<string> </string>
+		<key>bottom4</key>
+		<string>¡Vamos a comenzar!</string>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SWITCH</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>Así, aparece como muchos circuitos están desconectados.</string>
+		<key>middle1</key>
+		<string>Creo que si se vuelva a conectar el circuito y reinicia al alimentación, las luces se encenderán.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>Arrastre el dedo sobre los interruptores de naranja para dibujar cables</string>
+		<key>middle2</key>
+		<string>Utilice estos cables para tratar de conectar el circuito y todas las bombillas.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>Cuando estas fin,</string>
+		<key>middle3</key>
+		<string>toque la batería para ver si funciona!</string>
+		<key>bottom3</key>
+		<string>¡Bueno Suerte!</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SHORT</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>2</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>Estás haciendo un gran trabajo con</string>
+		<key>middle1</key>
+		<string>estas luces, pero hay algo que usted debe tener en cuenta.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>Una cosa que podría ir mal es que puede &quot;cortar&quot; el circuito.</string>
+		<key>middle2</key>
+		<string>Esto ocurre si se conecta la batería a sí mismo sin una bombilla en el camino de la electricidad.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>Ni siquiera sé lo que pasará si se inicia el poder con un cortocircuito ...</string>
+		<key>middle3</key>
+		<string> </string>
+		<key>bottom3</key>
+		<string>¡Seguid así!</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_BOMB</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>4</integer>
+		<key>numPages</key>
+		<integer>2</integer>
+		<key>top1</key>
+		<string>¡Qué lástima!</string>
+		<key>middle1</key>
+		<string>Parece que algunos de mis bombas accidentalmente cayó sobre el circuito.</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>¡Creo que deberías evitar conectar las bombas a toda costa!</string>
+		<key>middle2</key>
+		<string>Quién sabe lo que podría suceder si se establece un descuento ...</string>
+		<key>bottom2</key>
+		<string></string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_LASER</string>
+		<key>type</key>
+		<string>1</string>
+		<key>levelToDisplay</key>
+		<string>5</string>
+		<key>numPages</key>
+		<string>7</string>
+		<key>top1</key>
+		<string>¡Casi se me olvidaba decirte!</string>
+		<key>middle1</key>
+		<string>¡Algunos de los circuitos en mi laboratorio usan láser!</string>
+		<key>bottom1</key>
+		<string>Voy a explicar cómo funcionan.</string>
+		<key>top2</key>
+		<string>Si conecta un emisor a una batería que se disparan fuera un láser.</string>
+		<key>middle2</key>
+		<string>Si obtiene un láser para golpear un receptor, que actuará como una batería nueva.</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>Para completar algunos circuitos, tendrás que apuntar el láser de</string>
+		<key>middle3</key>
+		<string>un emisor para que se realiza un receptor.</string>
+		<key>bottom3</key>
+		<string>Puedes apuntar el láser utilizando los deflectores que están alrededor de mi laboratorio</string>
+		<key>top4</key>
+		<string> </string>
+		<key>middle4</key>
+		<string>El deflector tiene un rayo láser y la redirige en otra dirección.</string>
+		<key>bottom4</key>
+		<string> </string>
+		<key>top5</key>
+		<string>Si dispara un láser a un deflector,</string>
+		<key>middle5</key>
+		<string>se desviará el láser a través de todas sus aberturas</string>
+		<key>bottom5</key>
+		<string> </string>
+		<key>top6</key>
+		<string>Toque en el deflector para cambiar sus aberturas.</string>
+		<key>middle6</key>
+		<string>Ponga su dedo en el deflector y luego arrastrar el dedo</string>
+		<key>bottom6</key>
+		<string>en círculo para orientar el deflector en la forma que desee.</string>
+		<key>top7</key>
+		<string>¡Ten cuidado!</string>
+		<key>middle7</key>
+		<string>Los láseres son de muy alta intensidad y si un láser golpea una bomba,</string>
+		<key>bottom7</key>
+		<string>¡que lo más probable es detonar!</string>
+	</dict>
+	<key>Next</key>
+	<string>Próximo
+</string>
+</dict>
+</plist>

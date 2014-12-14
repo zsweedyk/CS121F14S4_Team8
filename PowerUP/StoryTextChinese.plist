@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>0</key>
+	<dict>
+		<key>state</key>
+		<string>FIRST_TIME</string>
+		<key>type</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>4</integer>
+		<key>top1</key>
+		<string>噢我的天哪</string>
+		<key>middle1</key>
+		<string>刚刚到底发生了什么</string>
+		<key>bottom1</key>
+		<string>我正专心研究我的发明，可突然间......</string>
+		<key>top2</key>
+		<string>嘭！</string>
+		<key>middle2</key>
+		<string>所有的灯都关了！</string>
+		<key>bottom2</key>
+		<string>我到底应该怎么做？</string>
+		<key>top3</key>
+		<string>嘿！</string>
+		<key>middle3</key>
+		<string>你能帮我把灯泡都点亮吗？</string>
+		<key>bottom3</key>
+		<string>  </string>
+		<key>top4</key>
+		<string>太棒了！</string>
+		<key>middle4</key>
+		<string> </string>
+		<key>bottom4</key>
+		<string>让我们开始游戏吧！</string>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SWITCH</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>0</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>看样子很多电路都没有接好，</string>
+		<key>middle1</key>
+		<string>我想你要是重新把电路接上，连上电源，就能点亮灯泡</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>橘黄色的东西是开关，用手指在上面滑动来连接电路，</string>
+		<key>middle2</key>
+		<string>连接到不同的电线，直到所有的灯泡都和电源连接为止。</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>当你觉得好了以后，</string>
+		<key>middle3</key>
+		<string>点一下电源点亮那些小灯泡，</string>
+		<key>bottom3</key>
+		<string>好运！</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_SHORT</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>4</integer>
+		<key>numPages</key>
+		<integer>3</integer>
+		<key>top1</key>
+		<string>你做的非常完美！</string>
+		<key>middle1</key>
+		<string>不过有一些事情你应该注意，</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>一个你不能做的事情就是让电路“短路”</string>
+		<key>middle2</key>
+		<string>它发生在当一个电源通过电线直接连到它自己而没有经过小灯泡的时候</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>当电路“短路”时，点一下电源会有意想不到的事情发生！</string>
+		<key>middle3</key>
+		<string> </string>
+		<key>bottom3</key>
+		<string>祝你好运！</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_BOMB</string>
+		<key>type</key>
+		<integer>1</integer>
+		<key>levelToDisplay</key>
+		<integer>11</integer>
+		<key>numPages</key>
+		<integer>2</integer>
+		<key>top1</key>
+		<string>天哪，</string>
+		<key>middle1</key>
+		<string>实验室的炸弹混进了电路里</string>
+		<key>bottom1</key>
+		<string> </string>
+		<key>top2</key>
+		<string>你要小心不要让炸弹连上电源</string>
+		<key>middle2</key>
+		<string>万一连上了意想不到的事情会再次发生！</string>
+		<key>bottom2</key>
+		<string></string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>state</key>
+		<string>NEED_TO_LEARN_LASER</string>
+		<key>type</key>
+		<string>1</string>
+		<key>levelToDisplay</key>
+		<string>17</string>
+		<key>numPages</key>
+		<string>7</string>
+		<key>top1</key>
+		<string>我忘记告诉你了，</string>
+		<key>middle1</key>
+		<string>有一些电路里用到了激光</string>
+		<key>bottom1</key>
+		<string>它们是这么工作的：</string>
+		<key>top2</key>
+		<string>如果激光发射器连上了电源它会射出一束激光</string>
+		<key>middle2</key>
+		<string>如果一束激光射进了激光接收器，它会变成一个电源</string>
+		<key>bottom2</key>
+		<string> </string>
+		<key>top3</key>
+		<string>为了点亮所有的小灯泡，你需要用发射器发出激光，</string>
+		<key>middle3</key>
+		<string>并且让激光接收器收到激光，</string>
+		<key>bottom3</key>
+		<string>实验室里有一些激光反射器。</string>
+		<key>top4</key>
+		<string> </string>
+		<key>middle4</key>
+		<string>反射器可以收到一束激光并且反射到不同的方向。</string>
+		<key>bottom4</key>
+		<string> </string>
+		<key>top5</key>
+		<string>如果激光射入反射器，</string>
+		<key>middle5</key>
+		<string>它会反射到所有可能的方向，</string>
+		<key>bottom5</key>
+		<string> </string>
+		<key>top6</key>
+		<string>点一下反射器来选择不同数目的反射方向，</string>
+		<key>middle6</key>
+		<string>把你的手指放在反射器上，绕着它转圆，</string>
+		<key>bottom6</key>
+		<string>反射器会旋转到不同的方向。</string>
+		<key>top7</key>
+		<string>小心！</string>
+		<key>middle7</key>
+		<string>这些激光能量巨大，一旦它们射入炸弹，</string>
+		<key>bottom7</key>
+		<string>炸弹立刻会引爆！</string>
+	</dict>
+	<key>Next</key>
+	<string>Next(C)</string>
+</dict>
+</plist>
